@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
+      url: ${{ steps.pages.outputs.page_url || steps.pages2.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -92,4 +92,11 @@ jobs:
         with:
           path: docs
       - id: pages
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      # Läuft noch eine vorherige Veröffentlichung, lehnt GitHub Pages ab: kurz warten und erneut versuchen
+      - if: steps.pages.outcome == 'failure'
+        run: sleep 90
+      - id: pages2
+        if: steps.pages.outcome == 'failure'
         uses: actions/deploy-pages@v4
