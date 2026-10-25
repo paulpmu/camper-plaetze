@@ -187,3 +187,26 @@ h4 { margin: 18px 0 8px; font-size: 15px; }
 }
 .leaflet-control-attribution { font-size: 10px; }
 .leaflet-bottom.leaflet-left { margin-bottom: var(--safe-bottom); }
+
+/* Zielwahl in der Kopfleiste */
+button.brand { border: 0; background: none; padding: 0; text-align: left; }
+.caret { color: var(--accent); font-size: 14px; }
+.mt { margin-top: 24px; }
+.ziel-list, .req-list { list-style: none; margin: 0; padding: 0; }
+.ziel-list li { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.ziel-list li.on { color: var(--accent); font-weight: 600; }
+.ziel-list li .r { margin-left: auto; font-size: 13px; color: var(--muted); font-weight: 400; text-align: right; }
+#req-text {
+  display: block; width: 100%; margin: 8px 0 10px; padding: 11px 12px; font: inherit; font-size: 16px;
+  color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; resize: vertical;
+}
+#req-send { width: 100%; }
+.req-list li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.req-list a { text-decoration: none; }
+.req-list .st { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 8px; margin-right: 6px; }
+.st.offen { background: #fdecc8; color: #8a5a00; }
+.st.erledigt { background: #d7f0df; color: #1e6b3a; }
+.route-info { font-size: 14px; margin: 6px 0; }
+.route-swatch { display: inline-block; width: 18px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+button.brand strong { font-size: 17px; color: var(--text); }
+button.brand #count { font-size: 12px; }

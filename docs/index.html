@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Marokko Camper</title>
-<meta name="description" content="Übernachtungsplätze in Marokko und Dakhla aus aktuellen Overlander-Videos">
+<title>Camper-Plätze</title>
+<meta name="description" content="Übernachtungsplätze für Camper aus aktuellen Overlander-Videos">
 <meta name="theme-color" content="#b5532e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Marokko Camper">
+<meta name="apple-mobile-web-app-title" content="Camper-Plätze">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -22,10 +22,10 @@
 <div id="map" aria-label="Karte"></div>
 
 <header class="topbar">
-  <div class="brand">
-    <strong>Marokko Camper</strong>
+  <button id="btn-ziel" class="brand" aria-label="Ziel wählen">
+    <strong><span id="ziel-name">Camper-Plätze</span> <span class="caret">▾</span></strong>
     <span id="count">lädt …</span>
-  </div>
+  </button>
   <div class="actions">
     <button id="btn-list" class="icon-btn" aria-label="Liste"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
     <button id="btn-filter" class="icon-btn" aria-label="Filter"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="filter-dot" class="dot" hidden></span></button>
@@ -36,6 +36,22 @@
 <button id="btn-locate" class="fab" aria-label="Mein Standort"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></button>
 
 <div id="backdrop" hidden></div>
+
+<!-- Ziele & Anfragen -->
+<section id="sheet-ziel" class="sheet tall" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2>Ziel wählen</h2>
+  <ul id="ziel-list" class="ziel-list"></ul>
+
+  <h2 class="mt">Ziel hinzufügen oder ändern</h2>
+  <p class="muted">Beschreiben Sie frei, was Sie möchten. Claude erstellt daraus die Suche, die Regionen und die Routen. Danach startet der Abruf automatisch.</p>
+  <textarea id="req-text" rows="5" placeholder="Beispiele:&#10;• Neues Ziel Norwegen mit Lofoten, Route Oslo – Trondheim – Bodø – Nordkap&#10;• Bei Marokko den Kanal @beispielkanal ergänzen&#10;• Spanien &amp; Portugal: Route Pyrenäen – Bilbao – Santander hinzufügen&#10;• Marokko jetzt aktualisieren"></textarea>
+  <button id="req-send" class="btn">Anfrage senden</button>
+  <p class="muted">Öffnet GitHub mit der vorbereiteten Anfrage. Dort auf <strong>Submit new issue</strong> tippen. Sie müssen in Safari bei GitHub angemeldet sein. Die Antwort erscheint unten, meist nach 1–2 Minuten.</p>
+  <h4>Letzte Anfragen</h4>
+  <ul id="req-list" class="req-list"><li class="muted">lädt …</li></ul>
+</section>
 
 <!-- Detail -->
 <section id="sheet-detail" class="sheet" hidden aria-live="polite">
@@ -58,6 +74,17 @@
   <div class="grab"></div>
   <button class="close" data-close aria-label="Schliessen">✕</button>
   <h2>Filter</h2>
+
+  <div id="route-filter" hidden>
+    <label class="field">Route
+      <select id="f-route"><option value="">Keine Route</option></select>
+    </label>
+    <div class="field" id="corridor-field" hidden>Abstand zur Route höchstens
+      <div class="seg" id="f-corridor">
+        <button data-v="5">5 km</button><button data-v="15">15 km</button><button data-v="30" class="on">30 km</button><button data-v="50">50 km</button>
+      </div>
+    </div>
+  </div>
 
   <label class="field">Region
     <select id="f-region"><option value="">Alle Regionen</option></select>
@@ -108,7 +135,7 @@
   <div class="grab"></div>
   <button class="close" data-close aria-label="Schliessen">✕</button>
   <h2>Über diese Karte</h2>
-  <p>Die Plätze stammen aus aktuellen YouTube-Reisevideos von Camper-Overlandern in Marokko und Dakhla. Sie werden täglich automatisch aktualisiert.</p>
+  <p>Die Plätze stammen aus aktuellen YouTube-Reisevideos von Camper-Overlandern. Sie werden täglich automatisch aktualisiert. Oben links wechseln Sie das Ziel oder fügen ein neues hinzu.</p>
   <p><strong>Wichtig:</strong> Die Bewertungen geben die subjektiven Aussagen der YouTuber wieder und sind keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie deshalb auf das Videodatum.</p>
   <p>«Ungefährer Standort» bedeutet, dass nur der Ort bekannt ist. Der Platz kann einige Kilometer entfernt liegen.</p>
   <div class="legend">
@@ -118,7 +145,7 @@
     <span><i class="lg andere"></i>Andere</span>
   </div>
   <p id="meta" class="muted"></p>
-  <p class="muted">Kartendaten © OpenStreetMap-Mitwirkende</p>
+  <p class="muted">Kartendaten © OpenStreetMap-Mitwirkende · Routen © OSRM</p>
 </section>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

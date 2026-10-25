@@ -1,8 +1,14 @@
-"""Täglicher Abruf: neue Marokko-Camper-Videos finden, auswerten und Plätze in docs/data/spots.json schreiben.
+"""Täglicher Abruf: neue Camper-Videos pro Ziel finden, auswerten und Plätze nach docs/data/<ziel>/ schreiben.
+
+Aufruf:
+  python scripts/update.py                     alle aktiven Ziele
+  python scripts/update.py --ziel marokko      nur ein Ziel
+  python scripts/update.py --nur-index         nur die Zielübersicht für die Webapp schreiben
+  python scripts/update.py --vergleich 10      10 Videos mit claude_model und compare_model gegenüberstellen
 
 Umgebungsvariablen:
   ANTHROPIC_API_KEY      (Pflicht)
-  YOUTUBE_API_KEY        (optional; ohne Schlüssel nur RSS-Feeds der Kanalliste)
+  YOUTUBE_API_KEY        (optional; ohne Schlüssel nur RSS-Feeds der Kanallisten)
   TRANSCRIPT_PROXY_URL   (optional; http://user:pass@host:port für Transkript-Abrufe)
   WEBSHARE_USER / WEBSHARE_PASS (optional; Webshare-Residential-Proxy für Transkripte)
   MAX_VIDEOS             (optional; überschreibt max_videos_per_run)
@@ -10,6 +16,7 @@ Umgebungsvariablen:
 
 from __future__ import annotations
 
+import argparse
 import datetime as dt
 import difflib
 import hashlib
@@ -18,37 +25,17 @@ import math
 import os
 import re
 import sys
-import time
 import xml.etree.ElementTree as ET
-from pathlib import Path
 from typing import Literal, Optional
 
 import anthropic
 import requests
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, create_model
 
-ROOT = Path(__file__).resolve().parent.parent
-CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
-STATE_FILE = ROOT / "data" / "state.json"
-GEOCACHE_FILE = ROOT / "data" / "geocache.json"
-SPOTS_FILE = ROOT / "docs" / "data" / "spots.json"
-META_FILE = ROOT / "docs" / "data" / "meta.json"
-IOVERLANDER_DIR = ROOT / "data" / "ioverlander"
+from common import (CONFIG, DATA_DIR, REPO, ROOT, UA, WEB_DATA, Geocoder, annotate_routes, build_routes,
+                    haversine_km, in_bbox, load_destinations, load_json, log, save_json)
 
 YT_API = "https://www.googleapis.com/youtube/v3"
-UA = "marokko-camper/1.0 (https://github.com/paulpmu/marokko-camper)"
-
-REGIONS = [
-    "Mittelmeer & Rif",
-    "Nordatlantik",
-    "Fès & Mittlerer Atlas",
-    "Marrakesch & Hoher Atlas",
-    "Südatlantik",
-    "Antiatlas & Draa",
-    "Sahara Ost",
-    "Südwesten",
-    "Dakhla & Süden",
-]
 
 # Preise pro Million Tokens (Input, Output) für die Kostenschätzung in meta.json
 PRICES = {
@@ -57,25 +44,6 @@ PRICES = {
     "claude-haiku-5-5": (0.10, 0.50),
 }
 FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-fable-5-1", "claude-sonnet-5-5"}
-
-
-def log(*a):
-    print(*a, flush=True)
-
-
-def load_json(path: Path, default):
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (FileNotFoundError, json.JSONDecodeError):
-        return default
-
-
-def save_json(path: Path, data, compact=False):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    text = json.dumps(data, ensure_ascii=False, separators=(",", ":")) if compact else json.dumps(
-        data, ensure_ascii=False, indent=1
-    )
-    path.write_text(text + "\n", encoding="utf-8")
 
 
 def now_utc() -> dt.datetime:
@@ -89,6 +57,10 @@ def iso(d: dt.datetime) -> str:
 # --------------------------------------------------------------------------- YouTube
 
 
+class QuotaExceeded(RuntimeError):
+    pass
+
+
 class YouTube:
     def __init__(self, key: str | None):
         self.key = key
@@ -99,7 +71,7 @@ class YouTube:
         r = requests.get(f"{YT_API}/{endpoint}", params=params, timeout=30)
         self.units += cost
         if r.status_code == 403 and "quotaExceeded" in r.text:
-            raise RuntimeError("YouTube-Kontingent für heute aufgebraucht")
+            raise QuotaExceeded("YouTube-Kontingent für heute aufgebraucht")
         r.raise_for_status()
         return r.json()
 
@@ -169,9 +141,9 @@ def rss_videos(channel_id: str) -> list[dict]:
     return out
 
 
-def is_relevant(meta: dict) -> bool:
+def is_relevant(meta: dict, dest: dict) -> bool:
     text = " ".join([meta.get("title", ""), meta.get("description", ""), " ".join(meta.get("tags", []))]).lower()
-    return any(k in text for k in CONFIG["relevance_keywords"])
+    return any(k.lower() in text for k in dest["relevance_keywords"])
 
 
 # --------------------------------------------------------------------------- Transkripte
@@ -192,16 +164,14 @@ def transcript_client():
     return YouTubeTranscriptApi(proxy_config=proxy)
 
 
-def fetch_transcript(api, video_id: str) -> tuple[str | None, str]:
+def fetch_transcript(api, video_id: str, languages: list[str]) -> tuple[str | None, str]:
     """Gibt (Text mit Zeitmarken, Status) zurück. Status: ok, keins, blockiert, fehler."""
     from youtube_transcript_api import _errors as E
 
     try:
-        tl = api.list(video_id)
-        prefs = CONFIG["transcript_languages"]
-        transcripts = list(tl)
-        transcripts.sort(key=lambda t: (t.is_generated,
-                                        prefs.index(t.language_code[:2]) if t.language_code[:2] in prefs else 99))
+        transcripts = list(api.list(video_id))
+        transcripts.sort(key=lambda t: (t.is_generated, languages.index(t.language_code[:2])
+                                        if t.language_code[:2] in languages else 99))
         if not transcripts:
             return None, "keins"
         fetched = transcripts[0].fetch()
@@ -243,47 +213,55 @@ class Infrastructure(BaseModel):
     showers: Optional[bool]
 
 
-class ExtractedSpot(BaseModel):
-    name: str = Field(description="Name des Platzes oder kurze Beschreibung, z. B. 'Strandplatz nördlich Mirleft'")
-    place: str = Field(description="Nächster Ort und Gegend, geeignet für eine Geocodierung, z. B. 'Mirleft, Tiznit'")
-    latitude: Optional[float] = Field(description="Nur wenn Koordinaten im Material stehen oder aus einem Kartenlink ablesbar sind, sonst null")
-    longitude: Optional[float]
-    coordinate_source: Literal["text", "kartenlink", "keine"]
-    region: Literal[tuple(REGIONS)]  # type: ignore[valid-type]
-    spot_type: Literal["wildplatz", "camping", "stellplatz", "andere"]
-    infrastructure: Infrastructure
-    four_wd_required: Optional[bool] = Field(description="Ist für die Zufahrt Allrad nötig?")
-    access_note: str = Field(description="Zufahrt, Pistenzustand, Untergrund; leer wenn unbekannt")
-    safety_rating: Optional[int] = Field(description="Sicherheitseindruck 1 (unsicher) bis 5 (sehr sicher)")
-    safety_note: str = Field(description="Sicherheit, Polizei/Gendarmerie, Auxiliaires; leer wenn unbekannt")
-    police_contact: Optional[bool] = Field(description="Gab es Kontakt mit Polizei/Gendarmerie (Pass-Kontrolle, Wegweisen, Bewachung)?")
-    price: str = Field(description="Preis pro Nacht wie genannt, z. B. '70 MAD'; leer wenn unbekannt")
-    rating: int = Field(description="Gesamtbewertung 1–5 aus Tonalität und Aussagen der YouTuber")
-    sentiment: Literal["positiv", "gemischt", "neutral", "negativ"]
-    recommendation: str = Field(description="Empfehlung auf Deutsch, 1–2 Sätze, für wen/wann der Platz passt")
-    quote: str = Field(description="Kurze aussagekräftige Aussage aus dem Video (Originalsprache), max. 200 Zeichen")
-    timestamp_seconds: Optional[int] = Field(description="Sekunde im Video, wo der Platz gezeigt wird, aus den [Ns]-Marken")
+def extraction_model(dest: dict):
+    """Ausgabeschema pro Ziel – die Regionen werden als feste Auswahl vorgegeben."""
+    regions = tuple(r["name"] for r in dest["regions"])
+    spot = create_model(
+        "ExtractedSpot",
+        name=(str, Field(description="Name des Platzes oder kurze Beschreibung, z. B. 'Strandplatz nördlich Mirleft'")),
+        place=(str, Field(description="Nächster Ort und Gegend, geeignet für eine Geocodierung, z. B. 'Mirleft, Tiznit'")),
+        latitude=(Optional[float], Field(description="Nur wenn Koordinaten im Material stehen oder aus einem Kartenlink ablesbar sind, sonst null")),
+        longitude=(Optional[float], ...),
+        coordinate_source=(Literal["text", "kartenlink", "keine"], ...),
+        region=(Literal[regions], ...),  # type: ignore[valid-type]
+        spot_type=(Literal["wildplatz", "camping", "stellplatz", "andere"], ...),
+        infrastructure=(Infrastructure, ...),
+        four_wd_required=(Optional[bool], Field(description="Ist für die Zufahrt Allrad nötig?")),
+        access_note=(str, Field(description="Zufahrt, Pistenzustand, Untergrund, Tankmöglichkeit; leer wenn unbekannt")),
+        safety_rating=(Optional[int], Field(description="Sicherheitseindruck 1 (unsicher) bis 5 (sehr sicher)")),
+        safety_note=(str, Field(description="Sicherheit, Kontrollen, Verbote, Bussen; leer wenn unbekannt")),
+        police_contact=(Optional[bool], Field(description="Gab es Kontakt mit Polizei/Behörden (Kontrolle, Wegweisen, Bewachung)?")),
+        price=(str, Field(description="Preis pro Nacht wie genannt, z. B. '70 MAD'; leer wenn unbekannt")),
+        rating=(int, Field(description="Gesamtbewertung 1–5 aus Tonalität und Aussagen der YouTuber")),
+        sentiment=(Literal["positiv", "gemischt", "neutral", "negativ"], ...),
+        recommendation=(str, Field(description="Empfehlung auf Deutsch, 1–2 Sätze, für wen/wann der Platz passt")),
+        quote=(str, Field(description="Kurze aussagekräftige Aussage aus dem Video (Originalsprache), max. 200 Zeichen")),
+        timestamp_seconds=(Optional[int], Field(description="Sekunde im Video, wo der Platz gezeigt wird, aus den [Ns]-Marken")),
+    )
+    return create_model(
+        "Extraction",
+        relevant=(bool, Field(description=f"Handelt das Video von einer Reise mit Camper/Van/Wohnmobil/4x4 im Gebiet «{dest['name']}»?")),
+        spots=(list[spot], ...),
+    )
 
 
-class Extraction(BaseModel):
-    relevant: bool = Field(description="Handelt das Video von einer Reise mit Camper/Van/Wohnmobil/4x4 in Marokko oder Dakhla?")
-    spots: list[ExtractedSpot]
-
-
-SYSTEM = f"""Du wertest Reisevideos von Camper-Overlandern in Marokko (inkl. Dakhla und Süden) aus.
+def system_prompt(dest: dict) -> str:
+    regions = "\n".join(f"  - {r['name']}: {r['hint']}" for r in dest["regions"])
+    return f"""Du wertest Reisevideos von Camper-Overlandern im Gebiet «{dest['name']}» aus.
 Aus Titel, Beschreibung, Kapitelmarken, Kommentaren und Transkript extrahierst du jeden Übernachtungsplatz,
 an dem die YouTuber übernachtet haben oder den sie konkret empfehlen bzw. vor dem sie warnen.
 
 Regeln:
 - Nur echte Übernachtungsplätze, keine reinen Sehenswürdigkeiten, Restaurants oder Durchfahrten.
+- Nur Plätze innerhalb des Gebiets «{dest['name']}».
 - Erfinde keine Fakten. Unbekanntes ist null bzw. ein leerer Text.
 - Koordinaten nur, wenn sie im Material stehen (auch DMS umrechnen) oder aus einem Kartenlink
   (Google Maps @lat,lng / q=lat,lng, Apple Maps ll=) ablesbar sind. Schätze keine Koordinaten.
 - Die Bewertung spiegelt die Aussagen und Tonalität der YouTuber wider, nicht dein Wissen.
-- Regionen: {", ".join(REGIONS)}.
-  Südatlantik = Essaouira bis Sidi Ifni; Südwesten = Guelmim, Tan-Tan, Tarfaya, Laâyoune, Boujdour;
-  Dakhla & Süden = Dakhla und südlich davon; Antiatlas & Draa = Tafraoute, Ouarzazate, Zagora, Dadès, Todra.
-- Ist das Video nicht über eine Camper-Reise in Marokko, setze relevant=false und gib keine Plätze zurück."""
+- Regionen:
+{regions}
+- Ist das Video nicht über eine Camper-Reise in diesem Gebiet, setze relevant=false und gib keine Plätze zurück.
+{dest.get('notes', '')}"""
 
 
 def build_prompt(v: dict, comments: list[str], transcript: str | None) -> str:
@@ -300,13 +278,13 @@ def build_prompt(v: dict, comments: list[str], transcript: str | None) -> str:
 
 
 class Claude:
-    def __init__(self):
+    def __init__(self, model: str | None = None):
         self.client = anthropic.Anthropic()
-        self.model = os.getenv("CLAUDE_MODEL") or CONFIG["claude_model"]
+        self.model = model or os.getenv("CLAUDE_MODEL") or CONFIG["claude_model"]
         self.tokens_in = 0
         self.tokens_out = 0
 
-    def extract(self, prompt: str) -> Extraction | None:
+    def extract(self, dest: dict, schema, prompt: str):
         kwargs = {}
         if self.model in FALLBACK_MODELS:
             # Lehnt der Sicherheitsfilter ab, übernimmt serverseitig ein Ersatzmodell
@@ -315,9 +293,9 @@ class Claude:
         resp = self.client.messages.parse(
             model=self.model,
             max_tokens=16000,
-            system=SYSTEM,
+            system=system_prompt(dest),
             messages=[{"role": "user", "content": prompt}],
-            output_format=Extraction,
+            output_format=schema,
             output_config={"effort": CONFIG["claude_effort"]},
             **kwargs,
         )
@@ -330,56 +308,21 @@ class Claude:
 
     def cost_usd(self) -> float:
         pin, pout = PRICES.get(self.model, (4.0, 20.0))
-        return round((self.tokens_in * pin + self.tokens_out * pout) / 1e6, 3)
+        return round((self.tokens_in * pin + self.tokens_out * pout) / 1e6, 4)
 
 
-# --------------------------------------------------------------------------- Geodaten
+# --------------------------------------------------------------------------- iOverlander
 
 
-def geocode(place: str, cache: dict) -> tuple[float, float] | None:
-    """OpenStreetMap Nominatim, max. 1 Anfrage pro Sekunde, Ergebnisse werden gecacht."""
-    key = place.strip().lower()
-    if key in cache:
-        return tuple(cache[key]) if cache[key] else None
-    result = None
-    candidates = [place] + ([place.split(",")[0]] if "," in place else [])
-    for q in candidates:
-        time.sleep(1.1)
-        try:
-            r = requests.get("https://nominatim.openstreetmap.org/search",
-                             params={"q": q, "format": "json", "limit": 1, "countrycodes": "ma,eh"},
-                             headers={"User-Agent": UA}, timeout=30)
-            r.raise_for_status()
-            hits = r.json()
-        except requests.RequestException as ex:
-            log(f"    Geocoding-Fehler: {ex}")
-            return None  # nicht cachen, nächstes Mal neu versuchen
-        if hits:
-            result = (float(hits[0]["lat"]), float(hits[0]["lon"]))
-            break
-    cache[key] = result
-    return result
-
-
-def in_area(lat: float, lng: float) -> bool:
-    """Grobe Box um Marokko inkl. Süden bis Lagouira."""
-    return 20.5 <= lat <= 36.2 and -17.5 <= lng <= -0.9
-
-
-def haversine_m(a, b) -> float:
-    lat1, lon1, lat2, lon2 = map(math.radians, (a[0], a[1], b[0], b[1]))
-    h = math.sin((lat2 - lat1) / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2
-    return 2 * 6371000 * math.asin(math.sqrt(h))
-
-
-def load_ioverlander() -> list[dict]:
-    """Optionaler iOverlander-Export (CSV oder JSON) in data/ioverlander/."""
+def load_ioverlander(dest_id: str) -> list[dict]:
+    """Optionaler iOverlander-Export (CSV oder JSON) in data/<ziel>/ioverlander/."""
     import csv
 
     places = []
-    if not IOVERLANDER_DIR.exists():
+    folder = DATA_DIR / dest_id / "ioverlander"
+    if not folder.exists():
         return places
-    for f in IOVERLANDER_DIR.iterdir():
+    for f in folder.iterdir():
         rows = []
         if f.suffix.lower() == ".csv":
             with f.open(encoding="utf-8-sig") as fh:
@@ -403,7 +346,7 @@ def load_ioverlander() -> list[dict]:
             places.append({"lat": lat, "lng": lng, "name": low.get("name") or low.get("title") or "",
                            "id": str(low.get("id") or low.get("place_id") or ""),
                            "category": low.get("category") or low.get("type") or ""})
-    log(f"iOverlander: {len(places)} Plätze geladen")
+    log(f"  iOverlander: {len(places)} Plätze geladen")
     return places
 
 
@@ -415,11 +358,11 @@ def similar(a: str, b: str) -> float:
 
 
 def merge_spot(spots: list[dict], new: dict, mention: dict):
-    limit = CONFIG["merge_distance_m"]
+    limit_km = CONFIG["merge_distance_m"] / 1000
     for s in spots:
-        d = haversine_m((s["lat"], s["lng"]), (new["lat"], new["lng"]))
+        d = haversine_km((s["lat"], s["lng"]), (new["lat"], new["lng"]))
         both_exact = s["precision"] == "exakt" and new["precision"] == "exakt"
-        if d <= limit and (both_exact or similar(s["name"], new["name"]) >= 0.6):
+        if d <= limit_km and (both_exact or similar(s["name"], new["name"]) >= 0.6):
             if any(m["video_id"] == mention["video_id"] for m in s["mentions"]):
                 return
             newer = all(mention["published"] >= m["published"] for m in s["mentions"])
@@ -457,36 +400,56 @@ def finalize(spots: list[dict]):
 # --------------------------------------------------------------------------- Ablauf
 
 
-def collect_candidates(yt: YouTube | None, state: dict) -> None:
+def search_cost(dest: dict, backfill: bool) -> int:
+    pages = CONFIG["backfill_pages"] if backfill else 1
+    return len(dest["search_queries"]) * pages * 100
+
+
+def search_today(dest: dict, index: int, dests: list[dict], state: dict) -> bool:
+    """Verteilt die Suchen über mehrere Tage, wenn das YouTube-Kontingent für alle Ziele nicht reicht."""
+    if not state.get("backfill_done"):
+        return True
+    total = sum(search_cost(d, False) for d in dests)
+    every = max(1, math.ceil(total / CONFIG["youtube_daily_budget"]))
+    return (dt.date.today().toordinal() + index) % every == 0
+
+
+def collect_candidates(dest: dict, yt: YouTube | None, state: dict, search: bool) -> None:
     """Neue Video-IDs samt Metadaten in die Warteschlange state['queue'] legen."""
     known = set(state["videos"]) | set(state["queue"])
     found: dict[str, dict] = {}
 
-    if yt:
+    if yt and search:
         backfill = not state.get("backfill_done")
-        days = CONFIG["backfill_days"] if backfill else CONFIG["search_window_days"]
-        pages = CONFIG["backfill_pages"] if backfill else 1
-        after = iso(now_utc() - dt.timedelta(days=days))
-        ids: list[str] = []
-        for q in CONFIG["search_queries"]:
-            try:
-                ids += yt.search(q, after, pages)
-            except Exception as ex:  # noqa: BLE001
-                log(f"Suche «{q}» fehlgeschlagen: {ex}")
-                if "Kontingent" in str(ex):
+        if yt.units + search_cost(dest, backfill) > CONFIG["youtube_daily_budget"]:
+            log("  YouTube-Suche verschoben: Tageskontingent reicht heute nicht mehr")
+        else:
+            days = CONFIG["backfill_days"] if backfill else CONFIG["search_window_days"]
+            pages = CONFIG["backfill_pages"] if backfill else 1
+            after = iso(now_utc() - dt.timedelta(days=days))
+            ids: list[str] = []
+            for q in dest["search_queries"]:
+                try:
+                    ids += yt.search(q, after, pages)
+                except QuotaExceeded:
+                    log("  YouTube-Kontingent aufgebraucht")
                     break
-        new_ids = sorted(set(ids) - known)
-        for item in yt.videos(new_ids):
-            sn = item["snippet"]
-            found[item["id"]] = {
-                "id": item["id"], "title": sn.get("title", ""), "channel": sn.get("channelTitle", ""),
-                "published": sn.get("publishedAt", "")[:10], "description": sn.get("description", ""),
-                "tags": sn.get("tags", []), "duration": parse_duration(item["contentDetails"].get("duration")),
-            }
-        state["backfill_done"] = True
-        log(f"YouTube-Suche: {len(ids)} Treffer, {len(new_ids)} neu")
+                except requests.RequestException as ex:
+                    log(f"  Suche «{q}» fehlgeschlagen: {ex}")
+            new_ids = sorted(set(ids) - known)
+            for item in yt.videos(new_ids):
+                sn = item["snippet"]
+                found[item["id"]] = {
+                    "id": item["id"], "title": sn.get("title", ""), "channel": sn.get("channelTitle", ""),
+                    "published": sn.get("publishedAt", "")[:10], "description": sn.get("description", ""),
+                    "tags": sn.get("tags", []), "duration": parse_duration(item["contentDetails"].get("duration")),
+                }
+            state["backfill_done"] = True
+            log(f"  YouTube-Suche: {len(ids)} Treffer, {len(new_ids)} neu")
+    elif yt:
+        log("  YouTube-Suche heute ausgelassen (Kontingent wird über mehrere Tage verteilt)")
 
-    for ch in CONFIG["channels"]:
+    for ch in dest.get("channels", []):
         cid = ch
         if ch.startswith("@"):
             cid = state["channels"].get(ch)
@@ -494,64 +457,91 @@ def collect_candidates(yt: YouTube | None, state: dict) -> None:
                 cid = yt.channel_id(ch)
                 state["channels"][ch] = cid
             if not cid:
-                log(f"Kanal {ch}: ID unbekannt (YouTube-Schlüssel nötig zum Auflösen)")
+                log(f"  Kanal {ch}: ID unbekannt (YouTube-Schlüssel nötig zum Auflösen)")
                 continue
         try:
             for v in rss_videos(cid):
                 if v["id"] not in known and v["id"] not in found:
                     found[v["id"]] = v
-        except Exception as ex:  # noqa: BLE001
-            log(f"RSS {ch} fehlgeschlagen: {ex}")
+        except (requests.RequestException, ET.ParseError) as ex:
+            log(f"  RSS {ch} fehlgeschlagen: {ex}")
 
     added = 0
     for vid, v in found.items():
         if v.get("duration") is not None and v["duration"] < CONFIG["min_duration_seconds"]:
             state["videos"][vid] = {"skipped": "kurz"}
             continue
-        if not is_relevant(v):
+        if not is_relevant(v, dest):
             state["videos"][vid] = {"skipped": "irrelevant"}
             continue
         v.pop("tags", None)
         state["queue"][vid] = v
         added += 1
-    log(f"Warteschlange: +{added}, total {len(state['queue'])}")
+    log(f"  Warteschlange: +{added}, total {len(state['queue'])}")
 
 
-def main():
-    if not os.getenv("ANTHROPIC_API_KEY"):
-        sys.exit("ANTHROPIC_API_KEY fehlt (GitHub → Settings → Secrets and variables → Actions)")
-    yt_key = os.getenv("YOUTUBE_API_KEY")
-    yt = YouTube(yt_key) if yt_key else None
-    if not yt:
-        log("Kein YOUTUBE_API_KEY: nur RSS-Feeds der Kanalliste werden abgefragt")
+def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder, ioverlander: list[dict]):
+    if sp.latitude is not None and sp.longitude is not None and in_bbox(sp.latitude, sp.longitude, dest["bbox"]):
+        lat, lng, precision = sp.latitude, sp.longitude, "exakt"
+    else:
+        pos = geocode(sp.place, dest["countrycodes"])
+        if not pos or not in_bbox(*pos, dest["bbox"]):
+            return None, None
+        lat, lng, precision = pos[0], pos[1], "ort"
+    new = {
+        "id": hashlib.sha1(f"{v['id']}|{sp.name}".encode()).hexdigest()[:10],
+        "name": sp.name, "place": sp.place, "lat": round(lat, 5), "lng": round(lng, 5),
+        "precision": precision, "region": sp.region, "type": sp.spot_type,
+        "infrastructure": sp.infrastructure.model_dump(), "four_wd": sp.four_wd_required,
+        "access_note": sp.access_note, "safety_note": sp.safety_note,
+        "police_contact": sp.police_contact, "price": sp.price,
+    }
+    io = min(ioverlander, key=lambda p: haversine_km((lat, lng), (p["lat"], p["lng"])), default=None)
+    if io and haversine_km((lat, lng), (io["lat"], io["lng"])) <= 0.25:
+        new["ioverlander"] = {"name": io["name"], "id": io["id"], "category": io["category"]}
+    mention = {
+        "video_id": v["id"], "title": v["title"], "channel": v["channel"], "published": v["published"],
+        "t": sp.timestamp_seconds, "quote": sp.quote, "rating": max(1, min(5, sp.rating)),
+        "sentiment": sp.sentiment, "recommendation": sp.recommendation,
+        "safety_rating": sp.safety_rating, "transcript": tstatus == "ok",
+    }
+    return new, mention
 
-    state = load_json(STATE_FILE, {"videos": {}, "queue": {}, "channels": {}, "backfill_done": False})
-    geocache = load_json(GEOCACHE_FILE, {})
-    spots = load_json(SPOTS_FILE, [])
-    ioverlander = load_ioverlander()
 
-    collect_candidates(yt, state)
+def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube | None, claude: Claude,
+                        tapi, geocode: Geocoder) -> dict:
+    did = dest["id"]
+    log(f"\n=== {dest['name']} ({did}) ===")
+    state_file = DATA_DIR / did / "state.json"
+    spots_file = WEB_DATA / did / "spots.json"
+    state = load_json(state_file, {"videos": {}, "queue": {}, "channels": {}, "backfill_done": False})
+    spots = load_json(spots_file, [])
+    ioverlander = load_ioverlander(did)
+    units_before, tin, tout = (yt.units if yt else 0), claude.tokens_in, claude.tokens_out
 
-    claude = Claude()
-    tapi = transcript_client()
+    collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
+
+    schema = extraction_model(dest)
     limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"])
     queue = sorted(state["queue"].values(), key=lambda v: v["published"], reverse=True)[:limit]
     stats = {"videos": 0, "spots_new": 0, "transcripts": {"ok": 0, "keins": 0, "blockiert": 0, "fehler": 0}}
+    stop = False
 
     for v in queue:
         log(f"▶ {v['published']} {v['channel']} – {v['title'][:70]}")
-        transcript, tstatus = fetch_transcript(tapi, v["id"])
+        transcript, tstatus = fetch_transcript(tapi, v["id"], dest["languages"])
         stats["transcripts"][tstatus] += 1
         comments = yt.comments(v["id"], CONFIG["max_comments"]) if yt else []
         try:
-            result = claude.extract(build_prompt(v, comments, transcript))
+            result = claude.extract(dest, schema, build_prompt(v, comments, transcript))
         except anthropic.RateLimitError:
             log("    Claude-Ratenlimit erreicht, Rest folgt beim nächsten Lauf")
             break
         except anthropic.APIStatusError as ex:
             log(f"    Claude-Fehler {ex.status_code}: {ex.message}")
             if ex.status_code in (400, 401, 403):
-                break  # Konfigurationsproblem (Schlüssel, Guthaben) – nicht weiter Geld verbrennen
+                stop = True  # Konfigurationsproblem (Schlüssel, Guthaben) – nicht weiter Geld verbrennen
+                break
             continue
         except anthropic.APIConnectionError:
             log("    Claude nicht erreichbar, Video bleibt in der Warteschlange")
@@ -567,56 +557,150 @@ def main():
             continue
 
         for sp in result.spots:
-            if sp.latitude is not None and sp.longitude is not None and in_area(sp.latitude, sp.longitude):
-                lat, lng, precision = sp.latitude, sp.longitude, "exakt"
-            else:
-                pos = geocode(sp.place, geocache)
-                if not pos or not in_area(*pos):
-                    log(f"    ✗ ohne Standort: {sp.name} ({sp.place})")
-                    continue
-                lat, lng, precision = pos[0], pos[1], "ort"
-            sid = hashlib.sha1(f"{v['id']}|{sp.name}".encode()).hexdigest()[:10]
-            new = {
-                "id": sid, "name": sp.name, "place": sp.place, "lat": round(lat, 5), "lng": round(lng, 5),
-                "precision": precision, "region": sp.region, "type": sp.spot_type,
-                "infrastructure": sp.infrastructure.model_dump(), "four_wd": sp.four_wd_required,
-                "access_note": sp.access_note, "safety_note": sp.safety_note,
-                "police_contact": sp.police_contact, "price": sp.price,
-            }
-            io = min(ioverlander, key=lambda p: haversine_m((lat, lng), (p["lat"], p["lng"])), default=None)
-            if io and haversine_m((lat, lng), (io["lat"], io["lng"])) <= 250:
-                new["ioverlander"] = {"name": io["name"], "id": io["id"], "category": io["category"]}
-            mention = {
-                "video_id": v["id"], "title": v["title"], "channel": v["channel"], "published": v["published"],
-                "t": sp.timestamp_seconds, "quote": sp.quote, "rating": max(1, min(5, sp.rating)),
-                "sentiment": sp.sentiment, "recommendation": sp.recommendation,
-                "safety_rating": sp.safety_rating, "transcript": tstatus == "ok",
-            }
+            new, mention = to_spot(dest, v, sp, tstatus, geocode, ioverlander)
+            if not new:
+                log(f"    ✗ ohne Standort: {sp.name} ({sp.place})")
+                continue
             before = len(spots)
             merge_spot(spots, new, mention)
             stats["spots_new"] += len(spots) - before
             record["spots"] += 1
-            log(f"    ✓ {sp.name} [{precision}] {sp.rating}/5")
+            log(f"    ✓ {sp.name} [{new['precision']}] {sp.rating}/5")
 
     finalize(spots)
-    save_json(SPOTS_FILE, spots, compact=True)
-    save_json(STATE_FILE, state)
-    save_json(GEOCACHE_FILE, geocache)
+    routes = build_routes(dest, geocode)
+    annotate_routes(spots, routes)
+    save_json(spots_file, spots, compact=True)
+    save_json(state_file, state)
 
-    meta = load_json(META_FILE, {})
-    history = meta.get("history", [])[-59:]
+    meta_file = WEB_DATA / did / "meta.json"
+    meta = load_json(meta_file, {})
     run = {
         "date": iso(now_utc()), "videos": stats["videos"], "spots_new": stats["spots_new"],
-        "transcripts": stats["transcripts"], "youtube_units": yt.units if yt else 0,
-        "claude_tokens": [claude.tokens_in, claude.tokens_out], "cost_usd": claude.cost_usd(),
+        "transcripts": stats["transcripts"], "youtube_units": (yt.units if yt else 0) - units_before,
+        "claude_tokens": [claude.tokens_in - tin, claude.tokens_out - tout], "model": claude.model,
     }
-    save_json(META_FILE, {
+    pin, pout = PRICES.get(claude.model, (4.0, 20.0))
+    run["cost_usd"] = round((run["claude_tokens"][0] * pin + run["claude_tokens"][1] * pout) / 1e6, 4)
+    save_json(meta_file, {
         "last_run": run["date"], "spots": len(spots),
         "videos_total": sum(1 for x in state["videos"].values() if "transcript" in x),
-        "queue": len(state["queue"]), "model": claude.model, "history": history + [run],
+        "queue": len(state["queue"]), "history": meta.get("history", [])[-59:] + [run],
     })
-    log(f"Fertig: {stats['videos']} Videos, {stats['spots_new']} neue Plätze, {len(spots)} total, "
-        f"Transkripte {stats['transcripts']}, YouTube {run['youtube_units']} Einheiten, ca. {run['cost_usd']} USD")
+    log(f"  Fertig: {stats['videos']} Videos, {stats['spots_new']} neue Plätze, {len(spots)} total, "
+        f"Transkripte {stats['transcripts']}, ca. {run['cost_usd']} USD")
+    return {"stop": stop}
+
+
+def write_index():
+    """docs/data/ziele.json: Übersicht aller Ziele für die Webapp."""
+    index = []
+    for d in load_destinations(only_active=True):
+        meta = load_json(WEB_DATA / d["id"] / "meta.json", {})
+        routes = load_json(WEB_DATA / d["id"] / "routes.json", {}).get("routes", [])
+        index.append({
+            "id": d["id"], "name": d["name"], "bbox": d["bbox"],
+            "regions": [r["name"] for r in d["regions"]],
+            "routes": [{k: r[k] for k in ("id", "name", "color", "length_km")} for r in routes],
+            "spots": meta.get("spots", 0), "last_run": meta.get("last_run"), "queue": meta.get("queue", 0),
+            "videos_total": meta.get("videos_total", 0),
+        })
+    save_json(WEB_DATA / "ziele.json", {"repo": REPO, "ziele": index})
+
+
+# --------------------------------------------------------------------------- Vergleich
+
+
+def compare(dests: list[dict], n: int, yt: YouTube | None):
+    """Dieselben Videos mit zwei Modellen auswerten und als Bericht gegenüberstellen. Ändert keine Daten."""
+    a, b = Claude(CONFIG["claude_model"]), Claude(CONFIG["compare_model"])
+    tapi = transcript_client()
+    lines = [f"# Modellvergleich {dt.date.today()}", "",
+             f"**A:** `{a.model}`  ·  **B:** `{b.model}`", ""]
+    for dest in dests:
+        state = load_json(DATA_DIR / dest["id"] / "state.json", {"videos": {}, "queue": {}})
+        pool = [{"id": k, **v} for k, v in state["videos"].items() if v.get("transcript") == "ok"]
+        pool += [v for v in state["queue"].values()]
+        pool = sorted(pool, key=lambda v: v.get("published", ""), reverse=True)[:n]
+        if not pool:
+            lines += [f"## {dest['name']}", "", "Noch keine Videos vorhanden – zuerst einen normalen Lauf starten.", ""]
+            continue
+        schema = extraction_model(dest)
+        lines += [f"## {dest['name']}", ""]
+        for v in pool:
+            meta = state["queue"].get(v["id"]) or v
+            if "description" not in meta and yt:
+                item = yt.videos([v["id"]])
+                if item:
+                    meta = {**meta, "description": item[0]["snippet"].get("description", "")}
+            meta.setdefault("description", "")
+            transcript, tstatus = fetch_transcript(tapi, v["id"], dest["languages"])
+            comments = yt.comments(v["id"], CONFIG["max_comments"]) if yt else []
+            prompt = build_prompt(meta, comments, transcript)
+            lines += [f"### [{meta['title']}](https://youtu.be/{v['id']})", f"{meta['channel']} · {meta['published']} · Transkript: {tstatus}", ""]
+            for label, c in (("A", a), ("B", b)):
+                try:
+                    r = c.extract(dest, schema, prompt)
+                except anthropic.APIError as ex:
+                    lines.append(f"- **{label}:** Fehler {ex}")
+                    continue
+                if not r or not r.relevant:
+                    lines.append(f"- **{label}:** {'nicht relevant' if r else 'keine Antwort'}")
+                    continue
+                spots = "; ".join(
+                    f"{s.name} ({s.spot_type}, {s.rating}/5{', Koord.' if s.latitude is not None else ''}"
+                    f"{', t=' + str(s.timestamp_seconds) + 's' if s.timestamp_seconds else ''})" for s in r.spots)
+                lines.append(f"- **{label}:** {len(r.spots)} Plätze – {spots or '–'}")
+            lines.append("")
+    lines += ["## Kosten", "", "| Modell | Tokens ein | Tokens aus | USD |", "|---|---|---|---|",
+              f"| {a.model} | {a.tokens_in} | {a.tokens_out} | {a.cost_usd()} |",
+              f"| {b.model} | {b.tokens_in} | {b.tokens_out} | {b.cost_usd()} |"]
+    report = "\n".join(lines) + "\n"
+    out = ROOT / "berichte" / f"vergleich-{dt.date.today()}.md"
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(report, encoding="utf-8")
+    if os.getenv("GITHUB_STEP_SUMMARY"):
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as fh:
+            fh.write(report)
+    log(report)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--ziel", default=os.getenv("ZIEL") or None, help="nur dieses Ziel (id)")
+    ap.add_argument("--vergleich", type=int, default=int(os.getenv("VERGLEICH") or 0),
+                    help="Anzahl Videos für den Modellvergleich")
+    ap.add_argument("--nur-index", action="store_true", help="nur docs/data/ziele.json neu schreiben")
+    args = ap.parse_args()
+
+    if args.nur_index or args.ziel == "-":
+        write_index()
+        return
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        sys.exit("ANTHROPIC_API_KEY fehlt (GitHub → Settings → Secrets and variables → Actions)")
+    yt_key = os.getenv("YOUTUBE_API_KEY")
+    yt = YouTube(yt_key) if yt_key else None
+    if not yt:
+        log("Kein YOUTUBE_API_KEY: nur RSS-Feeds der Kanallisten werden abgefragt")
+
+    all_dests = load_destinations()
+    dests = [d for d in all_dests if not args.ziel or d["id"] == args.ziel]
+    if not dests:
+        sys.exit(f"Ziel «{args.ziel}» nicht gefunden oder nicht aktiv")
+
+    if args.vergleich:
+        compare(dests, args.vergleich, yt)
+        return
+
+    claude, tapi, geocode = Claude(), transcript_client(), Geocoder()
+    try:
+        for d in dests:
+            if process_destination(d, all_dests.index(d), all_dests, yt, claude, tapi, geocode)["stop"]:
+                break
+    finally:
+        geocode.save()
+        write_index()
+    log(f"\nGesamt: YouTube {yt.units if yt else 0} Einheiten, Claude ca. {claude.cost_usd()} USD")
 
 
 if __name__ == "__main__":

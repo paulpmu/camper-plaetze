@@ -3,80 +3,145 @@
 
   const TYPE_LABEL = { wildplatz: "Wildplatz", camping: "Camping", stellplatz: "Stellplatz", andere: "Andere" };
   const INFRA_LABEL = { water: "💧 Wasser", dump_station: "🚽 Ver-/Entsorgung", electricity: "⚡ Strom", toilets: "🚻 WC", showers: "🚿 Dusche" };
-  const DEFAULT_FILTER = { region: "", types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
+  const DEFAULT_FILTER = { region: "", route: "", corridor: 30, types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  let index = { repo: "", ziele: [] };
+  let ziel = null;          // aktuelles Ziel aus ziele.json
   let spots = [];
+  let routes = [];
   let filter = load("filter", DEFAULT_FILTER);
   let me = null;
   let meMarker = null;
-  const markers = new Map();
+  let markers = new Map();
+  const routeLayers = new Map();
 
   function load(key, def) {
     try { return { ...def, ...JSON.parse(localStorage.getItem(key)) }; } catch { return { ...def }; }
   }
+  function loadStr(key) {
+    try { return localStorage.getItem(key); } catch { return null; }
+  }
   function save(key, val) {
-    try { localStorage.setItem(key, JSON.stringify(val)); } catch { /* privater Modus */ }
+    try { localStorage.setItem(key, typeof val === "string" ? val : JSON.stringify(val)); } catch { /* privater Modus */ }
   }
 
   // ---------------------------------------------------------------- Karte
-  const map = L.map("map", { zoomControl: false, tap: true }).setView([29.5, -8.5], 5);
+  const map = L.map("map", { zoomControl: false, tap: true }).setView([33, -6], 5);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a>',
   }).addTo(map);
+  const routeGroup = L.layerGroup().addTo(map);
   const cluster = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 45, spiderfyOnMaxZoom: true });
   map.addLayer(cluster);
 
+  function pinHtml(s) {
+    return `<div class="pin ${s.type} ${s.precision === "exakt" ? "" : "approx"}"><b>${s.rating.toFixed(1).replace(".0", "")}</b></div>`;
+  }
   function icon(s) {
-    return L.divIcon({
-      className: "",
-      html: `<div class="pin ${s.type} ${s.precision === "exakt" ? "" : "approx"}"><b>${s.rating.toFixed(1).replace(".0", "")}</b></div>`,
-      iconSize: [30, 30],
-      iconAnchor: [4, 30],
-    });
+    return L.divIcon({ className: "", html: pinHtml(s), iconSize: [30, 30], iconAnchor: [4, 30] });
   }
 
   // ---------------------------------------------------------------- Daten
+  async function getJson(url) {
+    const r = await fetch(url, { cache: "no-cache" });
+    if (!r.ok) throw new Error(url + " " + r.status);
+    return r.json();
+  }
+
   async function init() {
     try {
-      const [sr, mr] = await Promise.all([fetch("data/spots.json", { cache: "no-cache" }), fetch("data/meta.json", { cache: "no-cache" })]);
-      spots = await sr.json();
-      const meta = await mr.json();
-      showMeta(meta);
+      index = await getJson("data/ziele.json");
     } catch (e) {
       $("#count").textContent = "Daten nicht erreichbar (offline?)";
       return;
     }
-    const regions = [...new Set(spots.map((s) => s.region))].sort();
-    $("#f-region").insertAdjacentHTML("beforeend", regions.map((r) => `<option>${esc(r)}</option>`).join(""));
+    const [hz, hs] = decodeURIComponent(location.hash.slice(1)).split("/");
+    const wanted = hz || loadStr("ziel");
+    const z = index.ziele.find((x) => x.id === wanted) || index.ziele[0];
+    renderZielList();
+    if (z) await selectZiel(z.id, hs);
+    else $("#count").textContent = "noch kein Ziel";
+  }
+
+  async function selectZiel(id, spotId) {
+    const z = index.ziele.find((x) => x.id === id);
+    if (!z) return;
+    const changed = ziel && ziel.id !== id;
+    ziel = z;
+    save("ziel", id);
+    $("#ziel-name").textContent = z.name;
+    $("#count").textContent = "lädt …";
+    if (changed) { filter.region = ""; filter.route = ""; }
+    try {
+      [spots, routes] = await Promise.all([
+        getJson(`data/${id}/spots.json`).catch(() => []),
+        getJson(`data/${id}/routes.json`).then((r) => r.routes || []).catch(() => []),
+      ]);
+    } catch { spots = []; routes = []; }
+    if (filter.region && !z.regions.includes(filter.region)) filter.region = "";
+    if (filter.route && !routes.some((r) => r.id === filter.route)) filter.route = "";
+
+    markers = new Map();
     for (const s of spots) {
       const m = L.marker([s.lat, s.lng], { icon: icon(s), title: s.name });
       m.on("click", () => openDetail(s));
       markers.set(s.id, m);
     }
+    $("#f-region").innerHTML = `<option value="">Alle Regionen</option>` + z.regions.map((r) => `<option>${esc(r)}</option>`).join("");
+    $("#f-route").innerHTML = `<option value="">Keine Route</option>` + routes.map((r) => `<option value="${esc(r.id)}">${esc(r.name)} (${r.length_km} km)</option>`).join("");
+    $("#route-filter").hidden = !routes.length;
+    drawRoutes();
     syncFilterUI();
-    render(true);
+    renderZielList();
+    $(".empty")?.remove();
     if (!spots.length) {
       document.body.insertAdjacentHTML("beforeend",
-        `<div class="empty"><strong>Noch keine Plätze</strong><p class="muted">Der erste automatische Abruf hat noch keine Daten geliefert. Sobald die API-Schlüssel eingerichtet sind, füllt sich die Karte jede Nacht.</p></div>`);
+        `<div class="empty"><strong>Noch keine Plätze für ${esc(z.name)}</strong><p class="muted">${z.last_run ? "Der Abruf läuft. Neue Videos werden jede Nacht ausgewertet." : "Der erste Abruf steht noch aus. Er startet nachts automatisch oder kurz nach dem Anlegen des Ziels."}</p></div>`);
     }
-    const hash = decodeURIComponent(location.hash.slice(1));
-    const linked = spots.find((s) => s.id === hash);
+    showMeta();
+    render(false);
+    const linked = spots.find((s) => s.id === spotId);
     if (linked) { map.setView([linked.lat, linked.lng], 13); openDetail(linked); }
+    else fitView();
   }
 
-  function showMeta(meta) {
-    if (!meta.last_run) { $("#meta").textContent = "Noch kein Abruf erfolgt."; return; }
-    const d = new Date(meta.last_run);
-    $("#meta").textContent = `Stand ${d.toLocaleDateString("de-CH")} ${d.toLocaleTimeString("de-CH", { hour: "2-digit", minute: "2-digit" })} · ${meta.spots} Plätze aus ${meta.videos_total} ausgewerteten Videos` + (meta.queue ? ` · ${meta.queue} Videos in Warteschlange` : "");
+  function fitView() {
+    const visible = spots.filter(matches);
+    const r = routes.find((x) => x.id === filter.route);
+    if (r) map.fitBounds(L.latLngBounds(r.coords), { padding: [40, 40] });
+    else if (visible.length) map.fitBounds(L.latLngBounds(visible.map((s) => [s.lat, s.lng])), { padding: [40, 40], maxZoom: 12 });
+    else if (ziel) { const [s, w, n, e] = ziel.bbox; map.fitBounds([[s, w], [n, e]]); }
+  }
+
+  function drawRoutes() {
+    routeGroup.clearLayers();
+    routeLayers.clear();
+    for (const r of routes) {
+      const active = filter.route === r.id;
+      const line = L.polyline(r.coords, {
+        color: r.color, weight: active ? 5 : 3, opacity: active ? 0.9 : 0.45, dashArray: active ? null : "6 8",
+      }).bindTooltip(r.name, { sticky: true });
+      line.on("click", () => { filter.route = r.id; syncFilterUI(); drawRoutes(); render(); fitView(); });
+      routeGroup.addLayer(line);
+      routeLayers.set(r.id, line);
+    }
+  }
+
+  function showMeta() {
+    if (!ziel || !ziel.last_run) { $("#meta").textContent = "Für dieses Ziel ist noch kein Abruf erfolgt."; return; }
+    const d = new Date(ziel.last_run);
+    $("#meta").textContent = `${ziel.name}: Stand ${d.toLocaleDateString("de-CH")} ${d.toLocaleTimeString("de-CH", { hour: "2-digit", minute: "2-digit" })} · ${ziel.spots} Plätze aus ${ziel.videos_total} ausgewerteten Videos` + (ziel.queue ? ` · ${ziel.queue} Videos in Warteschlange` : "");
   }
 
   function ageDays(s) { return (Date.now() - new Date(s.last_seen).getTime()) / 864e5; }
+  function onRoute(s) { return filter.route ? (s.routes || {})[filter.route] : null; }
 
   function matches(s) {
     const f = filter;
+    if (f.route) { const r = onRoute(s); if (!r || r[1] > f.corridor) return false; }
     if (f.region && s.region !== f.region) return false;
     if (!f.types.includes(s.type)) return false;
     if (s.rating < f.rating) return false;
@@ -93,18 +158,17 @@
   }
 
   function isDefault() {
-    const { q, ...a } = filter; const { q: _q, ...b } = DEFAULT_FILTER;
+    const { q, corridor, ...a } = filter; const { q: _q, corridor: _c, ...b } = DEFAULT_FILTER;
     return JSON.stringify(a) === JSON.stringify(b);
   }
 
-  function render(fit = false) {
+  function render() {
     const visible = spots.filter(matches);
     cluster.clearLayers();
     cluster.addLayers(visible.map((s) => markers.get(s.id)));
-    $("#count").textContent = spots.length ? `${visible.length} von ${spots.length} Plätzen` : "keine Daten";
+    $("#count").textContent = spots.length ? `${visible.length} von ${spots.length} Plätzen` : "keine Plätze";
     $("#filter-dot").hidden = isDefault();
     renderList(visible);
-    if (fit && visible.length) map.fitBounds(L.latLngBounds(visible.map((s) => [s.lat, s.lng])), { padding: [40, 40], maxZoom: 12 });
     save("filter", filter);
   }
 
@@ -117,15 +181,17 @@
   }
 
   function renderList(visible) {
-    const items = visible.map((s) => ({ s, d: distKm(s) }));
-    if (me) items.sort((a, b) => a.d - b.d);
-    else items.sort((a, b) => b.s.rating - a.s.rating || b.s.last_seen.localeCompare(a.s.last_seen));
-    $("#list-sort").textContent = me ? "nach Entfernung" : "nach Bewertung";
-    $("#list").innerHTML = items.slice(0, 300).map(({ s, d }) => `
+    const items = visible.map((s) => ({ s, d: distKm(s), r: onRoute(s) }));
+    let label;
+    if (filter.route) { items.sort((a, b) => a.r[0] - b.r[0]); label = "nach Streckenkilometer"; }
+    else if (me) { items.sort((a, b) => a.d - b.d); label = "nach Entfernung"; }
+    else { items.sort((a, b) => b.s.rating - a.s.rating || b.s.last_seen.localeCompare(a.s.last_seen)); label = "nach Bewertung"; }
+    $("#list-sort").textContent = label;
+    $("#list").innerHTML = items.slice(0, 400).map(({ s, d, r }) => `
       <li data-id="${s.id}">
-        <div class="pin ${s.type} ${s.precision === "exakt" ? "" : "approx"}"><b>${s.rating.toFixed(1).replace(".0", "")}</b></div>
+        ${pinHtml(s)}
         <div><div class="t">${esc(s.name)}</div><div class="s">${esc(TYPE_LABEL[s.type])} · ${esc(s.place)}</div></div>
-        <div class="r">${d != null ? Math.round(d) + " km<br>" : ""}${fmtDate(s.last_seen)}</div>
+        <div class="r">${r ? `km ${r[0]}<br>${r[1]} km abseits` : (d != null ? Math.round(d) + " km<br>" : "") + fmtDate(s.last_seen)}</div>
       </li>`).join("") || `<li class="muted">Keine Plätze für diese Filter.</li>`;
   }
 
@@ -141,7 +207,6 @@
     const m = Math.floor(t / 60), s = String(t % 60).padStart(2, "0");
     return m >= 60 ? `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}:${s}` : `${m}:${s}`;
   }
-  function yesNo(v) { return v === true ? "ja" : v === false ? "nein" : null; }
 
   function openDetail(s) {
     const infra = Object.entries(INFRA_LABEL).map(([k, label]) => {
@@ -151,17 +216,22 @@
     const facts = [
       ["Zufahrt", [s.four_wd === true ? "Allrad nötig" : s.four_wd === false ? "ohne Allrad" : "", s.access_note].filter(Boolean).join(" – ")],
       ["Sicherheit", [s.safety_rating ? `${s.safety_rating}/5` : "", s.safety_note].filter(Boolean).join(" – ")],
-      ["Polizei", yesNo(s.police_contact) && (s.police_contact ? "Kontakt erwähnt" : "kein Kontakt")],
+      ["Polizei", s.police_contact === true ? "Kontakt erwähnt" : s.police_contact === false ? "kein Kontakt" : ""],
       ["Preis", s.price],
-      ["iOverlander", s.ioverlander && esc(s.ioverlander.name) + (s.ioverlander.category ? ` (${esc(s.ioverlander.category)})` : "")],
-    ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${k === "iOverlander" ? v : esc(v)}</dd>`).join("");
+    ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")
+      + (s.ioverlander ? `<dt>iOverlander</dt><dd>${esc(s.ioverlander.name)}${s.ioverlander.category ? ` (${esc(s.ioverlander.category)})` : ""}</dd>` : "");
+
+    const routeInfo = routes.filter((r) => (s.routes || {})[r.id]).map((r) => {
+      const [km, off] = s.routes[r.id];
+      return `<div class="route-info"><span class="route-swatch" style="background:${esc(r.color)}"></span>${esc(r.name)}: km ${km} von ${r.length_km}${off >= 1 ? `, ${off} km abseits` : ""}</div>`;
+    }).join("");
 
     const ll = `${s.lat},${s.lng}`;
     const io = s.ioverlander && s.ioverlander.id ? `https://www.ioverlander.com/places/${encodeURIComponent(s.ioverlander.id)}` : null;
     const mentions = s.mentions.map((m) => {
-      const url = `https://www.youtube.com/watch?v=${m.video_id}${m.t ? `&t=${m.t}s` : ""}`;
+      const url = `https://www.youtube.com/watch?v=${encodeURIComponent(m.video_id)}${m.t ? `&t=${m.t}s` : ""}`;
       return `<a class="mention" href="${url}" target="_blank" rel="noopener">
-        <img loading="lazy" src="https://i.ytimg.com/vi/${m.video_id}/mqdefault.jpg" alt="">
+        <img loading="lazy" src="https://i.ytimg.com/vi/${encodeURIComponent(m.video_id)}/mqdefault.jpg" alt="">
         <div>
           <div class="mt">${esc(m.title)}</div>
           <div class="ms">${esc(m.channel)} · ${fmtDate(m.published)} · <span class="stars" style="font-size:12px">${stars(m.rating)}</span></div>
@@ -182,6 +252,7 @@
       </div>
       <div class="stars">${stars(s.rating)}<small>${s.rating.toFixed(1)} · ${s.mentions.length} ${s.mentions.length === 1 ? "Video" : "Videos"} · zuletzt ${fmtDate(s.last_seen)}</small></div>
       ${s.recommendation ? `<div class="reco">${esc(s.recommendation)}</div>` : ""}
+      ${routeInfo}
       <div class="infra">${infra}</div>
       ${facts ? `<dl class="facts">${facts}</dl>` : ""}
       <div class="links">
@@ -194,12 +265,64 @@
       ${mentions}`;
     const share = $("#detail [data-share]");
     if (share) share.onclick = () => {
-      const url = location.href.split("#")[0] + "#" + s.id;
+      const url = location.href.split("#")[0] + "#" + ziel.id + "/" + s.id;
       if (navigator.share) navigator.share({ title: s.name, url }).catch(() => {});
       else navigator.clipboard?.writeText(url);
     };
-    history.replaceState(null, "", "#" + s.id);
+    history.replaceState(null, "", "#" + ziel.id + "/" + s.id);
     open("#sheet-detail");
+  }
+
+  // ---------------------------------------------------------------- Ziele & Anfragen
+  function renderZielList() {
+    $("#ziel-list").innerHTML = index.ziele.map((z) => `
+      <li data-id="${esc(z.id)}" class="${ziel && z.id === ziel.id ? "on" : ""}">
+        <span>${esc(z.name)}</span>
+        <span class="r">${z.spots} Plätze${z.routes.length ? ` · ${z.routes.length} Routen` : ""}<br>${z.last_run ? "Stand " + new Date(z.last_run).toLocaleDateString("de-CH") : "noch kein Abruf"}</span>
+      </li>`).join("") || `<li class="muted">Noch keine Ziele.</li>`;
+  }
+  $("#ziel-list").onclick = (e) => {
+    const li = e.target.closest("li[data-id]");
+    if (!li) return;
+    close();
+    selectZiel(li.dataset.id);
+  };
+
+  function repo() {
+    if (index.repo) return index.repo;
+    const owner = location.hostname.split(".")[0];
+    const name = location.pathname.split("/").filter(Boolean)[0];
+    return owner && name ? `${owner}/${name}` : "";
+  }
+
+  $("#req-send").onclick = () => {
+    const text = $("#req-text").value.trim();
+    if (!text) { $("#req-text").focus(); return; }
+    if (!repo()) { alert("Repository unbekannt – die App muss über GitHub Pages laufen."); return; }
+    const title = "[Ziel] " + text.split("\n")[0].slice(0, 70);
+    const body = `${text}\n\n---\nGesendet aus der Webapp · aktuelles Ziel: ${ziel ? ziel.name + " (" + ziel.id + ")" : "–"}`;
+    const url = `https://github.com/${repo()}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+    window.open(url, "_blank", "noopener");
+    $("#req-text").value = "";
+    save("req-draft", "");
+  };
+  $("#req-text").oninput = (e) => save("req-draft", e.target.value);
+
+  async function loadRequests() {
+    if (!repo()) { $("#req-list").innerHTML = `<li class="muted">Erst über GitHub Pages verfügbar.</li>`; return; }
+    try {
+      const r = await fetch(`https://api.github.com/repos/${repo()}/issues?state=all&per_page=30&sort=created`);
+      if (!r.ok) throw new Error(r.status);
+      const issues = (await r.json()).filter((i) => !i.pull_request && i.title.startsWith("[Ziel]")).slice(0, 6);
+      $("#req-list").innerHTML = issues.map((i) => {
+        const done = i.state === "closed";
+        return `<li><a href="${esc(i.html_url)}" target="_blank" rel="noopener">
+          <span class="st ${done ? "erledigt" : "offen"}">${done ? "erledigt" : i.comments ? "Rückfrage" : "in Arbeit"}</span>${esc(i.title.replace("[Ziel] ", ""))}</a>
+          <div class="muted">${new Date(i.created_at).toLocaleString("de-CH", { dateStyle: "short", timeStyle: "short" })}${i.comments ? ` · ${i.comments} Antwort${i.comments > 1 ? "en" : ""}` : ""}</div></li>`;
+      }).join("") || `<li class="muted">Noch keine Anfragen.</li>`;
+    } catch {
+      $("#req-list").innerHTML = `<li class="muted">Anfragen nicht abrufbar (offline oder GitHub-Limit).</li>`;
+    }
   }
 
   // ---------------------------------------------------------------- Sheets
@@ -213,7 +336,7 @@
   }
   function close() {
     if (current) $(current).hidden = true;
-    if (current === "#sheet-detail") history.replaceState(null, "", location.pathname);
+    if (current === "#sheet-detail" && ziel) history.replaceState(null, "", location.pathname + "#" + ziel.id);
     current = null;
     $("#backdrop").hidden = true;
   }
@@ -222,6 +345,11 @@
   $("#btn-filter").onclick = () => open("#sheet-filter");
   $("#btn-list").onclick = () => open("#sheet-list");
   $("#btn-info").onclick = () => open("#sheet-info");
+  $("#btn-ziel").onclick = () => {
+    $("#req-text").value = loadStr("req-draft") || "";
+    open("#sheet-ziel");
+    loadRequests();
+  };
   $("#list").onclick = (e) => {
     const li = e.target.closest("li[data-id]");
     if (!li) return;
@@ -233,13 +361,16 @@
   // Nach unten wischen schliesst ein Sheet
   document.querySelectorAll(".sheet").forEach((sh) => {
     let y0 = null;
-    sh.addEventListener("touchstart", (e) => { y0 = sh.scrollTop <= 0 ? e.touches[0].clientY : null; }, { passive: true });
+    sh.addEventListener("touchstart", (e) => { y0 = sh.scrollTop <= 0 && e.target.tagName !== "TEXTAREA" ? e.touches[0].clientY : null; }, { passive: true });
     sh.addEventListener("touchend", (e) => { if (y0 != null && e.changedTouches[0].clientY - y0 > 90) close(); y0 = null; }, { passive: true });
   });
 
   // ---------------------------------------------------------------- Filter-UI
   function syncFilterUI() {
     $("#f-region").value = filter.region;
+    $("#f-route").value = filter.route;
+    $("#corridor-field").hidden = !filter.route;
+    document.querySelectorAll("#f-corridor button").forEach((b) => b.classList.toggle("on", +b.dataset.v === filter.corridor));
     document.querySelectorAll("#f-type .chip").forEach((b) => b.classList.toggle("on", filter.types.includes(b.dataset.v)));
     document.querySelectorAll("#f-infra .chip").forEach((b) => b.classList.toggle("on", filter.infra.includes(b.dataset.v)));
     document.querySelectorAll("#f-rating button").forEach((b) => b.classList.toggle("on", +b.dataset.v === filter.rating));
@@ -251,14 +382,16 @@
   }
   function toggleIn(arr, v) { return arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]; }
 
-  $("#f-region").onchange = (e) => { filter.region = e.target.value; render(true); };
+  $("#f-route").onchange = (e) => { filter.route = e.target.value; syncFilterUI(); drawRoutes(); render(); fitView(); };
+  $("#f-corridor").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.corridor = +b.dataset.v; syncFilterUI(); render(); };
+  $("#f-region").onchange = (e) => { filter.region = e.target.value; render(); fitView(); };
   $("#f-type").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.types = toggleIn(filter.types, b.dataset.v); syncFilterUI(); render(); };
   $("#f-infra").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.infra = toggleIn(filter.infra, b.dataset.v); syncFilterUI(); render(); };
   $("#f-rating").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.rating = +b.dataset.v; syncFilterUI(); render(); };
   $("#f-age").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.age = +b.dataset.v; syncFilterUI(); render(); };
   ["no4wd", "exact", "safe"].forEach((k) => ($(`#f-${k}`).onchange = (e) => { filter[k] = e.target.checked; render(); }));
   $("#search").oninput = (e) => { filter.q = e.target.value.trim(); render(); };
-  $("#f-reset").onclick = () => { filter = structuredClone(DEFAULT_FILTER); syncFilterUI(); render(true); };
+  $("#f-reset").onclick = () => { filter = structuredClone(DEFAULT_FILTER); syncFilterUI(); drawRoutes(); render(); fitView(); };
 
   // ---------------------------------------------------------------- Standort
   $("#btn-locate").onclick = () => {

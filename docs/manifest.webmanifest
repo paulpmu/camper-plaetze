@@ -1,7 +1,7 @@
 {
-  "name": "Marokko Camper",
-  "short_name": "Marokko Camper",
-  "description": "Übernachtungsplätze in Marokko und Dakhla aus aktuellen Overlander-Videos",
+  "name": "Camper-Plätze",
+  "short_name": "Camper-Plätze",
+  "description": "Übernachtungsplätze für Camper aus aktuellen Overlander-Videos",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -1,0 +1,54 @@
+{
+  "id": "iberia",
+  "name": "Spanien & Portugal",
+  "active": true,
+  "countrycodes": ["es", "pt"],
+  "bbox": [35.9, -9.6, 43.9, 3.4],
+  "languages": ["de", "en", "es", "pt", "fr", "nl"],
+  "search_queries": [
+    "Spain van life wild camping",
+    "Portugal van life",
+    "Spanien Wohnmobil Stellplatz",
+    "Portugal Wohnmobil Reise",
+    "Algarve camper",
+    "Andalusien Camper",
+    "España autocaravana pernocta",
+    "Portugal autocaravana",
+    "Espagne camping-car bivouac",
+    "Portugal camping-car"
+  ],
+  "channels": [],
+  "relevance_keywords": [
+    "spain", "españa", "spanien", "espagne", "spagna", "portugal", "portogallo",
+    "andalucia", "andalucía", "andalusien", "algarve", "alentejo", "galicia", "galicien", "asturias",
+    "cantabria", "pyrenees", "pyrenäen", "catalonia", "katalonien", "valencia", "murcia", "almeria",
+    "almería", "tarifa", "cabo de gata", "lisbon", "lissabon", "lisboa", "porto", "sagres", "nazaré",
+    "sevilla", "granada", "malaga", "málaga", "cadiz", "cádiz", "picos de europa"
+  ],
+  "regions": [
+    {"name": "Katalonien & Pyrenäen", "hint": "Costa Brava, Barcelona, Pyrenäen, Andorra-Nähe, Ebro-Delta"},
+    {"name": "Levante", "hint": "Valencia, Alicante, Murcia, Costa Blanca"},
+    {"name": "Andalusien", "hint": "Almería, Cabo de Gata, Granada, Málaga, Tarifa, Cádiz, Sevilla, Huelva"},
+    {"name": "Zentralspanien", "hint": "Madrid, Kastilien, Extremadura, Aragonien"},
+    {"name": "Nordspanien", "hint": "Galicien, Asturien, Kantabrien, Baskenland, Picos de Europa"},
+    {"name": "Nordportugal", "hint": "Porto, Douro, Minho, Peneda-Gerês"},
+    {"name": "Zentrum Portugal", "hint": "Nazaré, Peniche, Coimbra, Lissabon, Sintra, Setúbal"},
+    {"name": "Alentejo", "hint": "Costa Vicentina Nord, Évora, Zambujeira, Vila Nova de Milfontes"},
+    {"name": "Algarve", "hint": "Sagres, Lagos, Faro, Tavira, Aljezur"}
+  ],
+  "routes": [
+    {
+      "id": "anreise-mittelmeer",
+      "name": "Anreise Mittelmeer bis Algeciras",
+      "color": "#1f6fb2",
+      "waypoints": ["La Jonquera", "Barcelona", "Valencia", "Alicante", "Almería", "Málaga", "Algeciras"]
+    },
+    {
+      "id": "rueckreise-portugal",
+      "name": "Rückreise über Portugal",
+      "color": "#8e44ad",
+      "waypoints": ["Tarifa", "Cádiz", "Huelva", "Faro", "Sagres", "Lissabon", "Porto", "Santiago de Compostela", "Bilbao"]
+    }
+  ],
+  "notes": "In Portugal ist das Übernachten mit Wohnmobilen ausserhalb erlaubter Plätze seit 2021 gesetzlich eingeschränkt, in Spanien regeln es Gemeinden unterschiedlich. Notiere Hinweise auf Verbote, Bussen oder Kontrollen im Sicherheitstext."
+}

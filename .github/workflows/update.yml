@@ -5,12 +5,18 @@ on:
     - cron: "17 3 * * *" # täglich 03:17 UTC
   workflow_dispatch:
     inputs:
+      ziel:
+        description: "Nur dieses Ziel (z. B. marokko); leer = alle"
+        required: false
       max_videos:
-        description: "Max. Videos in diesem Lauf (leer = Standard aus config.json)"
+        description: "Max. Videos pro Ziel in diesem Lauf (leer = Standard)"
+        required: false
+      vergleich:
+        description: "Modellvergleich statt Abruf: Anzahl Videos (z. B. 10); leer = normaler Abruf"
         required: false
   push:
     branches: [main]
-    paths: ["docs/**"]
+    paths: ["docs/**", "ziele/**"]
 
 permissions:
   contents: write
@@ -18,14 +24,14 @@ permissions:
   id-token: write
 
 concurrency:
-  group: update
+  group: repo-write
   cancel-in-progress: false
 
 jobs:
   update:
     if: github.event_name != 'push'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -40,14 +46,19 @@ jobs:
           TRANSCRIPT_PROXY_URL: ${{ secrets.TRANSCRIPT_PROXY_URL }}
           WEBSHARE_USER: ${{ secrets.WEBSHARE_USER }}
           WEBSHARE_PASS: ${{ secrets.WEBSHARE_PASS }}
+          ZIEL: ${{ inputs.ziel }}
           MAX_VIDEOS: ${{ inputs.max_videos }}
+          VERGLEICH: ${{ inputs.vergleich }}
         run: python scripts/update.py
       - name: Daten speichern
         run: |
-          git config user.name "marokko-camper-bot"
+          git config user.name "camper-plaetze-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data docs/data
-          git diff --staged --quiet || git commit -m "Daten aktualisiert $(date -u +%F)"
+          git add -A data docs/data
+          if [ -d berichte ]; then git add -A berichte; fi
+          git diff --staged --quiet && exit 0
+          git commit -m "Daten aktualisiert $(date -u +%F)"
+          git pull --rebase origin main
           git push
 
   deploy:
@@ -61,6 +72,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Zielübersicht aktualisieren
+        run: python scripts/update.py --nur-index
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

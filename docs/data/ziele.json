@@ -1,0 +1,57 @@
+{
+ "repo": "paulpmu/camper-plaetze",
+ "ziele": [
+  {
+   "id": "iberia",
+   "name": "Spanien & Portugal",
+   "bbox": [
+    35.9,
+    -9.6,
+    43.9,
+    3.4
+   ],
+   "regions": [
+    "Katalonien & Pyrenäen",
+    "Levante",
+    "Andalusien",
+    "Zentralspanien",
+    "Nordspanien",
+    "Nordportugal",
+    "Zentrum Portugal",
+    "Alentejo",
+    "Algarve"
+   ],
+   "routes": [],
+   "spots": 0,
+   "last_run": null,
+   "queue": 0,
+   "videos_total": 0
+  },
+  {
+   "id": "marokko",
+   "name": "Marokko & Dakhla",
+   "bbox": [
+    20.5,
+    -17.5,
+    36.2,
+    -0.9
+   ],
+   "regions": [
+    "Mittelmeer & Rif",
+    "Nordatlantik",
+    "Fès & Mittlerer Atlas",
+    "Marrakesch & Hoher Atlas",
+    "Südatlantik",
+    "Antiatlas & Draa",
+    "Sahara Ost",
+    "Südwesten",
+    "Dakhla & Süden"
+   ],
+   "routes": [],
+   "spots": 0,
+   "last_run": null,
+   "queue": 0,
+   "videos_total": 0
+  }
+ ]
+}
