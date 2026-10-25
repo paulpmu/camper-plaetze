@@ -4,6 +4,8 @@ Webapp für iPhone und iPad mit Übernachtungsplätzen für Camper. Die Plätze 
 
 **Webapp:** https://paulpmu.github.io/camper-plaetze/
 
+**Betrieb, Kosten und Pflege:** siehe [BETRIEB.md](BETRIEB.md)
+
 ```
 GitHub Action (täglich 03:17 UTC), pro Ziel:
   ├─ YouTube Data API: Suche in mehreren Sprachen + RSS-Feeds fester Kanäle
