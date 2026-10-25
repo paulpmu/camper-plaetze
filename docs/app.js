@@ -9,6 +9,7 @@
     ort: ["ungefährer Standort (Ortsmitte)", "warn"],
     region: ["nur Region bekannt – nicht auf der Karte", "warn"],
   };
+  const IOVERLANDER_URL = "https://app.ioverlander.com/";
   const SCHEDULE = { taeglich: "täglich", woechentlich: "wöchentlich", manuell: "nur manuell" };
   const WEEKDAY = ["", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const DEFAULT_FILTER = { region: "", route: "", corridor: 30, types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
@@ -276,10 +277,19 @@
         <a class="btn" href="https://maps.apple.com/?daddr=${ll}&q=${encodeURIComponent(s.name)}" target="_blank" rel="noopener">Apple Karten</a>
         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${ll}" target="_blank" rel="noopener">Google Maps</a>
         <a class="btn ghost" href="https://park4night.com/en/search?lat=${s.lat}&lng=${s.lng}&z=14" target="_blank" rel="noopener">park4night</a>
-        ${io ? `<a class="btn ghost" href="${io}" target="_blank" rel="noopener">iOverlander</a>` : `<button class="btn ghost" data-share>Teilen</button>`}
-      </div>`}
+        <button class="btn ghost" data-ioverlander>iOverlander</button>
+        <button class="btn ghost wide" data-share>Teilen</button>
+      </div>
+      <p class="muted io-hint" hidden>Koordinaten <strong>${s.lat}, ${s.lng}</strong> kopiert. In iOverlander ins Suchfeld einfügen, dann erscheinen die Plätze in der Umgebung.</p>`}
       <h4>Aus den Videos</h4>
       ${mentions}`;
+    const iob = $("#detail [data-ioverlander]");
+    if (iob) iob.onclick = async () => {
+      // iOverlander hat keine dokumentierte Adresse für eine Kartenposition: Koordinaten kopieren, dann öffnen
+      try { await navigator.clipboard.writeText(`${s.lat}, ${s.lng}`); } catch { /* Zwischenablage nicht erlaubt */ }
+      $("#detail .io-hint").hidden = false;
+      window.open(io || IOVERLANDER_URL, "_blank", "noopener");
+    };
     const share = $("#detail [data-share]");
     if (share) share.onclick = () => {
       const url = location.href.split("#")[0] + "#" + ziel.id + "/" + s.id;
@@ -303,8 +313,7 @@
           ${can ? `<select data-schedule aria-label="Zeitplan">
               ${Object.entries(SCHEDULE).map(([k, v]) => `<option value="${k}" ${z.schedule === k ? "selected" : ""}>${v}${k === "woechentlich" ? " (" + WEEKDAY[z.weekday || 1] + ")" : ""}</option>`).join("")}
             </select>
-            <button class="btn small" data-run>Jetzt aktualisieren</button>
-            <label class="btn ghost small upl">iOverlander-Export<input type="file" data-upload accept=".csv,.json,.geojson,.gpx,.kml" hidden></label>`
+            <button class="btn small" data-run>Jetzt aktualisieren</button>`
           : `<span class="muted">Zeitplan: ${SCHEDULE[z.schedule] || "täglich"}${z.schedule === "woechentlich" ? " (" + WEEKDAY[z.weekday || 1] + ")" : ""}</span>`}
         </div>
       </li>`).join("") || `<li class="muted">Noch keine Ziele.</li>`;
@@ -335,26 +344,7 @@
       } catch (err) { toast("Ändern fehlgeschlagen: " + err.message); e.target.value = z.schedule; }
       e.target.disabled = false;
     }
-    if (e.target.matches("[data-upload]") && e.target.files[0]) uploadIoverlander(z, e.target.files[0], e.target);
   };
-
-  async function uploadIoverlander(z, file, input) {
-    if (file.size > 40e6) { toast("Datei zu gross (max. 40 MB)."); return; }
-    const ext = file.name.split(".").pop().toLowerCase();
-    toast(`Lade ${file.name} hoch …`);
-    try {
-      const buf = new Uint8Array(await file.arrayBuffer());
-      let bin = "";
-      for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
-      const path = `/contents/data/${encodeURIComponent(z.id)}/ioverlander/export.${ext}`;
-      let sha;
-      try { sha = (await GH.api(`${path}?ref=main`)).sha; } catch { /* neue Datei */ }
-      await GH.api(path, { method: "PUT", body: { message: `iOverlander-Export für ${z.id} (aus der Webapp)`, content: btoa(bin), sha, branch: "main" } });
-      await GH.dispatch({ ziel: z.id });
-      toast(`iOverlander-Export für ${z.name} gespeichert. Der Abgleich läuft jetzt.`);
-    } catch (err) { toast("Hochladen fehlgeschlagen: " + err.message); }
-    input.value = "";
-  }
 
   function toast(msg) {
     let t = $("#toast");
@@ -440,7 +430,7 @@
     $("#req-hint-link").hidden = has;
     $("#gh-token").value = "";
     $("#gh-token").placeholder = has ? "•••••••• (hinterlegt)" : "github_pat_…";
-    if (!has) { $("#gh-status").textContent = "Kein Schlüssel hinterlegt. Mit Schlüssel können Sie Ziele direkt starten, Zeitpläne ändern, iOverlander-Exporte hochladen und Anfragen ohne Umweg senden."; return; }
+    if (!has) { $("#gh-status").textContent = "Kein Schlüssel hinterlegt. Mit Schlüssel können Sie Ziele direkt starten, Zeitpläne ändern und Anfragen ohne Umweg senden."; return; }
     $("#gh-status").textContent = verify ? "Prüfe …" : "Schlüssel hinterlegt.";
     if (!verify) return;
     try { $("#gh-status").textContent = `Verbunden als ${await GH.check()} – volle Steuerung aktiv.`; }

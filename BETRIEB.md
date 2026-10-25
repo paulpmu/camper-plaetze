@@ -87,7 +87,7 @@ Es werden nur Anfragen von Ihrem GitHub-Konto verarbeitet.
 ### 2.4 Steuerung direkt aus der App (GitHub-Schlüssel)
 
 Mit einem persönlichen GitHub-Schlüssel auf dem iPhone oder iPad steuern Sie alles direkt aus der App:
-- **Zielliste:** Zeitplan ändern, **Jetzt aktualisieren**, **iOverlander-Export** hochladen
+- **Zielliste:** Zeitplan ändern, **Jetzt aktualisieren**
 - **i → Läufe:** **Alle Ziele aktualisieren**, **Modellvergleich**, **Alle Videos neu auswerten**
 - **Anfragen** gehen ohne Umweg über die GitHub-Seite
 
@@ -120,18 +120,17 @@ Jeder Platz hat eine von vier Genauigkeitsstufen:
 | Stufe | Bedeutung | Darstellung |
 |---|---|---|
 | **genaue Koordinaten** | Koordinaten oder Kartenlink im Video | Marker durchgezogen |
-| **Platz verortet** | benannter Platz (Camping, Strand, See …) gefunden, über OpenStreetMap oder iOverlander | Marker durchgezogen |
+| **Platz verortet** | benannter Platz (Camping, Strand, See …) über OpenStreetMap gefunden | Marker durchgezogen |
 | **ungefähr** | nur der Ort ist bekannt, der Marker steht in der Ortsmitte | Marker gestrichelt |
 | **nur Region** | nur eine Gegend ist bekannt | nicht auf der Karte, nur in der Liste |
 
-**iOverlander-Abgleich:**
-1. Auf ioverlander.com mit Ihrem Konto anmelden und die Plätze des Landes exportieren, als CSV, GPX, KML oder JSON.
-2. In der App beim Ziel auf **iOverlander-Export** tippen und die Datei wählen. Am iPhone liegt sie meist unter «Dateien → Downloads».
-3. Die App speichert die Datei im Repository und startet den Abgleich. Passt ein YouTuber-Platz namentlich zu einem iOverlander-Eintrag in der Nähe, übernimmt er dessen genaue Koordinaten. Er zeigt dann die Kategorie und einen Link zu iOverlander.
+**iOverlander und park4night:** Beide bieten keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen zwei Knöpfe:
+- **park4night** öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung.
+- **iOverlander** kopiert die Koordinaten in die Zwischenablage und öffnet iOverlander. Fügen Sie sie dort ins Suchfeld ein, dann sehen Sie die Plätze in der Umgebung.
 
-Den Export alle paar Monate erneuern, damit neue iOverlander-Plätze dazukommen.
+So sehen Sie immer den aktuellen Stand beider Plattformen, ohne Export.
 
-**park4night:** park4night bietet weder eine Schnittstelle noch einen Export. Ein automatisches Einloggen mit Ihrem Konto würde gegen die Nutzungsbedingungen verstossen und könnte zur Sperre Ihres Kontos führen. Die App öffnet deshalb pro Platz die park4night-Karte an genau dieser Stelle. Ein Tippen auf **park4night** zeigt die dortigen Plätze in der Umgebung, angemeldet mit Ihrem Konto.
+Optional, falls einmal gewünscht: Liegt ein iOverlander-Export (CSV, GPX, KML oder JSON) unter `data/<ziel>/ioverlander/`, verknüpft die App passende Plätze und übernimmt deren genaue Koordinaten.
 
 ---
 
@@ -175,7 +174,6 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 |---|---|
 | neues Ziel, Route oder Kanal | in der App über **Ziel hinzufügen oder ändern**, das ist der einfachste Weg |
 | Zeitplan | in der App beim Ziel, siehe 2.2 |
-| iOverlander-Daten erneuern | in der App beim Ziel **iOverlander-Export**, siehe 2.6 |
 | Ziel ausblenden | in der App, zum Beispiel «Spanien & Portugal deaktivieren» |
 | Feineinstellungen | direkt auf GitHub die Datei in `ziele/` bzw. `config.json` öffnen, auf den Stift tippen, ändern und **Commit changes** |
 | anderes Modell | in `config.json` `claude_model` ändern: `claude-haiku-5-5` ist günstig, `claude-sonnet-5-5` mittel, `claude-opus-5-5` am genausten |
