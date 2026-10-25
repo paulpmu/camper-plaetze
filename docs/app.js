@@ -9,7 +9,6 @@
     ort: ["ungefährer Standort (Ortsmitte)", "warn"],
     region: ["nur Region bekannt – nicht auf der Karte", "warn"],
   };
-  const IOVERLANDER_URL = "https://app.ioverlander.com/";
   const SCHEDULE = { taeglich: "täglich", woechentlich: "wöchentlich", manuell: "nur manuell" };
   const WEEKDAY = ["", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const DEFAULT_FILTER = { region: "", route: "", corridor: 30, types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
@@ -236,8 +235,7 @@
       ["Sicherheit", [s.safety_rating ? `${s.safety_rating}/5` : "", s.safety_note].filter(Boolean).join(" – ")],
       ["Polizei", s.police_contact === true ? "Kontakt erwähnt" : s.police_contact === false ? "kein Kontakt" : ""],
       ["Preis", s.price],
-    ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")
-      + (s.ioverlander ? `<dt>iOverlander</dt><dd>${esc(s.ioverlander.name)}${s.ioverlander.category ? ` (${esc(s.ioverlander.category)})` : ""}</dd>` : "");
+    ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
 
     const routeInfo = routes.filter((r) => (s.routes || {})[r.id]).map((r) => {
       const [km, off] = s.routes[r.id];
@@ -245,7 +243,6 @@
     }).join("");
 
     const ll = `${s.lat},${s.lng}`;
-    const io = s.ioverlander && s.ioverlander.id ? `https://www.ioverlander.com/places/${encodeURIComponent(s.ioverlander.id)}` : null;
     const mentions = s.mentions.map((m) => {
       const url = `https://www.youtube.com/watch?v=${encodeURIComponent(m.video_id)}${m.t ? `&t=${m.t}s` : ""}`;
       return `<a class="mention" href="${url}" target="_blank" rel="noopener">
@@ -277,19 +274,10 @@
         <a class="btn" href="https://maps.apple.com/?daddr=${ll}&q=${encodeURIComponent(s.name)}" target="_blank" rel="noopener">Apple Karten</a>
         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${ll}" target="_blank" rel="noopener">Google Maps</a>
         <a class="btn ghost" href="https://park4night.com/en/search?lat=${s.lat}&lng=${s.lng}&z=14" target="_blank" rel="noopener">park4night</a>
-        <button class="btn ghost" data-ioverlander>iOverlander</button>
-        <button class="btn ghost wide" data-share>Teilen</button>
-      </div>
-      <p class="muted io-hint" hidden>Koordinaten <strong>${s.lat}, ${s.lng}</strong> kopiert. In iOverlander ins Suchfeld einfügen, dann erscheinen die Plätze in der Umgebung.</p>`}
+        <button class="btn ghost" data-share>Teilen</button>
+      </div>`}
       <h4>Aus den Videos</h4>
       ${mentions}`;
-    const iob = $("#detail [data-ioverlander]");
-    if (iob) iob.onclick = async () => {
-      // iOverlander hat keine dokumentierte Adresse für eine Kartenposition: Koordinaten kopieren, dann öffnen
-      try { await navigator.clipboard.writeText(`${s.lat}, ${s.lng}`); } catch { /* Zwischenablage nicht erlaubt */ }
-      $("#detail .io-hint").hidden = false;
-      window.open(io || IOVERLANDER_URL, "_blank", "noopener");
-    };
     const share = $("#detail [data-share]");
     if (share) share.onclick = () => {
       const url = location.href.split("#")[0] + "#" + ziel.id + "/" + s.id;

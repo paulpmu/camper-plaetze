@@ -113,7 +113,7 @@ Ohne App: Unter **Actions → Plätze aktualisieren → Run workflow** gibt es d
 | **Modellvergleich** = `10` | 10 Videos mit Haiku und Opus vergleichen, ohne Daten zu ändern. Den Bericht finden Sie in der Zusammenfassung des Laufs und unter `berichte/`. |
 | **neu_auswerten** = `ja` | alle bisherigen Videos mit den aktuellen Regeln neu auswerten, zum Beispiel nach Änderungen am Prompt |
 
-### 2.6 Standortgenauigkeit und iOverlander
+### 2.6 Standortgenauigkeit und park4night
 
 Jeder Platz hat eine von vier Genauigkeitsstufen:
 
@@ -124,13 +124,7 @@ Jeder Platz hat eine von vier Genauigkeitsstufen:
 | **ungefähr** | nur der Ort ist bekannt, der Marker steht in der Ortsmitte | Marker gestrichelt |
 | **nur Region** | nur eine Gegend ist bekannt | nicht auf der Karte, nur in der Liste |
 
-**iOverlander und park4night:** Beide bieten keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen zwei Knöpfe:
-- **park4night** öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung.
-- **iOverlander** kopiert die Koordinaten in die Zwischenablage und öffnet iOverlander. Fügen Sie sie dort ins Suchfeld ein, dann sehen Sie die Plätze in der Umgebung.
-
-So sehen Sie immer den aktuellen Stand beider Plattformen, ohne Export.
-
-Optional, falls einmal gewünscht: Liegt ein iOverlander-Export (CSV, GPX, KML oder JSON) unter `data/<ziel>/ioverlander/`, verknüpft die App passende Plätze und übernimmt deren genaue Koordinaten.
+**park4night:** park4night bietet keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen den Knopf **park4night**. Er öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung, immer mit dem aktuellen Stand.
 
 ---
 
@@ -219,7 +213,7 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `scripts/common.py` | Geodaten und Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
 | `docs/` | die Webapp; `docs/data/` enthält die veröffentlichten Plätze |
-| `data/` | interner Zustand: bearbeitete Videos, Warteschlange, Geocache, iOverlander-Exporte (`data/<ziel>/ioverlander/`) |
+| `data/` | interner Zustand: bearbeitete Videos, Warteschlange, Geocache |
 | `berichte/` | Modellvergleiche |
 
 Der ganze Verlauf liegt in Git. Jede Datenänderung ist ein Commit und lässt sich jederzeit nachvollziehen oder zurücksetzen.

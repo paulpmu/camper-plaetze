@@ -316,110 +316,6 @@ class Claude:
         return cost_usd(self.model, self.tokens_in, self.tokens_out)
 
 
-# --------------------------------------------------------------------------- iOverlander
-
-
-def load_ioverlander(dest_id: str) -> list[dict]:
-    """iOverlander-Export (CSV, JSON/GeoJSON, GPX oder KML) aus data/<ziel>/ioverlander/."""
-    import csv
-
-    places = []
-    folder = DATA_DIR / dest_id / "ioverlander"
-    if not folder.exists():
-        return places
-    for f in sorted(folder.iterdir()):
-        rows = []
-        suffix = f.suffix.lower()
-        try:
-            if suffix == ".csv":
-                with f.open(encoding="utf-8-sig") as fh:
-                    rows = list(csv.DictReader(fh))
-            elif suffix in (".json", ".geojson"):
-                data = json.loads(f.read_text(encoding="utf-8"))
-                if isinstance(data, dict) and "features" in data:
-                    for ft in data["features"]:
-                        p = dict(ft.get("properties") or {})
-                        p["longitude"], p["latitude"] = ft["geometry"]["coordinates"][:2]
-                        rows.append(p)
-                elif isinstance(data, list):
-                    rows = data
-            elif suffix in (".gpx", ".kml"):
-                rows = _xml_places(f, suffix)
-        except (ValueError, ET.ParseError, KeyError) as ex:
-            log(f"  iOverlander-Datei {f.name} nicht lesbar: {ex}")
-            continue
-        for r in rows:
-            low = {str(k).lower().strip(): v for k, v in r.items()}
-            lat, lng = low.get("latitude") or low.get("lat"), low.get("longitude") or low.get("lng") or low.get("lon")
-            if (lat is None or lng is None) and low.get("location") and "," in str(low["location"]):
-                lat, lng = str(low["location"]).split(",")[:2]
-            try:
-                lat, lng = float(lat), float(lng)
-            except (TypeError, ValueError):
-                continue
-            pid = str(low.get("id") or low.get("place_id") or "")
-            if not pid:
-                m = re.search(r"ioverlander\.com/places/(\d+)", " ".join(str(v) for v in low.values()))
-                pid = m.group(1) if m else ""
-            places.append({"lat": lat, "lng": lng, "name": str(low.get("name") or low.get("title") or ""),
-                           "id": pid, "category": str(low.get("category") or low.get("type") or "")})
-    log(f"  iOverlander: {len(places)} Plätze geladen")
-    return places
-
-
-def _xml_places(f, suffix: str) -> list[dict]:
-    root = ET.parse(f).getroot()
-    tag = lambda e: e.tag.rsplit("}", 1)[-1]  # Namensraum ignorieren
-    rows = []
-    for e in root.iter():
-        if suffix == ".gpx" and tag(e) == "wpt":
-            kids = {tag(c): (c.text or "") for c in e}
-            rows.append({"lat": e.get("lat"), "lon": e.get("lon"), "name": kids.get("name", ""),
-                         "type": kids.get("type", ""), "link": kids.get("desc", "")})
-        elif suffix == ".kml" and tag(e) == "Placemark":
-            kids = {tag(c): c for c in e.iter()}
-            coords = (kids["coordinates"].text or "").strip().split(",") if "coordinates" in kids else []
-            if len(coords) >= 2:
-                rows.append({"lon": coords[0], "lat": coords[1], "name": kids["name"].text if "name" in kids else "",
-                             "link": kids["description"].text if "description" in kids else ""})
-    return rows
-
-
-def match_ioverlander(spots: list[dict], places: list[dict]) -> int:
-    """Plätze mit iOverlander verknüpfen. Passt der Name eines ungefähr verorteten Platzes zu einem
-    iOverlander-Eintrag in der Nähe, übernimmt der Platz dessen genaue Koordinaten."""
-    matched = 0
-    for s in spots:
-        if s["lat"] is None or not places:
-            continue
-        radius = 1.0 if s["precision"] == "exakt" else 30.0
-        dlat = radius / 111
-        near = [p for p in places if abs(p["lat"] - s["lat"]) <= dlat and abs(p["lng"] - s["lng"]) <= dlat * 1.3]
-        if not near:
-            continue
-        names = [n for n in (s.get("poi"), s["name"]) if n]
-
-        def score(p):
-            pn = p["name"].lower()
-            best = max(similar(n, p["name"]) for n in names)
-            return max(best, 0.9 if any(len(n) > 5 and n.lower() in pn for n in names) else 0)
-
-        best = max(near, key=score)
-        dist = haversine_km((s["lat"], s["lng"]), (best["lat"], best["lng"]))
-        if score(best) >= 0.7 and dist <= radius:
-            hit = best
-            if s["precision"] in ("ort", "genau"):
-                s["lat"], s["lng"], s["precision"] = round(hit["lat"], 5), round(hit["lng"], 5), "genau"
-                s["coord_source"] = "iOverlander"
-        else:
-            hit = min(near, key=lambda p: haversine_km((s["lat"], s["lng"]), (p["lat"], p["lng"])))
-            if haversine_km((s["lat"], s["lng"]), (hit["lat"], hit["lng"])) > 0.25:
-                continue
-        s["ioverlander"] = {"name": hit["name"], "id": hit["id"], "category": hit["category"]}
-        matched += 1
-    return matched
-
-
 # --------------------------------------------------------------------------- Plätze zusammenführen
 
 
@@ -454,8 +350,6 @@ def merge_spot(spots: list[dict], new: dict, mention: dict):
             for k in ("four_wd", "police_contact", "access_note", "safety_note", "price"):
                 if new[k] not in (None, "") and (newer or s.get(k) in (None, "")):
                     s[k] = new[k]
-            if "ioverlander" in new and "ioverlander" not in s:
-                s["ioverlander"] = new["ioverlander"]
             return
     new["mentions"] = [mention]
     spots.append(new)
@@ -639,7 +533,6 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     spots_file = WEB_DATA / did / "spots.json"
     state = load_json(state_file, {"videos": {}, "queue": {}, "channels": {}, "backfill_done": False})
     spots = load_json(spots_file, [])
-    ioverlander = load_ioverlander(did)
     units_before, tin, tout = (yt.units if yt else 0), claude.tokens_in, claude.tokens_out
 
     collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
@@ -700,8 +593,6 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
             record["spots"] += 1
             log(f"    ✓ {sp.name} [{new['precision']}] {sp.rating}/5")
 
-    if ioverlander:
-        log(f"  iOverlander: {match_ioverlander(spots, ioverlander)} Plätze verknüpft")
     finalize(spots)
     routes = build_routes(dest, geocode)
     annotate_routes(spots, routes)

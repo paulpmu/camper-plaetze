@@ -272,5 +272,3 @@ button.brand #count { font-size: 12px; }
 }
 #toast.show { opacity: 1; transform: none; }
 .actions-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
-.links .wide { grid-column: 1 / -1; }
-.io-hint { margin-top: -6px; }
