@@ -249,3 +249,26 @@ button.brand #count { font-size: 12px; }
 .zs { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .zs .kpis { grid-template-columns: 1fr 1fr; }
 .zs .kpi b { font-size: 17px; }
+
+/* Zielsteuerung */
+.ziel-list li { display: block; cursor: default; }
+.zrow { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.zctl { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; align-items: center; font-weight: 400; }
+.zctl select {
+  padding: 7px 10px; font-size: 16px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--text); -webkit-appearance: none; appearance: none;
+}
+.upl { cursor: pointer; }
+#gh-token {
+  display: block; width: 100%; margin: 8px 0; padding: 11px 12px; font-size: 16px;
+  color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+}
+#list li.group { cursor: default; font-weight: 600; padding-top: 18px; }
+#toast {
+  position: fixed; z-index: 2000; left: 16px; right: 16px; bottom: calc(var(--safe-bottom) + 90px);
+  max-width: 480px; margin: 0 auto; padding: 12px 16px; border-radius: 14px;
+  background: #2a2420; color: #fff; font-size: 15px; box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(10px); transition: .25s; pointer-events: none;
+}
+#toast.show { opacity: 1; transform: none; }
+.actions-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }

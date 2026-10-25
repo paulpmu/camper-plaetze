@@ -48,9 +48,19 @@
   <p class="muted">Beschreiben Sie frei, was Sie möchten. Claude erstellt daraus die Suche, die Regionen und die Routen. Danach startet der Abruf automatisch.</p>
   <textarea id="req-text" rows="5" placeholder="Beispiele:&#10;• Neues Ziel Norwegen mit Lofoten, Route Oslo – Trondheim – Bodø – Nordkap&#10;• Bei Marokko den Kanal @beispielkanal ergänzen&#10;• Spanien &amp; Portugal: Route Pyrenäen – Bilbao – Santander hinzufügen&#10;• Marokko jetzt aktualisieren"></textarea>
   <button id="req-send" class="btn">Anfrage senden</button>
-  <p class="muted">Öffnet GitHub mit der vorbereiteten Anfrage. Dort auf <strong>Submit new issue</strong> tippen. Sie müssen in Safari bei GitHub angemeldet sein. Die Antwort erscheint unten, meist nach 1–2 Minuten.</p>
+  <p class="muted" id="req-hint-direct" hidden>Wird direkt an GitHub gesendet. Die Antwort erscheint unten, meist nach 1–2 Minuten.</p>
+  <p class="muted" id="req-hint-link">Öffnet GitHub mit der vorbereiteten Anfrage. Dort auf <strong>Submit new issue</strong> tippen. Mit hinterlegtem GitHub-Schlüssel (unten) geht es direkt.</p>
   <h4>Letzte Anfragen</h4>
   <ul id="req-list" class="req-list"><li class="muted">lädt …</li></ul>
+
+  <h4>GitHub-Schlüssel auf diesem Gerät</h4>
+  <p id="gh-status" class="muted">Kein Schlüssel hinterlegt. Mit Schlüssel können Sie Ziele direkt starten, Zeitpläne ändern, iOverlander-Exporte hochladen und Anfragen ohne Umweg senden.</p>
+  <input id="gh-token" type="password" placeholder="github_pat_…" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <div class="row">
+    <button id="gh-remove" class="btn ghost">Entfernen</button>
+    <button id="gh-save" class="btn">Speichern &amp; prüfen</button>
+  </div>
+  <p class="muted">Schlüssel erstellen: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained token</a>, nur für dieses Repository, Rechte: Actions, Contents und Issues jeweils «Read and write». Der Schlüssel bleibt nur auf diesem Gerät gespeichert.</p>
 </section>
 
 <!-- Detail -->
@@ -172,6 +182,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="github.js"></script>
 <script src="app.js"></script>
 <script src="betrieb.js"></script>
 </body>

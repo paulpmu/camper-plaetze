@@ -215,7 +215,12 @@ def extraction_model(dest: dict):
     spot = create_model(
         "ExtractedSpot",
         name=(str, Field(description="Name des Platzes oder kurze Beschreibung, z. B. 'Strandplatz nördlich Mirleft'")),
-        place=(str, Field(description="Nächster Ort und Gegend, geeignet für eine Geocodierung, z. B. 'Mirleft, Tiznit'")),
+        place=(str, Field(description="Nächster Ort (Stadt/Dorf) und Provinz, geeignet für eine Geocodierung, z. B. 'Mirleft, Tiznit'")),
+        poi_name=(str, Field(description="Offizieller Name des Platzes, Campings, Strands, Sees, Passes o. ä., wenn genannt, z. B. 'Camping Aftas' oder 'Plage Blanche'; sonst leer")),
+        location_precision=(Literal["koordinaten", "genau", "ort", "region"], Field(description=(
+            "koordinaten = Koordinaten/Kartenlink vorhanden; genau = benannter, auffindbarer Ort (Camping, Strand, See, Pass) "
+            "oder eindeutige Lage ('Parkplatz am Leuchtturm von Tarfaya'); ort = nur Stadt/Dorf bekannt; "
+            "region = nur Gegend bekannt ('Hoher Atlas', 'Küste südlich Agadir')"))),
         latitude=(Optional[float], Field(description="Nur wenn Koordinaten im Material stehen oder aus einem Kartenlink ablesbar sind, sonst null")),
         longitude=(Optional[float], ...),
         coordinate_source=(Literal["text", "kartenlink", "keine"], ...),
@@ -248,7 +253,12 @@ Aus Titel, Beschreibung, Kapitelmarken, Kommentaren und Transkript extrahierst d
 an dem die YouTuber übernachtet haben oder den sie konkret empfehlen bzw. vor dem sie warnen.
 
 Regeln:
-- Nur echte Übernachtungsplätze, keine reinen Sehenswürdigkeiten, Restaurants oder Durchfahrten.
+- Nur Orte, an denen die YouTuber mit dem Fahrzeug übernachtet haben oder die sie ausdrücklich als
+  Übernachtungsplatz empfehlen oder davor warnen. Nicht dazu gehören: Werkstätten, Restaurants, Cafés,
+  Tankstellen, Märkte, Sehenswürdigkeiten, Fährhäfen, Grenzübergänge, Hotels/Riads ohne Camper-Stellplatz
+  sowie Orte, die nur durchfahren oder besucht werden.
+- Lieber weniger, dafür sichere Plätze. Im Zweifel weglassen.
+- Gib die Ortsangabe so genau wie möglich an und stufe ihre Genauigkeit ehrlich ein.
 - Nur Plätze innerhalb des Gebiets «{dest['name']}».
 - Erfinde keine Fakten. Unbekanntes ist null bzw. ein leerer Text.
 - Koordinaten nur, wenn sie im Material stehen (auch DMS umrechnen) oder aus einem Kartenlink
@@ -310,39 +320,104 @@ class Claude:
 
 
 def load_ioverlander(dest_id: str) -> list[dict]:
-    """Optionaler iOverlander-Export (CSV oder JSON) in data/<ziel>/ioverlander/."""
+    """iOverlander-Export (CSV, JSON/GeoJSON, GPX oder KML) aus data/<ziel>/ioverlander/."""
     import csv
 
     places = []
     folder = DATA_DIR / dest_id / "ioverlander"
     if not folder.exists():
         return places
-    for f in folder.iterdir():
+    for f in sorted(folder.iterdir()):
         rows = []
-        if f.suffix.lower() == ".csv":
-            with f.open(encoding="utf-8-sig") as fh:
-                rows = list(csv.DictReader(fh))
-        elif f.suffix.lower() in (".json", ".geojson"):
-            data = json.loads(f.read_text(encoding="utf-8"))
-            if isinstance(data, dict) and "features" in data:
-                for ft in data["features"]:
-                    p = dict(ft.get("properties") or {})
-                    p["longitude"], p["latitude"] = ft["geometry"]["coordinates"][:2]
-                    rows.append(p)
-            elif isinstance(data, list):
-                rows = data
+        suffix = f.suffix.lower()
+        try:
+            if suffix == ".csv":
+                with f.open(encoding="utf-8-sig") as fh:
+                    rows = list(csv.DictReader(fh))
+            elif suffix in (".json", ".geojson"):
+                data = json.loads(f.read_text(encoding="utf-8"))
+                if isinstance(data, dict) and "features" in data:
+                    for ft in data["features"]:
+                        p = dict(ft.get("properties") or {})
+                        p["longitude"], p["latitude"] = ft["geometry"]["coordinates"][:2]
+                        rows.append(p)
+                elif isinstance(data, list):
+                    rows = data
+            elif suffix in (".gpx", ".kml"):
+                rows = _xml_places(f, suffix)
+        except (ValueError, ET.ParseError, KeyError) as ex:
+            log(f"  iOverlander-Datei {f.name} nicht lesbar: {ex}")
+            continue
         for r in rows:
-            low = {k.lower().strip(): v for k, v in r.items()}
+            low = {str(k).lower().strip(): v for k, v in r.items()}
+            lat, lng = low.get("latitude") or low.get("lat"), low.get("longitude") or low.get("lng") or low.get("lon")
+            if (lat is None or lng is None) and low.get("location") and "," in str(low["location"]):
+                lat, lng = str(low["location"]).split(",")[:2]
             try:
-                lat = float(low.get("latitude") or low.get("lat"))
-                lng = float(low.get("longitude") or low.get("lng") or low.get("lon"))
+                lat, lng = float(lat), float(lng)
             except (TypeError, ValueError):
                 continue
-            places.append({"lat": lat, "lng": lng, "name": low.get("name") or low.get("title") or "",
-                           "id": str(low.get("id") or low.get("place_id") or ""),
-                           "category": low.get("category") or low.get("type") or ""})
+            pid = str(low.get("id") or low.get("place_id") or "")
+            if not pid:
+                m = re.search(r"ioverlander\.com/places/(\d+)", " ".join(str(v) for v in low.values()))
+                pid = m.group(1) if m else ""
+            places.append({"lat": lat, "lng": lng, "name": str(low.get("name") or low.get("title") or ""),
+                           "id": pid, "category": str(low.get("category") or low.get("type") or "")})
     log(f"  iOverlander: {len(places)} Plätze geladen")
     return places
+
+
+def _xml_places(f, suffix: str) -> list[dict]:
+    root = ET.parse(f).getroot()
+    tag = lambda e: e.tag.rsplit("}", 1)[-1]  # Namensraum ignorieren
+    rows = []
+    for e in root.iter():
+        if suffix == ".gpx" and tag(e) == "wpt":
+            kids = {tag(c): (c.text or "") for c in e}
+            rows.append({"lat": e.get("lat"), "lon": e.get("lon"), "name": kids.get("name", ""),
+                         "type": kids.get("type", ""), "link": kids.get("desc", "")})
+        elif suffix == ".kml" and tag(e) == "Placemark":
+            kids = {tag(c): c for c in e.iter()}
+            coords = (kids["coordinates"].text or "").strip().split(",") if "coordinates" in kids else []
+            if len(coords) >= 2:
+                rows.append({"lon": coords[0], "lat": coords[1], "name": kids["name"].text if "name" in kids else "",
+                             "link": kids["description"].text if "description" in kids else ""})
+    return rows
+
+
+def match_ioverlander(spots: list[dict], places: list[dict]) -> int:
+    """Plätze mit iOverlander verknüpfen. Passt der Name eines ungefähr verorteten Platzes zu einem
+    iOverlander-Eintrag in der Nähe, übernimmt der Platz dessen genaue Koordinaten."""
+    matched = 0
+    for s in spots:
+        if s["lat"] is None or not places:
+            continue
+        radius = 1.0 if s["precision"] == "exakt" else 30.0
+        dlat = radius / 111
+        near = [p for p in places if abs(p["lat"] - s["lat"]) <= dlat and abs(p["lng"] - s["lng"]) <= dlat * 1.3]
+        if not near:
+            continue
+        names = [n for n in (s.get("poi"), s["name"]) if n]
+
+        def score(p):
+            pn = p["name"].lower()
+            best = max(similar(n, p["name"]) for n in names)
+            return max(best, 0.9 if any(len(n) > 5 and n.lower() in pn for n in names) else 0)
+
+        best = max(near, key=score)
+        dist = haversine_km((s["lat"], s["lng"]), (best["lat"], best["lng"]))
+        if score(best) >= 0.7 and dist <= radius:
+            hit = best
+            if s["precision"] in ("ort", "genau"):
+                s["lat"], s["lng"], s["precision"] = round(hit["lat"], 5), round(hit["lng"], 5), "genau"
+                s["coord_source"] = "iOverlander"
+        else:
+            hit = min(near, key=lambda p: haversine_km((s["lat"], s["lng"]), (p["lat"], p["lng"])))
+            if haversine_km((s["lat"], s["lng"]), (hit["lat"], hit["lng"])) > 0.25:
+                continue
+        s["ioverlander"] = {"name": hit["name"], "id": hit["id"], "category": hit["category"]}
+        matched += 1
+    return matched
 
 
 # --------------------------------------------------------------------------- Plätze zusammenführen
@@ -352,18 +427,26 @@ def similar(a: str, b: str) -> float:
     return difflib.SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
 
+PRECISION_RANK = {"region": 0, "ort": 1, "genau": 2, "exakt": 3}
+
+
 def merge_spot(spots: list[dict], new: dict, mention: dict):
     limit_km = CONFIG["merge_distance_m"] / 1000
     for s in spots:
-        d = haversine_km((s["lat"], s["lng"]), (new["lat"], new["lng"]))
-        both_exact = s["precision"] == "exakt" and new["precision"] == "exakt"
-        if d <= limit_km and (both_exact or similar(s["name"], new["name"]) >= 0.6):
+        if s["lat"] is None or new["lat"] is None:
+            # Ohne Koordinaten nur zusammenführen, wenn Region und Name passen
+            same = s["region"] == new["region"] and similar(s["name"], new["name"]) >= 0.6
+        else:
+            d = haversine_km((s["lat"], s["lng"]), (new["lat"], new["lng"]))
+            both_exact = s["precision"] == "exakt" and new["precision"] == "exakt"
+            same = d <= limit_km and (both_exact or similar(s["name"], new["name"]) >= 0.6)
+        if same:
             if any(m["video_id"] == mention["video_id"] for m in s["mentions"]):
                 return
             newer = all(mention["published"] >= m["published"] for m in s["mentions"])
             s["mentions"].append(mention)
-            if new["precision"] == "exakt" and s["precision"] != "exakt":
-                s["lat"], s["lng"], s["precision"] = new["lat"], new["lng"], "exakt"
+            if PRECISION_RANK[new["precision"]] > PRECISION_RANK[s["precision"]]:
+                s["lat"], s["lng"], s["precision"] = new["lat"], new["lng"], new["precision"]
             # Fakten übernehmen: neuere Videos überschreiben, ältere füllen nur Lücken
             for k, v in new["infrastructure"].items():
                 if v is not None and (newer or s["infrastructure"].get(k) is None):
@@ -393,6 +476,17 @@ def finalize(spots: list[dict]):
 
 
 # --------------------------------------------------------------------------- Ablauf
+
+
+WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+
+
+def is_due(dest: dict) -> bool:
+    """Nächtlicher Lauf: täglich immer, wöchentlich am gewählten Wochentag (1 = Montag), manuell nie."""
+    schedule = dest.get("schedule", "taeglich")
+    if schedule == "woechentlich":
+        return dt.date.today().isoweekday() == int(dest.get("weekday", 1))
+    return schedule == "taeglich"
 
 
 def search_cost(dest: dict, backfill: bool) -> int:
@@ -475,12 +569,16 @@ def collect_candidates(dest: dict, yt: YouTube | None, state: dict, search: bool
     log(f"  Warteschlange: +{added}, total {len(state['queue'])}")
 
 
-def requeue_blocked(state: dict, yt: YouTube, limit: int = 200):
-    """Mit Proxy: Videos, deren Transkript früher blockiert war, einmal mit Transkript neu auswerten."""
+def requeue(state: dict, yt: YouTube, everything: bool, limit: int = 300) -> int:
+    """Bereits ausgewertete Videos erneut in die Warteschlange legen.
+
+    everything=False: nur Videos, deren Transkript blockiert war (sobald ein Proxy eingerichtet ist).
+    everything=True:  alle ausgewerteten Videos, z. B. nach geänderten Auswertungsregeln."""
     ids = [vid for vid, r in state["videos"].items()
-           if r.get("transcript") == "blockiert" and not r.get("retried") and vid not in state["queue"]][:limit]
+           if "transcript" in r and vid not in state["queue"]
+           and (everything or (r["transcript"] == "blockiert" and not r.get("retried")))][:limit]
     if not ids:
-        return
+        return 0
     for item in yt.videos(ids):
         sn = item["snippet"]
         state["queue"][item["id"]] = {
@@ -488,7 +586,8 @@ def requeue_blocked(state: dict, yt: YouTube, limit: int = 200):
             "published": sn.get("publishedAt", "")[:10], "description": sn.get("description", ""),
             "duration": parse_duration(item["contentDetails"].get("duration")), "retry": True,
         }
-    log(f"  Nachholen mit Transkript: {len(ids)} Videos erneut in der Warteschlange")
+    log(f"  {'Neu auswerten' if everything else 'Nachholen mit Transkript'}: {len(ids)} Videos erneut in der Warteschlange")
+    return len(ids)
 
 
 def remove_mentions(spots: list[dict], video_id: str):
@@ -498,25 +597,31 @@ def remove_mentions(spots: list[dict], video_id: str):
     spots[:] = [s for s in spots if s["mentions"]]
 
 
-def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder, ioverlander: list[dict]):
+def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder):
+    lat = lng = None
     if sp.latitude is not None and sp.longitude is not None and in_bbox(sp.latitude, sp.longitude, dest["bbox"]):
         lat, lng, precision = sp.latitude, sp.longitude, "exakt"
+    elif sp.location_precision == "region":
+        precision = "region"  # erscheint nur in der Liste, nicht auf der Karte
     else:
-        pos = geocode(sp.place, dest["countrycodes"])
-        if not pos or not in_bbox(*pos, dest["bbox"]):
+        town = geocode(sp.place, dest["countrycodes"])
+        town = town if town and in_bbox(*town, dest["bbox"]) else None
+        poi = geocode(f"{sp.poi_name}, {sp.place.split(',')[0]}", dest["countrycodes"]) if sp.poi_name else None
+        if poi and in_bbox(*poi, dest["bbox"]) and (not town or haversine_km(poi, town) <= 40):
+            (lat, lng), precision = poi, "genau"
+        elif town:
+            (lat, lng), precision = town, "ort"
+        else:
             return None, None
-        lat, lng, precision = pos[0], pos[1], "ort"
     new = {
         "id": hashlib.sha1(f"{v['id']}|{sp.name}".encode()).hexdigest()[:10],
-        "name": sp.name, "place": sp.place, "lat": round(lat, 5), "lng": round(lng, 5),
+        "name": sp.name, "place": sp.place, "poi": sp.poi_name,
+        "lat": round(lat, 5) if lat is not None else None, "lng": round(lng, 5) if lng is not None else None,
         "precision": precision, "region": sp.region, "type": sp.spot_type,
         "infrastructure": sp.infrastructure.model_dump(), "four_wd": sp.four_wd_required,
         "access_note": sp.access_note, "safety_note": sp.safety_note,
         "police_contact": sp.police_contact, "price": sp.price,
     }
-    io = min(ioverlander, key=lambda p: haversine_km((lat, lng), (p["lat"], p["lng"])), default=None)
-    if io and haversine_km((lat, lng), (io["lat"], io["lng"])) <= 0.25:
-        new["ioverlander"] = {"name": io["name"], "id": io["id"], "category": io["category"]}
     mention = {
         "video_id": v["id"], "title": v["title"], "channel": v["channel"], "published": v["published"],
         "t": sp.timestamp_seconds, "quote": sp.quote, "rating": max(1, min(5, sp.rating)),
@@ -538,12 +643,16 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     units_before, tin, tout = (yt.units if yt else 0), claude.tokens_in, claude.tokens_out
 
     collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
-    if yt and proxy_configured():
-        requeue_blocked(state, yt)
+    limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"])
+    if yt and os.getenv("NEU_AUSWERTEN", "").strip().lower() in ("ja", "1", "true"):
+        limit = max(limit, requeue(state, yt, everything=True))  # alles in diesem Lauf, nicht über Nächte verteilt
+    elif yt and proxy_configured():
+        requeue(state, yt, everything=False)
 
     schema = extraction_model(dest)
-    limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"])
-    queue = sorted(state["queue"].values(), key=lambda v: v["published"], reverse=True)[:limit]
+    # Erneut auszuwertende Videos zuerst, danach die neuesten
+    queue = sorted(state["queue"].values(), key=lambda v: v["published"], reverse=True)
+    queue = sorted(queue, key=lambda v: not v.get("retry"))[:limit]
     stats = {"videos": 0, "spots_new": 0, "transcripts": {"ok": 0, "keins": 0, "blockiert": 0, "fehler": 0}}
     stop = False
 
@@ -581,7 +690,7 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
             continue
 
         for sp in result.spots:
-            new, mention = to_spot(dest, v, sp, tstatus, geocode, ioverlander)
+            new, mention = to_spot(dest, v, sp, tstatus, geocode)
             if not new:
                 log(f"    ✗ ohne Standort: {sp.name} ({sp.place})")
                 continue
@@ -591,6 +700,8 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
             record["spots"] += 1
             log(f"    ✓ {sp.name} [{new['precision']}] {sp.rating}/5")
 
+    if ioverlander:
+        log(f"  iOverlander: {match_ioverlander(spots, ioverlander)} Plätze verknüpft")
     finalize(spots)
     routes = build_routes(dest, geocode)
     annotate_routes(spots, routes)
@@ -628,6 +739,7 @@ def write_index():
             "id": d["id"], "name": d["name"], "bbox": d["bbox"],
             "regions": [r["name"] for r in d["regions"]],
             "routes": [{k: r[k] for k in ("id", "name", "color", "length_km")} for r in routes],
+            "schedule": d.get("schedule", "taeglich"), "weekday": d.get("weekday", 1),
             "spots": meta.get("spots", 0), "last_run": meta.get("last_run"), "queue": meta.get("queue", 0),
             "videos_total": meta.get("videos_total", 0), "last": (meta.get("history") or [None])[-1],
         })
@@ -719,6 +831,9 @@ def main():
     dests = [d for d in all_dests if not args.ziel or d["id"] == args.ziel]
     if not dests:
         sys.exit(f"Ziel «{args.ziel}» nicht gefunden oder nicht aktiv")
+    if os.getenv("GITHUB_EVENT_NAME") == "schedule" and not args.ziel:
+        dests = [d for d in dests if is_due(d)]
+        log(f"Zeitplan: heute fällig {[d['id'] for d in dests] or 'keine Ziele'}")
 
     if args.vergleich:
         compare(dests, args.vergleich, yt)

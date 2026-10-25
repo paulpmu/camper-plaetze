@@ -103,9 +103,9 @@ Sobald ein Proxy eingetragen ist, wertet die App alle Videos, deren Transkript f
 | `max_videos_per_run` | Kostenbremse pro Ziel und Lauf |
 | `route_corridor_km` | bis zu welchem Abstand ein Platz einer Route zugeordnet wird |
 
-## iOverlander-Abgleich (optional)
+## iOverlander, Zeitplan und Steuerung aus der App
 
-Einen iOverlander-Export (CSV oder JSON) unter `data/<ziel>/ioverlander/` ablegen. Plätze im Umkreis von 250 m werden dann verknüpft.
+Siehe [BETRIEB.md](BETRIEB.md), Abschnitte 2.2 bis 2.6.
 
 ## Kosten
 

@@ -62,19 +62,48 @@ Ablauf pro Ziel, zum Beispiel Marokko, dann Spanien & Portugal:
 
 Den Verlauf jedes Laufs sehen Sie unter **Actions**: grün heisst erfolgreich, rot heisst Fehler. Bei einem Fehler schickt GitHub Ihnen eine E-Mail.
 
-### 2.2 Anfrage aus der Webapp
+### 2.2 Zeitplan pro Ziel
 
-1. In der App tippen Sie auf den Zielnamen, dann auf **Ziel hinzufügen oder ändern**, schreiben einen Text und tippen auf **Anfrage senden**.
-2. Auf GitHub öffnet sich ein vorbereitetes Issue mit dem Titel «[Ziel] …». Sie tippen auf **Submit**.
+Jedes Ziel hat einen eigenen Zeitplan:
+
+| Zeitplan | Wirkung |
+|---|---|
+| **täglich** | jede Nacht abrufen |
+| **wöchentlich** | einmal pro Woche, Standard Montag. Den Wochentag ändern Sie per Anfrage, etwa «Spanien wöchentlich am Freitag» |
+| **nur manuell** | nie automatisch, nur über «Jetzt aktualisieren» |
+
+Umstellen in der App: Zielname antippen, dann beim Ziel das Auswahlfeld ändern. Dafür braucht es den GitHub-Schlüssel, siehe 2.4. Bezahlt wird pro neuem Video, nicht pro Lauf. Häufigere Läufe kosten deshalb kaum mehr, die Daten sind aber aktueller.
+
+### 2.3 Anfrage aus der Webapp
+
+1. In der App tippen Sie auf den Zielnamen, schreiben unter **Ziel hinzufügen oder ändern** einen Text und tippen auf **Anfrage senden**.
+2. Mit GitHub-Schlüssel geht die Anfrage direkt an GitHub. Ohne Schlüssel öffnet sich ein vorbereitetes Issue «[Ziel] …», und Sie tippen dort auf **Submit**.
 3. Der Workflow «Anfrage aus der Webapp verarbeiten» startet. Claude Opus erstellt oder ändert die Zieldatei in `ziele/`.
 4. Die Antwort erscheint als Kommentar im Issue, das Issue wird geschlossen und der Abruf für dieses Ziel startet sofort.
 5. Bei Unklarheiten stellt Claude eine Rückfrage. Sie antworten mit einem Kommentar im Issue.
 
 Es werden nur Anfragen von Ihrem GitHub-Konto verarbeitet.
 
-### 2.3 Manueller Start und Modellvergleich
+### 2.4 Steuerung direkt aus der App (GitHub-Schlüssel)
 
-Unter **Actions → Plätze aktualisieren → Run workflow** gibt es drei Felder:
+Mit einem persönlichen GitHub-Schlüssel auf dem iPhone oder iPad steuern Sie alles direkt aus der App:
+- **Zielliste:** Zeitplan ändern, **Jetzt aktualisieren**, **iOverlander-Export** hochladen
+- **i → Läufe:** **Alle Ziele aktualisieren**, **Modellvergleich**, **Alle Videos neu auswerten**
+- **Anfragen** gehen ohne Umweg über die GitHub-Seite
+
+**Schlüssel erstellen** (einmalig, etwa 3 Minuten):
+1. https://github.com/settings/personal-access-tokens/new öffnen.
+2. **Token name:** `camper-plaetze iPhone`. **Expiration:** zum Beispiel 1 Jahr.
+3. **Repository access:** **Only select repositories** → `camper-plaetze`.
+4. **Permissions → Repository permissions:** **Actions**, **Contents** und **Issues** je auf **Read and write**. **Metadata** setzt GitHub automatisch auf «Read».
+5. **Generate token**, dann den Schlüssel (`github_pat_…`) kopieren.
+6. In der App: Zielname antippen, ganz nach unten scrollen, Schlüssel einfügen, **Speichern & prüfen**. Es erscheint «Verbunden als paulpmu».
+
+Der Schlüssel bleibt nur auf diesem Gerät, im Speicher von Safari. Wer das entsperrte Gerät hat, kann damit das Repository verändern, aber nichts anderes. Läuft er ab oder geht das Gerät verloren, löschen Sie ihn unter https://github.com/settings/personal-access-tokens und erstellen einen neuen.
+
+### 2.5 Manueller Start auf GitHub und Modellvergleich
+
+Ohne App: Unter **Actions → Plätze aktualisieren → Run workflow** gibt es diese Felder:
 
 | Feld | Wirkung |
 |---|---|
@@ -82,6 +111,27 @@ Unter **Actions → Plätze aktualisieren → Run workflow** gibt es drei Felder
 | **Ziel** = `marokko` | nur dieses Ziel |
 | **Max. Videos** = `100` | mehr Videos in diesem Lauf, um die Warteschlange schneller abzubauen |
 | **Modellvergleich** = `10` | 10 Videos mit Haiku und Opus vergleichen, ohne Daten zu ändern. Den Bericht finden Sie in der Zusammenfassung des Laufs und unter `berichte/`. |
+| **neu_auswerten** = `ja` | alle bisherigen Videos mit den aktuellen Regeln neu auswerten, zum Beispiel nach Änderungen am Prompt |
+
+### 2.6 Standortgenauigkeit und iOverlander
+
+Jeder Platz hat eine von vier Genauigkeitsstufen:
+
+| Stufe | Bedeutung | Darstellung |
+|---|---|---|
+| **genaue Koordinaten** | Koordinaten oder Kartenlink im Video | Marker durchgezogen |
+| **Platz verortet** | benannter Platz (Camping, Strand, See …) gefunden, über OpenStreetMap oder iOverlander | Marker durchgezogen |
+| **ungefähr** | nur der Ort ist bekannt, der Marker steht in der Ortsmitte | Marker gestrichelt |
+| **nur Region** | nur eine Gegend ist bekannt | nicht auf der Karte, nur in der Liste |
+
+**iOverlander-Abgleich:**
+1. Auf ioverlander.com mit Ihrem Konto anmelden und die Plätze des Landes exportieren, als CSV, GPX, KML oder JSON.
+2. In der App beim Ziel auf **iOverlander-Export** tippen und die Datei wählen. Am iPhone liegt sie meist unter «Dateien → Downloads».
+3. Die App speichert die Datei im Repository und startet den Abgleich. Passt ein YouTuber-Platz namentlich zu einem iOverlander-Eintrag in der Nähe, übernimmt er dessen genaue Koordinaten. Er zeigt dann die Kategorie und einen Link zu iOverlander.
+
+Den Export alle paar Monate erneuern, damit neue iOverlander-Plätze dazukommen.
+
+**park4night:** park4night bietet weder eine Schnittstelle noch einen Export. Ein automatisches Einloggen mit Ihrem Konto würde gegen die Nutzungsbedingungen verstossen und könnte zur Sperre Ihres Kontos führen. Die App öffnet deshalb pro Platz die park4night-Karte an genau dieser Stelle. Ein Tippen auf **park4night** zeigt die dortigen Plätze in der Umgebung, angemeldet mit Ihrem Konto.
 
 ---
 
@@ -124,6 +174,8 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | Was | Wie |
 |---|---|
 | neues Ziel, Route oder Kanal | in der App über **Ziel hinzufügen oder ändern**, das ist der einfachste Weg |
+| Zeitplan | in der App beim Ziel, siehe 2.2 |
+| iOverlander-Daten erneuern | in der App beim Ziel **iOverlander-Export**, siehe 2.6 |
 | Ziel ausblenden | in der App, zum Beispiel «Spanien & Portugal deaktivieren» |
 | Feineinstellungen | direkt auf GitHub die Datei in `ziele/` bzw. `config.json` öffnen, auf den Stift tippen, ändern und **Commit changes** |
 | anderes Modell | in `config.json` `claude_model` ändern: `claude-haiku-5-5` ist günstig, `claude-sonnet-5-5` mittel, `claude-opus-5-5` am genausten |
@@ -138,6 +190,7 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | Transkripte meist `fehler` | YouTube hat etwas geändert und die Transkript-Bibliothek ist veraltet | Version in `requirements.txt` erhöhen, siehe 4.4 |
 | Lauf rot mit Hinweis auf ein Modell | das Claude-Modell wurde abgelöst | In `config.json` das aktuelle Modell eintragen |
 | nächtlicher Lauf startet nicht mehr | GitHub pausiert Zeitpläne nach 60 Tagen ohne Aktivität im Repository | Unter **Actions** den Workflow wieder aktivieren (**Enable workflow**) |
+| App meldet «Schlüssel ungültig» oder Fehler 401 | GitHub-Schlüssel abgelaufen | neuen Schlüssel erstellen, siehe 2.4 |
 | App zeigt alte Daten | Safari-Cache | App schliessen und neu öffnen, notfalls neu laden |
 
 ### 4.4 Technische Wartung, etwa zweimal pro Jahr
@@ -168,7 +221,7 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `scripts/common.py` | Geodaten und Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
 | `docs/` | die Webapp; `docs/data/` enthält die veröffentlichten Plätze |
-| `data/` | interner Zustand: bearbeitete Videos, Warteschlange, Geocache |
+| `data/` | interner Zustand: bearbeitete Videos, Warteschlange, Geocache, iOverlander-Exporte (`data/<ziel>/ioverlander/`) |
 | `berichte/` | Modellvergleiche |
 
 Der ganze Verlauf liegt in Git. Jede Datenänderung ist ein Commit und lässt sich jederzeit nachvollziehen oder zurücksetzen.

@@ -218,6 +218,8 @@ def annotate_routes(spots: list[dict], routes: list[dict]):
     corridor = CONFIG["route_corridor_km"]
     for s in spots:
         s["routes"] = {}
+        if s["lat"] is None:
+            continue
         for r in routes:
             km, off = locate_on_route(s["lat"], s["lng"], r["coords"])
             if off <= corridor:

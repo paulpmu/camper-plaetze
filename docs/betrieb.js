@@ -18,12 +18,7 @@
     if (!index) index = await getJson("data/ziele.json").catch(() => ({ ziele: [], fixkosten: [] }));
     return index;
   }
-  function repo() {
-    if (index && index.repo) return index.repo;
-    const owner = location.hostname.split(".")[0];
-    const name = location.pathname.split("/").filter(Boolean)[0];
-    return owner && name ? `${owner}/${name}` : "";
-  }
+  function repo() { return GH.repo(); }
   function table(head, rows, sumRow) {
     const th = head.map(([t, num]) => `<th class="${num ? "num" : ""}">${t}</th>`).join("");
     const tr = (r, cls = "") => `<tr class="${cls}">${r.map((c, i) => `<td class="${head[i][1] ? "num" : ""}">${c}</td>`).join("")}</tr>`;
@@ -65,22 +60,28 @@
     return min < 1 ? "< 1 Min." : `${min} Min.`;
   }
 
+  let pollTimer = null;
   async function loadRuns() {
     await getIndex();
-    $("#runs").innerHTML = `<p class="muted">lädt …</p>`;
+    clearTimeout(pollTimer);
+    $("#runs").innerHTML = (GH.token() ? `<div class="actions-row">
+        <button class="btn small" data-act="alle">Alle Ziele aktualisieren</button>
+        <button class="btn ghost small" data-act="vergleich">Modellvergleich (10 Videos)</button>
+        <button class="btn ghost small" data-act="neu">Alle Videos neu auswerten</button>
+      </div>` : `<p class="muted">Mit GitHub-Schlüssel (oben links → Ziel wählen) können Sie Läufe hier direkt starten.</p>`)
+      + `<div id="run-list"><p class="muted">lädt …</p></div>`;
     try {
       if (!repo()) throw new Error("kein Repository");
-      const r = await fetch(`https://api.github.com/repos/${repo()}/actions/runs?per_page=12`);
-      if (!r.ok) throw new Error(r.status);
-      const runs = (await r.json()).workflow_runs || [];
-      $("#runs").innerHTML = runs.map((x) => `
+      const runs = (await GH.api(`/actions/runs?per_page=12`)).workflow_runs || [];
+      if (runs.some((x) => x.status !== "completed") && !$("#sheet-info").hidden) pollTimer = setTimeout(() => { if (!$("#sheet-info").hidden) loadRuns(); }, 20000);
+      $("#run-list").innerHTML = runs.map((x) => `
         <a class="run" href="${esc(x.html_url)}" target="_blank" rel="noopener">
           ${runStatus(x)}
           <div><div class="rt">${esc(WORKFLOW[x.name] || x.name)} · ${esc(EVENT[x.event] || x.event)}</div>
           <div class="rs">${dateTime(x.run_started_at || x.created_at)} · ${duration(x)}</div></div>
         </a>`).join("") || `<p class="muted">Noch keine Läufe.</p>`;
     } catch {
-      $("#runs").innerHTML = `<p class="muted">Läufe nicht abrufbar (offline oder GitHub-Limit von 60 Abfragen pro Stunde).</p>`;
+      $("#run-list").innerHTML = `<p class="muted">Läufe nicht abrufbar (offline oder GitHub-Limit von 60 Abfragen pro Stunde ohne Schlüssel).</p>`;
     }
 
     $("#ziel-status").innerHTML = index.ziele.map((z) => {
@@ -96,6 +97,18 @@
         </div></div>`;
     }).join("") + `<p class="muted">Modell für die Auswertung: ${esc(index.model || "–")}. Automatischer Abruf täglich um 03:17 UTC (04:17 Winterzeit, 05:17 Sommerzeit).</p>`;
   }
+
+  $("#runs").onclick = async (e) => {
+    const b = e.target.closest("[data-act]");
+    if (!b) return;
+    const act = b.dataset.act;
+    const inputs = { alle: {}, vergleich: { vergleich: "10" }, neu: { neu_auswerten: "ja" } }[act];
+    if (act === "neu" && !confirm("Alle bereits ausgewerteten Videos mit den aktuellen Regeln neu auswerten? Kosten mit Haiku: wenige Rappen pro 100 Videos.")) return;
+    if (act === "vergleich" && !confirm("10 Videos mit Haiku und Opus auswerten und vergleichen? Kosten einmalig ca. 1 USD.")) return;
+    b.disabled = true;
+    try { await GH.dispatch(inputs); window.toast && window.toast("Lauf gestartet."); setTimeout(loadRuns, 4000); }
+    catch (err) { window.toast && window.toast("Start fehlgeschlagen: " + err.message); b.disabled = false; }
+  };
 
   // ---------------------------------------------------------------- Kosten
   function monthsBetween(from, to) {

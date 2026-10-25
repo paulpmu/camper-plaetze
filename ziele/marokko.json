@@ -1,58 +1,161 @@
 {
-  "id": "marokko",
-  "name": "Marokko & Dakhla",
-  "active": true,
-  "countrycodes": ["ma", "eh"],
-  "bbox": [20.5, -17.5, 36.2, -0.9],
-  "languages": ["de", "en", "fr", "nl", "es", "it"],
-  "search_queries": [
-    "Morocco overlanding",
-    "Morocco van life",
-    "Morocco camper wild camping",
-    "road to Dakhla van",
-    "Dakhla camper",
-    "Western Sahara overland",
-    "Marokko Wohnmobil",
-    "Marokko Camper Reise",
-    "Westsahara Dakhla Wohnmobil",
-    "Maroc fourgon aménagé",
-    "Maroc camping-car bivouac",
-    "Dakhla camping-car route",
-    "Marokko camper overnachten"
-  ],
-  "channels": [],
-  "relevance_keywords": [
-    "morocco", "maroc", "marokko", "marruecos", "marocco", "marrocos", "المغرب",
-    "dakhla", "western sahara", "westsahara", "sahara occidental", "sahara", "atlas",
-    "agadir", "essaouira", "marrakech", "marrakesch", "merzouga", "taghazout", "tanger", "tangier",
-    "chefchaouen", "fes", "fès", "ouarzazate", "zagora", "sidi ifni", "tafraoute", "legzira",
-    "mirleft", "imsouane", "erg chebbi", "draa", "dades", "todra", "guelmim", "tan-tan", "tantan",
-    "tarfaya", "laayoune", "laâyoune", "boujdour", "assa", "tata", "foum zguid", "akhfennir"
-  ],
-  "regions": [
-    {"name": "Mittelmeer & Rif", "hint": "Tanger, Tétouan, Chefchaouen, Al Hoceima, Nador, Saïdia"},
-    {"name": "Nordatlantik", "hint": "Asilah, Larache, Rabat, Casablanca, El Jadida, Oualidia, Safi"},
-    {"name": "Fès & Mittlerer Atlas", "hint": "Fès, Meknès, Ifrane, Azrou, Midelt"},
-    {"name": "Marrakesch & Hoher Atlas", "hint": "Marrakesch, Ourika, Imlil, Azilal, Bin el Ouidane, Tizi n'Tichka"},
-    {"name": "Südatlantik", "hint": "Essaouira, Imsouane, Taghazout, Agadir, Tiznit, Mirleft, Sidi Ifni"},
-    {"name": "Antiatlas & Draa", "hint": "Tafraoute, Ouarzazate, Zagora, Dadès, Todra, Tata, Foum Zguid, Assa"},
-    {"name": "Sahara Ost", "hint": "Merzouga, Erg Chebbi, Erfoud, Rissani, Figuig"},
-    {"name": "Südwesten", "hint": "Guelmim, Plage Blanche, Tan-Tan, Akhfennir, Tarfaya, Laâyoune, Boujdour"},
-    {"name": "Dakhla & Süden", "hint": "Dakhla, Lagune, Bir Gandouz, Guerguerat und südlich davon"}
-  ],
-  "routes": [
-    {
-      "id": "hinweg-kueste",
-      "name": "Hinweg Küste nach Dakhla",
-      "color": "#1f6fb2",
-      "waypoints": ["Agadir", "Tiznit", "Guelmim", "Tan-Tan", "Tarfaya", "Laâyoune", "Boujdour", "Dakhla"]
-    },
-    {
-      "id": "rueckweg-inland",
-      "name": "Rückweg Landesinnere",
-      "color": "#8e44ad",
-      "waypoints": ["Dakhla", "Boujdour", "Laâyoune", "Tan-Tan", "Guelmim", "Assa", "Tata", "Foum Zguid", "Zagora"]
-    }
-  ],
-  "notes": "Auf der Strecke Guelmim–Dakhla (N1) sind Polizei-/Gendarmeriekontrollen mit Passkopien (Fiche) üblich; Wildcampen wird dort teils untersagt. Notiere Hinweise zu Kontrollen, Wegweisen und Tankmöglichkeiten im Sicherheits- bzw. Zufahrtstext."
+ "id": "marokko",
+ "name": "Marokko & Dakhla",
+ "active": true,
+ "schedule": "taeglich",
+ "weekday": 1,
+ "countrycodes": [
+  "ma",
+  "eh"
+ ],
+ "bbox": [
+  20.5,
+  -17.5,
+  36.2,
+  -0.9
+ ],
+ "languages": [
+  "de",
+  "en",
+  "fr",
+  "nl",
+  "es",
+  "it"
+ ],
+ "search_queries": [
+  "Morocco overlanding",
+  "Morocco van life",
+  "Morocco camper wild camping",
+  "road to Dakhla van",
+  "Dakhla camper",
+  "Western Sahara overland",
+  "Marokko Wohnmobil",
+  "Marokko Camper Reise",
+  "Westsahara Dakhla Wohnmobil",
+  "Maroc fourgon aménagé",
+  "Maroc camping-car bivouac",
+  "Dakhla camping-car route",
+  "Marokko camper overnachten"
+ ],
+ "channels": [],
+ "relevance_keywords": [
+  "morocco",
+  "maroc",
+  "marokko",
+  "marruecos",
+  "marocco",
+  "marrocos",
+  "المغرب",
+  "dakhla",
+  "western sahara",
+  "westsahara",
+  "sahara occidental",
+  "sahara",
+  "atlas",
+  "agadir",
+  "essaouira",
+  "marrakech",
+  "marrakesch",
+  "merzouga",
+  "taghazout",
+  "tanger",
+  "tangier",
+  "chefchaouen",
+  "fes",
+  "fès",
+  "ouarzazate",
+  "zagora",
+  "sidi ifni",
+  "tafraoute",
+  "legzira",
+  "mirleft",
+  "imsouane",
+  "erg chebbi",
+  "draa",
+  "dades",
+  "todra",
+  "guelmim",
+  "tan-tan",
+  "tantan",
+  "tarfaya",
+  "laayoune",
+  "laâyoune",
+  "boujdour",
+  "assa",
+  "tata",
+  "foum zguid",
+  "akhfennir"
+ ],
+ "regions": [
+  {
+   "name": "Mittelmeer & Rif",
+   "hint": "Tanger, Tétouan, Chefchaouen, Al Hoceima, Nador, Saïdia"
+  },
+  {
+   "name": "Nordatlantik",
+   "hint": "Asilah, Larache, Rabat, Casablanca, El Jadida, Oualidia, Safi"
+  },
+  {
+   "name": "Fès & Mittlerer Atlas",
+   "hint": "Fès, Meknès, Ifrane, Azrou, Midelt"
+  },
+  {
+   "name": "Marrakesch & Hoher Atlas",
+   "hint": "Marrakesch, Ourika, Imlil, Azilal, Bin el Ouidane, Tizi n'Tichka"
+  },
+  {
+   "name": "Südatlantik",
+   "hint": "Essaouira, Imsouane, Taghazout, Agadir, Tiznit, Mirleft, Sidi Ifni"
+  },
+  {
+   "name": "Antiatlas & Draa",
+   "hint": "Tafraoute, Ouarzazate, Zagora, Dadès, Todra, Tata, Foum Zguid, Assa"
+  },
+  {
+   "name": "Sahara Ost",
+   "hint": "Merzouga, Erg Chebbi, Erfoud, Rissani, Figuig"
+  },
+  {
+   "name": "Südwesten",
+   "hint": "Guelmim, Plage Blanche, Tan-Tan, Akhfennir, Tarfaya, Laâyoune, Boujdour"
+  },
+  {
+   "name": "Dakhla & Süden",
+   "hint": "Dakhla, Lagune, Bir Gandouz, Guerguerat und südlich davon"
+  }
+ ],
+ "routes": [
+  {
+   "id": "hinweg-kueste",
+   "name": "Hinweg Küste nach Dakhla",
+   "color": "#1f6fb2",
+   "waypoints": [
+    "Agadir",
+    "Tiznit",
+    "Guelmim",
+    "Tan-Tan",
+    "Tarfaya",
+    "Laâyoune",
+    "Boujdour",
+    "Dakhla"
+   ]
+  },
+  {
+   "id": "rueckweg-inland",
+   "name": "Rückweg Landesinnere",
+   "color": "#8e44ad",
+   "waypoints": [
+    "Dakhla",
+    "Boujdour",
+    "Laâyoune",
+    "Tan-Tan",
+    "Guelmim",
+    "Assa",
+    "Tata",
+    "Foum Zguid",
+    "Zagora"
+   ]
+  }
+ ],
+ "notes": "Auf der Strecke Guelmim–Dakhla (N1) sind Polizei-/Gendarmeriekontrollen mit Passkopien (Fiche) üblich; Wildcampen wird dort teils untersagt. Notiere Hinweise zu Kontrollen, Wegweisen und Tankmöglichkeiten im Sicherheits- bzw. Zufahrtstext."
 }

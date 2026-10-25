@@ -39,6 +39,8 @@ class Destination(BaseModel):
     id: str = Field(description="Kurz-ID aus Kleinbuchstaben, Ziffern und Bindestrichen, z. B. 'norwegen'")
     name: str = Field(description="Anzeigename, z. B. 'Norwegen & Lofoten'")
     active: bool
+    schedule: Literal["taeglich", "woechentlich", "manuell"] = Field(description="Nächtlicher Abruf: täglich, wöchentlich oder nur manuell")
+    weekday: int = Field(description="Wochentag für 'woechentlich', 1 = Montag bis 7 = Sonntag")
     countrycodes: list[str] = Field(description="ISO-3166-1-alpha-2-Codes in Kleinbuchstaben")
     bbox: list[float] = Field(description="[Süd, West, Nord, Ost] in Dezimalgrad, umfasst das ganze Gebiet")
     languages: list[str] = Field(description="Transkriptsprachen nach Priorität, ISO-639-1, Deutsch und Englisch zuerst")
@@ -72,7 +74,8 @@ Regeln:
 - YouTube-Kontingent: pro Tag reichen alle Ziele zusammen für etwa 90 Suchbegriffe. Halte dich pro Ziel an 8–14.
 - Routen sinnvoll nur, wenn der Nutzer sie nennt oder sie offensichtlich zum Wunsch gehören.
 - Die bbox muss alle Regionen und Routen umfassen.
-- Verwende bestehende IDs bei Änderungen unverändert."""
+- Verwende bestehende IDs bei Änderungen unverändert.
+- Zeitplan: neue Ziele standardmässig 'woechentlich' (weekday 1), ausser der Nutzer wünscht etwas anderes."""
 
 
 def gh(path: str):

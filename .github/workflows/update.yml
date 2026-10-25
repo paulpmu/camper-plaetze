@@ -14,6 +14,9 @@ on:
       vergleich:
         description: "Modellvergleich statt Abruf: Anzahl Videos (z. B. 10); leer = normaler Abruf"
         required: false
+      neu_auswerten:
+        description: "ja = alle bereits ausgewerteten Videos mit den aktuellen Regeln neu auswerten"
+        required: false
   push:
     branches: [main]
     paths: ["docs/**", "ziele/**"]
@@ -49,6 +52,7 @@ jobs:
           ZIEL: ${{ inputs.ziel }}
           MAX_VIDEOS: ${{ inputs.max_videos }}
           VERGLEICH: ${{ inputs.vergleich }}
+          NEU_AUSWERTEN: ${{ inputs.neu_auswerten }}
         run: python scripts/update.py
       - name: Daten speichern
         run: |

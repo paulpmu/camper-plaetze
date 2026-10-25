@@ -3,6 +3,14 @@
 
   const TYPE_LABEL = { wildplatz: "Wildplatz", camping: "Camping", stellplatz: "Stellplatz", andere: "Andere" };
   const INFRA_LABEL = { water: "💧 Wasser", dump_station: "🚽 Ver-/Entsorgung", electricity: "⚡ Strom", toilets: "🚻 WC", showers: "🚿 Dusche" };
+  const PRECISION = {
+    exakt: ["genaue Koordinaten", ""],
+    genau: ["Platz verortet", ""],
+    ort: ["ungefährer Standort (Ortsmitte)", "warn"],
+    region: ["nur Region bekannt – nicht auf der Karte", "warn"],
+  };
+  const SCHEDULE = { taeglich: "täglich", woechentlich: "wöchentlich", manuell: "nur manuell" };
+  const WEEKDAY = ["", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const DEFAULT_FILTER = { region: "", route: "", corridor: 30, types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -38,7 +46,7 @@
   map.addLayer(cluster);
 
   function pinHtml(s) {
-    return `<div class="pin ${s.type} ${s.precision === "exakt" ? "" : "approx"}"><b>${s.rating.toFixed(1).replace(".0", "")}</b></div>`;
+    return `<div class="pin ${s.type} ${s.precision === "ort" || s.precision === "region" ? "approx" : ""}"><b>${s.rating.toFixed(1).replace(".0", "")}</b></div>`;
   }
   function icon(s) {
     return L.divIcon({ className: "", html: pinHtml(s), iconSize: [30, 30], iconAnchor: [4, 30] });
@@ -54,6 +62,7 @@
   async function init() {
     try {
       index = await getJson("data/ziele.json");
+      GH.setRepo(index.repo);
     } catch (e) {
       $("#count").textContent = "Daten nicht erreichbar (offline?)";
       return;
@@ -86,6 +95,7 @@
 
     markers = new Map();
     for (const s of spots) {
+      if (s.lat == null) continue;
       const m = L.marker([s.lat, s.lng], { icon: icon(s), title: s.name });
       m.on("click", () => openDetail(s));
       markers.set(s.id, m);
@@ -111,8 +121,9 @@
   function fitView() {
     const visible = spots.filter(matches);
     const r = routes.find((x) => x.id === filter.route);
+    const located = visible.filter((s) => s.lat != null);
     if (r) map.fitBounds(L.latLngBounds(r.coords), { padding: [40, 40] });
-    else if (visible.length) map.fitBounds(L.latLngBounds(visible.map((s) => [s.lat, s.lng])), { padding: [40, 40], maxZoom: 12 });
+    else if (located.length) map.fitBounds(L.latLngBounds(located.map((s) => [s.lat, s.lng])), { padding: [40, 40], maxZoom: 12 });
     else if (ziel) { const [s, w, n, e] = ziel.bbox; map.fitBounds([[s, w], [n, e]]); }
   }
 
@@ -148,7 +159,7 @@
     if (f.age && ageDays(s) > f.age) return false;
     if (f.infra.some((k) => s.infrastructure[k] !== true)) return false;
     if (f.no4wd && s.four_wd === true) return false;
-    if (f.exact && s.precision !== "exakt") return false;
+    if (f.exact && s.precision !== "exakt" && s.precision !== "genau") return false;
     if (f.safe && s.safety_rating != null && s.safety_rating < 3) return false;
     if (f.q) {
       const hay = [s.name, s.place, s.region, ...s.mentions.map((m) => m.channel + " " + m.title)].join(" ").toLowerCase();
@@ -165,7 +176,7 @@
   function render() {
     const visible = spots.filter(matches);
     cluster.clearLayers();
-    cluster.addLayers(visible.map((s) => markers.get(s.id)));
+    cluster.addLayers(visible.filter((s) => markers.has(s.id)).map((s) => markers.get(s.id)));
     $("#count").textContent = spots.length ? `${visible.length} von ${spots.length} Plätzen` : "keine Plätze";
     $("#filter-dot").hidden = isDefault();
     renderList(visible);
@@ -173,7 +184,7 @@
   }
 
   function distKm(s) {
-    if (!me) return null;
+    if (!me || s.lat == null) return null;
     const R = 6371, r = Math.PI / 180;
     const dLat = (s.lat - me[0]) * r, dLng = (s.lng - me[1]) * r;
     const a = Math.sin(dLat / 2) ** 2 + Math.cos(me[0] * r) * Math.cos(s.lat * r) * Math.sin(dLng / 2) ** 2;
@@ -181,7 +192,8 @@
   }
 
   function renderList(visible) {
-    const items = visible.map((s) => ({ s, d: distKm(s), r: onRoute(s) }));
+    const items = visible.filter((s) => s.lat != null).map((s) => ({ s, d: distKm(s), r: onRoute(s) }));
+    const regionOnly = visible.filter((s) => s.lat == null);
     let label;
     if (filter.route) { items.sort((a, b) => a.r[0] - b.r[0]); label = "nach Streckenkilometer"; }
     else if (me) { items.sort((a, b) => a.d - b.d); label = "nach Entfernung"; }
@@ -192,7 +204,12 @@
         ${pinHtml(s)}
         <div><div class="t">${esc(s.name)}</div><div class="s">${esc(TYPE_LABEL[s.type])} · ${esc(s.place)}</div></div>
         <div class="r">${r ? `km ${r[0]}<br>${r[1]} km abseits` : (d != null ? Math.round(d) + " km<br>" : "") + fmtDate(s.last_seen)}</div>
-      </li>`).join("") || `<li class="muted">Keine Plätze für diese Filter.</li>`;
+      </li>`).join("") + (regionOnly.length ? `<li class="group muted">Nur Region bekannt (${regionOnly.length})</li>` + regionOnly.map((s) => `
+      <li data-id="${s.id}">
+        ${pinHtml(s)}
+        <div><div class="t">${esc(s.name)}</div><div class="s">${esc(TYPE_LABEL[s.type])} · ${esc(s.region)}</div></div>
+        <div class="r">${fmtDate(s.last_seen)}</div>
+      </li>`).join("") : "") || `<li class="muted">Keine Plätze für diese Filter.</li>`;
   }
 
   // ---------------------------------------------------------------- Detail
@@ -247,7 +264,7 @@
       </div>
       <div class="badges">
         <span class="badge type ${s.type}">${TYPE_LABEL[s.type]}</span>
-        ${s.precision === "exakt" ? `<span class="badge">genaue Koordinaten</span>` : `<span class="badge warn">ungefährer Standort (Ort)</span>`}
+        <span class="badge ${PRECISION[s.precision][1]}">${PRECISION[s.precision][0]}${s.coord_source ? " (" + esc(s.coord_source) + ")" : ""}</span>
         ${ageDays(s) > 365 ? `<span class="badge warn">Info älter als 1 Jahr</span>` : ""}
       </div>
       <div class="stars">${stars(s.rating)}<small>${s.rating.toFixed(1)} · ${s.mentions.length} ${s.mentions.length === 1 ? "Video" : "Videos"} · zuletzt ${fmtDate(s.last_seen)}</small></div>
@@ -255,12 +272,12 @@
       ${routeInfo}
       <div class="infra">${infra}</div>
       ${facts ? `<dl class="facts">${facts}</dl>` : ""}
-      <div class="links">
+      ${s.lat == null ? "" : `<div class="links">
         <a class="btn" href="https://maps.apple.com/?daddr=${ll}&q=${encodeURIComponent(s.name)}" target="_blank" rel="noopener">Apple Karten</a>
         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${ll}" target="_blank" rel="noopener">Google Maps</a>
         <a class="btn ghost" href="https://park4night.com/en/search?lat=${s.lat}&lng=${s.lng}&z=14" target="_blank" rel="noopener">park4night</a>
         ${io ? `<a class="btn ghost" href="${io}" target="_blank" rel="noopener">iOverlander</a>` : `<button class="btn ghost" data-share>Teilen</button>`}
-      </div>
+      </div>`}
       <h4>Aus den Videos</h4>
       ${mentions}`;
     const share = $("#detail [data-share]");
@@ -275,32 +292,97 @@
 
   // ---------------------------------------------------------------- Ziele & Anfragen
   function renderZielList() {
+    const can = !!GH.token();
     $("#ziel-list").innerHTML = index.ziele.map((z) => `
       <li data-id="${esc(z.id)}" class="${ziel && z.id === ziel.id ? "on" : ""}">
-        <span>${esc(z.name)}</span>
-        <span class="r">${z.spots} Plätze${z.routes.length ? ` · ${z.routes.length} Routen` : ""}<br>${z.last_run ? "Stand " + new Date(z.last_run).toLocaleDateString("de-CH") : "noch kein Abruf"}</span>
+        <div class="zrow" data-select>
+          <span>${esc(z.name)}</span>
+          <span class="r">${z.spots} Plätze${z.routes.length ? ` · ${z.routes.length} Routen` : ""}<br>${z.last_run ? "Stand " + new Date(z.last_run).toLocaleDateString("de-CH") : "noch kein Abruf"}</span>
+        </div>
+        <div class="zctl">
+          ${can ? `<select data-schedule aria-label="Zeitplan">
+              ${Object.entries(SCHEDULE).map(([k, v]) => `<option value="${k}" ${z.schedule === k ? "selected" : ""}>${v}${k === "woechentlich" ? " (" + WEEKDAY[z.weekday || 1] + ")" : ""}</option>`).join("")}
+            </select>
+            <button class="btn small" data-run>Jetzt aktualisieren</button>
+            <label class="btn ghost small upl">iOverlander-Export<input type="file" data-upload accept=".csv,.json,.geojson,.gpx,.kml" hidden></label>`
+          : `<span class="muted">Zeitplan: ${SCHEDULE[z.schedule] || "täglich"}${z.schedule === "woechentlich" ? " (" + WEEKDAY[z.weekday || 1] + ")" : ""}</span>`}
+        </div>
       </li>`).join("") || `<li class="muted">Noch keine Ziele.</li>`;
   }
-  $("#ziel-list").onclick = (e) => {
+  $("#ziel-list").onclick = async (e) => {
     const li = e.target.closest("li[data-id]");
     if (!li) return;
-    close();
-    selectZiel(li.dataset.id);
+    const z = index.ziele.find((x) => x.id === li.dataset.id);
+    if (e.target.closest("[data-select]")) { close(); selectZiel(z.id); return; }
+    const run = e.target.closest("[data-run]");
+    if (run) {
+      run.disabled = true; run.textContent = "wird gestartet …";
+      try { await GH.dispatch({ ziel: z.id }); toast(`Abruf für ${z.name} gestartet. Den Fortschritt sehen Sie unter i → Läufe.`); run.textContent = "gestartet ✓"; }
+      catch (err) { toast("Start fehlgeschlagen: " + err.message); run.disabled = false; run.textContent = "Jetzt aktualisieren"; }
+    }
+  };
+  $("#ziel-list").onchange = async (e) => {
+    const li = e.target.closest("li[data-id]");
+    if (!li) return;
+    const z = index.ziele.find((x) => x.id === li.dataset.id);
+    if (e.target.matches("[data-schedule]")) {
+      const schedule = e.target.value;
+      e.target.disabled = true;
+      try {
+        await GH.updateZiel(z.id, { schedule }, `Zeitplan ${z.id}: ${schedule} (aus der Webapp)`);
+        z.schedule = schedule;
+        toast(`Zeitplan für ${z.name}: ${SCHEDULE[schedule]}. Gilt ab dem nächsten Lauf.`);
+      } catch (err) { toast("Ändern fehlgeschlagen: " + err.message); e.target.value = z.schedule; }
+      e.target.disabled = false;
+    }
+    if (e.target.matches("[data-upload]") && e.target.files[0]) uploadIoverlander(z, e.target.files[0], e.target);
   };
 
-  function repo() {
-    if (index.repo) return index.repo;
-    const owner = location.hostname.split(".")[0];
-    const name = location.pathname.split("/").filter(Boolean)[0];
-    return owner && name ? `${owner}/${name}` : "";
+  async function uploadIoverlander(z, file, input) {
+    if (file.size > 40e6) { toast("Datei zu gross (max. 40 MB)."); return; }
+    const ext = file.name.split(".").pop().toLowerCase();
+    toast(`Lade ${file.name} hoch …`);
+    try {
+      const buf = new Uint8Array(await file.arrayBuffer());
+      let bin = "";
+      for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+      const path = `/contents/data/${encodeURIComponent(z.id)}/ioverlander/export.${ext}`;
+      let sha;
+      try { sha = (await GH.api(`${path}?ref=main`)).sha; } catch { /* neue Datei */ }
+      await GH.api(path, { method: "PUT", body: { message: `iOverlander-Export für ${z.id} (aus der Webapp)`, content: btoa(bin), sha, branch: "main" } });
+      await GH.dispatch({ ziel: z.id });
+      toast(`iOverlander-Export für ${z.name} gespeichert. Der Abgleich läuft jetzt.`);
+    } catch (err) { toast("Hochladen fehlgeschlagen: " + err.message); }
+    input.value = "";
   }
 
-  $("#req-send").onclick = () => {
+  function toast(msg) {
+    let t = $("#toast");
+    if (!t) { t = document.createElement("div"); t.id = "toast"; document.body.appendChild(t); }
+    t.textContent = msg; t.className = "show";
+    clearTimeout(toast.timer); toast.timer = setTimeout(() => (t.className = ""), 4500);
+  }
+  window.toast = toast;
+
+  function repo() { return GH.repo(); }
+
+  $("#req-send").onclick = async () => {
     const text = $("#req-text").value.trim();
     if (!text) { $("#req-text").focus(); return; }
     if (!repo()) { alert("Repository unbekannt – die App muss über GitHub Pages laufen."); return; }
     const title = "[Ziel] " + text.split("\n")[0].slice(0, 70);
     const body = `${text}\n\n---\nGesendet aus der Webapp · aktuelles Ziel: ${ziel ? ziel.name + " (" + ziel.id + ")" : "–"}`;
+    if (GH.token()) {
+      $("#req-send").disabled = true;
+      try {
+        await GH.createIssue(title, body);
+        toast("Anfrage gesendet. Die Antwort erscheint unten, meist nach 1–2 Minuten.");
+        $("#req-text").value = ""; save("req-draft", "");
+        setTimeout(loadRequests, 3000);
+      } catch (err) { toast("Senden fehlgeschlagen: " + err.message); }
+      $("#req-send").disabled = false;
+      return;
+    }
     const url = `https://github.com/${repo()}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
     window.open(url, "_blank", "noopener");
     $("#req-text").value = "";
@@ -311,9 +393,7 @@
   async function loadRequests() {
     if (!repo()) { $("#req-list").innerHTML = `<li class="muted">Erst über GitHub Pages verfügbar.</li>`; return; }
     try {
-      const r = await fetch(`https://api.github.com/repos/${repo()}/issues?state=all&per_page=30&sort=created`);
-      if (!r.ok) throw new Error(r.status);
-      const issues = (await r.json()).filter((i) => !i.pull_request && i.title.startsWith("[Ziel]")).slice(0, 6);
+      const issues = (await GH.api(`/issues?state=all&per_page=30&sort=created`)).filter((i) => !i.pull_request && i.title.startsWith("[Ziel]")).slice(0, 6);
       $("#req-list").innerHTML = issues.map((i) => {
         const done = i.state === "closed";
         return `<li><a href="${esc(i.html_url)}" target="_blank" rel="noopener">
@@ -347,14 +427,37 @@
   $("#btn-info").onclick = () => open("#sheet-info");
   $("#btn-ziel").onclick = () => {
     $("#req-text").value = loadStr("req-draft") || "";
+    renderZielList();
+    showTokenState();
     open("#sheet-ziel");
     loadRequests();
   };
+
+  // ---------------------------------------------------------------- GitHub-Schlüssel
+  async function showTokenState(verify = false) {
+    const has = !!GH.token();
+    $("#req-hint-direct").hidden = !has;
+    $("#req-hint-link").hidden = has;
+    $("#gh-token").value = "";
+    $("#gh-token").placeholder = has ? "•••••••• (hinterlegt)" : "github_pat_…";
+    if (!has) { $("#gh-status").textContent = "Kein Schlüssel hinterlegt. Mit Schlüssel können Sie Ziele direkt starten, Zeitpläne ändern, iOverlander-Exporte hochladen und Anfragen ohne Umweg senden."; return; }
+    $("#gh-status").textContent = verify ? "Prüfe …" : "Schlüssel hinterlegt.";
+    if (!verify) return;
+    try { $("#gh-status").textContent = `Verbunden als ${await GH.check()} – volle Steuerung aktiv.`; }
+    catch (err) { $("#gh-status").textContent = "Schlüssel ungültig: " + err.message; }
+  }
+  $("#gh-save").onclick = async () => {
+    const t = $("#gh-token").value.trim();
+    if (t) GH.setToken(t);
+    await showTokenState(true);
+    renderZielList();
+  };
+  $("#gh-remove").onclick = () => { GH.setToken(""); showTokenState(); renderZielList(); };
   $("#list").onclick = (e) => {
     const li = e.target.closest("li[data-id]");
     if (!li) return;
     const s = spots.find((x) => x.id === li.dataset.id);
-    map.setView([s.lat, s.lng], Math.max(map.getZoom(), 13));
+    if (s.lat != null) map.setView([s.lat, s.lng], Math.max(map.getZoom(), 13));
     openDetail(s);
   };
 
