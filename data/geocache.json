@@ -395,5 +395,152 @@
  "ma,eh|marrakesch, marokko": [
   31.6258257,
   -7.9891608
+ ],
+ "es,pt|sesimbra, setúbal": [
+  38.4436932,
+  -9.0996273
+ ],
+ "es,pt|lissabon, lissabon": [
+  38.7077507,
+  -9.1365919
+ ],
+ "es,pt|camping lisboa, lissabon": [
+  38.7244254,
+  -9.2050576
+ ],
+ "es,pt|algodonales, cádiz": [
+  36.879693,
+  -5.4047755
+ ],
+ "es,pt|sierra delira, algodonales": null,
+ "es,pt|lapeza, granada": null,
+ "es,pt|jimena de la frontera, cádiz": [
+  36.4327335,
+  -5.4527477
+ ],
+ "es,pt|teruel, teruel": [
+  40.3436719,
+  -1.1081939
+ ],
+ "es,pt|moncofa, castellón": [
+  39.808205,
+  -0.1452657
+ ],
+ "es,pt|apúlia, esposende (braga)": [
+  41.4824433,
+  -8.7651879
+ ],
+ "es,pt|cabo da roca, cabo da roca": [
+  38.7804947,
+  -9.4988505
+ ],
+ "es,pt|vera playa, almería": [
+  37.2282081,
+  -1.8025371
+ ],
+ "es,pt|bragança, bragança": [
+  41.8071182,
+  -6.7589839
+ ],
+ "es,pt|raposeira, braga": [
+  41.5170771,
+  -8.0004716
+ ],
+ "es,pt|parque nacional da peneda-gerês, raposeira": [
+  41.8775008,
+  -8.2358063
+ ],
+ "es,pt|braga, braga": [
+  41.5510583,
+  -8.4280045
+ ],
+ "es,pt|parque de campismo de braga, braga": [
+  41.5386658,
+  -8.4223035
+ ],
+ "es,pt|la línea de la concepción, cádiz": [
+  36.1677899,
+  -5.3482396
+ ],
+ "es,pt|roses, girona": [
+  42.2632018,
+  3.1755328
+ ],
+ "es,pt|camping salata, roses": [
+  42.266535,
+  3.1575209
+ ],
+ "es,pt|ancora, viana do castelo": [
+  41.7959527,
+  -8.8510326
+ ],
+ "es,pt|vila chã, porto": [
+  41.2965412,
+  -8.7253665
+ ],
+ "es,pt|küste südlich porto, porto": null,
+ "es,pt|nazaré, leiria": [
+  39.6029108,
+  -9.0701572
+ ],
+ "ma,eh|mohammedia, préfecture mohammédia": [
+  33.6958383,
+  -7.3893292
+ ],
+ "ma,eh|camping saïd, mohammedia": [
+  33.725448,
+  -7.3367753
+ ],
+ "ma,eh|mirim monte resort, tanger": null,
+ "ma,eh|chefchaouen, tanger-tétouan-al hoceima": [
+  35.1700832,
+  -5.2766583
+ ],
+ "ma,eh|lagadier, chefchaouen": null,
+ "ma,eh|tanger, tanger-assilah": [
+  35.746,
+  -5.797
+ ],
+ "ma,eh|camping terre d'océan, taghazout": null,
+ "ma,eh|guelmim, guelmim-es semara": [
+  28.9863852,
+  -10.0574351
+ ],
+ "ma,eh|wohlfühloase, guelmim": null,
+ "ma,eh|foum zguid, tata": [
+  30.0854,
+  -6.8732
+ ],
+ "ma,eh|tafraoute, antiatlas": [
+  35.114625,
+  -4.920862
+ ],
+ "ma,eh|plage blanche, plage blanche": [
+  28.8252696,
+  -10.8942182
+ ],
+ "ma,eh|legzira beach, legzira": [
+  29.4436222,
+  -10.1179213
+ ],
+ "ma,eh|asilah, larache": [
+  35.4651588,
+  -6.031032
+ ],
+ "ma,eh|camping saada, asilah": [
+  35.4719705,
+  -6.0287982
+ ],
+ "ma,eh|kénitra, kénitra": [
+  34.2514611,
+  -6.5818162
+ ],
+ "ma,eh|settat, settat": [
+  32.993908,
+  -7.623451
+ ],
+ "ma,eh|marrakesch, marrakesch-safi": [
+  31.6258257,
+  -7.9891608
  ]
 }

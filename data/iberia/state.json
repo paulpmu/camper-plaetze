@@ -1514,21 +1514,24 @@
    "channel": "Chillout Verrückt Camper Die Ahlfis",
    "published": "2026-10-25",
    "transcript": "ok",
-   "spots": 2
+   "spots": 2,
+   "retried": true
   },
   "WBAMJxConGY": {
    "title": "Spanien 2026: Welche Orte Wohnmobil-Rentner jetzt aussperren – und wo es noch geht",
    "channel": "Sabines Wohnmobil-Geheimnisse.",
    "published": "2026-10-25",
    "transcript": "ok",
-   "spots": 2
+   "spots": 2,
+   "retried": true
   },
   "b3t6BbMxEqM": {
    "title": "PORTUGAL ROAD TRIP 🇵🇹 1000 KM in a Camper Van",
    "channel": "kaveh radfar",
    "published": "2026-10-25",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "bqatTvnAZpk": {
    "title": "Packing My Entire Life Into a Van (Leaving Ireland)",
@@ -1536,6 +1539,7 @@
    "published": "2026-10-25",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "clkwokcqdII": {
@@ -1543,42 +1547,48 @@
    "channel": "Lehmann Vlogs",
    "published": "2026-10-25",
    "transcript": "ok",
-   "spots": 0
+   "spots": 1,
+   "retried": true
   },
   "thGybmZ40dM": {
    "title": "ENTRAMOS EN PORTUGAL-Viajar en Autocaravana -EL RINCON DEL DIVAN-",
    "channel": "El Rincón del Diván",
    "published": "2026-10-25",
    "transcript": "ok",
-   "spots": 2
+   "spots": 2,
+   "retried": true
   },
   "wpIFMqM5D8I": {
    "title": "Je repars en fourgon pour l'hiver, mais où?",
    "channel": "La Nomade Trotteuse",
    "published": "2026-10-25",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "RNcwSRfIFLQ": {
    "title": "A Vila Costeira em Portugal Que Tem as Vistas Mais Lindas",
    "channel": "Maga e Noir na Europa ",
    "published": "2026-10-24",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "vggtSMJ91lI": {
    "title": "Solo im Unimog - Das beste Offgrid-Versteck überhaupt?",
    "channel": "TRIP24H | Overlanding the World in an Unimog",
    "published": "2026-10-24",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "2s8RLeehw6A": {
    "title": "Flugzeugfriedhof in Spanien - zu riskant zum Freistehen - Teruel mit dem Wohnmobil",
    "channel": "mhm_explore",
    "published": "2026-10-23",
    "transcript": "ok",
-   "spots": 2
+   "spots": 3,
+   "retried": true
   },
   "8BFag3ft09M": {
    "title": "ROCHEFORT-EN-TERRE : quelle découverte ! 😍 Notre première étape en camping-car",
@@ -1586,6 +1596,7 @@
    "published": "2026-10-23",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "PWFHbCSNFrc": {
@@ -1593,35 +1604,40 @@
    "channel": "UnsereLebensreise",
    "published": "2026-10-23",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "VPFESUF3Nys": {
    "title": "4 Monate Vollzeitvanlife – was uns gerade bewegt",
    "channel": "VANtastic Life",
    "published": "2026-10-23",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "e2dKu6wrNlI": {
    "title": "Encontrámos a Misteriosa 😱 Casa de Areia Abandonada! 🏚️ (Foz do Sizandro)",
    "channel": "Rotas & Memórias",
    "published": "2026-10-23",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "qqNPNUpqX_Q": {
    "title": "12 Orte in Spanien, wo Wohnmobil-Rentner gratis überwintern – und 5 teure Fallen",
    "channel": "Sabines Wohnmobil-Geheimnisse.",
    "published": "2026-10-23",
    "transcript": "ok",
-   "spots": 10
+   "spots": 9,
+   "retried": true
   },
   "Gw2gK3AUBQg": {
    "title": "700 Liter Regen! Ist Spanien im Winter noch ein sicheres Camperparadies?",
    "channel": "LivingToGo by Ralf Schmidt",
    "published": "2026-10-22",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "THnKcUWZbR4": {
    "title": "FRANKREICH SCHRECKEN TRÄNEN FREUDE - im Camper nach Spanien",
@@ -1629,6 +1645,7 @@
    "published": "2026-10-22",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "mDw4zg8jTRc": {
@@ -1636,63 +1653,73 @@
    "channel": "Wistubas on Tour ",
    "published": "2026-10-22",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "3vM2OHKV4BE": {
    "title": "Unglaublich was wir dort erleben❤️Menschen Trubel👉 Eine Tolle Stadt Lissabon Einmalige Reise Teil 20",
    "channel": "Chillout Verrückt Camper Die Ahlfis",
    "published": "2026-10-21",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "52Z3R4Wabgo": {
    "title": "Full time van life - a dip into Portugal",
    "channel": "VanLife Travels",
    "published": "2026-10-20",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "Y1CUQbI0RmU": {
    "title": "Traveling Portugal & Galicia in the van with only €500",
    "channel": "Oleh's Wanderlust ",
    "published": "2026-10-20",
    "transcript": "ok",
-   "spots": 4
+   "spots": 4,
+   "retried": true
   },
   "JXZj-zviNS0": {
    "title": "Katastrophenalarm in Spanien: Was Wohnmobil-Rentner jetzt tun müssen",
    "channel": "Sabines Wohnmobil-Geheimnisse.",
    "published": "2026-10-19",
    "transcript": "ok",
-   "spots": 1
+   "spots": 0,
+   "retried": true,
+   "skipped": "irrelevant"
   },
   "2cUQLT7Ppog": {
    "title": "Traum-Klippen & Ticket-Chaos in Spanien!",
    "channel": "man macht blau ",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 0
+   "spots": 3,
+   "retried": true
   },
   "Cdh1hvqZKEA": {
    "title": "Wild Beach Camping (Vera Playa) in Spain to the Top of Benidorm's Gran Hotel Bali! 🚐🇪🇸",
    "channel": "Caravan_road_trips",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 2
+   "spots": 1,
+   "retried": true
   },
   "R0a38cT1oqI": {
    "title": "Norte de Portugal en Camper - Braganza, Chaves, Braga",
    "channel": "La Vida Sobre Ruedas",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 2
+   "spots": 3,
+   "retried": true
   },
   "R3NiFvdg8Ug": {
    "title": "Model Off Duty | Motorhome Road Trip in the Algarve | 11",
    "channel": "Veridiana Ferreira",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "fKeNbmDcSEE": {
    "title": "Was für ein Ort! 😍 Von diesem Stellplatz direkt ins Mittelalter | Dinan 🇫🇷",
@@ -1700,6 +1727,7 @@
    "published": "2026-10-18",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "kCACHZriSjo": {
@@ -1707,21 +1735,24 @@
    "channel": "Lehmann Vlogs",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 0
+   "spots": 1,
+   "retried": true
   },
   "GNDTIrxXI8Y": {
    "title": "Vanlife - Roadtrip Portugal. Sur la N2, ne rate pas la route des villages de Schiste !!! 👍👍👍",
    "channel": "Au gré du van",
    "published": "2026-10-17",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "HMrHEcxDw3g": {
    "title": "Ich dachte, das neue Gesetz erlaubt alles – dann kam in Spanien der Strafzettel  200 € Strafe",
    "channel": "Womo-Kniffe",
    "published": "2026-10-17",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "OYyR05UyrZc": {
    "title": "6 mois en camping-car : Espagne & Portugal 🚐🔥 Équipements et test AUTO-VOX",
@@ -1729,6 +1760,7 @@
    "published": "2026-10-17",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "-d9SIHVgu-M": {
@@ -1736,7 +1768,8 @@
    "channel": "JÜRGENundNICOLE auf Tour",
    "published": "2026-10-16",
    "transcript": "ok",
-   "spots": 2
+   "spots": 2,
+   "retried": true
   },
   "1nZjcz0O0bo": {
    "title": "🚐 Mit dem Wohnmobil nach Spanien – Reiseplanung mit der HacoApp, HACO-Stellplatzkarte & Tipps",
@@ -1744,6 +1777,7 @@
    "published": "2026-10-16",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "4RDmRpEuXOA": {
@@ -1752,6 +1786,7 @@
    "published": "2026-10-16",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "C3EDEVj2MKM": {
@@ -1759,42 +1794,154 @@
    "channel": "VANtastic Life",
    "published": "2026-10-16",
    "transcript": "ok",
-   "spots": 3
+   "spots": 3,
+   "retried": true
   },
   "iROEnwRcUPw": {
    "title": "Mit Camper und Deutscher Dogge durch Spanien – unterwegs in Kastilien und León",
    "channel": "Schlabberschnute on Tour",
    "published": "2026-10-16",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "DNCn_Gl2Ifw": {
    "title": "Warum Rentner jeden Winter wieder nach Spanien fahren - (es ist nicht die Sonne!)",
    "channel": "Daniel klärt auf!",
    "published": "2026-10-15",
    "transcript": "ok",
-   "spots": 9
+   "spots": 0,
+   "retried": true,
+   "skipped": "irrelevant"
   },
   "jZpc8SQjqfw": {
    "title": "VANLIFE - Is Portugal The Future?",
    "channel": "Our Van Tales",
    "published": "2026-10-15",
    "transcript": "ok",
-   "spots": 1
+   "spots": 3,
+   "retried": true
   },
   "523fH2pGdlw": {
    "title": "Was dir keiner übers Überwintern in Spanien sagt (6 Wahrheiten)",
    "channel": "Lehmann Vlogs",
    "published": "2026-10-14",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "7dzzi13cjG4": {
    "title": "#045 Überwinterung 2 0 - wir bleiben... 😎",
    "channel": "die.hamburger - Ingrid & Tom",
    "published": "2026-10-14",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
+  },
+  "-hxca0vOeW4": {
+   "skipped": "kurz"
+  },
+  "1duuXjZrKns": {
+   "skipped": "kurz"
+  },
+  "2FdVBt58vFQ": {
+   "skipped": "kurz"
+  },
+  "4fh81bOv-zA": {
+   "skipped": "kurz"
+  },
+  "5fWqXovR0FQ": {
+   "skipped": "kurz"
+  },
+  "6FFWSkbn-JE": {
+   "skipped": "kurz"
+  },
+  "8hMruTNylLg": {
+   "skipped": "kurz"
+  },
+  "9kRwnxJfJ20": {
+   "skipped": "kurz"
+  },
+  "ADA6W7IKK3M": {
+   "skipped": "kurz"
+  },
+  "B3Un7g4Skjo": {
+   "skipped": "kurz"
+  },
+  "B8wUtULitdE": {
+   "skipped": "kurz"
+  },
+  "D0d_N8KxP6w": {
+   "skipped": "kurz"
+  },
+  "GrligUdQHJY": {
+   "skipped": "kurz"
+  },
+  "JZxQj0z1s54": {
+   "skipped": "kurz"
+  },
+  "L6g2szsHKFM": {
+   "skipped": "kurz"
+  },
+  "QhZAvy05hCE": {
+   "skipped": "kurz"
+  },
+  "QtVC7d5Xrhg": {
+   "skipped": "kurz"
+  },
+  "R2yQC9TvJIo": {
+   "skipped": "kurz"
+  },
+  "XJ-sm442jiQ": {
+   "skipped": "kurz"
+  },
+  "_-iOeqvRONY": {
+   "skipped": "kurz"
+  },
+  "_1ki2rsC9qY": {
+   "skipped": "kurz"
+  },
+  "_j1V6hc3j-A": {
+   "skipped": "kurz"
+  },
+  "ctbUbl9ojFE": {
+   "skipped": "kurz"
+  },
+  "diSHl-RUT3c": {
+   "skipped": "kurz"
+  },
+  "frDl0H5elfw": {
+   "skipped": "kurz"
+  },
+  "mAhta0BUZBE": {
+   "skipped": "kurz"
+  },
+  "qX30jhrIzmM": {
+   "skipped": "kurz"
+  },
+  "r192_oBrMc4": {
+   "skipped": "kurz"
+  },
+  "rQXYEEo9V_g": {
+   "skipped": "kurz"
+  },
+  "ra435MUeQoQ": {
+   "skipped": "kurz"
+  },
+  "uPrd3vp4go0": {
+   "skipped": "kurz"
+  },
+  "wdsuyGb67bQ": {
+   "skipped": "kurz"
+  },
+  "x99oaxJ46Z0": {
+   "skipped": "kurz"
+  },
+  "xIATNa38pXg": {
+   "skipped": "kurz"
+  },
+  "z0djXibbA3E": {
+   "skipped": "kurz"
   }
  },
  "queue": {
@@ -5045,6 +5192,374 @@
    "published": "2026-06-29",
    "description": "Flucht von Deutschland nach Portugal #shorts#youtube#travel#roadtrip#vanlife #nature #trip #camping \n\n\n\nwir sind 2022 mit einem Camper nach Portugal gereist, um uns Grundstücke anzuschauen, da wir den wunsch hatten, auszuwandern Tag 1 von Seefeld über Freiburg nach Frankreich",
    "duration": 181
+  },
+  "-AHQziFxtoc": {
+   "id": "-AHQziFxtoc",
+   "title": "DESPUÉS DE LAS TORMENTAS, TENEMOS QUE VOLVER A EMPEZAR NUESTRO CAMINO - EP. 3 - TEMP. 6",
+   "channel": "Viajo Porque Lo Necesito",
+   "published": "2026-10-17",
+   "description": "¡Volvimos a la ruta por el Algarve! Conocemos Vila Real de Santo António, paseamos junto al Guadiana, visitamos el mercado y celebramos los 10 meses de Eros con pastel y un postre típico. También probamos una cafetera portátil que… mejor no comprar. Acompáñanos entre lluvia, antojos y aventuras en casa rodante.\n\nSuscríbete al canal para seguir viajando con nosotros.\nCuéntanos en los comentarios qué fue lo que más te gustó del video.\n\n#Viajes #Portugal #Familia #Autocaravana\n\n👉 Este canal es realizado en colaboración con https://www.youtube.com/@viajoporquepreciso\n\n0:00 - Regreso a la ruta tras las inundaciones\n2:49 - Prueba de la cafetera portátil\n7:52 - Llegada a Vila Real y el río Guadiana\n10:44 - Historia y paseo por Vila Real\n14:46 - Cena y descanso en la casa rodante\n16:04 - Pan fresco y visita al mercado\n21:49 - Diez meses de Eros y postres del Algarve\n26:46 - Clima cambiante y despedida",
+   "duration": 1759
+  },
+  "1THyVetJfDc": {
+   "id": "1THyVetJfDc",
+   "title": "Roadsurfer VW T6 California Portugal: ehrliche Camper-Miete Erfahrung",
+   "channel": "The Silent and the Smoker",
+   "published": "2026-10-15",
+   "description": "Letzter Tag unserer kurzen Portugal-Reise: Für vier, fünf Tage haben wir uns bei Roadsurfer einen VW T6 California mit Küche ausgeliehen, damit ich mitreden kann. Der Bus hat 100.000 Kilometer drauf, Schrammen, schlechte Reifen und ist alles andere als sauber. Deshalb mein Tipp: vor der Übernahme wirklich alles dokumentieren. Der Tisch und das Stehen unterm Aufstelldach gefallen mir, das Klappern und der Aufstieg ins Dachbett weniger. Ich bleibe bei meinem Elektro-Camper, aber mitgemacht haben wollte ich es.\n\nKapitel:\n0:00 Letzter Tag in Portugal\n0:31 Zustand nach 100.000 Kilometern\n1:25 Dach und Sauberkeit\n2:00 Aufstieg ins Dachbett\n2:31 Tisch top, Klappern nicht\n3:19 Mein Fazit zum California\n3:59 Sauber zurückgegeben\n\nDie ganze Reise auf FindPenguins: https://findpenguins.com/ribiskus/trip/portugal-2026?sort=ASC\nAuto abholen auf FindPenguins: https://findpenguins.com/ribiskus/footprint/6ac759d421de55-89986207\nAuto abholen, Teil 2: https://findpenguins.com/ribiskus/footprint/6ac75aaf3c9ea8-59600383\n\n#Roadsurfer #VWCalifornia #CamperMiete",
+   "duration": 260
+  },
+  "2Lf1uiBFWqE": {
+   "id": "2Lf1uiBFWqE",
+   "title": "Anfahrt gen Süden - Deutschland - Überwintern in Portugal #03",
+   "channel": "reinhards_womo_reisen",
+   "published": "2026-10-16",
+   "description": "Weiter geht’s in Richtung Süden mit einem Zwischenstop in Gerolzhofen und Schwandorf..\nIch mache 2 E-Bike Touren, komme an einen Fluss vorbei, finde den Murano Beachclub und den Wild Wake Park. Werde ich Wake Bord fahren? All das erwartet Euch im 3 Teil.\n\nMeine Route führt mich erst durch Deutschland und dann erst mal nach Frankreich zur Kanalküste und Atlantikküste. Wenn Ihr Lust habt begleitet mich auf meiner Reise, wir fangen in Deutschland an. \n#Kastenwagenreisen\n#Main\n#Langzeitreisen\n#Maxiavan\n#Maxia Van\n#Vw Crafter",
+   "duration": 1656
+  },
+  "3r3c-7_KchM": {
+   "id": "3r3c-7_KchM",
+   "title": "The Best Way to Visit Porto in a Motorhome (Without Getting Stuck)",
+   "channel": "Karavanci",
+   "published": "2026-10-05",
+   "description": "Visiting Porto by campervan or motorhome? Discover how to plan a Gaia base, explore Porto’s historic centre on foot, and prepare a separate Douro Valley road trip—without getting caught out by narrow streets or access restrictions. \n\nIn Episode 1 of Karavancı’s Portugal by Campervan series, we bring together Porto sightseeing and practical motorhome travel planning: campsite options, local transport, Portuguese toll roads, overnight checks and vehicle preparation.\n\n🚐 PLANNING YOUR PORTO CAMPERVAN STAY\n• Why consider Vila Nova de Gaia as a base for exploring Porto?\n• Campsite options discussed: Orbitur Canidelo and Marisol, with current opening status, services and vehicle policies to check before booking.\n• Getting to the historic centre by local transport and exploring on foot.\n• Route planning for larger vehicles: narrow streets, height barriers and access restrictions.\n• Portuguese toll roads and EasyToll considerations.\n\n🏛️ WHAT TO SEE AND EAT IN PORTO\nExplore São Bento railway station, Porto Cathedral (Sé), Clérigos Tower, Igreja do Carmo and Livraria Lello. Discover Ribeira, the Dom Luís I Bridge and the Six Bridges river cruise, then take in the views from Serra do Pilar, Jardim do Morro and the Gaia cable car.\n\nThere’s also time for two Porto food favourites: a pastel de nata with coffee and the city’s famous Francesinha.\n\n🍇 DOURO VALLEY ROAD TRIP\nBeyond Porto, we look at a separate driving route through the Douro Valley, including the N222 between Peso da Régua and Pinhão. We discuss vehicle dimensions, steep climbs, engine temperature and harvest-season activity to help you assess the route for your own campervan or motorhome.\n\n💧 OVERNIGHT STAYS & MOTORHOME SERVICES\nUnderstand the differences between parking, staying overnight and setting up camp. We cover municipal and protected-area restrictions, the 48-hour rule discussed in the video, and why permission to park does not automatically mean permission to sleep there.\n\nWe also explore Portuguese motorhome service areas—Áreas de Serviço para Autocaravanas (ASAs)—including fresh water, grey-water disposal and chemical-toilet emptying, plus preparation for coastal weather.\n\n⚠️ BEFORE YOU TRAVEL\nThis video is a planning guide, not confirmation of current campsite availability, road access or overnight permission. Check directly with campsite operators and consult current municipal, protected-area and road information. Services and vehicle suitability vary by location. Karavancı assessments are editorial opinions.\n\nWhich would you explore first: Porto’s historic streets or the Douro Valley? Tell us in the comments.\n\nSubscribe to Karavancı for the next Portugal episodes, campervan destination guides and practical motorhome tips.\n\n0:00 Navigating Porto in a Camper Van\n0:17 Finding Your Base in Vila Nova de Gaia\n0:41 Walk along Salgueiros Beach\n0:52 Camping Sites at Vila Nova de Gaia\n1:08 Start Exploring Porto\n2:39 The River : The Rabelo boats, Serra do Pilar, The Gaia cable car and Jardim do Morro\n4:11 Pastel de Nata & Francesinha\n4:57 Portuguese Toll Roads & Easy Toll\n5:37 Driving the Winding Douro Valley \n6:39 Popular Miradouros of Douro Valley \n7:15 Historic Railway Station of Pinhao\n7:35 Spending the night with Campervan (Rules and Regulations)\n9:00 Foz do Douro and the nineteenth-century Felgueiras Lighthouse\n\nSubscribe to Karavancı to follow the Nazaré episode.\n\n🚐 Karavancı — Made by caravan lovers, for caravan lovers.\nWe create videos about caravan life, campers, motorhomes, practical tips, vehicle comparisons, safety, equipment, travel ideas, and life on the road.\n\n▶️ All Episodes of this Series\nhttps://www.youtube.com/playlist?list=PLI0MzGc08zxU\n\n▶️ Caravan Beginner Guides\nhttps://www.youtube.com/playlist?list=PLI0MzGc08zxU\n\n▶️ RV Life Hacks and Guides\nhttps://www.youtube.com/playlist?list=PLYflikP5-uC4\n\n🔔 Subscribe to Karavancı\nhttps://www.youtube.com/@karavancicom\n\nFollow along as we explore smarter, safer, and more enjoyable ways to experience caravan life. 🚐🌲\n\nReference list at :\nhttps://www.karavanci.com/rehberler/porto-karavan-rehberi-douro-kamping\n#Porto #Campervan #Portugal #DouroValley #Motorhome #PortoTravel #PortugalByCampervan #Karavancı",
+   "duration": 616
+  },
+  "4WaFG5utga0": {
+   "id": "4WaFG5utga0",
+   "title": "Irl portugal , découvrons la belle ville de Nazaré ensemble Part 1",
+   "channel": "fabio",
+   "published": "2026-10-22",
+   "description": "Streamé en live sur Twitch ; regardez en live sur https://www.twitch.tv/fabioche94",
+   "duration": 3496
+  },
+  "5H0R-pU7BMw": {
+   "id": "5H0R-pU7BMw",
+   "title": "LA ÚLTIMA JOYA DE PORTUGAL...🇵🇹 ¡Y PONEMOS RUMBO A CASA!🏠🚐",
+   "channel": "The Carpe Van",
+   "published": "2026-10-18",
+   "description": "🇵🇹¡Último video de nuestra aventura por Portugal! 🚐\n\nNuestra última parada fue Braga, una ciudad que nos sorprendió y nos gustó muchísimo. 😍 Uno de los lugares que mas nos impresionó fue la espectacular Basílica de Bom Jesus do Monte, situada en lo alto de la colina, con unas vistas preciosas y unas escaleras que no dejan indiferente a nadie.\nDespués de disfrutar de esta bonita ciudad, llegó el momento de despedirnos de Portugal y poner rumbo a España.🇪🇸 \nEsa noche dormimos en un área de autocaravanas en Soria, y al día siguiente, continuamos el camino hasta llegar por fin a casa.🏠❤️\n\nAsí termina nuestro viaje por Portugal, lleno de lugares preciosos, nuevas experiencias y recuerdos que siempre llevaremos con nosotros.\n\nContadnos en los comentarios: \n¿Conocéis Braga? ¿Habéis visitado la Basílica de Bom Jesus do Monte?\n\n👍 Si os ha gustado el video, dadle a LIKE.\n🔔 SUSCRIBIOS  al canal para acompañarnos en nuestras próximas aventuras.\n❤️ ¡Gracias por viajar con nosotros!\n\n#portugal #braga #bomjesusdomonte #viajeenautocaravana \n#portugalenautocaravana #viajesporeuropa #soria #rutaenautocaravana #autocaravana #areasautocaravana #campingportugal #viajes #travelvlog",
+   "duration": 2317
+  },
+  "A4T0bkJWp2A": {
+   "id": "A4T0bkJWp2A",
+   "title": "Lisboa Camping 🇵🇹 The Closest Campsite to Lisbon? Is It Worth It?",
+   "channel": "ThreeWillGo",
+   "published": "2026-10-09",
+   "description": "🏕️ LISBOA CAMPING REVIEW | Is It Worth €45 a Night?! 🇵🇹\n\nIn this video, we take you on a full review of Lisboa Camping, one of the most expensive campsites we have ever stayed at — costing us €45 per night! 😳\n\nSo, is it actually worth the money?\n\nThe main reason we chose to stay here was its location. With public transport taking around 30 minutes to get into Lisbon, it makes visiting the city much easier without having to drive or worry about parking.\n\nBut what is the campsite itself really like?\n\nIn this 10-minute campsite review, we take a look at:\n\n🏕️ The pitches\n🏊 The swimming pool\n🛒 The on-site supermarket\n🚿 The campsite facilities\n🧺 The launderette\n🍹 The pool bar\n🚍 Public transport into Lisbon\n💶 And, of course, whether we think it’s worth €45 a night\n\nWe’ll show you around the campsite and give you our honest opinion — the good, the bad and whether we’d stay here again.\n\nIf you’re planning a motorhome, campervan or caravan trip to Lisbon, hopefully this review will help you decide whether Lisboa Camping is worth adding to your itinerary.\n\n👍 If you enjoy the video, please give it a thumbs up, subscribe to the channel and hit the 🔔 bell so you don’t miss our next adventure!\n\n💬 Have you stayed at Lisboa Camping? Let us know what you thought in the comments!\n\nWebsite link - https://lisboacamping.com\n\n#LisboaCamping #LisbonCamping #PortugalCamping #CampingPortugal #Lisbon #Portugal #MotorhomePortugal #CampervanPortugal #CaravanTravel #CampsiteReview #CampingReview #MotorhomeTravel #CampervanLife #PortugalTravel #familyfriendlycampsite #vanlifediaries #vanlife #vanlifeeurope #vanlifeportugal #vanlifetravelvlog #vanlifediary #wheretostay #swimmingpool #portugaltrip  #campervantravel",
+   "duration": 537
+  },
+  "B7FsEKKXKXY": {
+   "id": "B7FsEKKXKXY",
+   "title": "Fátima partie II - visite du musée de la vie du Christ … ça vaut le coup ? 🤔",
+   "channel": "La Petite Famille Nomade",
+   "published": "2026-10-11",
+   "description": "🇵🇹🙏 VISITE DU MUSÉE DE FÁTIMA : À LA DÉCOUVERTE DE LA VIE DE JÉSUS ! ✨ | PARTIE 2️⃣\n\nOn continue notre découverte de Fátima, au Portugal ! 🇵🇹❤️ Cette fois-ci, nous vous emmenons visiter le musée de Fátima, consacré notamment à la vie de Jésus-Christ. ✝️🙏\n\nUne visite riche en histoire et en découvertes, à travers différentes représentations qui nous permettent d’en apprendre davantage sur la vie de Jésus. ❤️\n\n📸 Au programme de cette deuxième partie :\n✝️ Découverte de la vie de Jésus\n🖼️ Des représentations et des scènes chargées d’histoire\n🙏 Un moment de découverte et de recueillement\n🚐 La suite de notre aventure en camping-car au Portugal !\n\n⚠️ PETIT MOT CONCERNANT LA VIDÉO ❤️\n\nVous remarquerez que, par moments, la vidéo saute un peu. Nous sommes sincèrement désolés pour ce petit souci technique et nous vous remercions pour votre compréhension. 🙏❤️ Nous tenions malgré tout à partager cette visite avec vous !\n\n👍 Si la vidéo vous plaît, pensez à mettre un petit pouce bleu !\n🔔 Abonnez-vous à notre chaîne pour suivre toutes nos aventures en camping-car.\n💬 N’hésitez pas à nous laisser un commentaire, ça nous fait toujours plaisir !\n\nMerci à tous de nous suivre et de voyager avec nous ! ❤️🚐\n\n🇵🇹 À très bientôt pour de nouvelles découvertes !\n\n#Fatima #Portugal #Partie2 #VieDeJesus #MuséeDeFatima #VoyageEnCampingCar #CampingCar #PortugalEnCampingCar #Découverte #Voyage",
+   "duration": 1885
+  },
+  "BVz1SMFMgxw": {
+   "id": "BVz1SMFMgxw",
+   "title": "Überwintern in Spanien und Portugal: 5 Fristen, die kaum ein Camper kennt",
+   "channel": "Emilia und Knut",
+   "published": "2026-10-14",
+   "description": "Überwintern im Wohnmobil: ab welchem Tag du dich in Portugal, Spanien, Frankreich, Italien und Marokko anmelden musst.\n⭐️ Kostenloser Adress-Check: abmelden oder gemeldet bleiben? 👉 https://links.emiliaundknut.de/yt-wohnsitz\n📱 Dominic auf Instagram 👉 https://www.instagram.com/dominicraw_\n\n⚠️ Affiliate-Links: Bianca bekommt eine kleine Provision, dein Preis bleibt gleich. So haben wir es gemacht, das ist keine Beratung.\n━━━━━━━━━━━━━━━━━━━━━━━\n🔥 DER ADRESS-CHECK (kostenlos)\nWas an deiner Adresse in Deutschland hängt, von der Post bis zum Kindergeld. 3 Fragen, kostenlos per Mail, Abmeldung jederzeit.\n👉 https://links.emiliaundknut.de/yt-wohnsitz\n━━━━━━━━━━━━━━━━━━━━━━━\n⏰ KAPITEL\n0:00 Ab welchem Tag du dich anmelden musst\n0:39 Die Grundregel: 3 Monate frei in jedem EU-Land\n1:25 Der Marokko-Trick: wofür er hilft und wofür nicht\n2:40 Portugal: Tag 91 bis 120 und bis 1.500 € Bußgeld\n3:18 Spanien: der Antrag kommt vor Tag 91\n3:59 Frankreich und Italien: entspannt und ein Irrtum\n4:33 Marokko: an Tag 90 ist Schluss\n5:26 Dein Wohnmobil zählt mit: Fristen fürs Fahrzeug\n6:03 Was du mitnimmst: 3 Regeln und eine Verwechslung\n━━━━━━━━━━━━━━━━━━━━━━━\n📱 WHATSAPP COMMUNITY (kostenlos) 👉 http://go.emiliaundknut.de/whatsapp\n✉️ MONTAGSPOST NEWSLETTER 👉 https://links.emiliaundknut.de/yt-montagspost\n💬 KOSTENLOSES AUSZEIT-GESPRÄCH 👉 https://links.emiliaundknut.de/yt-gespraech\n🛒 AMAZON SHOP 👉 https://www.amazon.de/shop/emiliaundknut\n🔧 CAMPER TECHNIK BUNDLE 👉 https://amzn.eu/d/0415b5zQ\n🎥 CONTENT CREATOR BUNDLE 👉 https://amzn.eu/d/0gJ09XcB\n🧸 SPIELZEUG VANLIFE 👉 https://amzn.eu/d/0gvrqJGV\n━━━━━━━━━━━━━━━━━━━━━━━\n🎥 WEITERE VIDEOS ZUM THEMA\n➡︎ Vanlife Bürokratie: 1 Fehler, 3 Fragen zu GEZ, Krankenkasse und Rente: https://youtu.be/DEDDt_u7by4\n➡︎ Mit dem Camper nach Marokko: Fähre, Zoll und erste Nacht: https://youtu.be/zFiTm97pIGU\n━━━━━━━━━━━━━━━━━━━━━━━\n❓ HÄUFIGE FRAGEN\nGilt die Regel 90 von 180 Tagen für Deutsche im EU-Ausland?\nNein. Sie steht im Schengener Grenzkodex und gilt nur für Menschen ohne EU-Pass. Als EU-Bürger darfst du 3 Monate ohne Anmeldung bleiben (Richtlinie 2004/38/EG, Art. 6).\n\nAb wann muss ich mich in Portugal anmelden?\nNach 90 Tagen hast du bis Tag 120 Zeit für das Certificado de Registo. Sonst drohen 400 bis 1.500 Euro (Lei 37/2006, Art. 14 und 30).\n\n━━━━━━━━━━━━━━━━━━━━━━━\n📚 QUELLEN AUS DEM VIDEO (Stand 09.10.2026)\n➡︎ EU: Richtlinie 2004/38/EG, Art. 6 und 8 · VO 2016/399\n➡︎ Ihr Europa, Aufenthalt im EU-Ausland: https://europa.eu/youreurope/citizens/residence/documents-formalities/registering-residence/index_de.htm\n➡︎ Spanien: Real Decreto 240/2007, Art. 7 · Ley 35/2006, Art. 9\n➡︎ Portugal: Lei 37/2006, Art. 14 und 30\n➡︎ Frankreich: service-public.gouv.fr\n➡︎ Italien: Innenministerium, Anwesenheitserklärung für EU-Bürger freiwillig\n➡︎ Marokko: Auswärtiges Amt, Stand 08.10.2026\n━━━━━━━━━━━━━━━━━━━━━━━\nÜberwintern im Wohnmobil in Spanien, Portugal, Frankreich, Italien oder Marokko: welche Frist wo gilt. Als Deutscher darfst du in jedem EU-Land 3 Monate ohne Anmeldung bleiben, danach entscheidet jedes Land selbst. Portugal ab Tag 91, Spanien schon vorher, Frankreich nie, Italien freiwillig, Marokko nach 90 Tagen Schluss. Dazu der Marokko-Trick und die Regel 90 von 180 Tagen.\n\n#überwinternimwohnmobil #überwinterninspanien #wohnmobilportugal #vanlifebürokratie\n━━━━━━━━━━━━━━━━━━━━━━━\n📱 UNSERE WHATSAPP COMMUNITY (kostenlos)\n👉 http://go.emiliaundknut.de/whatsapp\n✉️ MONTAGSPOST, UNSER NEWSLETTER\n👉 https://links.emiliaundknut.de/yt-montagspost\n━━━━━━━━━━━━━━━━━━━━━━━\n👨‍👩‍👧 EMILIA UND KNUT\nWir sind Bianca, Dominic und Emilia (2 Jahre). Wir haben unser Haus in Deutschland vermietet und waren 9 Monate mit unserem Van Knut unterwegs. Gerade entscheiden wir, wie es weitergeht. Ehrliche Videos über Familie, Vanlife und wie wir uns Schritt für Schritt mehr Zeit und Freiheit aufbauen.\nNeue Videos jeden Sonntag 18:00 Uhr.\n━━━━━━━━━━━━━━━━━━━━━━━\n🤝 KOOPERATIONEN UND PARTNERANFRAGEN\n👉 info@biancabehr.de\n🔗 ALLE LINKS, RABATTCODES UND EMPFEHLUNGEN\n👉 https://linktr.ee/biancabehr\n🛒 UNSER SHOP\n👉 https://links.emiliaundknut.de/yt-shop\n━━━━━━━━━━━━━━━━━━━━━━━\n📱 UNS AUF SOCIAL MEDIA FOLGEN\nInstagram: https://instagram.com/emiliaundknut\nTikTok: https://tiktok.com/@BiancaBehr_\n━━━━━━━━━━━━━━━━━━━━━━━\n🚐 UNSERE PARTNER UND VAN-AUSSTATTUNG (mit Rabattcodes)\nCampnetic, Trelino, Qeedo, Alb Filter, Silwy, Outin\n👉 https://linktr.ee/biancabehr\n🎶 UNSERE MUSIK FÜR YOUTUBE (Affiliate)\n👉 https://share.epidemicsound.com/9d8x6z\n🌐 INTERNET WELTWEIT ÜBER STARLINK (kostenloser Testmonat)\n👉 https://starlink.com/residential?referral=RC-DF-11009241-30207-76\n━━━━━━━━━━━━━━━━━━━━━━━\n⚠️ Einige Links sind Affiliate-Links. Wenn du darüber bestellst, bekommt Bianca eine kleine Provision, für dich ändert sich der Preis nicht. Danke, dass du uns damit unterstützt 🤍\n#emiliaundknut #familienvlog #vanlifefamily #vanlife #weltreise #reisenmitkind #familieimvan #vanlifedeutsch #familieaufweltreise #camperfamilie #vanlifewithkids",
+   "duration": 509
+  },
+  "DHV7baNcDJ4": {
+   "id": "DHV7baNcDJ4",
+   "title": "Їдемо в Португалію на кемпері: румтур і відповіді на питання",
+   "channel": "Mrozek Oksana",
+   "published": "2026-10-10",
+   "description": "Їдемо Португалією на кемпері. У цьому відео показую, що всередині кемпера (румтур), ділюся місцями для ночівлі з park4night і відповідаю на питання про мандрівку на кемпері.\n\nПро що відео:\n0:00 Інтро\n0:20 Вступ\n5:12 Lagos\n7:27 Sagres\n8:32 Де купуємо продукти і скільки це коштує\n9:33 Пляж Odeceixe\n10:30 Sines\n11:35 Подорож з собакою\n13:47 Автономність кемпера\n15:18 Рутина в кемпері\n16:36 Румтур: що всередині кемпера?\n22:59 Sesimbra\n23:43 Lisboa\n25:28 Sintra\n27:12 Купуємо SUP\n28:48 Розпаковка SUPy\n30:30 Прання у кемпері\n34:15 Завершення подорожі\n\nПопереднє відео: https://youtu.be/PzQUfySDRq4?si=FvRY96DfxXcO8xOC\n\nInstagram: https://www.instagram.com/mrozek_oksana/?hl=uk",
+   "duration": 2126
+  },
+  "F_aeMg3STXY": {
+   "id": "F_aeMg3STXY",
+   "title": "Visito AMARANTE con la camper 🇵🇹  😳 VLOG-1 #viral #vlog #viralvideo #youtuber #vanlife #storytime ",
+   "channel": "MrBejarano",
+   "published": "2026-10-11",
+   "description": "¡Bienvenidos a mi primer vlog oficial en el canal! Con 44 años me lanzo a este nuevo formato para compartir con vosotros nuestras escapadas y viajes en furgoneta camper de una forma mucho más cercana y real. 🚐🇵🇹\n\nEn este vídeo arrancamos viaje aprovechando el puente del 12 de octubre con destino a Portugal. Empezamos con el \"susto\" de rigor en la gasolinera (¡107 € para llenar el depósito!), hacemos parada técnica en Guimarães para equipar la furgoneta y ponemos rumbo a descubrir el impresionante casco histórico y el puente medieval de Amarante.\n\nUn viaje lleno de anécdotas, calorcito, paseos y consejos para viajar en camper/autocaravana. ¡Espero que disfrutéis de esta nueva etapa tanto como yo grabándola!\n\n👇 Cuéntame en los comentarios: ¿Qué te parece este nuevo formato de vlog? ¿Has estado alguna vez en Amarante o viajado en camper por Portugal? ¡Os leo a todos!\n\n⏱️ Capítulos: 00:00 Preparando el viaje y salida 00:25 El susto de la gasolina (107 €) 01:08 Parada en Guimarães y compras para la camper 01:42 Llegada a Amarante y comida 02:10 Paseo hacia el casco histórico 04:08 El puente medieval y la iglesia de Amarante 04:50 Vistas al río y reflexiones sobre pernoctar en camper\n\nNo olvides dejar tu Like 👍, suscribirte y activar la campanita 🔔 para no perderte las próximas rutas.\n\n#MrBejarano #Vlog #CamperLife #Portugal #ViajarEnCamper #Amarante #FurgonetaCamper",
+   "duration": 602
+  },
+  "GxNCjEKpjMk": {
+   "id": "GxNCjEKpjMk",
+   "title": "Um Pouco da Nossa Ruína em Portugal e Como Vivemos Aqui❤️💚#vidaemportugal#autocaravana#ruína🏚️#obra ",
+   "channel": "Luiza Strijbos Vlogs",
+   "published": "2026-10-20",
+   "description": "",
+   "duration": 475
+  },
+  "H109WAbJhPE": {
+   "id": "H109WAbJhPE",
+   "title": "Spanje en Portugal najaar 2026 deel 5",
+   "channel": "Dutch Camper Cat",
+   "published": "2026-10-09",
+   "description": "Deel 5 van onze najaarsreis naar Spanje en Portugal 2026. Van Chaves naar Lamedo via de A2",
+   "duration": 1529
+  },
+  "H2aFHYO7Nyk": {
+   "id": "H2aFHYO7Nyk",
+   "title": "Wildschwein, Privatklo & Traumbuchten 🐗🌊 Camping Cala Llevadó | Tossa de Mar | Wanda on Tour 4K",
+   "channel": "WANDA ON TOUR",
+   "published": "2026-10-07",
+   "description": "Camping Cala Llevadó bei Tossa de Mar – unser Lieblingsplatz an der Costa Brava! 🌊🚐\n\nNach fünf Tagen und fünf Campingplätzen von Trier quer durch Frankreich rollen wir mit unserer Wanda über die Pyrenäen – und sind zum ersten Mal seit 2017 wieder in Spanien. Ziel: Camping Cala Llevadó, ein Platz in einem Pinienwald direkt über kleinen türkisen Buchten zwischen Lloret und Tossa de Mar.\n\nIn diesem Video nehmen wir euch mit auf zwei Aufenthalte:\n\n🌲 Ankommen: Stellplatz unter Pinien, eine eigene Toilette direkt am Platz, Garnelen aus der Pfanne vom Chefkoch und die Suche nach der Waschmaschine.\n🐗 Besuch in der Nacht: Ein Wildschwein wollte unsere Mülltüte klauen …\n🏖️ Runter zum Meer: Der Weg zum Strand ist steil, aber die kleinen Buchten sind der Hammer.\n🥾 Die krasse Wanderung: Zu Fuß durch den Wald nach Tossa de Mar – mit Kratern, Kletterpassagen, einem echten Bambustunnel und der schwersten Entscheidung der Reise: rechts oder links? Belohnung: Eis, die Altstadt Vila Vella und zurück mit dem Bus.\n🔁 Drei Wochen später: Nach unserer Tour bis Gibraltar kommen wir am 29. Juli zurück – weil es uns hier so gut gefallen hat.\n🤿 Unser Strandtag: Premium-Stellplatz mit eigenem Sanitärhäuschen, der abenteuerliche Weg runter zur Cala, Klippen zum Springen, Schnorcheln, eine selbst geschnitzte Strandflöte und nette Nachbarn aus Italien mit Honigmelone.\n\nAm Ende gibt's unser ehrliches Fazit: Was ist richtig gut, was weniger – und für wen lohnt sich der Platz?\n\nKennt ihr Cala Llevadó oder habt ihr einen anderen Lieblingsplatz an der Costa Brava? Schreibt's uns in die Kommentare! 👇\nWenn euch das Video gefällt, lasst gern ein Like da und abonniert WANDA ON TOUR – wir nehmen euch mit auf unsere Reisen mit der Familie durch Europa. 🚐💙\n\n📍 Camping Cala Llevadó · Tossa de Mar · Costa Brava · Katalonien · Spanien\n📅 Juli 2026 · zwei Aufenthalte · eigene Erfahrung, keine Werbung\n\n⏱️ Kapitel\n00:00 Highlights\n00:34 Intro\n00:42 Über die Pyrenäen nach Spanien\n01:27 Unsere Route: Von Trier an die Costa Brava\n02:59 Ankunft auf Camping Cala Llevadó\n03:50 Der Chefkoch in der Wanda\n04:12 Der erste Morgen: Waschmaschine, La Vela & Pool\n04:57 Besuch vom Wildschwein\n05:15 Der Weg runter zum Meer\n06:38 Die krasse Wanderung nach Tossa de Mar\n09:09 Durch den Bambustunnel\n09:32 Tossa de Mar & Vila Vella\n10:16 Mit dem Bus zurück\n10:37 Drei Wochen später: zurück am Lieblingsplatz\n11:34 Unser Strandtag\n12:36 Premium-Stellplatz mit Privatklo\n13:40 Der krasse Weg runter zur Cala\n14:54 Strandleben: Klippen, Schnorcheln & Strandflöte\n16:35 Unser Fazit\n17:00 Abspann\n\n🎵 Musik\nMusik von Kevin MacLeod (incompetech.com)\nLizenziert unter Creative Commons: By Attribution 4.0\nhttps://creativecommons.org/licenses/by/4.0/\nTitel: „Funkorama“, „Verano Sensual“, „Laid Back Guitars“, „Chill Wave“, „Sunflower Dance Party“, „Almost New“, „Happy Alley“, „Paradise Found“\n\n🗺️ Karten: Natural Earth (Public Domain) · © OpenStreetMap-Mitwirkende (ODbL)\n\n#WandaOnTour #CostaBrava #TossaDeMar #CalaLlevado #Wohnmobil #CampingSpanien #Familienurlaub #Vanlife #Spanien #Roadtrip",
+   "duration": 1031
+  },
+  "Iov9ZtiOsVI": {
+   "id": "Iov9ZtiOsVI",
+   "title": "Monsaraz, Village Médiéval,, road trip Portugal",
+   "channel": "Les Marlui en voyage",
+   "published": "2026-10-16",
+   "description": "Nous sommes Martine&Luis et notre passion c'est les voyages.\nDepuis peu avec notre camping car \" Pignouf \", nous aspirons à parcourir les routes\ndu bonheur.",
+   "duration": 192
+  },
+  "IycnwTPWdqk": {
+   "id": "IycnwTPWdqk",
+   "title": "Por esta razón tuvimos que regresar a Portugal - EP 30 - 5.ª temp.",
+   "channel": "Viajo Porque Lo Necesito",
+   "published": "2026-10-05",
+   "description": "¡Acompáñanos en esta épica aventura de Francia a Portugal en casa rodante! Vientos locos, comida deliciosa, paisajes increíbles y el regreso al Algarve para vacunas, amigos y muchas anécdotas familiares. ¿Sobrevivimos a la noche más ventosa? Descúbrelo en el video. Suscríbete al canal y cuéntanos en los comentarios qué parte te gustó más. #viajes #familia #aventura #Europa #Portugal\n\n👉 Este canal es realizado en colaboración con https://www.youtube.com/@viajoporquepreciso\n\n0:00 - Inicio del viaje Francia-Portugal\n0:55 - Experiencias en ruta y la frontera\n3:09 - Francia: Paradas y paisajes\n7:19 - Noche ventosa en la costa francesa\n9:08 - Amanecer y travesía hacia España\n13:40 - Regreso a Portugal y reencuentro con amigos\n18:00 - Celebraciones familiares y vida cotidiana\n20:14 - Reflexiones sobre el regreso y planes futuros",
+   "duration": 1865
+  },
+  "J6kQMeEDoqs": {
+   "id": "J6kQMeEDoqs",
+   "title": "Mit dem Bus von Portugal nach Lissabon",
+   "channel": "Genuss Reisen und mehr",
+   "published": "2026-10-20",
+   "description": "Mal mit dem Bus und dann noch durch so ein schönes Land",
+   "duration": 403
+  },
+  "KDVd8pXigFM": {
+   "id": "KDVd8pXigFM",
+   "title": "GESPERRTE STRASSE👉WOHNMOBILE NICHT WILLKOMMEN🤔Einheimischer sagt FAHR DOCH👉Einmalige Reise Teil 19",
+   "channel": "Chillout Verrückt Camper Die Ahlfis",
+   "published": "2026-10-18",
+   "description": "#Portugal #WohnmobilPortugal #Ericeira #Camping #ChilloutCamper\nMoin,\nwir verlassen unseren traumhaften Platz am Praia del Rey und fahren weiter entlang der portugiesischen Küste. Unser nächstes Ziel ist Ericeira – ein bekannter Küstenort, der uns mit Sonne, Wellen und vielen Surfern begeistert! 🌊☀️\n\nWir legen einen kurzen Zwischenstopp ein, genießen die Aussicht und beobachten die Surfer. Doch auf unserer Weiterfahrt stellen wir fest, dass viele schöne Plätze mit Höhenbegrenzungen ausgestattet sind. Mit unserem LMC-Wohnmobil kommen wir deshalb leider nicht überall hin, wo wir gerne hinmöchten.\n\nSchließlich entdecken wir noch einen genialen Platz, an dem wir den Tag genießen können. Doch dann stellt sich die nächste Frage: Sollen wir weiter nach Lissabon fahren, um uns die portugiesische Hauptstadt am nächsten Tag anzusehen, oder bleiben wir lieber hier?\n\nEntscheidungen sind beim Reisen mit dem Wohnmobil nicht immer einfach! Manchmal muss man abwägen, was sich lohnt und wo es einem am besten gefällt.\n\n💬 Was würdet ihr machen? Weiter nach Lissabon oder lieber einen weiteren Tag an einem traumhaften Küstenplatz genießen? Schreibt es uns in die Kommentare!\n\n👍 Wenn euch unsere Reise gefällt, freuen wir uns über einen Daumen nach oben und ein Abo. Begleitet uns weiter auf unserer Wohnmobilreise durch Portugal!\n\nLG Holger+Mona\n\nHier der Link zum Rabattcode yfood..\n\nhttps://bit.ly/455nMBA\n\n10% Sparen…Einfach mal ausprobieren👍\n\nUnsere Europaweite Google Stellplatzkarte findet ihr hier👉\nhttps://www.google.com/maps/d/edit?mid=19dJhcebtI742_xDNfNFbTeUaoIJwJ3o&usp=sharing\n\nÜber eine kleine Unterstützung in unsere \"Kuchenkasse\" würden wir uns freuen👉\n https://paypal.me/ChilloutCamper\n\nUnsere Campingartikel und mehr findet ihr in unserem Amazonshop unter👉 \nhttps://www.amazon.de/shop/chilloutverrucktcamperdieahlfis?ref_=cm_sw_r_mwn_aipsfshop_M6A645Q71FS3VYD2406H&language=en-US\n\n\n\n#Portugal #WohnmobilPortugal #Ericeira #PortugalReise #CampingPortugal #Wohnmobilreise #Freistehen #PortugalKüste #Lissabon #Vanlife #LMCWohnmobil #CamperLeben #Atlantik #ChilloutCamper\n\nPortugal mit dem Wohnmobil, Wohnmobilreise Portugal, Ericeira Portugal, Wohnmobil Portugal Küste, Camping Portugal, Höhenbegrenzung Wohnmobil, Stellplätze Portugal, Freistehen Portugal, Lissabon mit dem Wohnmobil, Portugal Rundreise 2026, Surfer Ericeira, portugiesische Atlantikküste, LMC Wohnmobil, Wohnmobil Urlaub Europa, Chillout Camper",
+   "duration": 2161
+  },
+  "KfNRUzn2I-Y": {
+   "id": "KfNRUzn2I-Y",
+   "title": "Voorbereidingen Portugal zijn begonnen | Campervlog #153",
+   "channel": "Ons plakbandpensioen",
+   "published": "2026-10-09",
+   "description": "We gaan naar Portugal. We zijn nog in Nederland als we begonnen zijn aan de voorbereidingen voor onze reis naar Portugal. Vertrek zaterdag 17 september vanaf camperplaats Kessel. Boodschappen doen, de garage van de camper opruimen en wat eruit en erin.\n\nDat doen we allemaal op Afslag Nagele. Daar aangekomen na vertrek vanaf Rabo Scheele en Wouwkes camperplaats. Dinsdag 13 oktober terug naar Wouwkes camperplaats en dan camperplaats Kessel. Maar dat allemaal in de volgende vlog.\n\nHeel veel kijkplezier.\n\n📍 Hoofdstukken:\n00:00 Begin Campervlog #153\n00:12 We nemen afscheid van Rabo Scheele\n01:23 Boodschappen gedaan, op naar Wouwkes\n05:28 Voorbereidingen voor Portugal deel 1\n08:16 Voorbereidingen voor Portugal deel 2\n09:49 Einde Campervlog #153\n\n🌐 Meer van ons:\n👉 Website & reisverslagen: https://www.plakbandpensioen.nl  \n👉 Direct naar onze reisverslagen: https://www.plakbandpensioen.nl/onze-reis\n👉 Word abonnee op onze nieuwsbrief: https://nieuwsbrief.plakbandpensioen.nl/\n👉  Onze webshop: https://payhip.com/Onsplakbandpensioen\n\n☕ Steun ons:\n👉 Buy me a coffee: https://nieuwsbrief.plakbandpensioen.nl/products/ons-plakbandpensioen\n\n📱 Volg ons op social media:\n👉 Facebook: https://www.facebook.com/onsplakbandpensioen/\n👉 Instagram: https://www.instagram.com/onsplakbandpensioen/\n👉 Polarsteps: https://www.polarsteps.com/onsplakbandpensioen\n\n👉 Interesse in samenwerking? Bekijk onze sponsorpagina: https://www.plakbandpensioen.nl/sponsoring",
+   "duration": 603
+  },
+  "OV22I0uaTfw": {
+   "id": "OV22I0uaTfw",
+   "title": "Auf nach Spanien 🇪🇸! Doch die Pyrenäen werden zur Nervenprobe! Überwintern Spanien  / Portugal 2026",
+   "channel": "Drei Passagiere - Reisen und Leben im Wohnmobil",
+   "published": "2026-10-15",
+   "description": "🇪🇸 Wir sind auf dem Weg nach Spanien zum Überwintern 2026! 🚛☀️🏔️\nDoch bevor wir die Sonne Spaniens genießen können, wartet noch eine ganz besondere Herausforderung auf uns: Die Überquerung der Pyrenäen über den Col du Pourtalet!\nWas für eine Fahrt! 😱 Enge Serpentinen, steile Felswände und gefährlich weit in die Straße ragende Felsvorsprünge verlangten uns und unserem großen Phoenix-Wohnmobil einiges ab. Immer wieder wurde es verdammt eng! Besonders bei Gegenverkehr hieß es: Ruhe bewahren, Zentimeter abschätzen und bloß nicht die Nerven verlieren! Da stand uns mehr als einmal der Schweiß auf der Stirn. 🚛⛰️\n\nDoch dann war es geschafft! Willkommen in Spanien! 🇪🇸\n\nUnd plötzlich zeigte sich die Fahrt von ihrer schönsten Seite. Herrlich ausgebaute Straßen, beeindruckende Berglandschaften und ein Panorama, das uns immer wieder sprachlos machte. Die Anspannung wich der Begeisterung – genau für solche Momente lieben wir unser Leben auf vier Rädern! ❤️\n\nUnser erstes Nachtlager auf spanischem Boden fanden wir in Formigal, auf einem riesigen Parkplatz des dortigen Skigebiets. Umgeben von einer beeindruckenden Bergkulisse konnten wir den Tag in aller Ruhe ausklingen lassen und die aufregende Passfahrt noch einmal Revue passieren lassen.\n\nAm nächsten Morgen ging unsere Reise weiter. Über wunderschöne Straßen, vorbei an imposanten Bergen und mit immer neuen Ausblicken führte uns unser Weg Richtung Huesca, wo auch diese Folge unserer Reise endet.\n\n🎬 War die Fahrt über den Col du Pourtalet mit unserem großen Wohnmobil wirklich eine gute Idee? Und wie haben wir die teilweise extrem engen Passagen gemeistert?\n\nBegleitet uns auf dieser spannenden Etappe unserer Reise in den Süden!\n\n❤️ Viel Spaß beim Zuschauen wünschen euch\n\nOlli, Maike & Lotta 🐾\n\nDie drei Passagiere – unterwegs mit unserem Phoenix-Wohnmobil! 🚛🌍\n\n👍 Wenn euch unser Video gefällt, freuen wir uns über einen Daumen nach oben, einen Kommentar und natürlich über ein Abo!\n\n#DieDreiPassagiere #Wohnmobilreise #Spanien2026 #ColDuPourtalet #Pyrenäen #LebenImWohnmobil #ÜberwinternInSpanien #PhoenixWohnmobil #Vanlife #Formigal #Huesca\n\nWir sind Maike, Oliver und die Dackel-Dame Lotta – und nach vielen Jahren im Arbeitsleben haben wir uns entschieden, einen ganz neuen Weg einzuschlagen. Seit 2010 sind wir begeisterte Wohnmobilfahrer, und jetzt beginnt für uns ein großes Abenteuer: \nWir leben ab sofort im Wohnmobil und reisen durch Europa.\nMit viel Freude, Freiheit und Neugier starten wir in diesen neuen Lebensabschnitt, in dem wir unterwegs sein, besondere Orte entdecken und unsere Erlebnisse mit euch teilen möchten. Begleitet uns auf unserer Reise durch Spanien, Portugal, Frankreich und viele weitere schöne Ziele – immer mit unserem Zuhause auf Rädern und Lotta an unserer Seite.\n\nKontakt gerne unter Oliver@dreipassagiere.de",
+   "duration": 1516
+  },
+  "Ol_A_AbZAHM": {
+   "id": "Ol_A_AbZAHM",
+   "title": "Ep40.Portugal's Best Beachfront Motorhome Stop! - Foz do Arelho",
+   "channel": "AreWeThereYet?",
+   "published": "2026-10-10",
+   "description": "Welcome back to another adventure as we continue our motorhome journey along Portugal's spectacular Atlantic Coast!\n\nIn this episode we discover what might just be Portugal's best beachfront motorhome park-up in the beautiful seaside town of Foz do Arelho, overlooking the stunning Óbidos Lagoon. With overnight parking available for a fraction of the cost of many campsites, we explain why we decided to skip the electric hook-up (EHU) and enjoy one of the best-value motorhome stops we've found in Portugal. \n\nAfter settling in, we take a relaxing walk along the golden sandy beach towards Foz do Arelho before climbing the spectacular Passadiços (boardwalks) that wind their way along the dramatic Atlantic cliffs. Along the route we visit breathtaking miradouros (viewpoints) offering panoramic views across the Atlantic Ocean, the lagoon and Portugal's beautiful Silver Coast.\n\nJoin us as we explore one of Portugal's most scenic seaside locations and show why Foz do Arelho deserves a place on every Portugal travel itinerary.\nIf you enjoy motorhome travel, European road trips, hidden destinations and travel guides, don't forget to Like, Subscribe and hit the notification bell so you never miss another adventure!\n\nPlaces featured in this video:\nFoz do Arelho - Óbidos Lagoon - Atlantic Coast Portugal - Passadiços de Foz do Arelho \nMiradouros - Silver Coast Portugal \n\nTrevor & Andrea\n\n#Portugal,#Motorhome,#MotorhomeTravel,#PortugalTravel,#roadtripfrance  ,#FozDoArelho,#SilverCoast,#VanLifeEurope,#TravelEurope,#hiddengems",
+   "duration": 1405
+  },
+  "QuIbh3DxNCY": {
+   "id": "QuIbh3DxNCY",
+   "title": "De MOTO por Portugal e outros...",
+   "channel": "O Moto Viajante ",
+   "published": "2026-10-21",
+   "description": "falo aqui dos meus livros, entre os quais o Último que pode ser considerado um Guia de viagens\n\nOs meus Livros:\n\"Todos Somos Manada\" (2025) na Amazon.es\n\"1494 TORDESILHAS” (2018): https://amzn.to/3qwulJ7\n“1385 O Golpe dos Bastardos” (2013): https://amzn.to/3xgvyZ7\n\" O Capitão Branican\" (2025) na Amazon.es \n\n@omotoviajante @motaserotas\n#omototurista #motaserotas\n#viagemdemoto #aventura #motorhome #motorcycle\n#portugal #dicasdeviagem #motorcycletouring #gopro\n#omotoviajante  #viagemdemoto @omotoviajante   #ExplorePortugal  #amazingplaces  #Vlog #motovlog #bestspotsinportugal #slowroad #scenicroad #autocaravana #RV #travelling #travelawesome #mototurismo  #mototourism #testride #bmwgsa  #bmw #moto #fjtorres #melhorviagemdemoto #passeiodemoto #omelhordeportugal #mejordeespanha #franciscotorres #bmwmotorrad #roléemPortugal #viagemcomgarupa #triptips #testride #testdrive #tips #motosbrasil #brasil  #bmwfan #triumph  #rolécom garupa #honda #hondaxadv #harleydavidson",
+   "duration": 503
+  },
+  "SsYUA5RSw7E": {
+   "id": "SsYUA5RSw7E",
+   "title": "NOS FUIMOS De la costa de Portugal 🇵🇹 a los bosques 🌳 😎😎😎🇵🇹",
+   "channel": "La_jhoana",
+   "published": "2026-10-09",
+   "description": "🌊 PORTUGAL EN AUTOCARAVANA 🇵🇹 | Peniche, cascadas escondidas y nuevas aventuras\n\n¡Seguimos explorando Portugal en autocaravana! 🚐💚\n\nEn esta aventura comenzamos recorriendo la preciosa costa de Peniche, disfrutando de sus paisajes y de la naturaleza. Después, ponemos rumbo a Reguengo Grande, donde descubrimos rincones naturales sorprendentes y disfrutamos de una cascada rodeada de vegetación. 💦🌿\n\nPero nuestro viaje no termina aquí… Continuamos la ruta hasta llegar a otro lugar donde pasar la noche con nuestra autocaravana, descubriendo nuevos paisajes y disfrutando de la libertad de viajar sobre ruedas.\n\n✨ En este episodio:\n🌊 Exploramos la costa de Peniche.\n🚐 Continuamos nuestra ruta hacia Reguengo Grande.\n💦 Descubrimos una cascada escondida en plena naturaleza.\n🌿 Seguimos viajando por Portugal y buscamos nuestro próximo lugar para estacionar.\n\nSi te gustan los viajes en autocaravana, los lugares secretos, la naturaleza y descubrir rincones increíbles de Europa, ¡acompañanos en esta aventura por Portugal! ❤️\n\n👍 Dale a LIKE, suscríbete al canal y activa la campanita para no perderte nuestros próximos viajes.\n\n💬 Cuéntanos en los comentarios: ¿Conoces esta zona de Portugal? ¿Te gustaría visitar estos lugares?\n\n#Portugal #Peniche #ReguengoGrande #Autocaravana #ViajarEnAutocaravana #PortugalEnAutocaravana #RoadTripPortugal #Cascadas #VanLife #ViajesPorEuropa",
+   "duration": 544
+  },
+  "WPG5inhg5PE": {
+   "id": "WPG5inhg5PE",
+   "title": "I Swapped My Camper Van for an 18-Ton Expedition Truck",
+   "channel": "Mispronounced Adventures",
+   "published": "2026-10-12",
+   "description": "Swapping my self-built 4x4 MAN TGE campervan for something considerably bigger… a brand-new 18-ton MAN TGM 4x4 expedition truck. It belongs to my friend Guy, who asked me to come along for its first proper shakedown trip through Europe as the onboard technician, helping test the systems and sort out any problems along the way.\n\nThat means plenty of real-world expedition truck travel, plus diagnosing and fixing things like the Alde hydronic diesel heating, fuel line priming, water leak sensors, electrical systems and other habitation teething problems as we make our way towards Spain and Portugal.\n\nFollow Guy and his truck on @vanlovetv  or https://instagram.com/this.guys.journey\n\n\n￼Bluetti ￼partnership information ￼\n\nGet 5% off with code BLUETTIMA at checkout.\n\nShop the BLUETTI Elite 300: \n\nhttps://www.bluettipower.co.uk/products/elite-300-portable-power-station\n\nhttps://www.bluettipower.co.uk/\n\n#BLUETTI #Elite300\n\n\n━━━━━━━━━━━━━━━━━━\n🚐 Mispronounced Adventures — Support & Gear\n━━━━━━━━━━━━━━━━━━\n\n🔥 AUTOTERM HEATERS & AVL: AMBASSADOR DISCOUNT  \n10% OFF (MPA10) - AUTOTERM & AVL full range \n👉 https://autoterm.store/ or https://adventurevanlife.store/\n\n⚡ HOLY ENERGY — Natural Alternative to Energy Drinks  \nALEX5 (£5 off first order) • ALEX (10% off)  \n👉 https://uk.holy.com/discount/ALEX?ref=MISPRONOUNCEDADVENTURES\n🎁 Starter Set Deluxe Box: https://uk.holy.com/collections/newcomers/products/starter-set-deluxe?ref=MISPRONOUNCEDADVENTURES&utm_medium=creator\n\n🔋 ROAMER BATTERIES — 5% OFF ( Link applies discount at checkout )  \n👉 https://roamer.com/mispronouncedadventures\n\n🛒 AMAZON VAN BUILD STORE  \n👉 https://www.amazon.co.uk/shop/mispronouncedadventures\n\n⭐ CHANNEL MEMBERSHIP  \n👉 https://www.youtube.com/channel/UC7WeodwqsLSpp8YsVnscNnQ/join\n\n☕ SUPPORT THE CHANNEL (Coffee / Beer / Diesel)  \n👉 https://www.buymeacoffee.com/mispronouncedad\n\n🛒 eBay (supports the channel)  \n🇬🇧 https://ebay.us/jfiepl  \n🇺🇸 https://ebay.us/8T3c8\n\n━━━━━━━━━━━━━━━━━━\n📍 CONNECT WITH ME\n━━━━━━━━━━━━━━━━━━\n\n📧 Email: Alex@alexfrood.com  \n🌐 Website: https://www.alexfrood.com  \n📸 Instagram: https://www.instagram.com/alexfrood/  \n📘 Facebook: https://www.facebook.com/AlexFroodOutdoorInstructor.Photographer\n\n⚠️ Disclaimer: Some of these links are affiliate links where I'll earn a small commission if you make a purchase at no additional cost to you. Also as an Amazon Associate, I earn from qualifying purchases at no extra cost to you.\n____________________________________",
+   "duration": 1867
+  },
+  "WpEG_AEnKTs": {
+   "id": "WpEG_AEnKTs",
+   "title": "Road trip en van au Portugal : ce qu’il faut savoir avant de réserver",
+   "channel": "Adam & Liz Voyage ",
+   "published": "2026-10-15",
+   "description": "🚐 Les vans et camping-cars à louer au Portugal sur Yescapa, prix et disponibilités à vos dates : https://www.yescapa.fr/campervan-hire/portugal?ae=620&aev=yt\n\n🔎 Comparer les prix des vans et camping-cars, du moins cher au mieux équipé : https://www.yescapa.fr/hire-cheap-motorhomes?ae=620&aev=yt\n\nLiens affiliés : si vous réservez via ces liens, je touche une commission, sans changement de prix pour vous.\n\nRoad trip en van au Portugal : où dormir sans amende sur la côte, combien coûte un van chez un particulier et quand partir.\n\nLes liens en haut de la description ouvrent Yescapa, la plateforme de location de vans et de camping-cars entre particuliers. Vous y trouvez les véhicules libres à vos dates, à comparer sur le prix, l'équipement et les avis. Pour le printemps et l'été, les mieux notés partent des mois à l'avance, autant voir maintenant ce qui reste. Yescapa annonce l'assurance et l'assistance 24h/24 incluses, et le paiement en deux fois sans frais.\n\nUne nuit face à l'océan peut finir en amende. Dormir dans un véhicule aménagé hors des aires autorisées est interdit dans les zones protégées, les sites Natura 2000 et le littoral classé. Ça couvre l'essentiel des côtes de l'Algarve et de la Costa Vicentina. En Algarve, ça se contrôle vraiment.\n\nAilleurs, la nuit à bord est tolérée un temps limité par commune, sauf arrêté municipal. Table, chaises et auvent dehors, c'est du camping, interdit hors campings et aires. Les eaux usées vidées dans la nature coûtent très cher.\n\nLa parade, ce sont les aires : des centaines dans le pays, beaucoup gratuites, souvent avec vue, eau et vidange. Une appli de repérage, les étapes choisies la veille, et le problème disparaît.\n\nPas de barrière, pas de caisse : sur l'axe qui traverse l'Algarve, le péage est uniquement électronique. Le propriétaire sait si son van est équipé pour ce péage. Il sait aussi quelles communes tolèrent la nuit à bord et lesquelles verbalisent. Au comptoir d'une agence, personne ne vous le dira.\n\nChez un particulier, vaisselle, réchaud, chaises et glacière sont déjà à bord. Printemps et automne sont les meilleures périodes. L'été, l'Algarve est bondée et chère, et l'hiver reste praticable dans le sud.\n\nPorto, Nazaré, Peniche, Lisbonne, puis la Costa Vicentina jusqu'à l'Algarve : le classique du nord au sud. Ou l'Algarve seule sur une semaine, avec ses villages de l'intérieur, largement sous-estimés.\n\n0:00 Pourquoi le Portugal en van ?\n0:22 Combien coûte un van aménagé ?\n0:42 Quand partir au Portugal ?\n1:01 Peut-on dormir en van au Portugal ?\n1:48 Dormir face à la mer légalement\n2:12 Le piège des péages électroniques\n2:29 Pourquoi louer chez un particulier ?\n2:59 Quel itinéraire, et quand réserver ?\n\nLouer le van d'un inconnu, bonne idée ou pas ? Notre avis Yescapa pour trancher : https://www.youtube.com/watch?v=vXEn7cHltFg\n\nSur Adam&Liz Voyage, on aborde chaque voyage par le côté qu'on découvre trop tard : la règle locale qui finit en amende, la caution bloquée, le vrai prix sur place. Abonnez-vous si vous voulez partir avec tout ça déjà réglé.\n\nVous préparez un road trip au Portugal ? Dites-moi quand en commentaire, le mois suffit.\n\n#RoadTripPortugal #VanLife #CampingCar #Algarve #Yescapa",
+   "duration": 222
+  },
+  "X4DOB0aCjV8": {
+   "id": "X4DOB0aCjV8",
+   "title": "Das ist Camping..Schnelle Entscheidungen fällen..3 Wochen zu viel🤔Einmalige Reise Teil 17 Nazare",
+   "channel": "Chillout Verrückt Camper Die Ahlfis",
+   "published": "2026-10-11",
+   "description": "Moin,\n🚐 Die Reise durch Portugal geht weiter – unser nächstes Ziel heißt Nazaré! 🇵🇹\n\nEndlich sind wir in Nazaré angekommen! Doch schon auf dem Campingplatz fangen die Probleme an: Der Boden ist extrem sandig und wir haben Schwierigkeiten, uns nicht festzufahren. Dazu kommt eine regelrechte Fliegenplage, die es fast unmöglich macht, draußen gemütlich zu sitzen. So haben wir uns unseren Aufenthalt eigentlich nicht vorgestellt!\n\nDeshalb ändern wir spontan unseren Plan und fahren noch am selben Tag mit dem Scooter nach Nazaré. 🛵 Da es sehr warm ist, bleiben unsere Hunde im Wohnmobil.\n\nUnd was sollen wir sagen? Der Abend in Nazaré war richtig schön! Wir genießen die Stadt, lassen uns das fantastische Essen schmecken und sind begeistert von der Atmosphäre. 😍\n\nLeider konnten wir wegen eines Festes nicht zum Strand fahren, an dem die berühmten Big Waves von Nazaré zu sehen sind. Das müssen wir wohl auf einen anderen Besuch verschieben!\n\nWar Nazaré trotz der Probleme auf dem Campingplatz eine Reise wert? Für uns auf jeden Fall!\n\nSchaut euch unser neues Reisevideo an und erlebt mit uns die Höhen und Tiefen unserer Wohnmobilreise durch Portugal.\n\n👇 Jetzt seid ihr gefragt:\nWart ihr schon einmal in Nazaré? Habt ihr die berühmten Riesenwellen gesehen? Und kennt ihr Campingplätze, auf denen man nicht gleich von einer Fliegenplage überrascht wird? Schreibt es uns in die Kommentare!\n\n👍 Wenn euch unsere Reise gefällt, lasst gerne ein Like da und abonniert unseren Kanal Chillout Camper, damit ihr die nächsten Abenteuer nicht verpasst!\n\nLiebe Grüße und immer eine gute Fahrt! ❤️Holger+Mona\n\nUnsere Europaweite Google Stellplatzkarte findet ihr hier👉\nhttps://www.google.com/maps/d/edit?mid=19dJhcebtI742_xDNfNFbTeUaoIJwJ3o&usp=sharing\n\nÜber eine kleine Unterstützung in unsere \"Kuchenkasse\" würden wir uns freuen👉\n https://paypal.me/ChilloutCamper\n\nUnsere Campingartikel und mehr findet ihr in unserem Amazonshop unter👉 \nhttps://www.amazon.de/shop/chilloutverrucktcamperdieahlfis?ref_=cm_sw_r_mwn_aipsfshop_M6A645Q71FS3VYD2406H&language=en-US\n\nNazaré Portugal, Nazaré mit dem Wohnmobil, Campingplatz Nazaré, Portugal Rundreise mit dem Wohnmobil, Wohnmobilurlaub Portugal 2026, Nazaré Sehenswürdigkeiten, Big Waves Nazaré, Riesenwellen Portugal, Camping in Portugal, Nazaré Altstadt, Scooter Tour Nazaré, Campingplatz Probleme, Portugal Reisebericht, Chillout Camper.\n\n#Nazaré #Portugal #WohnmobilPortugal #CampingPortugal #PortugalReise #WohnmobilReise #Campingurlaub #BigWaves #Riesenwellen #CamperLife #PortugalMitDemWohnmobil #NazaréPortugal #CamperReise #ChilloutCamper #Portugal2026",
+   "duration": 2083
+  },
+  "Y9kA3taL6Ao": {
+   "id": "Y9kA3taL6Ao",
+   "title": "De Azeitão ao mar: o portinho que parece Mykonos em Portugal",
+   "channel": "Maga e Noir na Europa ",
+   "published": "2026-10-17",
+   "description": "Descubra a beleza oculta de Portugal em um roteiro encantador que vai de Azeitão até um portinho paradisíaco que lembra as paisagens de Mykonos. Acompanhe a Maga e o gatinho Noir em uma jornada contemplativa de motorhome pela região de Setúbal, revelando vistas deslumbrantes da Serra da Arrábida e a cor indescritível do mar.\n\nGente, eu fiquei simplesmente encantada com a cor dessa água e a paz desse lugar, mesmo em um dia nublado. Passamos por quintas históricas, conhecemos curiosidades sobre os vinhos locais e exploramos trilhas com vistas para Tróia e a Figueirinha, sempre com a liberdade que só a vida na estrada proporciona para nós, mulheres maduras e independentes.\n\n• Visita à Quinta da Califórnia com curiosidades sobre o vinho da casa e o inusitado extintor de vinho.\n• Paisagens panorâmicas avistando Lisboa, Palmela e a travessia para Tróia.\n• Exploração do Portinho da Arrábida, um refúgio que remete às ilhas gregas pela arquitetura e cor do mar.\n• Relatos reais sobre as dificuldades de acesso para motorhomes e autocaravanas em vilarejos estreitos.\n• Momentos de carinho e aventura com o gato Noir durante a exploração das praias e casinhas locais.\n\nVenha se inspirar com essa liberdade e compartilhe comigo nos comentários: você já conhecia esse cantinho que parece a Grécia em Portugal?\n\n#vanlifeportugal  #arrabida  #ViagemComPets #MulheresNaEstrada #PortugalHiddenGems",
+   "duration": 1070
+  },
+  "YUEZSEGm7fw": {
+   "id": "YUEZSEGm7fw",
+   "title": "Van-Log #7 | Portugal mit dem Camper! 🌅 Vom einsamen See bis zum belebten Porto.",
+   "channel": "BigNic",
+   "published": "2026-10-11",
+   "description": "Wir sind in Portugal angekommen! Und unser erster Stopp hätte kaum entspannter sein können. Direkt an einem See finden wir einen Platz, an dem wir drei Tage lang fast komplett alleine stehen. Viel Platz, Ruhe, Strand und natürlich genügend Auslauf für Maya. 🐕☀️\nDanach tauschen wir Entspannung gegen Serpentinen und fahren weiter in den Nationalpark Peneda-Gerês. Der Weg hinauf in die Berge ist ordentlich kurvig und steil, dafür finden wir oben einen richtig guten Ausgangspunkt für unsere Wanderungen. Und die haben sich gelohnt: tolle Landschaften, Berge und wunderschöne Wasserfälle. 🥾💦\nZum Abschluss geht es für zwei Tage nach Porto. Nach See, Strand und Bergen stürzen wir uns also ins Stadtleben und erkunden eine der bekanntesten Städte Portugals. 🏙️\n\nEine Folge zwischen absoluter Ruhe und Großstadt, mit ziemlich viel Natur dazwischen. \n\n#VanLog #VanLife #CamperLife #PortugalRoadtrip #PenedaGeres #Porto #CampingMitHund\n\n👉 Wenn euch unser Van-Log gefällt, lasst gerne ein Abo da und begleitet uns weiter auf unserer Reise durch Europa!\n\nFür weitere Abenteuer und aktuelle Projekte und Neuigkeiten schaut gerne auch auf Instagram vorbei.\n\n📷 BigNic: https://www.instagram.com/bignic93/\n🐶 Maya: https://www.instagram.com/ohren_im_wind/",
+   "duration": 1625
+  },
+  "Z8QuffYD6l8": {
+   "id": "Z8QuffYD6l8",
+   "title": "Campingplatz zum Überwintern in Spanien? Camping Alegria Benicarlo & Peniscola",
+   "channel": "womo-vlog",
+   "published": "2026-10-17",
+   "description": "Direkt am Meer in Spanien überwintern & Sommer-Urlaub machen? Camping Alegria in Benicarlo bei Peniscola im Check!\n\nIn diesem Video zeige ich dir den Campingplatz Alegria in Benicarlo – unweit von Peniscola mit seiner wunderschönen Altstadt. Der Platz liegt direkt am Meer, nach Benicarlo bist du in wenigen Minuten zu Fuß, nach Peniscola kommst du super mit dem Fahrrad.\n\nIch nehme dich mit auf einen kompletten Rundgang: Stellplätze für Wohnmobil und Wohnwagen, Sanitäranlagen, Strandzugang und meine ehrliche Einschätzung zur Lage. Der Campingplatz hat ganzjährig geöffnet und eignet sich daher perfekt zum Überwintern in Spanien, aber auch für den Sommer-Urlaub mit Wohnmobil oder Wohnwagen.\n\nOb du zum Überwintern nach Spanien willst, Camping am Meer suchst oder einen Stopp an der Costa Azahar planst – hier bekommst du alle Infos zu Benicarlo, Peniscola und dem Camping Alegria auf einen Blick.\n\n👉 Warst du schon mal in Benicarlo oder Peniscola? Schreib mir deine Erfahrung in die Kommentare!\n👉 Abo nicht vergessen für mehr Campingplätze, Stellplatz-Tests und Wohnmobil-Tipps aus Spanien & Europa!\n\n#womovlog #campingspanien #überwinterninspanien\n\nMehr vom #womovlog:\nHier geht's um Wohnmobil, Camping, Zubehör, DIY und Reisen – egal ob Wohnmobil, Wohnwagen, Zelt oder Van. Schau dich gern auf dem Kanal um!\n\nHier geht es zu unseren Kooperationspartnern:\n(Affiliate Links: Für dich bleibt der Preis gleich, ich bekomme eine kleine Provision)\n\nKalle das Kabel: https://kalledaskabel.de/?womovlog=e49e7c9f4ad28\n\nFritz Berger: https://tidd.ly/3UCYZQj\n\nHier geht es zu unserem Amazon-Shop: https://amzn.to/3ZkJgZ6\n(Affiliate Links: Für dich bleibt der Preis gleich, ich bekomme eine kleine Provision)\n\nhttps://www.youtube.com/channel/UCFoAXYcGVoyuSPr8uv5_KcA?sub_confirmation=1\n\nDu willst meine Arbeit unterstützen, das geht hier:\nhttps://paypal.me/womovlog?country.x=DE&locale.x=de_DE\n\n\nUnser Equipment: (Affiliate Links: Für dich bleibt der Preis gleich, ich bekomme eine kleine Provision)\n--------------------------------------------------------------------------------------------------------------------------------------------\nWohnmobil:\nInterieur:\nRouter:                                             https://amzn.to/49WxrLI\nUSB Leuchten:                                https://amzn.to/3TGaQNG\nUSB Tischleuchte:                          https://amzn.to/48YhxiD\nSchutzfolie für den Tisch:             https://amzn.to/4cnv99W\n---------------------------------------------------------------------------------------------------------------------------------------------\nKochen:\nBallarini Topfset:                            https://amzn.to/3PpynQA\nAussen-Kocher:                              https://amzn.to/3PmyXyv\nGas für Aussen-Kocher:                https://amzn.to/43kTCIO \nLotusgrill:                                        https://amzn.to/3v9myqS\nCadac Carri Chef Grill:                  https://amzn.to/43qKIJR\n----------------------------------------------------------------------------------------------------------------------------------------------\nTechnik:\nSolartasche:                                    https://amzn.to/3VvKiQq\nVerlängerung SolarTasche:           https://amzn.to/3veryug\nVictron MPPT Regler 100/50:       https://amzn.to/4944eNs\nVictron MPPT Regler 75/15:         https://amzn.to/43qBwp0\nBluetooth Thermometer:              https://amzn.to/3v4uE44\nFrankreich-Aufkleber:                    https://amzn.to/3TG73QE\nKondenswasserablauf Heizung: https://amzn.to/43kSqVQ\nAdBlue Verschluß-Sicherung:      https://amzn.to/4acdoJv\nUSB Anschluss mit Messgerät:   https://amzn.to/3VnCgJn\nToilettenzusatz Solbio:                  https://amzn.to/3TkeFGV \nKabeltasche:                                   https://amzn.to/3Teh9Xe\nRadhalter Heckgarage:                  https://amzn.to/49U2RCh\nSolartasche:                                    https://amzn.to/3VvKiQq\nVerlängerung SolarTasche:           https://amzn.to/3veryug\nVictron MPPT Regler 100/50:       https://amzn.to/4944eNs\nVictron MPPT Regler 75/15:         https://amzn.to/43qBwp0\nWarnleuchte KFZ über 3,5to :        https://amzn.to/4cmw6PI \nAirlineschiene:                                 https://amzn.to/3PoMXaZ  \n\n\nTRANSPARENZ:\nAlle im Video gezeigten oder genannten Produkte wurden von mir persönlich zu dem regulären Preis erworben. Die Informationen, Hinweise, Tipps und Bewertungen beruhen auf meiner persönlichen Einschätzung und Erfahrung. Für die Richtigkeit übernehme ich keinerlei Garantie oder Haftung. \n\nMusik: www.allesgemafrei.de\n             www.frametraxx.de\n             www.audiohub.de\n             www.musikfox.de\n             www.soundtaxi.de\n\n#camping #wohnmobil #spanien #überwinternspanien #benicarlo #peniscola #wohnwagen #campingplatz #vanlife #campingammeer #womovlog #costaazahar",
+   "duration": 494
+  },
+  "_wyrLFw8WL8": {
+   "id": "_wyrLFw8WL8",
+   "title": "Road trip Espagne et Portugal",
+   "channel": "Bornes",
+   "published": "2026-10-18",
+   "description": "Road trip off road solo pendant 1 mois en Espagne et au Portugal",
+   "duration": 1260
+  },
+  "cBIDwJ01OVg": {
+   "id": "cBIDwJ01OVg",
+   "title": "NO IMAGINÁBAMOS QUE NUESTRO ENCUENTRO CON LA CASA RODANTE SERÍA ASÍ - EP. 1 - TEMP. 6",
+   "channel": "Viajo Porque Lo Necesito",
+   "published": "2026-10-12",
+   "description": "¡Volvimos a Europa y la aventura arrancó con un vuelo retrasado, daños en la casa rodante, una tormenta y Eros enfermo! Entre reencuentros, pastelito y preparativos en Lisboa, nos toca improvisar y seguir adelante. Acompáñanos en este regreso lleno de imprevistos y descubre qué viene en la nueva temporada.\n\nSuscríbete al canal para seguir viajando con nosotros.\nComenta qué fue lo que más te gustó de este video. #Viajes #Portugal #Familia #CasaRodante #Aventura\n\n👉 Este canal es realizado en colaboración con https://www.youtube.com/@viajoporquepreciso\n\n0:00 - Regreso de Brasil y momentos familiares\n2:12 - Problemas de vuelo y llegada a Lisboa\n6:43 - Daños y revisión de la casa rodante\n11:31 - Mantenimiento y organización de la casa rodante\n17:26 - Vida familiar y preparativos para seguir viajando\n25:03 - Tormentas y cambio de ruta en Portugal\n27:31 - Eros se enferma y llegan a Coruche\n32:02 - La tormenta y una racha complicada",
+   "duration": 2217
+  },
+  "d8iABtp7u2E": {
+   "id": "d8iABtp7u2E",
+   "title": "HIGHS & LOWS of LIVING OFF GRID & REMOTE - OUR HOMESTEAD LIFE, PORTUGAL",
+   "channel": "Nick & Sarah - the exPAWers",
+   "published": "2026-10-15",
+   "description": "Welcome back to our off grid homestead in Portugal and thanks for being here:) We left our remote off grid homestead to collect some supplies and got stranded!\n\nIn todays video we share a quiet morning and a relaxed vibe on our off grid farm before tackling a few ongoing projects, everything is all coming together and we are starting to enjoy life now some of the huge jobs are out of the way.. But it all went a little wrong on a simple supply run to the local city! HELP IS NEEDED..\n\nIf anyone is looking into getting some decent electric pruners, we can recommend Prunarbo products; use this link and get 10% off:) https://www.prunarbo.com/products/16071769276149082824861170?source_type=sales_plugin_af&slt=sales_plugin_af&referral_code=DFYODER5ZP2H\n\nHope you enjoyed the video. please LIKE, COMMENT, and don't forget to SUBSCRIBE to our channel; https://www.youtube.com/channel/UCasvDNJLIODOEO1YBNKBnGQ\n\nJoin our Patreon for lots of bonus content and more; https://www.patreon.com/theexPAWers\n\nFOLLOW US for daily updates and more;\nInstagram: https://www.instagram.com/the.exPAWers/\nFacebook:  https://www.facebook.com/exPAWers/\nTikTok:   https://www.tiktok.com/@the.expawers/\nTwitter:   https://www.twitter.com/theexpawers/\n\nCHECK OUT our WEBSITE:\nhttps://theexpawers.com/\n\nSUPPORT the CHANNEL (send us a treat)\nhttps://www.paypal.me/exPAWers\n\nCHECK OUT OUR NEW MERCHANDISE; https://the-expawers.creator-spring.com/?\n\nEmail me if you want a STICKER PACK; sarah@theexpawers.com\n\nVisit our Amazon Shop to find our what camera equipment we use and our must have van life gear;\nhttps://www.amazon.co.uk/shop/theexpawers\n\nGet the power you need with AMAZING ECOFLOW Products here;  https://uk.ecoflow.com/pages/portable-power-stations?aff=39\n\nLike the music we use? Use our link and get a 30 day free trial to Epidemic Sound; https://www.epidemicsound.com/referral/q8eotp/\n\nSUBSCRIBE! if you're interested in what it's like to be LIVING IN A VAN, how to TRAVEL THE WORLD ON A BUDGET, easy and healthy VAN LIFE MEALS and the BEST PLACES TO VISIT IN EUROPE and soon AROUND THE WORLD.\n\nTHANKYOU;\nWe would like to say a BIG THANK YOU to all of our Subscribers and everyone who watches our videos and for all of the lovely comments, it really does mean a lot to us. \n\nCONTACT US;\nhello@theexpawers.com\n\nThis video was sponsored by DeleteMe\n\nWANT TO WORK WITH US?\nbrands@theexpawers.com\n\n\n\n #offgridliving #homesteading #offgrid",
+   "duration": 1692
+  },
+  "eRrQV6C_ACo": {
+   "id": "eRrQV6C_ACo",
+   "title": "Moving to Portugal: We Made Our Dream Life a Reality",
+   "channel": "Cobble & Grove Portugal ",
+   "published": "2026-10-18",
+   "description": "We left South Africa 2 and a half years ago. We sold everything and came over with a whole lot of faith that it would all work out. And now, here we are, living our dream in the quiet countryside of Portugal. 🤍\n\nIn this episode, we continue transforming our living room and fireplace into a warm and cosy space for the winter ahead. The water marks get covered with stain-resistant paint, our old log burner gets a makeover, and the ceiling finally gets a fresh coat of paint. Slowly but surely, everything is coming together so beautifully, and I can already imagine spending cold winter days tucked away in this little corner of our home.\n\nThere is still work to do, but seeing this space come to life makes it all worthwhile. I can't wait to light the fire, settle in, and enjoy the simple comforts of our home in the village.\n\nWe end the episode with Peppa joining me on a little adventure to collect pine cones for our new fireplace. 🍂🐾\n\nThank you for being here and sharing in our little journey as we build a life we once only dreamed of.\n\nWith love from Portugal,\nCobble and Grove 💚🇵🇹🐾\n\nCHANNEL SUPPORT LINKS💚💚:\n\nBuy me a coffee☕\nhttps://buymeacoffee.com/cobbleandg5\n\nBelow are affiliate links.🌱They help support our little channel at no extra cost to you. Our channel makes a small commission if you go ahead and purchase through our direct links below. Request for discount codes in the comments section wherever applicable:\n\nCheck out Reolink for your home security needs:\n5% Coupon Code: Cobble&Grove5 (valid on the official website until 31st December 2026)\nReolink Official Website: https://reolink.com/product/reolink-solar-floodlight-cam/?aff=2259\nAmazon: https://amzn.to/4zhfmUV\n\n\nALLPOWERS PT\nSolar Energy:\nhttps://www.awin1.com/cread.php?awinmid=125820&awinaffid=2664614&ued=https%3A%2F%2Fallpowers-pt.com%2F&platform=ma\n\nVEVOR EU\nHomestead tools & cozy home finds:\nhttps://www.awin1.com/cread.php?awinmid=118431&awinaffid=2664614&ued=https%3A%2F%2Fshare.google%2FMtzRkBhRGmrocND9m\n\nBRICO DEPOT\nDirect link to our Pergola (it survived Storm Kristin!) from Brico Depot as seen in the video:\nhttps://www.awin1.com/cread.php?awinmid=69486&awinaffid=2664614&ued=https%3A%2F%2Fwww.bricodepot.pt%2Fpergola-de-madeira-3x3m-harmala-5063022563071%3Fsv1%3Daffiliate%26sv_campaign_id%3D559319%26awc%3D69486_1764063875_18a463da1b7c75c9fcdb491a42452955%26utm_medium%3Daffiliate%26utm_source%3Dawin%26utm_content%3D559319&platform=ma\n\nCONFORAMA PORTUGAL\nCozy home goods:\nhttps://www.awin1.com/cread.php?awinmid=18551&awinaffid=2664614&ued=https%3A%2F%2Fwww.conforama.pt%2Fofertas-folheto-pt&platform=ma\n\nBe.Green Plant Design Portugal☘️ \nFor your plant needs:\nhttps://www.awin1.com/cread.php?awinmid=123376&awinaffid=2664614&ued=https%3A%2F%2Fbe.green%2F&platform=ma\n\nNAVIMOW FR\nAutonomous Robotic Lawnmowers:\nhttps://www.awin1.com/cread.php?awinmid=123746&awinaffid=2664614&ued=https%3A%2F%2Ffr.navimow.com%2Fproducts%2Fnavimow-i2-lidar-pro-robot-lawn-mower%3Fvariant%3D49709893550319&platform=ma\n\n\nFor creators  🎥 \n\nFIVERR:\nhttps://www.awin1.com/cread.php?awinmid=6288&awinaffid=2664614&ued=https%3A%2F%2Fwww.fiverr.com%2F&platform=ma",
+   "duration": 1201
+  },
+  "iqiA9OGi6aQ": {
+   "id": "iqiA9OGi6aQ",
+   "title": "Visitamos 🇵🇹OPORTO en AUTOCARAVANA 🚍| Una de las ciudades más bonitas 🫶de Portugal",
+   "channel": "The Carpe Van",
+   "published": "2026-10-07",
+   "description": "¡Nos vamos a Oporto en autocaravana!\nEn este video visitamos Oporto, Portugal, una ciudad llena de encanto, historia, rincones increíbles a orillas del río Duero.\nRecorreremos sus calles, descubrimos algunos de sus lugares más conocidos y os enseñamos nuestra experiencia viajando hasta Oporto en autocaravana.\nSi estáis preparando un viaje a Portugal en autocaravana, esperamos que este video te sirva para conocer Oporto y para planificar vuestra propia ruta.\nSi te gusta el video, dale LIKE, suscríbete y activa la campanita de notificación para acompañarnos en nuestros próximos viajes.\n\n#oporto #portugal #autocaravana #oportoenautocaravana #viajarenautocaravana #viajarporportugal #camping #áreas #viral",
+   "duration": 870
+  },
+  "kMgrO96NmzI": {
+   "id": "kMgrO96NmzI",
+   "title": "TORMENTA CON VIENTOS DE 180 KM/H, NIEVE E INUNDACIONES: CAOS EN PORTUGAL - EP. 2 - 6.ª TEMP.",
+   "channel": "Viajo Porque Lo Necesito",
+   "published": "2026-10-14",
+   "description": "Íbamos por nieve en la Serra da Estrela y terminamos en plena tormenta: caminos cerrados, hielo, inundaciones y un motorhome buscando refugio. Entre sustos, arreglos improvisados y cuidados para Eros, vivimos una aventura inolvidable por Portugal. ¡Acompáñanos para descubrir cómo salimos de esta! #Viajes #Portugal #Aventura #Familia\n\nSuscríbete al canal para seguir viajando con nosotros.\nCuéntanos en los comentarios qué fue lo que más te gustó del video.\n\n👉 Este canal es realizado en colaboración con https://www.youtube.com/@viajoporquepreciso\n\n\nMúsicas do vídeo: https://share.epidemicsound.com/7n5n9b\n\n0:00 - Tormentas, enfermedad e inundaciones en Portugal\n5:35 - Parada en carretera y consulta pediátrica\n9:23 - Rumbo a la Sierra y primeras nevadas\n14:33 - Nevada intensa y regreso por seguridad\n20:02 - Refugio ante la tormenta y problema con el agua\n27:04 - La tormenta pasa y el viaje continúa\n31:12 - Destrozos en carretera y llegada a Évora\n33:48 - Balance de la tormenta y regreso al Algarve",
+   "duration": 2330
+  },
+  "mp0sESB9_yE": {
+   "id": "mp0sESB9_yE",
+   "title": "FICAMOS SEM AGUA NA NOSSA CASA CONTEINER",
+   "channel": "VIVENDO EM PORTUGAL",
+   "published": "2026-10-19",
+   "description": "Ficamos sem água na nossa casa contêiner! 😱💧\n\nA água da casa vem do nosso poço, mas ele acabou secando e tivemos que nos virar enquanto tentávamos resolver o problema.\n\nAinda bem que a nossa autocaravana nos salvou! 🚐❤️ Como ela tem reservatório de água, conseguimos usar para tomar banho, lavar louça e passar esses dias sem água na casa.\n\nChamamos um senhor para fazer a limpeza do poço e tentar recuperar a água. Agora é torcer para que dê certo! 👀\n\nAcompanhe mais esse perrengue e toda a transformação da nossa quinta em Portugal.\n\n#CasaContainer #Poço #QuintaEmPortugal #Autocaravana #VivendoEmPortugal",
+   "duration": 1154
+  },
+  "qEY688aeXzI": {
+   "id": "qEY688aeXzI",
+   "title": "😂😂 not what I was expecting 🫣 # #vanlife #wildlife #offgrid #renovation #offgridliving #portugal",
+   "channel": "Amy's ARMY",
+   "published": "2026-10-18",
+   "description": "",
+   "duration": 181
+  },
+  "qr25qmAtynQ": {
+   "id": "qr25qmAtynQ",
+   "title": "Porto (Portugal) : vaut-elle vraiment un séjour ? Ce que les guides ne vous disent pas !",
+   "channel": "Reporteurs",
+   "published": "2026-10-11",
+   "description": "Porto (Portugal) vaut-elle vraiment un séjour ? Voici notre avis sincère et nos conseils de voyageurs indépendants.\nClassée à l'UNESCO en 1996, la ville portugaise de Porto est devenue l'une des destinations les plus visitées du Portugal. \n🔎 Dans cette vidéo :\n• Pourquoi Porto est devenue une référence touristique ?\n• Ce que l'on a aimé : les vieux tramways, les azulejos, les dégustations de porto\n• Combien de jours prévoir et quand y aller ?\n• Notre avis : Porto, incontournable ou surcotée ?\n💬 Et vous, Porto : incontournable ou surcotée ? Dites-le-nous en commentaire !\n\n▶️ Nos autres vidéos sur le Portugal :\nRoad-trip en camping-car au portugal : https://youtu.be/TpmBBSwfW2s\nLisbone en 3 jours : hdttps://youtu.be/y4PsnREiF7Q\nSintra : https://youtu.be/Z8Zgt3AtQtg\nLes plus beaux endroits de l'Algarve : https://youtu.be/r6tK_2wxKls\nAveiro & Tomar : https://youtu.be/gZeE8ZPvUUA\n\n👍 Si la vidéo vous a plu, laissez un like et abonnez-vous pour ne pas rater nos prochains conseils de voyage.\n\n#Porto #Portugal #VoyageAuPortugal\n--------------\nNous sommes Do & So, un couple de voyageurs indépendants en quête de lieux authentiques et d’expériences hors des sentiers battus… ou pas !\nEntre nature, patrimoine, culture locale et rencontres, nos vidéos racontent nos itinéraires à travers le monde, avec notre regard, nos ressentis et nos conseils pratiques.\n📸 Prêts à voyager autrement ? Abonnez-vous : https://www.youtube.com/reporteurs pour suivre nos expériences de voyageurs que nous partageons avec plaisir.\n👍 N'hésite pas à activer la cloche pour découvrir nos prochaines expériences de voyages ! Pour plus d'infos, pose ta question en commentaire !\n\n--------------\nBlog : https://reporteurs.fr/\nFacebook : https://www.facebook.com/Reporteurs/\nInstagram : https://www.instagram.com/reporteurs\ntwiter : https://twitter.com/Reporteurscom\n-------------------\n Lien de la vidéo : https://youtu.be/qr25qmAtynQ\nCatégorie : Voyage\nLicence de paternité Creative Commons (réutilisation autorisée)",
+   "duration": 261
+  },
+  "sytN3OWEWAA": {
+   "id": "sytN3OWEWAA",
+   "title": "Algarve, il sentiero delle 7 valli sospese. Costa del sol in camper, episodio 7",
+   "channel": "HO VISTO UN POSTO",
+   "published": "2026-10-25",
+   "description": "Chiudiamo il nostro viaggio in grande stile tra le meraviglie naturali dell'Algarve! In questo ultimo episodio esploriamo uno dei trekking costieri più spettacolari del Portogallo: il sentiero delle Sette Valli Sospese. \nPartendo dai pressi di Lagos, ci addentriamo tra scogliere a picco sull'oceano, grotte nascoste scavate dalla forza della pioggia e del mare, e pazzeschi fossili marini incastonati nella roccia. Uno spettacolo pazzesco che unisce panorami mozzafiato, geologia e un pizzico di avventura prima di concludere questa indimenticabile esperienza su strada! \n\nCAPITOLI DEL VIDEO\n0:00 - Introduzione: il risveglio in camper a Lagos e l'inizio del trekking\n0:28 - Titolo del video e presentazione del Sentiero delle Sette Valli Sospese\n1:15 - Partenza dal parcheggio e mappa del percorso\n1:46 - Primi panorami mozzafiato sulle scogliere e sui faraglioni dell'Algarve\n2:34 - Si può fare in kayak? Esplorare la costa dal mare\n3:02 - Come si sono formate queste rocce? Millenni di erosione tra mare e pioggia\n4:40 - La Benagil Cave vista dall'alto: i pozzi naturali e la \"grotta\" a cielo aperto\n5:52 - Curiosità botaniche e alberi scolpiti dal forte vento\n6:00 - Incredibile scoperta: fossili di conchiglie sul fondale marino fossile\n6:58 - L'effetto \"verde bottiglia\" e le grotte nascoste dall'alto\n7:18 - Considerazioni finali e saluti da questo splendido road trip in camper\n\nTutti gli episodi di questo viaggio:\nEp.1 - Il nostro primo viaggio in camper, PROBLEMI!\nhttps://youtu.be/nbPc3p87-YM\nEp.2 - Playa de los muertos e le saline di Cabo da Gata\nhttps://youtu.be/qTNdXE-msuA\nEp.3 - Roma sul mare: il garum, la salsa più costosa dell'antichità\nhttps://youtu.be/3Ea4Cu34mGo\nEp.4 - Italica, la città dei 2 imperatori\nhttps://youtu.be/1NnuD-eSIAU\nEp.5 - El Rocio, il far west spagnolo\nhttps://youtu.be/2XUv_p3MfqM\nEp.6 - Le navi di Colombo, alla scoperta delle caravelle\nhttps://youtu.be/v_8drcXJwG0\nEp.7 - Algarve, il sentiero delle 7 valli sospese\nhttps://youtu.be/sytN3OWEWAA\n\n📌 Iscriviti al canale e attiva la campanella per non perderti le prossime tappe di questo road trip che si presenta come una grande avventura.",
+   "duration": 467
+  },
+  "tgfbP0XMJjs": {
+   "id": "tgfbP0XMJjs",
+   "title": "🇵🇹🏰 MONTEMOR O VELHO : Histoire et Charme au Portugal ! #portugal #montemorovelho #vanlife #roadtrip",
+   "channel": "Escapa_de_ValPat",
+   "published": "2026-10-17",
+   "description": "MONTEMOR-O-VELHO — UNE ESCALE AU CŒUR DU PORTUGAL\n🚐Aujourd’hui, direction Montemor-o-Velho, une petite ville pleine de charme située dans la région de Coimbra, au bord des plaines du Mondego.\n🏰Dominée par son impressionnant château médiéval, la ville nous plonge dans plusieurs siècles d’histoire, depuis la Reconquête chrétienne jusqu’au développement du royaume du Portugal.\nEntre patrimoine, paysages et petites routes tranquilles, nous vous emmenons découvrir une autre facette du Portugal, loin des grandes destinations touristiques.\n\n 🏰Le château de Montemor-o-Velho\n Une ville chargée d’histoire\n Les paysages de la région du Mondego\n Une découverte au fil de la route\n\nSi vous aimez les voyages, les découvertes et les petits coins authentiques du Portugal, pensez à vous abonner à la chaîne et à laisser un commentaire. \n🎥 Abonne-toi  aussi pour ne rien rater de nos Escapades en France et à l'étranger en plus de nos rénovations maison ....\n\n#portugal #montemorovelho #vanlife #roadtrip \n#fourgon #mercedes #sprinter  #vanlife #voyage #tourisme #patrimoine #yorkshire #europe #france #paysétrangers  #regions \nINSTAGRAM :\nhttps://www.instagram.com/escapa_de.valpat\nFACEBOOK : \nhttps://www.facebook.com/valie.reilhac\nTIKTOK :\nhttps://www.tiktok.com/@sweetdreameretnous\nBLOG CREATIONS : \nhttps://valiecreationsscrapetescapades.blogspot.com/\nMAIL : \nsweetdreameretnous@gmail.com\n\n~Chapitres~\n00:00 Générique et jusqu'à Montemor-o-Velho\n00:30 Espinho & Drone\n04:24 Spécialités culinaires portugaises\n11:19 Plage de Vagueira\n14:37 Visite de Montemor-o-velho\n25:08 Conclusion",
+   "duration": 1613
+  },
+  "wfrSJz-i0Ag": {
+   "id": "wfrSJz-i0Ag",
+   "title": "Vivre au Portugal : pourquoi on s’est installés ici… et les pièges à éviter",
+   "channel": "Planete de Caro - Lifestyle",
+   "published": "2026-10-13",
+   "description": "CODE PROMO DIX : BEA10 (5 € SUR VOTRE PREMIÈRE COMMANDE)\nhttps://dixsupps.com/\nVivre au Portugal : pourquoi nous avons choisi l’Algarve après notre tour d’Europe en camping-car, et pourquoi l’expatriation ne convient pas à tout le monde.\n\nBienvenue dans Les marches de Xavier, notre nouveau format Expat. Je vous emmène marcher au bord de la Ria Formosa, avec une facecam et une seconde caméra pour partager ce que je vois.\n\nDans ce premier épisode, je raconte notre parcours : le Portugal de mon père, les séjours d’hiver en camping-car, le Covid, le télétravail, la location puis l’achat de notre appartement. Je présente aussi les sujets que nous aborderons : logement, coût de la vie, travail, démarches, société au Portugal, relations avec les habitants, voiture et retours en France.\n\nIl s’agit de mon vécu en Algarve, pas d’un guide qui promet de répondre aujourd’hui à toutes ces questions. Les épisodes suivants les détailleront. Dites-moi en commentaire ce que vous voulez savoir avant de vous installer au Portugal.\n\nDIX, la société de compléments alimentaires avec laquelle je travaille :\nhttps://dixsupps.com/\nCode à saisir : Bea10. Les conditions de l’offre sont celles du site.\n\nPOUR PROLONGER LA BALADE ET NOTRE HISTOIRE\nNotre guide de Fuseta et de ses environs :\nhttps://www.laplanetedecaro.com/fuseta-vanlife-campingcar/\nNotre projet de voyage en camping-car dans l’Algarve :\nhttps://www.youtube.com/watch?v=OEE6s0JZK1Q\nLouer son camping-car : combien ça rapporte vraiment ?\nhttps://www.youtube.com/watch?v=ZKbI0GCY35E\n\nNOS CHAÎNES CITÉES DANS LA VIDÉO\nPlanète de Caro, la chaîne originale : https://www.youtube.com/@planetedecaro\nLes Voyages de Caro et Xav : https://www.youtube.com/@planetedecarovoyages\nLes Tests de Planète de Caro : https://www.youtube.com/@planetedecarotests\nLes Recettes de Caro : https://www.youtube.com/@planetedecarorecettes\nLe Monsieur Xav, sujets de société et réflexions : https://www.youtube.com/@lemonsieurxav\n\nCHAPITRES\n00:00 Vivre au Portugal : les marches de Xavier\n01:00 Pourquoi parler d’expatriation au Portugal ?\n01:37 Les flamants roses de la Ria Formosa\n02:26 Notre quotidien et notre travail sur Internet\n03:25 DIX et le code promo Bea10\n04:21 Notre histoire avec le Portugal\n05:30 Covid, télétravail et départ en camping-car\n06:34 Pourquoi je restais discret sur les vidéos\n07:21 Du camping-car à un appartement au Portugal\n08:23 Acheter au Portugal et y vivre à l’année\n08:47 Notre balade et le bateau du dimanche\n09:51 L’appartement : une opportunité et des surprises\n10:58 Avantages, inconvénients et retours d’expatriés\n13:30 Se loger au Portugal : les prochains sujets\n14:42 Coût de la vie et démarches d’installation\n15:34 Relations, voiture et coût du quotidien\n16:21 Portugais francophones : revenir au pays\n17:23 La playlist Expat et nos autres chaînes\n18:44 La suite des marches de Xavier\n\nFilmée le 8 octobre 2026 en Algarve, au Portugal.\n\nTous nos réseaux : https://www.laplanetedecaro.com/rs/",
+   "duration": 1145
+  },
+  "xQ7fLKuah8M": {
+   "id": "xQ7fLKuah8M",
+   "title": "A ENTRADA DA NOSSA CASA EM PORTUGAL ESTÁ ASSIM AGORA 🇵🇹🤩",
+   "channel": "Portugal Diário",
+   "published": "2026-10-07",
+   "description": "Mais um dia de diário de obra em nossa casa em Portugal! Dessa vez viemos fazer a rampa de entrada que estava bem danificada com os anos! Agora ficou tudo novo",
+   "duration": 1059
+  },
+  "xijYJYX6Hac": {
+   "id": "xijYJYX6Hac",
+   "title": "Solo im Unimog - Planänderung an der Grenze nach Portugal!",
+   "channel": "TRIP24H | Overlanding the World in an Unimog",
+   "published": "2026-10-09",
+   "description": "Der Solo-Trip startet mit spektakulären Offroad-Strecken und Drohnen-Shots im spanischen Grenzgebiet. Doch als ich die Grenze nach Portugal überquere, läuft die Stellplatzsuche absolut nicht nach Plan. Ich werde nach einem langen Fahrtag von meinem geplanten Stellplatz weggeschickt, was für mich absolut ungewohnt ist. Nach einer ungeplanten Kehrtwende und einer lauten Nacht auf einem Not-Stellplatz schlägt am nächsten Tag auch noch das Wetter komplett um: Dauerregen!\nAuf dem Weg Richtung Südportugal wendet sich das Blatt aber zum Glück: Ich finde einen wunderschönen, einsamen Traumstellplatz in der Natur. Zeit zum Durchatmen für mich und meinen Hund – bevor der Regen am nächsten Tag wieder einsetzt. Ein ehrlicher Vlog über die Höhen und Tiefen des Overland-Lebens!\n\n#Unimog #SoloTrip #Overland #Spanien #Portugal #Reisevlog #OffroadCamper #CampingMitHund\n\nWenn euch unsere Reise mit dem Unimog gefällt und ihr Pit und mich auf den nächsten Etappen unterstützen wollt, könnt ihr gerne Kanalmitglied werden. Vielen Dank an alle, die das schon tun – das hilft uns enorm, solche Pisten-Abenteuer unabhängig zu filmen!\n👇\nhttps://www.youtube.com/channel/UC18oJa2o_z7dENqoB7_ezjg/join",
+   "duration": 1410
+  },
+  "xqDELqH_d_k": {
+   "id": "xqDELqH_d_k",
+   "title": "Camper Pão de Forma /Kombihome ou Autocaravana Iveco 4x4 : Qual a melhor forma de morar na estrada?",
+   "channel": "Entre Temperos e Trilhas",
+   "published": "2026-10-21",
+   "description": "🚐 Campervan em uma carrinha Pão de Forma / Kombihome clássica ou uma autocaravana chassi Iveco 4x4 com estilo militar? Qual escolheria para viver ou viajar sobre rodas?\n\nDesta vez, fomos ao AutoClássico Porto conhecer dois conceitos completamente diferentes de casas sobre rodas. De um lado, uma Kombihome clássica, cheia de personalidade e nostalgia. Do outro, uma impressionante autocaravana 4x4, preparada para quem procura aventura e liberdade.\n\nMas será que o tamanho, o conforto e a tecnologia fazem realmente a diferença na hora de escolher?\n\nNeste vídeo, mostramos de perto estes veículos e exploramos duas formas muito diferentes de aproveitar a vida na estrada.\n\n🔸 Camper em Carrinha Pão de Forma / Kombihome clássica: um conceito que combina charme, simplicidade e o espírito das viagens de antigamente.\n\n🔸 Autocaravana em um Chassi Iveco 4x4: um veículo robusto, com características pensadas para aventuras e percursos mais exigentes.\n\nVamos conhecer os interiores, observar os detalhes e descobrir o que torna cada modelo tão especial.\n\nE surge aquela pergunta que todos os apaixonados pelo caravanismo acabam por fazer: vale mais a pena apostar na simplicidade e no charme de um clássico ou no conforto e na capacidade de uma autocaravana moderna?\n\nSe gosta de autocaravanas, campervans, motorhomes, Kombis/Pão de Forma transformadas e viagens sobre rodas, este vídeo é para si!\n\n💬 QUEREMOS SABER A SUA OPINIÃO!\n\nSe pudesse escolher apenas um destes veículos para a sua próxima grande aventura, qual seria?\n\n1. Camper Carrinha Pão de Forma /  Kombihome clássica\n2. Autocaravana 4x4\n3. Autocaravana tradicional\n\nConte-nos nos comentários e diga porquê!\n\n📌 INSCREVA-SE NO CANAL ENTRE TEMPEROS E TRILHAS\n\nPartilhamos as nossas experiências de autocaravana, visitas a feiras e stands, tours por diferentes modelos, dicas para quem pretende comprar uma autocaravana em Portugal e, claro, muitas viagens e aventuras em família.\n\nSe este universo também o fascina, subscreva o canal, deixe o seu gosto e partilhe este vídeo com alguém que sonha ter uma casa sobre rodas.\n\nAté à próxima aventura!\n\n#Autocaravana #Kombihome #AutoClassicoPorto #Campervan #Motorhome #Caravanismo #AutocaravanasPortugal #Kombi #vidanaestrada #paodeforma #carrinhapaodeforma #camperpaodeforma",
+   "duration": 375
+  },
+  "yBVIsZcPdbk": {
+   "id": "yBVIsZcPdbk",
+   "title": "The Perfect $5 euro campground! But get there before the weekend rush! #vanlife  #portugal",
+   "channel": "Jack and Darlene Living an Amazing Life!",
+   "published": "2026-10-21",
+   "description": "The Perfect $5 euro campground! But get there before the weekend rush!  Foz do Airelo \nParque de Pernoita de Autocaravanas da Foz do Arelho\nFoz do Arelho, Portugal\n\n #vanlife  #portugal \n\nYes we are traveling Europe with 5 dogs in our RV!\n#vanlifedogs \n#portugal #motorhome #travelvlog #tavira  \n\nWelcome to our Living an Amazing Life channel. Come live an amazing life with us. @LivingAnAmazingLife\nRemember to Like, Share and Subscribe! \nFor business inquiry = BostocksWest@gmail.com\nJoin us on our adventures. Travel, Health, RV living, Food and more with Jack and Darlene. \nJack a life long martial artist, master instructor and teacher, former circus artist, longevity natural movement zen enthusiast. \nDarlene a certified yoga practitioner, former circus artist and 25 year professional Hollywood stunt woman. \n\n#fitnessmotivation #travel #agingwell  #pets #cruise #healthylifestyle #rvlife #fitness #fatlosssecrets #foodie #wanderlust #adventure #travelpassion #travelgoals #workout  #fitness #workout #cardio #exercise #workoutvideo #fitnessmotivation #fitnessjourney #youtubefitness #workoutathome #homeworkouts #homefitness #youtubechannel #coreworkout  #exercisevideo #exerciseroutine #weightloss #youtubeworkouts #lowimpactcardio #youtuber #absworkout  #abworkout",
+   "duration": 1082
+  },
+  "zdZ6f3R61wU": {
+   "id": "zdZ6f3R61wU",
+   "title": "Volví al pueblo de mi padre en Galicia | Ruta en autocaravana por Portugal y Galicia",
+   "channel": "Club de Viajeros Inteligentes",
+   "published": "2026-10-19",
+   "description": "Nueve días en autocaravana desde Valencia: Palos de la Frontera, el Algarve, Lisboa, la costa atlántica de Portugal y Galicia de punta a punta. Tres fines del mundo (Sagres, Cabo da Roca y Finisterre)… y una última parada que no sale en ninguna guía: Arcade, el pueblo donde nació mi padre.\n\n¿De dónde era tu familia? Contámelo en los comentarios 👇\n\n📍 CAPÍTULOS\n0:00 Intro\n0:36 Salimos de Valencia\n0:49 Gemasolar: la torre en medio del campo\n1:19 Palos de la Frontera y las carabelas de Colón\n1:59 Sagres: el primer fin del mundo\n2:36 Lisboa: el Cristo Rei y el puente 25 de Abril\n3:13 La Estufa Fria\n3:22 Cabo da Roca: el segundo fin del mundo\n4:00 Praia da Assenta: atardecer y asado\n5:16 Galicia: la respuesta de Colón y las islas Cíes\n5:59 Pulpo á feira\n6:31 El puente de Rande y el tesoro hundido\n6:54 Santiago de Compostela\n7:25 Combarro y los hórreos\n8:06 Ézaro: la cascada que cae al mar\n8:57 Finisterre: el tercer fin del mundo\n9:16 Arcade, el pueblo de mi padre\n10:21 1949: la historia del Entre Ríos\n11:29 La familia en Arcade\n12:04 La vuelta\n\n🚐 Viaje realizado del 15 al 23 de julio de 2025 en autocaravana de alquiler. Algunas imágenes de Arcade y de las islas Cíes son de otra visita que hice en tren, en septiembre de 2025.\n\n🔗 El club de viajes del que formo parte: https://arielfeijoo_es.incruises.com/signup\nEs InCruises, un club de vacaciones centrado en cruceros (no tiene relación con las autocaravanas). Es un enlace de afiliado: si te sumás a través de él, puedo recibir una compensación, sin costo extra para vos.\n\n🎵 Música: Biblioteca de audio de YouTube (Balada Gitana – House of the Gipsies; Pienso Viento – Casa Rosa; Tuath Dé Dunsany y Thin Places – Jesse Gallagher).\n🗺️ Mapas: © OpenStreetMap contributors.\n🚢 Foto del barco: SS Colby Victory, 1946, dominio público (Wikimedia Commons).\n\n#autocaravana #galicia #portugal",
+   "duration": 766
   }
  },
  "channels": {},

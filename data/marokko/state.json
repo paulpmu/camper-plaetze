@@ -1114,7 +1114,7 @@
    "channel": "Beyond Comfort",
    "published": "2026-10-24",
    "transcript": "ok",
-   "spots": 1,
+   "spots": 0,
    "retried": true
   },
   "B196-diQTLw": {
@@ -1226,7 +1226,7 @@
    "title": "I Thought I Knew Morocco, But This Restaurant Still Surprised Me! Solo Bike Touring Atlas Mountains ",
    "channel": "hels on wheels",
    "published": "2026-10-15",
-   "transcript": "ok",
+   "transcript": "fehler",
    "spots": 0,
    "retried": true,
    "skipped": "irrelevant"
@@ -1449,6 +1449,7 @@
    "published": "2026-10-21",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "jw4W_8XPl04": {
@@ -1456,35 +1457,40 @@
    "channel": "Little House On The Pirellis",
    "published": "2026-10-21",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "HpKcZ242ou8": {
    "title": "Morocco solo van trip Week 1",
    "channel": "Little House On The Pirellis",
    "published": "2026-10-19",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "EWDxunHyx7s": {
    "title": "19 - Marokko Roadtrip - Illegal in Marokko! Meine Visum-Odyssee führt mich zurück nach Guelmin",
    "channel": "Rick Maria Nuessler",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 3
+   "spots": 2,
+   "retried": true
   },
   "ONNrkVK69g0": {
    "title": "Zurück nach Marokko: Alles zum Thema Einreise + Tipps für die Fähre // Vanlife Vlog",
    "channel": "Muchacho",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 4
+   "spots": 7,
+   "retried": true
   },
   "OlkMrRZGgQ4": {
    "title": "Maroc on y est ! 🇲🇦 ",
    "channel": "un_autre_voyage",
    "published": "2026-10-18",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "dwTNu9DQ0oU": {
    "title": "PREPARING FOR WINTER 🚐 Van Damp Reality & Big Next Steps!",
@@ -1492,6 +1498,7 @@
    "published": "2026-10-18",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "aPowjGYHbfA": {
@@ -1499,7 +1506,9 @@
    "channel": "Back Road Club",
    "published": "2026-10-14",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true,
+   "skipped": "irrelevant"
   },
   "QidO5maAOqU": {
    "title": "En route vers le Maroc 🇲🇦 Nous traversons l'Espagne 🇪🇸 (épisode 3)",
@@ -1507,6 +1516,7 @@
    "published": "2026-10-11",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "J9MQU4Bv3gs": {
@@ -1514,7 +1524,8 @@
    "channel": "naomi gale",
    "published": "2026-10-09",
    "transcript": "ok",
-   "spots": 0
+   "spots": 0,
+   "retried": true
   },
   "WE305xqt25g": {
    "title": "Wohnmobilreise nach Marocco über Frankreich, Spanien und Portugal.   Teil 1 Anreise",
@@ -1522,15 +1533,15 @@
    "published": "2026-10-09",
    "transcript": "ok",
    "spots": 0,
-   "skipped": "irrelevant"
+   "retried": true
   },
   "PRFh9zI0jeA": {
    "title": "Le Maroc en j5 - épisode 1",
    "channel": "Cap sur l'essentiel ",
    "published": "2026-10-08",
-   "transcript": "fehler",
-   "spots": 0,
-   "skipped": "irrelevant"
+   "transcript": "ok",
+   "spots": 3,
+   "retried": true
   },
   "IJJoz-OVifk": {
    "title": "Meine neue S-Klasse wurde mit Graffiti besprüht",
@@ -1538,6 +1549,7 @@
    "published": "2026-10-07",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "WCVAOtZnSkQ": {
@@ -1545,7 +1557,8 @@
    "channel": "Tanja & Denis Katzer - Die Große Reise since 1991",
    "published": "2026-10-06",
    "transcript": "ok",
-   "spots": 1
+   "spots": 1,
+   "retried": true
   },
   "LPIpZUwsuaA": {
    "title": "✈️ VLOG AU MAROC | Voyage, santé & routine 🇲🇦 (2025)",
@@ -1553,7 +1566,11 @@
    "published": "2026-10-05",
    "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
+  },
+  "hMxUJ9XUm8Y": {
+   "skipped": "kurz"
   }
  },
  "queue": {
@@ -3251,6 +3268,22 @@
    "description": "When my tent pole fused and broke in the Atlas Mountains, I thought I was out of luck—until a local Moroccan blacksmith fashioned a brilliant custom replacement out of an old screw! With the tent fixed, I hit the road through Goulmima and the stunning palm groves, enjoying a rare tailwind and finding an unexpected camp spot.\nIf you enjoyed this episode, please hit Like, Subscribe, and leave a comment to help support the channel!\n\n🔗 LINKS & SUPPORT:\n▶️ Watch the previous vlog: https://youtu.be/yhrAXZ4NoRM?si=02leWCDODsR0YYlJ\n\n🔗 All links & ways to support: https://helsonwheels.bio.link\n\n⏱️ TIMESTAMPS:\n00:00 Broken Tent Pole Dilemma\n00:44 Moroccan Blacksmith Genius Fix\n01:46 Testing the New Pole & Pool Break\n02:12 Exploring Palm Groves & Mud Palaces in Goulmima\n04:13 Local Food & Bike Resupply\n05:09 Cycle Touring the Valley with a Tailwind\n06:54 Searching for a Wild Campsite\n07:43 Night Camp & Big Thank You to Adam!\n\n#CycleTouring #Morocco #AtlasMountains #BicycleTouring #OverlandingAfrica #HelsOnWheels #SoloFemaleTravel #Goulmima",
    "duration": 491,
    "retry": true
+  },
+  "HxnBRhrxW9k": {
+   "id": "HxnBRhrxW9k",
+   "title": "Washing the Living Room Floor with Water?! 🇲🇦 Daily Life in Morocco as a Korean wife",
+   "channel": "YUKJI",
+   "published": "2026-10-25",
+   "description": "French-Moroccan husband 🇲🇦 and Korean wife 🇰🇷\nBuilding a new life together in Morocco with our dogs 🐶\nSharing Moroccan daily life, homemade Korean & Moroccan food\nand cozy couple moments from Oujda, Morocco\n\n💌 E mail : yukjistreet@gmail.com\n💛 Instagram : http://www.instagram.com/yukji_street\n\n\nThis is the English/Korean channel of YUKJI",
+   "duration": 1413
+  },
+  "aupL0HPuqFc": {
+   "id": "aupL0HPuqFc",
+   "title": "Elektrisch nach Marokko, jetzt schon in Spanien",
+   "channel": "Michis Hasenbau",
+   "published": "2026-10-25",
+   "description": "",
+   "duration": 2506
   }
  },
  "channels": {},
