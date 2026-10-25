@@ -8,27 +8,16 @@ Dieses Dokument beschreibt, was wo läuft, was es kostet und wie das Werkzeug ge
 
 ## 1. Überblick: Was passiert wo?
 
-```
-               jede Nacht 04:17 (Winterzeit) / 05:17 (Sommerzeit)
-                                 │
-                    ┌────────────▼─────────────┐
-                    │  GitHub Actions (Abruf)  │
-                    └─┬──────┬──────┬──────┬───┘
-       Videos suchen  │      │      │      │  Plätze herauslesen
-   ┌──────────────────▼┐  ┌──▼──────────┐  ┌▼───────────────────┐
-   │ YouTube Data API  │  │ Webshare    │  │ Anthropic Claude   │
-   │ (Google Cloud)    │  │ → YouTube   │  │ (Haiku)            │
-   │ Titel, Kommentare │  │ Transkripte │  │                    │
-   └───────────────────┘  └─────────────┘  └────────────────────┘
-                                 │  Orte → Koordinaten, Routenverlauf
-                    ┌────────────▼─────────────┐
-                    │ OpenStreetMap / OSRM     │
-                    └────────────┬─────────────┘
-                                 │  Daten werden im Repository gespeichert
-                    ┌────────────▼─────────────┐
-                    │ GitHub Pages (Webapp)    │ ◄── Safari auf iPhone / iPad
-                    └──────────────────────────┘
-```
+Jede Nacht um 04:17 (Winterzeit) bzw. 05:17 (Sommerzeit) startet **GitHub Actions** den Abruf:
+
+1. **YouTube Data API** (Google Cloud): Videos suchen, Beschreibungen und Kommentare lesen.
+2. **Webshare → YouTube**: Transkripte holen.
+3. **Anthropic Claude (Haiku)**: Übernachtungsplätze herauslesen.
+4. **OpenStreetMap / OSRM**: Ortsnamen in Koordinaten umwandeln, Routenverlauf berechnen.
+5. **GitHub**: Daten speichern und die Webapp über **GitHub Pages** neu veröffentlichen.
+6. **Safari auf iPhone/iPad** lädt die Webapp mit den neuen Plätzen.
+
+In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den Stand der Läufe, die aufgelaufenen Kosten und dieses Handbuch.
 
 ### Plattformen und ihre Rolle
 
@@ -113,7 +102,7 @@ Unter **Actions → Plätze aktualisieren → Run workflow** gibt es drei Felder
 - **Webshare:** Ist das Volumen aufgebraucht, kommen keine Transkripte mehr durch. Es entstehen keine Zusatzkosten.
 - **App:** `max_videos_per_run` in `config.json` begrenzt die Auswertungen pro Nacht.
 
-Die effektiven Kosten jedes Laufs stehen in `docs/data/<ziel>/meta.json` unter `history` → `cost_usd`.
+Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → Kosten**. Grundlage ist das Kostenbuch `docs/data/kosten.json`: Jeder Abruf, jede Anfrage und jeder Modellvergleich trägt dort Tokens, Kosten und YouTube-Einheiten ein. Die Webshare-Kosten stehen als Abo in `config.json` unter `fixkosten`. Ändert sich das Paket, passen Sie dort den Betrag an.
 
 ---
 
@@ -123,10 +112,11 @@ Die effektiven Kosten jedes Laufs stehen in `docs/data/<ziel>/meta.json` unter `
 
 | Prüfen | Wo | Worauf achten |
 |---|---|---|
-| Läufe | Repository → **Actions** | Alle grün? Rote Läufe öffnen und den Fehler lesen, siehe 4.3 |
+| Läufe | Webapp → **i → Läufe** oder Repository → **Actions** | Alle grün? Rote Läufe öffnen und den Fehler lesen, siehe 4.3 |
 | Anthropic-Guthaben | console.anthropic.com → **Billing** | genug Guthaben? Wenn es leer ist, bricht die Auswertung ab |
 | Webshare-Volumen | dashboard.webshare.io → **Dashboard** | Wie viel ist verbraucht? Über 80 % → grösseres Paket |
-| Transkripte | `docs/data/marokko/meta.json` → letzter Eintrag unter `transcripts` | `ok` sollte die meisten Videos ausmachen, nicht `blockiert` |
+| Transkripte | Webapp → **i → Läufe** → «Transkripte ok» | sollte die meisten Videos ausmachen, nicht «blockiert» |
+| Kosten | Webapp → **i → Kosten** | Entwicklung pro Monat und Plattform |
 | App | in Safari öffnen | Gibt es neue Plätze? Stimmt das Datum unter «i»? |
 
 ### 4.2 Inhalte anpassen

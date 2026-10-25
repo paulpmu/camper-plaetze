@@ -210,3 +210,42 @@ button.brand { border: 0; background: none; padding: 0; text-align: left; }
 .route-swatch { display: inline-block; width: 18px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
 button.brand strong { font-size: 17px; color: var(--text); }
 button.brand #count { font-size: 12px; }
+
+/* Info & Betrieb */
+.tabs { margin: 4px 52px 14px 0; }
+.tabs button { font-size: 14px; padding: 8px 0; }
+.tab-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.btn.small { flex: none; padding: 7px 12px; font-size: 13px; border-radius: 10px; }
+.tbl-wrap { overflow-x: auto; margin: 8px 0 14px; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tbl th, .tbl td { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl th { color: var(--muted); font-weight: 600; font-size: 12px; }
+.tbl td.num, .tbl th.num { text-align: right; white-space: nowrap; }
+.tbl tr.sum td { font-weight: 700; border-top: 2px solid var(--line); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 10px 0; }
+.kpi { background: var(--bg); border-radius: 12px; padding: 10px 12px; }
+.kpi b { display: block; font-size: 20px; }
+.kpi span { font-size: 12px; color: var(--muted); }
+.run { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); }
+.run .st { flex: none; }
+.run .rt { font-weight: 600; font-size: 14px; }
+.run .rs { font-size: 12px; color: var(--muted); }
+.st { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 8px; white-space: nowrap; }
+.st.laeuft { background: #dbe9fb; color: #1f5fa8; }
+.st.fehler { background: #fadbd8; color: #a3271b; }
+.st.neutral { background: var(--bg); color: var(--muted); }
+.pulse { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .45; } }
+.md { font-size: 15px; overflow-wrap: anywhere; }
+.md h1 { font-size: 22px; margin: 4px 52px 8px 0; }
+.md h2 { font-size: 18px; margin: 22px 0 8px; }
+.md h3 { font-size: 16px; margin: 18px 0 6px; }
+.md table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+.md th, .md td { border-bottom: 1px solid var(--line); padding: 6px; text-align: left; vertical-align: top; }
+.md pre { background: var(--bg); padding: 10px; border-radius: 10px; overflow-x: auto; font-size: 10px; line-height: 1.25; }
+.md code { font-size: 13px; background: var(--bg); padding: 1px 4px; border-radius: 4px; }
+.md pre code { background: none; padding: 0; font-size: inherit; }
+.md hr { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+.zs { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.zs .kpis { grid-template-columns: 1fr 1fr; }
+.zs .kpi b { font-size: 17px; }

@@ -12,5 +12,8 @@
   "max_comments": 40,
   "max_transcript_chars": 150000,
   "merge_distance_m": 300,
-  "route_corridor_km": 50
+  "route_corridor_km": 50,
+  "fixkosten": [
+    {"name": "Webshare Rotating Residential (1 GB)", "plattform": "Webshare", "usd_pro_monat": 3.5, "seit": "2026-10"}
+  ]
 }

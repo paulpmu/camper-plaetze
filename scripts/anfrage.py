@@ -18,10 +18,9 @@ import anthropic
 import requests
 from pydantic import BaseModel, Field
 
-from common import CONFIG, ID_RE, ZIELE_DIR, load_destinations, log, save_json
+from common import CONFIG, FALLBACK_MODELS, ID_RE, ZIELE_DIR, book, load_destinations, log, save_json
 
 OUT_DIR = Path("/tmp/anfrage")
-FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-fable-5-1", "claude-sonnet-5-5"}
 
 
 class Region(BaseModel):
@@ -140,6 +139,7 @@ def main():
                                 messages=[{"role": "user", "content": prompt}],
                                 output_format=Result, output_config={"effort": "high"}, **kwargs) as stream:
         resp = stream.get_final_message()
+    book("anfrage", model, resp.usage.input_tokens, resp.usage.output_tokens, note=f"Anfrage #{number}")
     if resp.stop_reason in ("refusal", "max_tokens") or not resp.parsed_output:
         reply, action, did, close = "Die Anfrage konnte nicht automatisch verarbeitet werden.", "fehler", "", "false"
     else:

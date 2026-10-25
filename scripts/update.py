@@ -32,18 +32,10 @@ import anthropic
 import requests
 from pydantic import BaseModel, Field, create_model
 
-from common import (CONFIG, DATA_DIR, REPO, ROOT, UA, WEB_DATA, Geocoder, annotate_routes, build_routes,
-                    haversine_km, in_bbox, load_destinations, load_json, log, save_json)
+from common import (CONFIG, DATA_DIR, FALLBACK_MODELS, REPO, ROOT, UA, WEB_DATA, Geocoder, annotate_routes, book,
+                    build_routes, cost_usd, haversine_km, in_bbox, load_destinations, load_json, log, save_json)
 
 YT_API = "https://www.googleapis.com/youtube/v3"
-
-# Preise pro Million Tokens (Input, Output) für die Kostenschätzung in meta.json
-PRICES = {
-    "claude-opus-5-5": (4.0, 20.0),
-    "claude-sonnet-5-5": (2.0, 10.0),
-    "claude-haiku-5-5": (0.10, 0.50),
-}
-FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-fable-5-1", "claude-sonnet-5-5"}
 
 
 def now_utc() -> dt.datetime:
@@ -311,8 +303,7 @@ class Claude:
         return resp.parsed_output
 
     def cost_usd(self) -> float:
-        pin, pout = PRICES.get(self.model, (4.0, 20.0))
-        return round((self.tokens_in * pin + self.tokens_out * pout) / 1e6, 4)
+        return cost_usd(self.model, self.tokens_in, self.tokens_out)
 
 
 # --------------------------------------------------------------------------- iOverlander
@@ -613,8 +604,10 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
         "transcripts": stats["transcripts"], "youtube_units": (yt.units if yt else 0) - units_before,
         "claude_tokens": [claude.tokens_in - tin, claude.tokens_out - tout], "model": claude.model,
     }
-    pin, pout = PRICES.get(claude.model, (4.0, 20.0))
-    run["cost_usd"] = round((run["claude_tokens"][0] * pin + run["claude_tokens"][1] * pout) / 1e6, 4)
+    run["cost_usd"] = cost_usd(claude.model, *run["claude_tokens"])
+    # Vor dem Speichern von meta.json buchen, damit das einmalige Übernehmen alter Läufe nichts doppelt zählt
+    book("abruf", claude.model, *run["claude_tokens"], ziel=did, youtube_units=run["youtube_units"],
+         videos=stats["videos"])
     save_json(meta_file, {
         "last_run": run["date"], "spots": len(spots),
         "videos_total": sum(1 for x in state["videos"].values() if "transcript" in x),
@@ -636,9 +629,12 @@ def write_index():
             "regions": [r["name"] for r in d["regions"]],
             "routes": [{k: r[k] for k in ("id", "name", "color", "length_km")} for r in routes],
             "spots": meta.get("spots", 0), "last_run": meta.get("last_run"), "queue": meta.get("queue", 0),
-            "videos_total": meta.get("videos_total", 0),
+            "videos_total": meta.get("videos_total", 0), "last": (meta.get("history") or [None])[-1],
         })
-    save_json(WEB_DATA / "ziele.json", {"repo": REPO, "ziele": index})
+    save_json(WEB_DATA / "ziele.json", {
+        "repo": REPO, "ziele": index, "model": CONFIG["claude_model"],
+        "fixkosten": CONFIG.get("fixkosten", []), "youtube_budget": CONFIG["youtube_daily_budget"],
+    })
 
 
 # --------------------------------------------------------------------------- Vergleich
@@ -688,6 +684,9 @@ def compare(dests: list[dict], n: int, yt: YouTube | None):
     lines += ["## Kosten", "", "| Modell | Tokens ein | Tokens aus | USD |", "|---|---|---|---|",
               f"| {a.model} | {a.tokens_in} | {a.tokens_out} | {a.cost_usd()} |",
               f"| {b.model} | {b.tokens_in} | {b.tokens_out} | {b.cost_usd()} |"]
+    for c in (a, b):
+        book("vergleich", c.model, c.tokens_in, c.tokens_out, ziel=",".join(d["id"] for d in dests),
+             youtube_units=yt.units if yt and c is a else 0)
     report = "\n".join(lines) + "\n"
     out = ROOT / "berichte" / f"vergleich-{dt.date.today()}.md"
     out.parent.mkdir(exist_ok=True)

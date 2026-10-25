@@ -130,26 +130,49 @@
   </div>
 </section>
 
-<!-- Info -->
-<section id="sheet-info" class="sheet" hidden>
+<!-- Info & Betrieb -->
+<section id="sheet-info" class="sheet tall" hidden>
   <div class="grab"></div>
   <button class="close" data-close aria-label="Schliessen">✕</button>
-  <h2>Über diese Karte</h2>
-  <p>Die Plätze stammen aus aktuellen YouTube-Reisevideos von Camper-Overlandern. Sie werden täglich automatisch aktualisiert. Oben links wechseln Sie das Ziel oder fügen ein neues hinzu.</p>
-  <p><strong>Wichtig:</strong> Die Bewertungen geben die subjektiven Aussagen der YouTuber wieder und sind keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie deshalb auf das Videodatum.</p>
-  <p>«Ungefährer Standort» bedeutet, dass nur der Ort bekannt ist. Der Platz kann einige Kilometer entfernt liegen.</p>
-  <div class="legend">
-    <span><i class="lg wildplatz"></i>Wildplatz</span>
-    <span><i class="lg camping"></i>Camping</span>
-    <span><i class="lg stellplatz"></i>Stellplatz</span>
-    <span><i class="lg andere"></i>Andere</span>
+  <div class="seg tabs" id="info-tabs">
+    <button data-tab="info" class="on">Info</button><button data-tab="laeufe">Läufe</button><button data-tab="kosten">Kosten</button><button data-tab="handbuch">Handbuch</button>
   </div>
-  <p id="meta" class="muted"></p>
-  <p class="muted">Kartendaten © OpenStreetMap-Mitwirkende · Routen © OSRM</p>
+
+  <div class="tab" data-tab="info">
+    <h2>Über diese Karte</h2>
+    <p>Die Plätze stammen aus aktuellen YouTube-Reisevideos von Camper-Overlandern. Sie werden täglich automatisch aktualisiert. Oben links wechseln Sie das Ziel oder fügen ein neues hinzu.</p>
+    <p><strong>Wichtig:</strong> Die Bewertungen geben die subjektiven Aussagen der YouTuber wieder und sind keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie deshalb auf das Videodatum.</p>
+    <p>«Ungefährer Standort» bedeutet, dass nur der Ort bekannt ist. Der Platz kann einige Kilometer entfernt liegen.</p>
+    <div class="legend">
+      <span><i class="lg wildplatz"></i>Wildplatz</span>
+      <span><i class="lg camping"></i>Camping</span>
+      <span><i class="lg stellplatz"></i>Stellplatz</span>
+      <span><i class="lg andere"></i>Andere</span>
+    </div>
+    <p id="meta" class="muted"></p>
+    <p class="muted">Kartendaten © OpenStreetMap-Mitwirkende · Routen © OSRM</p>
+  </div>
+
+  <div class="tab" data-tab="laeufe" hidden>
+    <div class="tab-head"><h2>Läufe</h2><button class="btn ghost small" data-reload="laeufe">Aktualisieren</button></div>
+    <div id="runs"></div>
+    <h4>Letzter Abruf pro Ziel</h4>
+    <div id="ziel-status"></div>
+  </div>
+
+  <div class="tab" data-tab="kosten" hidden>
+    <div class="tab-head"><h2>Kosten</h2><button class="btn ghost small" data-reload="kosten">Aktualisieren</button></div>
+    <div id="kosten"></div>
+  </div>
+
+  <div class="tab" data-tab="handbuch" hidden>
+    <div id="handbuch" class="md"><p class="muted">lädt …</p></div>
+  </div>
 </section>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="app.js"></script>
+<script src="betrieb.js"></script>
 </body>
 </html>

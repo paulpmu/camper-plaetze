@@ -21,6 +21,15 @@ GEOCACHE_FILE = DATA_DIR / "geocache.json"
 REPO = os.getenv("GITHUB_REPOSITORY", "")
 UA = f"camper-plaetze/1.0 (https://github.com/{REPO or 'camper-plaetze'})"
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,30}$")
+LEDGER_FILE = WEB_DATA / "kosten.json"
+
+# Preise pro Million Tokens (Input, Output) für das Kostenbuch
+PRICES = {
+    "claude-opus-5-5": (4.0, 20.0),
+    "claude-sonnet-5-5": (2.0, 10.0),
+    "claude-haiku-5-5": (0.10, 0.50),
+}
+FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-fable-5-1", "claude-sonnet-5-5"}
 
 
 def log(*a):
@@ -50,6 +59,39 @@ def load_destinations(only_active=True) -> list[dict]:
         if d.get("active", True) or not only_active:
             out.append(d)
     return out
+
+
+def cost_usd(model: str, tokens_in: int, tokens_out: int) -> float:
+    pin, pout = PRICES.get(model, (4.0, 20.0))
+    return round((tokens_in * pin + tokens_out * pout) / 1e6, 4)
+
+
+def book(kind: str, model: str, tokens_in: int, tokens_out: int, ziel: str = "", youtube_units: int = 0,
+         videos: int = 0, note: str = ""):
+    """Eintrag ins Kostenbuch docs/data/kosten.json (wird von der Webapp ausgewertet)."""
+    import datetime as dt
+
+    ledger = load_json(LEDGER_FILE, None)
+    if ledger is None:
+        ledger = _seed_ledger()
+    ledger.append({
+        "date": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "kind": kind, "ziel": ziel,
+        "model": model, "tokens": [tokens_in, tokens_out], "usd": cost_usd(model, tokens_in, tokens_out),
+        "youtube_units": youtube_units, "videos": videos, "note": note,
+    })
+    save_json(LEDGER_FILE, ledger, compact=True)
+
+
+def _seed_ledger() -> list[dict]:
+    """Einmalig: Läufe aus der Zeit vor dem Kostenbuch aus den meta.json-Verläufen übernehmen."""
+    out = []
+    for meta_file in WEB_DATA.glob("*/meta.json"):
+        for run in load_json(meta_file, {}).get("history", []):
+            tin, tout = run.get("claude_tokens", [0, 0])
+            out.append({"date": run["date"], "kind": "abruf", "ziel": meta_file.parent.name,
+                        "model": run.get("model", ""), "tokens": [tin, tout], "usd": run.get("cost_usd", 0),
+                        "youtube_units": run.get("youtube_units", 0), "videos": run.get("videos", 0), "note": ""})
+    return sorted(out, key=lambda e: e["date"])
 
 
 # --------------------------------------------------------------------------- Geodaten

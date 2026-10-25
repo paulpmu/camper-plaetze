@@ -77,8 +77,10 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Zielübersicht aktualisieren
-        run: python scripts/update.py --nur-index
+      - name: Zielübersicht und Handbuch für die Webapp
+        run: |
+          python scripts/update.py --nur-index
+          cp BETRIEB.md docs/handbuch.md
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
       - uses: actions/configure-pages@v5
