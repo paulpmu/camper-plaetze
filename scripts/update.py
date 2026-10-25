@@ -319,7 +319,27 @@ class Claude:
 
 # --------------------------------------------------------------------------- OpenStreetMap
 
-OVERPASS = "https://overpass-api.de/api/interpreter"
+OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+OSM_ERRORS: dict[str, str] = {}  # letzte Fehlermeldung pro Ziel, landet in meta.json
+
+
+def overpass(query: str) -> list[dict]:
+    """Overpass-Abfrage mit Wiederholung bei Überlastung und Ersatzserver."""
+    last = ""
+    for url in OVERPASS:
+        for attempt in range(3):
+            try:
+                r = requests.post(url, data={"data": query}, headers={"User-Agent": UA}, timeout=240)
+                if r.status_code in (429, 502, 503, 504):
+                    last = f"{url}: HTTP {r.status_code}"
+                    time.sleep(20 * (attempt + 1))
+                    continue
+                r.raise_for_status()
+                return r.json().get("elements", [])
+            except (requests.RequestException, ValueError) as ex:
+                last = f"{url}: {type(ex).__name__} {ex}"[:300]
+                time.sleep(10)
+    raise RuntimeError(last)
 
 
 def _yes(v) -> bool | None:
@@ -331,45 +351,58 @@ def _yes(v) -> bool | None:
 def fetch_osm(dest: dict) -> list[dict] | None:
     """Wohnmobil-Stellplätze (tourism=caravan_site) aus OpenStreetMap, je Gebiet aus dest['osm_areas'].
 
-    Gibt None zurück, wenn eine Abfrage scheitert – dann bleibt die bisherige Datei unverändert."""
-    spots = []
+    Eine einzige Abfrage für alle Gebiete; nach jedem Gebiet markiert ein «marker»-Element die Grenze.
+    Gibt None zurück, wenn die Abfrage scheitert – dann bleibt die bisherige Datei unverändert."""
+    parts = ["[out:json][timeout:200];"]
     for area in dest.get("osm_areas", []):
         sel = (f'["ISO3166-2"="{area["code"]}"]' if "-" in area["code"]
                else f'["ISO3166-1"="{area["code"]}"]["admin_level"="2"]')
-        query = f'[out:json][timeout:120];area{sel}->.a;nwr["tourism"="caravan_site"](area.a);out center tags;'
-        try:
-            r = requests.post(OVERPASS, data={"data": query}, headers={"User-Agent": UA}, timeout=180)
-            r.raise_for_status()
-            elements = r.json().get("elements", [])
-        except (requests.RequestException, ValueError) as ex:
-            log(f"  OpenStreetMap {area['code']} fehlgeschlagen: {ex}")
-            return None
-        for e in elements:
-            lat = e.get("lat", (e.get("center") or {}).get("lat"))
-            lng = e.get("lon", (e.get("center") or {}).get("lon"))
-            if lat is None or lng is None:
-                continue
-            t = e.get("tags", {})
-            spots.append({
-                "id": f"osm-{e['type'][0]}{e['id']}", "source": "osm", "osm": f"{e['type']}/{e['id']}",
-                "name": t.get("name") or t.get("operator") or "Wohnmobil-Stellplatz",
-                "place": t.get("addr:city") or t.get("addr:place") or "", "poi": "",
-                "lat": round(lat, 5), "lng": round(lng, 5), "precision": "exakt",
-                "region": area["region"], "type": "stellplatz",
-                "infrastructure": {
-                    "water": _yes(t.get("drinking_water") or t.get("water_point")),
-                    "dump_station": _yes(t.get("sanitary_dump_station")),
-                    "electricity": _yes(t.get("power_supply")),
-                    "toilets": _yes(t.get("toilets")), "showers": _yes(t.get("shower")),
-                },
-                "four_wd": None, "police_contact": None, "access_note": "", "safety_note": "",
-                "price": ("gratis" if t.get("fee") == "no" else t.get("charge", "")) or ("kostenpflichtig" if t.get("fee") == "yes" else ""),
-                "capacity": t.get("capacity", ""), "opening_hours": t.get("opening_hours", ""),
-                "operator": t.get("operator", ""), "website": t.get("website") or t.get("contact:website", ""),
-                "description": t.get("description:de") or t.get("description", ""),
-                "rating": None, "mentions": [],
-            })
-        time.sleep(1)  # Overpass schonen
+        parts.append(f'area{sel}->.a;nwr["tourism"="caravan_site"](area.a);out center tags;'
+                     f'make marker code="{area["code"]}";out;')
+    try:
+        elements = overpass("".join(parts))
+    except RuntimeError as ex:
+        OSM_ERRORS[dest["id"]] = str(ex)
+        log(f"  OpenStreetMap fehlgeschlagen: {ex}")
+        return None
+    region_of = {a["code"]: a["region"] for a in dest["osm_areas"]}
+    spots, pending, seen = [], [], set()
+    for e in elements:
+        if e.get("type") == "marker":
+            region = region_of.get(e.get("tags", {}).get("code"), "")
+            for p in pending:
+                p["region"] = region
+            spots += pending
+            pending = []
+            continue
+        lat = e.get("lat", (e.get("center") or {}).get("lat"))
+        lng = e.get("lon", (e.get("center") or {}).get("lon"))
+        key = f"{e['type']}/{e['id']}"
+        if lat is None or lng is None or key in seen:
+            continue
+        seen.add(key)
+        t = e.get("tags", {})
+        pending.append({
+            "id": f"osm-{e['type'][0]}{e['id']}", "source": "osm", "osm": key,
+            "name": t.get("name") or t.get("operator") or "Wohnmobil-Stellplatz",
+            "place": t.get("addr:city") or t.get("addr:place") or "", "poi": "",
+            "lat": round(lat, 5), "lng": round(lng, 5), "precision": "exakt",
+            "region": "", "type": "stellplatz",
+            "infrastructure": {
+                "water": _yes(t.get("drinking_water") or t.get("water_point")),
+                "dump_station": _yes(t.get("sanitary_dump_station")),
+                "electricity": _yes(t.get("power_supply")),
+                "toilets": _yes(t.get("toilets")), "showers": _yes(t.get("shower")),
+            },
+            "four_wd": None, "police_contact": None, "access_note": "", "safety_note": "",
+            "price": ("gratis" if t.get("fee") == "no" else t.get("charge", "")) or ("kostenpflichtig" if t.get("fee") == "yes" else ""),
+            "capacity": t.get("capacity", ""), "opening_hours": t.get("opening_hours", ""),
+            "operator": t.get("operator", ""), "website": t.get("website") or t.get("contact:website", ""),
+            "description": t.get("description:de") or t.get("description", ""),
+            "rating": None, "mentions": [],
+        })
+    spots += pending  # falls der letzte Marker fehlt
+    OSM_ERRORS.pop(dest["id"], None)
     log(f"  OpenStreetMap: {len(spots)} Stellplätze")
     return spots
 
@@ -679,6 +712,7 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
         "last_run": run["date"], "spots": len(spots),
         "videos_total": sum(1 for x in state["videos"].values() if "transcript" in x),
         "queue": len(state["queue"]), "history": meta.get("history", [])[-59:] + [run],
+        "osm_error": OSM_ERRORS.get(did),
     })
     log(f"  Fertig: {stats['videos']} Videos, {stats['spots_new']} neue Plätze, {len(spots)} total, "
         f"Transkripte {stats['transcripts']}, ca. {run['cost_usd']} USD")
