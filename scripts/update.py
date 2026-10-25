@@ -164,6 +164,10 @@ def transcript_client():
     return YouTubeTranscriptApi(proxy_config=proxy)
 
 
+def proxy_configured() -> bool:
+    return bool((os.getenv("WEBSHARE_USER") and os.getenv("WEBSHARE_PASS")) or os.getenv("TRANSCRIPT_PROXY_URL"))
+
+
 def fetch_transcript(api, video_id: str, languages: list[str]) -> tuple[str | None, str]:
     """Gibt (Text mit Zeitmarken, Status) zurück. Status: ok, keins, blockiert, fehler."""
     from youtube_transcript_api import _errors as E
@@ -480,6 +484,29 @@ def collect_candidates(dest: dict, yt: YouTube | None, state: dict, search: bool
     log(f"  Warteschlange: +{added}, total {len(state['queue'])}")
 
 
+def requeue_blocked(state: dict, yt: YouTube, limit: int = 200):
+    """Mit Proxy: Videos, deren Transkript früher blockiert war, einmal mit Transkript neu auswerten."""
+    ids = [vid for vid, r in state["videos"].items()
+           if r.get("transcript") == "blockiert" and not r.get("retried") and vid not in state["queue"]][:limit]
+    if not ids:
+        return
+    for item in yt.videos(ids):
+        sn = item["snippet"]
+        state["queue"][item["id"]] = {
+            "id": item["id"], "title": sn.get("title", ""), "channel": sn.get("channelTitle", ""),
+            "published": sn.get("publishedAt", "")[:10], "description": sn.get("description", ""),
+            "duration": parse_duration(item["contentDetails"].get("duration")), "retry": True,
+        }
+    log(f"  Nachholen mit Transkript: {len(ids)} Videos erneut in der Warteschlange")
+
+
+def remove_mentions(spots: list[dict], video_id: str):
+    """Erwähnungen eines Videos entfernen; Plätze ohne Erwähnung fallen weg."""
+    for s in spots:
+        s["mentions"] = [m for m in s["mentions"] if m["video_id"] != video_id]
+    spots[:] = [s for s in spots if s["mentions"]]
+
+
 def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder, ioverlander: list[dict]):
     if sp.latitude is not None and sp.longitude is not None and in_bbox(sp.latitude, sp.longitude, dest["bbox"]):
         lat, lng, precision = sp.latitude, sp.longitude, "exakt"
@@ -520,6 +547,8 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     units_before, tin, tout = (yt.units if yt else 0), claude.tokens_in, claude.tokens_out
 
     collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
+    if yt and proxy_configured():
+        requeue_blocked(state, yt)
 
     schema = extraction_model(dest)
     limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"])
@@ -549,8 +578,12 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
 
         del state["queue"][v["id"]]
         stats["videos"] += 1
+        if v.get("retry"):
+            remove_mentions(spots, v["id"])
         record = {"title": v["title"], "channel": v["channel"], "published": v["published"],
                   "transcript": tstatus, "spots": 0}
+        if v.get("retry"):
+            record["retried"] = True
         state["videos"][v["id"]] = record
         if not result or not result.relevant:
             record["skipped"] = "irrelevant" if result else "abgelehnt"

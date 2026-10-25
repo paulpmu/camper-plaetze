@@ -89,6 +89,8 @@ YouTube sperrt solche Abrufe von GitHub-Servern häufig. Das Video wird dann ohn
 | `WEBSHARE_USER` / `WEBSHARE_PASS` | Proxy-Benutzername und -Passwort von Webshare |
 | `TRANSCRIPT_PROXY_URL` | alternativ ein beliebiger Proxy: `http://user:pass@host:port` |
 
+Sobald ein Proxy eingetragen ist, wertet die App alle Videos, deren Transkript früher blockiert war, automatisch einmal neu aus. Die alten Plätze dieser Videos werden dabei ersetzt.
+
 ## Einstellungen: `config.json`
 
 | Feld | Bedeutung |
