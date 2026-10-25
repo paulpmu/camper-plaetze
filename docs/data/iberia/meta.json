@@ -1,0 +1,26 @@
+{
+ "last_run": "2026-10-25T17:50:26Z",
+ "spots": 49,
+ "videos_total": 40,
+ "queue": 406,
+ "history": [
+  {
+   "date": "2026-10-25T17:50:26Z",
+   "videos": 40,
+   "spots_new": 49,
+   "transcripts": {
+    "ok": 40,
+    "keins": 0,
+    "blockiert": 0,
+    "fehler": 0
+   },
+   "youtube_units": 2459,
+   "claude_tokens": [
+    481080,
+    66295
+   ],
+   "model": "claude-haiku-5-5",
+   "cost_usd": 0.0813
+  }
+ ]
+}

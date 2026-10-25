@@ -62,5 +62,338 @@
  "ma,eh|zagora": [
   30.3279053,
   -5.8369957
+ ],
+ "es,pt|praia das bicas, sines, alentejo": [
+  38.4647687,
+  -9.192498
+ ],
+ "es,pt|sines, alentejo": [
+  37.9858448,
+  -8.7812651
+ ],
+ "es,pt|algodonales, provinz cádiz": [
+  36.879693,
+  -5.4047755
+ ],
+ "es,pt|lapeza, sierra nevada, provinz granada": null,
+ "es,pt|jimena de la frontera, provinz cádiz": [
+  36.4327335,
+  -5.4527477
+ ],
+ "es,pt|umland von barcelona, katalonien": null,
+ "es,pt|foz de arouce, lousã, coimbra": [
+  40.158653,
+  -8.278448
+ ],
+ "es,pt|zwischen coimbra und lissabon, zentrum portugal": null,
+ "es,pt|batalha, leiria": [
+  39.6578998,
+  -8.8243713
+ ],
+ "es,pt|crato, portalegre": [
+  39.2851221,
+  -7.6454266
+ ],
+ "es,pt|teruel, aragón": [
+  40.6005259,
+  -0.9229282
+ ],
+ "es,pt|stausee bei teruel, aragón": null,
+ "es,pt|stausee, spanien (lage unklar, kommentar nennt la manga)": null,
+ "es,pt|algarve, portugal": [
+  37.2449218,
+  -8.1959563
+ ],
+ "es,pt|foz do sizandro, torres vedras": [
+  39.1094566,
+  -9.3960504
+ ],
+ "es,pt|benissa, alicante": [
+  38.7163735,
+  0.0534016
+ ],
+ "es,pt|archena, murcia": [
+  38.1178119,
+  -1.3025236
+ ],
+ "es,pt|úbeda, jaén": [
+  38.0111398,
+  -3.3719098
+ ],
+ "es,pt|osuna, sevilla": [
+  37.2373532,
+  -5.1033306
+ ],
+ "es,pt|antequera, málaga": [
+  37.0183652,
+  -4.5596649
+ ],
+ "es,pt|la vall d'uixó, castellón": [
+  39.8235837,
+  -0.2316995
+ ],
+ "es,pt|puerto lumbreras, murcia": [
+  37.5635045,
+  -1.8076233
+ ],
+ "es,pt|el grao de moncofa, castellón": [
+  39.7979847,
+  -0.1321222
+ ],
+ "es,pt|los alcázares, murcia (mar menor)": [
+  37.7480488,
+  -0.8648602
+ ],
+ "es,pt|lissabon, lisboa": [
+  38.7077507,
+  -9.1365919
+ ],
+ "es,pt|apúlia, esposende, minho": [
+  41.4824433,
+  -8.7651879
+ ],
+ "es,pt|oeiras, lissabon": [
+  38.6925777,
+  -9.3123076
+ ],
+ "es,pt|cabo da roca, sintra": [
+  38.7809045,
+  -9.4994163
+ ],
+ "es,pt|praia das maçãs, sintra": [
+  38.825643,
+  -9.4629412
+ ],
+ "es,pt|lousã, coimbra": [
+  40.111052,
+  -8.2460668
+ ],
+ "es,pt|son serra de marina, mallorca": [
+  39.7359615,
+  3.2235713
+ ],
+ "es,pt|atlantikküste, nordspanien (ort nicht genannt)": null,
+ "es,pt|kleinstadt an der nordküste, spanien (name nicht genannt)": null,
+ "es,pt|bucht an der nordküste, spanien (name nicht genannt)": null,
+ "es,pt|vera playa, vera, almería": [
+  37.2282081,
+  -1.8025371
+ ],
+ "es,pt|benidorm, costa blanca": [
+  38.5608323,
+  -0.0920015
+ ],
+ "es,pt|bragança, trás-os-montes": [
+  41.4576442,
+  -7.1542194
+ ],
+ "es,pt|raposeira, peneda-gerês nationalpark": [
+  32.7570409,
+  -17.2205326
+ ],
+ "es,pt|braga, minho": [
+  41.7360007,
+  -8.346108
+ ],
+ "es,pt|grenze zu gibraltar, la línea de la concepción, cádiz": null,
+ "es,pt|góis, coimbra": [
+  40.1546195,
+  -8.1099454
+ ],
+ "es,pt|roses, costa brava": [
+  42.2632018,
+  3.1755328
+ ],
+ "es,pt|ancora, portugal": [
+  41.7959527,
+  -8.8510326
+ ],
+ "es,pt|villa chão, nordportugal": [
+  42.8451617,
+  -8.0406231
+ ],
+ "es,pt|strand 10 km südlich von porto, matosinhos-küste": null,
+ "es,pt|campingplatz in portugal, küstenregion (ort nicht genannt)": null,
+ "es,pt|nazaré, zentrum portugal": [
+  39.6029108,
+  -9.0701572
+ ],
+ "es,pt|schleuse, kastilien und león": null,
+ "es,pt|osichos, palencia": null,
+ "es,pt|la marina, alicante, costa blanca": [
+  38.5789908,
+  -0.093477
+ ],
+ "es,pt|torre la sal, castellón, costa del azahar": [
+  40.1308276,
+  0.1631257
+ ],
+ "es,pt|guardamar del segura, alicante, costa blanca": [
+  38.0899985,
+  -0.65381
+ ],
+ "es,pt|murcia, costa cálida": [
+  37.4333128,
+  -1.500491
+ ],
+ "es,pt|andalusien": [
+  37.3399964,
+  -4.5811614
+ ],
+ "es,pt|mazarrón, murcia, costa cálida": [
+  37.5629708,
+  -1.2615782
+ ],
+ "es,pt|costa del sol, andalusien": [
+  36.7236437,
+  -4.1296936
+ ],
+ "es,pt|alhama de murcia, murcia, costa cálida": [
+  37.8515145,
+  -1.4251045
+ ],
+ "es,pt|monsanto, castelo branco": [
+  40.0356955,
+  -7.1145351
+ ],
+ "es,pt|umgebung monsanto, castelo branco": null,
+ "es,pt|umgebung castelo branco, beira baixa": null,
+ "es,pt|hügel bei castelo branco, beira baixa": null,
+ "es,pt|la jonquera": [
+  42.4340121,
+  2.8645567
+ ],
+ "es,pt|barcelona": [
+  41.3825802,
+  2.177073
+ ],
+ "es,pt|valencia": [
+  39.4697065,
+  -0.3763353
+ ],
+ "es,pt|alicante": [
+  38.3436365,
+  -0.4881708
+ ],
+ "es,pt|almería": [
+  36.8685739,
+  -2.3120282
+ ],
+ "es,pt|málaga": [
+  36.7647913,
+  -4.4422005
+ ],
+ "es,pt|algeciras": [
+  36.1311725,
+  -5.4473991
+ ],
+ "es,pt|tarifa": [
+  36.0129082,
+  -5.6050213
+ ],
+ "es,pt|cádiz": [
+  36.5297438,
+  -6.2928976
+ ],
+ "es,pt|huelva": [
+  37.2575874,
+  -6.9484945
+ ],
+ "es,pt|faro": [
+  37.0162944,
+  -7.935182
+ ],
+ "es,pt|sagres": [
+  37.0078288,
+  -8.941924
+ ],
+ "es,pt|lissabon": [
+  38.7077507,
+  -9.1365919
+ ],
+ "es,pt|porto": [
+  41.1502195,
+  -8.6103497
+ ],
+ "es,pt|santiago de compostela": [
+  42.9064576,
+  -8.5192983
+ ],
+ "es,pt|bilbao": [
+  43.2630018,
+  -2.9350039
+ ],
+ "ma,eh|mohammedia, casablanca": [
+  33.6958383,
+  -7.3893292
+ ],
+ "ma,eh|anti-atlas, gegend oase, marokko": [
+  30.1184766,
+  -8.2715446
+ ],
+ "ma,eh|hoher atlas, gegend schneefelder, marokko": [
+  32.3294894,
+  -5.4368736
+ ],
+ "ma,eh|hoher atlas, ca. 2700 m, marokko": [
+  32.3294894,
+  -5.4368736
+ ],
+ "ma,eh|zedernwald, mittlerer atlas (gegend azrou/ifrane), marokko": null,
+ "ma,eh|erg chebbi, merzouga": [
+  31.1382361,
+  -3.9707751
+ ],
+ "ma,eh|tanger, mittelmeer & rif": [
+  35.7694908,
+  -5.8044679
+ ],
+ "ma,eh|tanger, marokko": [
+  35.7694908,
+  -5.8044679
+ ],
+ "ma,eh|chefchaouen, marokko": [
+  35.1700832,
+  -5.2766583
+ ],
+ "ma,eh|lagadier (ca. 20 min. außerhalb), marokko": null,
+ "ma,eh|taghazout, agadir": [
+  30.5846695,
+  -9.6784988
+ ],
+ "ma,eh|guelmim, südwesten marokkos": [
+  28.9863852,
+  -10.0574351
+ ],
+ "ma,eh|foum zguid, antiatlas & draa": [
+  30.085933,
+  -6.874903
+ ],
+ "ma,eh|tafraout, antiatlas": [
+  34.845784,
+  -4.871343
+ ],
+ "ma,eh|landesinneres zwischen tafraout und tan-tan": null,
+ "ma,eh|plage blanche, tan-tan": [
+  28.4455337,
+  -11.1589932
+ ],
+ "ma,eh|küste zwischen plage blanche und sidi ifni, aglou-gebiet": null,
+ "ma,eh|legzira, sidi ifni": [
+  29.4464595,
+  -10.1156151
+ ],
+ "ma,eh|strand nördlich von legzira, südatlantik": null,
+ "ma,eh|region agadir": [
+  30.4016677,
+  -9.5892645
+ ],
+ "ma,eh|asilah": [
+  35.4555716,
+  -5.9216889
+ ],
+ "ma,eh|marrakesch, marokko": [
+  31.6258257,
+  -7.9891608
  ]
 }
