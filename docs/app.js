@@ -11,7 +11,7 @@
   };
   const SCHEDULE = { taeglich: "täglich", woechentlich: "wöchentlich", manuell: "nur manuell" };
   const WEEKDAY = ["", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-  const DEFAULT_FILTER = { region: "", route: "", corridor: 30, types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
+  const DEFAULT_FILTER = { region: "", route: "", corridor: 30, sources: ["youtube", "osm"], types: ["wildplatz", "camping", "stellplatz", "andere"], rating: 0, age: 365, infra: [], no4wd: false, exact: false, safe: false, q: "" };
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -45,7 +45,9 @@
   const cluster = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 45, spiderfyOnMaxZoom: true });
   map.addLayer(cluster);
 
+  const isOsm = (s) => s.source === "osm";
   function pinHtml(s) {
+    if (isOsm(s)) return `<div class="pin osm"><b>P</b></div>`;
     return `<div class="pin ${s.type} ${s.precision === "ort" || s.precision === "region" ? "approx" : ""}"><b>${s.rating.toFixed(1).replace(".0", "")}</b></div>`;
   }
   function icon(s) {
@@ -85,10 +87,13 @@
     $("#count").textContent = "lädt …";
     if (changed) { filter.region = ""; filter.route = ""; }
     try {
-      [spots, routes] = await Promise.all([
+      let osm;
+      [spots, routes, osm] = await Promise.all([
         getJson(`data/${id}/spots.json`).catch(() => []),
         getJson(`data/${id}/routes.json`).then((r) => r.routes || []).catch(() => []),
+        z.osm ? getJson(`data/${id}/osm.json`).catch(() => []) : [],
       ]);
+      spots = spots.concat(osm);
     } catch { spots = []; routes = []; }
     if (filter.region && !z.regions.includes(filter.region)) filter.region = "";
     if (filter.route && !routes.some((r) => r.id === filter.route)) filter.route = "";
@@ -155,8 +160,9 @@
     if (f.route) { const r = onRoute(s); if (!r || r[1] > f.corridor) return false; }
     if (f.region && s.region !== f.region) return false;
     if (!f.types.includes(s.type)) return false;
-    if (s.rating < f.rating) return false;
-    if (f.age && ageDays(s) > f.age) return false;
+    if (!f.sources.includes(isOsm(s) ? "osm" : "youtube")) return false;
+    if (f.rating && (s.rating == null || s.rating < f.rating)) return false;
+    if (f.age && !isOsm(s) && ageDays(s) > f.age) return false;
     if (f.infra.some((k) => s.infrastructure[k] !== true)) return false;
     if (f.no4wd && s.four_wd === true) return false;
     if (f.exact && s.precision !== "exakt" && s.precision !== "genau") return false;
@@ -197,13 +203,13 @@
     let label;
     if (filter.route) { items.sort((a, b) => a.r[0] - b.r[0]); label = "nach Streckenkilometer"; }
     else if (me) { items.sort((a, b) => a.d - b.d); label = "nach Entfernung"; }
-    else { items.sort((a, b) => b.s.rating - a.s.rating || b.s.last_seen.localeCompare(a.s.last_seen)); label = "nach Bewertung"; }
+    else { items.sort((a, b) => (b.s.rating ?? 0) - (a.s.rating ?? 0) || (b.s.last_seen || "").localeCompare(a.s.last_seen || "")); label = "nach Bewertung"; }
     $("#list-sort").textContent = label;
     $("#list").innerHTML = items.slice(0, 400).map(({ s, d, r }) => `
       <li data-id="${s.id}">
         ${pinHtml(s)}
         <div><div class="t">${esc(s.name)}</div><div class="s">${esc(TYPE_LABEL[s.type])} · ${esc(s.place)}</div></div>
-        <div class="r">${r ? `km ${r[0]}<br>${r[1]} km abseits` : (d != null ? Math.round(d) + " km<br>" : "") + fmtDate(s.last_seen)}</div>
+        <div class="r">${r ? `km ${r[0]}<br>${r[1]} km abseits` : (d != null ? Math.round(d) + " km<br>" : "") + (isOsm(s) ? "OpenStreetMap" : fmtDate(s.last_seen))}</div>
       </li>`).join("") + (regionOnly.length ? `<li class="group muted">Nur Region bekannt (${regionOnly.length})</li>` + regionOnly.map((s) => `
       <li data-id="${s.id}">
         ${pinHtml(s)}
@@ -235,6 +241,10 @@
       ["Sicherheit", [s.safety_rating ? `${s.safety_rating}/5` : "", s.safety_note].filter(Boolean).join(" – ")],
       ["Polizei", s.police_contact === true ? "Kontakt erwähnt" : s.police_contact === false ? "kein Kontakt" : ""],
       ["Preis", s.price],
+      ["Plätze", s.capacity],
+      ["Geöffnet", s.opening_hours],
+      ["Betreiber", s.operator],
+      ["Beschreibung", s.description],
     ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
 
     const routeInfo = routes.filter((r) => (s.routes || {})[r.id]).map((r) => {
@@ -258,14 +268,14 @@
     $("#detail").innerHTML = `
       <div class="d-head">
         <h3>${esc(s.name)}</h3>
-        <div class="muted">${esc(s.place)} · ${esc(s.region)}</div>
+        <div class="muted">${[s.place, s.region].filter(Boolean).map(esc).join(" · ")}</div>
       </div>
       <div class="badges">
         <span class="badge type ${s.type}">${TYPE_LABEL[s.type]}</span>
-        <span class="badge ${PRECISION[s.precision][1]}">${PRECISION[s.precision][0]}${s.coord_source ? " (" + esc(s.coord_source) + ")" : ""}</span>
-        ${ageDays(s) > 365 ? `<span class="badge warn">Info älter als 1 Jahr</span>` : ""}
+        ${isOsm(s) ? `<span class="badge">aus OpenStreetMap</span>` : `<span class="badge ${PRECISION[s.precision][1]}">${PRECISION[s.precision][0]}${s.coord_source ? " (" + esc(s.coord_source) + ")" : ""}</span>
+        ${ageDays(s) > 365 ? `<span class="badge warn">Info älter als 1 Jahr</span>` : ""}`}
       </div>
-      <div class="stars">${stars(s.rating)}<small>${s.rating.toFixed(1)} · ${s.mentions.length} ${s.mentions.length === 1 ? "Video" : "Videos"} · zuletzt ${fmtDate(s.last_seen)}</small></div>
+      ${isOsm(s) ? "" : `<div class="stars">${stars(s.rating)}<small>${s.rating.toFixed(1)} · ${s.mentions.length} ${s.mentions.length === 1 ? "Video" : "Videos"} · zuletzt ${fmtDate(s.last_seen)}</small></div>`}
       ${s.recommendation ? `<div class="reco">${esc(s.recommendation)}</div>` : ""}
       ${routeInfo}
       <div class="infra">${infra}</div>
@@ -274,10 +284,13 @@
         <a class="btn" href="https://maps.apple.com/?daddr=${ll}&q=${encodeURIComponent(s.name)}" target="_blank" rel="noopener">Apple Karten</a>
         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${ll}" target="_blank" rel="noopener">Google Maps</a>
         <a class="btn ghost" href="https://park4night.com/en/search?lat=${s.lat}&lng=${s.lng}&z=14" target="_blank" rel="noopener">park4night</a>
+        ${(ziel.links || []).map((l) => `<a class="btn ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)}</a>`).join("")}
+        ${s.website ? `<a class="btn ghost" href="${esc(s.website)}" target="_blank" rel="noopener">Website</a>` : ""}
+        ${isOsm(s) ? `<a class="btn ghost" href="https://www.openstreetmap.org/${esc(s.osm)}" target="_blank" rel="noopener">OpenStreetMap</a>` : ""}
         <button class="btn ghost" data-share>Teilen</button>
       </div>`}
-      <h4>Aus den Videos</h4>
-      ${mentions}`;
+      ${isOsm(s) ? `<p class="muted">Stellplatz aus OpenStreetMap. Angaben ohne Gewähr, Daten © OpenStreetMap-Mitwirkende (ODbL).</p>` : `<h4>Aus den Videos</h4>
+      ${mentions}`}`;
     const share = $("#detail [data-share]");
     if (share) share.onclick = () => {
       const url = location.href.split("#")[0] + "#" + ziel.id + "/" + s.id;
@@ -295,7 +308,7 @@
       <li data-id="${esc(z.id)}" class="${ziel && z.id === ziel.id ? "on" : ""}">
         <div class="zrow" data-select>
           <span>${esc(z.name)}</span>
-          <span class="r">${z.spots} Plätze${z.routes.length ? ` · ${z.routes.length} Routen` : ""}<br>${z.last_run ? "Stand " + new Date(z.last_run).toLocaleDateString("de-CH") : "noch kein Abruf"}</span>
+          <span class="r">${z.spots} Plätze${z.osm ? ` · ${z.osm} Stellplätze OSM` : ""}${z.routes.length ? ` · ${z.routes.length} Routen` : ""}<br>${z.last_run ? "Stand " + new Date(z.last_run).toLocaleDateString("de-CH") : "noch kein Abruf"}</span>
         </div>
         <div class="zctl">
           ${can ? `<select data-schedule aria-label="Zeitplan">
@@ -453,6 +466,7 @@
     $("#corridor-field").hidden = !filter.route;
     document.querySelectorAll("#f-corridor button").forEach((b) => b.classList.toggle("on", +b.dataset.v === filter.corridor));
     document.querySelectorAll("#f-type .chip").forEach((b) => b.classList.toggle("on", filter.types.includes(b.dataset.v)));
+    document.querySelectorAll("#f-source .chip").forEach((b) => b.classList.toggle("on", filter.sources.includes(b.dataset.v)));
     document.querySelectorAll("#f-infra .chip").forEach((b) => b.classList.toggle("on", filter.infra.includes(b.dataset.v)));
     document.querySelectorAll("#f-rating button").forEach((b) => b.classList.toggle("on", +b.dataset.v === filter.rating));
     document.querySelectorAll("#f-age button").forEach((b) => b.classList.toggle("on", +b.dataset.v === filter.age));
@@ -466,6 +480,7 @@
   $("#f-route").onchange = (e) => { filter.route = e.target.value; syncFilterUI(); drawRoutes(); render(); fitView(); };
   $("#f-corridor").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.corridor = +b.dataset.v; syncFilterUI(); render(); };
   $("#f-region").onchange = (e) => { filter.region = e.target.value; render(); fitView(); };
+  $("#f-source").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.sources = toggleIn(filter.sources, b.dataset.v); syncFilterUI(); render(); };
   $("#f-type").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.types = toggleIn(filter.types, b.dataset.v); syncFilterUI(); render(); };
   $("#f-infra").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.infra = toggleIn(filter.infra, b.dataset.v); syncFilterUI(); render(); };
   $("#f-rating").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.rating = +b.dataset.v; syncFilterUI(); render(); };

@@ -124,6 +124,16 @@ Jeder Platz hat eine von vier Genauigkeitsstufen:
 | **ungefähr** | nur der Ort ist bekannt, der Marker steht in der Ortsmitte | Marker gestrichelt |
 | **nur Region** | nur eine Gegend ist bekannt | nicht auf der Karte, nur in der Liste |
 
+### 2.7 Stellplätze aus OpenStreetMap und Zusatz-Links
+
+Ein Ziel kann neben den YouTube-Plätzen auch die offiziellen **Wohnmobil-Stellplätze aus OpenStreetMap** zeigen. Gemeint sind Einträge mit `tourism=caravan_site`, frei nutzbar unter der ODbL-Lizenz. Sie erscheinen als türkisfarbene «P»-Marker mit Gebühr, Ver- und Entsorgung, Strom, Plätzen, Öffnungszeiten und Website, soweit erfasst. Aktualisiert werden sie mit jedem Lauf des Ziels.
+
+- **Einschalten:** in der Zieldatei unter `osm_areas` die Gebiete eintragen (ISO-Code, z. B. `CH-BE` oder `NO`) und je einer Region zuordnen. Einfacher per Anfrage in der App, etwa «Bei Norwegen Stellplätze aus OpenStreetMap ergänzen».
+- **Zusatz-Links:** Unter `links` lassen sich pro Ziel Knöpfe hinterlegen, die bei jedem Platz erscheinen. Bei der Schweiz ist das **Wohnmobilland**, die Liste des Vereins Wohnmobilland Schweiz. Sie öffnet sich als Seite, die Daten werden nicht übernommen.
+- **Filter:** Unter **Filter → Quelle** blenden Sie YouTube-Plätze oder OpenStreetMap-Stellplätze ein und aus.
+
+Das Ziel **Schweiz** nutzt nur OpenStreetMap und den Wohnmobilland-Link, ohne YouTube-Suche. Wildcampen ist in der Schweiz meist verboten. YouTube-Suchbegriffe lassen sich jederzeit per Anfrage ergänzen.
+
 **park4night:** park4night bietet keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen den Knopf **park4night**. Er öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung, immer mit dem aktuellen Stand.
 
 ---

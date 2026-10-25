@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Literal, Optional
@@ -35,6 +36,16 @@ class Route(BaseModel):
     waypoints: list[str] = Field(description="Orte in Fahrreihenfolge, eindeutig geocodierbar (Ort, ggf. mit Region)")
 
 
+class OsmArea(BaseModel):
+    code: str = Field(description="ISO-3166-2-Code eines Gebiets (z. B. 'CH-BE', 'ES-AN') oder ISO-3166-1 eines Landes (z. B. 'NO')")
+    region: str = Field(description="Name einer der Regionen dieses Ziels, der die Stellplätze zugeordnet werden")
+
+
+class Link(BaseModel):
+    name: str = Field(description="Kurzer Knopftext, z. B. 'Wohnmobilland'")
+    url: str
+
+
 class Destination(BaseModel):
     id: str = Field(description="Kurz-ID aus Kleinbuchstaben, Ziffern und Bindestrichen, z. B. 'norwegen'")
     name: str = Field(description="Anzeigename, z. B. 'Norwegen & Lofoten'")
@@ -49,6 +60,8 @@ class Destination(BaseModel):
     relevance_keywords: list[str] = Field(description="30–50 Kleinbuchstaben-Stichwörter: Ländernamen in vielen Sprachen und bekannte Orte/Gegenden")
     regions: list[Region] = Field(description="5–10 Regionen, die das Gebiet lückenlos abdecken")
     routes: list[Route]
+    osm_areas: list[OsmArea] = Field(description="Gebiete, aus denen Wohnmobil-Stellplätze aus OpenStreetMap übernommen werden; leer, wenn nicht gewünscht")
+    links: list[Link] = Field(description="Zusätzliche Knöpfe pro Platz, z. B. zu einer offiziellen Stellplatzliste; leer, wenn keine")
     notes: str = Field(description="Hinweise für die Auswertung, z. B. lokale Regeln zum Wildcampen; leer wenn keine")
 
 
@@ -75,7 +88,9 @@ Regeln:
 - Routen sinnvoll nur, wenn der Nutzer sie nennt oder sie offensichtlich zum Wunsch gehören.
 - Die bbox muss alle Regionen und Routen umfassen.
 - Verwende bestehende IDs bei Änderungen unverändert.
-- Zeitplan: neue Ziele standardmässig 'woechentlich' (weekday 1), ausser der Nutzer wünscht etwas anderes."""
+- Zeitplan: neue Ziele standardmässig 'woechentlich' (weekday 1), ausser der Nutzer wünscht etwas anderes.
+- OpenStreetMap-Stellplätze (osm_areas) nur, wenn der Nutzer sie wünscht oder bei bestehenden Zielen übernehmen.
+- Links nur auf Wunsch des Nutzers; bestehende Links bei Änderungen übernehmen."""
 
 
 def gh(path: str):
@@ -98,8 +113,15 @@ def validate(d: Destination, existing_ids: set[str], action: str) -> list[str]:
         s, w, n, e = d.bbox
         if not (-90 <= s < n <= 90 and -180 <= w < e <= 180):
             errors.append(f"bbox unplausibel: {d.bbox}")
-    if not 3 <= len(d.search_queries) <= 15:
-        errors.append("3–15 Suchbegriffe nötig")
+    if len(d.search_queries) > 15 or (len(d.search_queries) < 3 and not d.osm_areas):
+        errors.append("3–15 Suchbegriffe nötig (ohne OpenStreetMap-Gebiete)")
+    region_names = {r.name for r in d.regions}
+    for a in d.osm_areas:
+        if not re.fullmatch(r"[A-Z]{2}(-[A-Z0-9]{1,3})?", a.code) or a.region not in region_names:
+            errors.append(f"OpenStreetMap-Gebiet «{a.code}» ungültig")
+    for l in d.links:
+        if not l.url.startswith("https://"):
+            errors.append(f"Link «{l.name}» muss mit https:// beginnen")
     if not d.regions:
         errors.append("mindestens eine Region nötig")
     if not d.countrycodes:

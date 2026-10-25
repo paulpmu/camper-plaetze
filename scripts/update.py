@@ -25,6 +25,7 @@ import math
 import os
 import re
 import sys
+import time
 import xml.etree.ElementTree as ET
 from typing import Literal, Optional
 
@@ -316,6 +317,63 @@ class Claude:
         return cost_usd(self.model, self.tokens_in, self.tokens_out)
 
 
+# --------------------------------------------------------------------------- OpenStreetMap
+
+OVERPASS = "https://overpass-api.de/api/interpreter"
+
+
+def _yes(v) -> bool | None:
+    if v is None:
+        return None
+    return str(v).lower() not in ("no", "none", "0", "false")
+
+
+def fetch_osm(dest: dict) -> list[dict] | None:
+    """Wohnmobil-Stellplätze (tourism=caravan_site) aus OpenStreetMap, je Gebiet aus dest['osm_areas'].
+
+    Gibt None zurück, wenn eine Abfrage scheitert – dann bleibt die bisherige Datei unverändert."""
+    spots = []
+    for area in dest.get("osm_areas", []):
+        sel = (f'["ISO3166-2"="{area["code"]}"]' if "-" in area["code"]
+               else f'["ISO3166-1"="{area["code"]}"]["admin_level"="2"]')
+        query = f'[out:json][timeout:120];area{sel}->.a;nwr["tourism"="caravan_site"](area.a);out center tags;'
+        try:
+            r = requests.post(OVERPASS, data={"data": query}, headers={"User-Agent": UA}, timeout=180)
+            r.raise_for_status()
+            elements = r.json().get("elements", [])
+        except (requests.RequestException, ValueError) as ex:
+            log(f"  OpenStreetMap {area['code']} fehlgeschlagen: {ex}")
+            return None
+        for e in elements:
+            lat = e.get("lat", (e.get("center") or {}).get("lat"))
+            lng = e.get("lon", (e.get("center") or {}).get("lon"))
+            if lat is None or lng is None:
+                continue
+            t = e.get("tags", {})
+            spots.append({
+                "id": f"osm-{e['type'][0]}{e['id']}", "source": "osm", "osm": f"{e['type']}/{e['id']}",
+                "name": t.get("name") or t.get("operator") or "Wohnmobil-Stellplatz",
+                "place": t.get("addr:city") or t.get("addr:place") or "", "poi": "",
+                "lat": round(lat, 5), "lng": round(lng, 5), "precision": "exakt",
+                "region": area["region"], "type": "stellplatz",
+                "infrastructure": {
+                    "water": _yes(t.get("drinking_water") or t.get("water_point")),
+                    "dump_station": _yes(t.get("sanitary_dump_station")),
+                    "electricity": _yes(t.get("power_supply")),
+                    "toilets": _yes(t.get("toilets")), "showers": _yes(t.get("shower")),
+                },
+                "four_wd": None, "police_contact": None, "access_note": "", "safety_note": "",
+                "price": ("gratis" if t.get("fee") == "no" else t.get("charge", "")) or ("kostenpflichtig" if t.get("fee") == "yes" else ""),
+                "capacity": t.get("capacity", ""), "opening_hours": t.get("opening_hours", ""),
+                "operator": t.get("operator", ""), "website": t.get("website") or t.get("contact:website", ""),
+                "description": t.get("description:de") or t.get("description", ""),
+                "rating": None, "mentions": [],
+            })
+        time.sleep(1)  # Overpass schonen
+    log(f"  OpenStreetMap: {len(spots)} Stellplätze")
+    return spots
+
+
 # --------------------------------------------------------------------------- Plätze zusammenführen
 
 
@@ -598,6 +656,11 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     annotate_routes(spots, routes)
     save_json(spots_file, spots, compact=True)
     save_json(state_file, state)
+    if dest.get("osm_areas"):
+        osm = fetch_osm(dest)
+        if osm is not None:
+            annotate_routes(osm, routes)
+            save_json(WEB_DATA / did / "osm.json", osm, compact=True)
 
     meta_file = WEB_DATA / did / "meta.json"
     meta = load_json(meta_file, {})
@@ -631,6 +694,7 @@ def write_index():
             "regions": [r["name"] for r in d["regions"]],
             "routes": [{k: r[k] for k in ("id", "name", "color", "length_km")} for r in routes],
             "schedule": d.get("schedule", "taeglich"), "weekday": d.get("weekday", 1),
+            "links": d.get("links", []), "osm": len(load_json(WEB_DATA / d["id"] / "osm.json", [])),
             "spots": meta.get("spots", 0), "last_run": meta.get("last_run"), "queue": meta.get("queue", 0),
             "videos_total": meta.get("videos_total", 0), "last": (meta.get("history") or [None])[-1],
         })

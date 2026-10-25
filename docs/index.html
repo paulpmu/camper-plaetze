@@ -100,6 +100,13 @@
     <select id="f-region"><option value="">Alle Regionen</option></select>
   </label>
 
+  <div class="field">Quelle
+    <div class="chips" id="f-source">
+      <button data-v="youtube" class="chip on">YouTube-Videos</button>
+      <button data-v="osm" class="chip on">Stellplätze OpenStreetMap</button>
+    </div>
+  </div>
+
   <div class="field">Platztyp
     <div class="chips" id="f-type">
       <button data-v="wildplatz" class="chip on">Wildplatz</button>
@@ -158,9 +165,10 @@
       <span><i class="lg camping"></i>Camping</span>
       <span><i class="lg stellplatz"></i>Stellplatz</span>
       <span><i class="lg andere"></i>Andere</span>
+      <span><i class="lg osm"></i>Stellplatz aus OpenStreetMap («P»)</span>
     </div>
     <p id="meta" class="muted"></p>
-    <p class="muted">Kartendaten © OpenStreetMap-Mitwirkende · Routen © OSRM</p>
+    <p class="muted">Kartendaten und Stellplätze © OpenStreetMap-Mitwirkende (ODbL) · Routen © OSRM</p>
   </div>
 
   <div class="tab" data-tab="laeufe" hidden>

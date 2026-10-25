@@ -272,3 +272,4 @@ button.brand #count { font-size: 12px; }
 }
 #toast.show { opacity: 1; transform: none; }
 .actions-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
+.pin.osm, .lg.osm { background: #0f7b8a; }

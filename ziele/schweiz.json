@@ -1,0 +1,173 @@
+{
+ "id": "schweiz",
+ "name": "Schweiz",
+ "active": true,
+ "schedule": "woechentlich",
+ "weekday": 1,
+ "countrycodes": [
+  "ch"
+ ],
+ "bbox": [
+  45.8,
+  5.9,
+  47.85,
+  10.55
+ ],
+ "languages": [
+  "de",
+  "fr",
+  "it",
+  "en"
+ ],
+ "search_queries": [],
+ "channels": [],
+ "relevance_keywords": [],
+ "regions": [
+  {
+   "name": "Genferseeregion & Wallis",
+   "hint": "Genf, Lausanne, Montreux, Wallis, Zermatt, Saas-Fee"
+  },
+  {
+   "name": "Jura & Drei-Seen-Land",
+   "hint": "Neuenburg, Freiburg, Murten, Jura, Biel-Umgebung"
+  },
+  {
+   "name": "Bern & Berner Oberland",
+   "hint": "Bern, Thun, Interlaken, Grindelwald, Emmental"
+  },
+  {
+   "name": "Mittelland & Nordwestschweiz",
+   "hint": "Basel, Solothurn, Aarau, Lenzburg, Baden"
+  },
+  {
+   "name": "Zentralschweiz",
+   "hint": "Luzern, Vierwaldstättersee, Zug, Schwyz, Uri, Obwalden, Nidwalden"
+  },
+  {
+   "name": "Zürich & Ostschweiz",
+   "hint": "Zürich, Winterthur, Schaffhausen, Bodensee, St. Gallen, Appenzell, Glarus"
+  },
+  {
+   "name": "Graubünden",
+   "hint": "Chur, Davos, Engadin, St. Moritz, Surselva"
+  },
+  {
+   "name": "Tessin",
+   "hint": "Lugano, Locarno, Bellinzona, Maggiatal"
+  }
+ ],
+ "osm_areas": [
+  {
+   "code": "CH-VD",
+   "region": "Genferseeregion & Wallis"
+  },
+  {
+   "code": "CH-GE",
+   "region": "Genferseeregion & Wallis"
+  },
+  {
+   "code": "CH-VS",
+   "region": "Genferseeregion & Wallis"
+  },
+  {
+   "code": "CH-NE",
+   "region": "Jura & Drei-Seen-Land"
+  },
+  {
+   "code": "CH-FR",
+   "region": "Jura & Drei-Seen-Land"
+  },
+  {
+   "code": "CH-JU",
+   "region": "Jura & Drei-Seen-Land"
+  },
+  {
+   "code": "CH-BE",
+   "region": "Bern & Berner Oberland"
+  },
+  {
+   "code": "CH-BS",
+   "region": "Mittelland & Nordwestschweiz"
+  },
+  {
+   "code": "CH-BL",
+   "region": "Mittelland & Nordwestschweiz"
+  },
+  {
+   "code": "CH-SO",
+   "region": "Mittelland & Nordwestschweiz"
+  },
+  {
+   "code": "CH-AG",
+   "region": "Mittelland & Nordwestschweiz"
+  },
+  {
+   "code": "CH-LU",
+   "region": "Zentralschweiz"
+  },
+  {
+   "code": "CH-ZG",
+   "region": "Zentralschweiz"
+  },
+  {
+   "code": "CH-SZ",
+   "region": "Zentralschweiz"
+  },
+  {
+   "code": "CH-UR",
+   "region": "Zentralschweiz"
+  },
+  {
+   "code": "CH-OW",
+   "region": "Zentralschweiz"
+  },
+  {
+   "code": "CH-NW",
+   "region": "Zentralschweiz"
+  },
+  {
+   "code": "CH-ZH",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-SH",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-TG",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-SG",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-AR",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-AI",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-GL",
+   "region": "Zürich & Ostschweiz"
+  },
+  {
+   "code": "CH-GR",
+   "region": "Graubünden"
+  },
+  {
+   "code": "CH-TI",
+   "region": "Tessin"
+  }
+ ],
+ "links": [
+  {
+   "name": "Wohnmobilland",
+   "url": "https://womoland.ch/Fueer_Wohnmobilisten/Stellplaetze/"
+  }
+ ],
+ "routes": [],
+ "notes": "Wildcampen ist in der Schweiz meist verboten; massgebend sind kantonale und kommunale Regeln."
+}
