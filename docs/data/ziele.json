@@ -37,6 +37,8 @@
    ],
    "schedule": "woechentlich",
    "weekday": 1,
+   "links": [],
+   "osm": 0,
    "spots": 45,
    "last_run": "2026-10-25T18:33:45Z",
    "queue": 452,
@@ -96,6 +98,8 @@
    ],
    "schedule": "taeglich",
    "weekday": 1,
+   "links": [],
+   "osm": 0,
    "spots": 26,
    "last_run": "2026-10-25T18:47:07Z",
    "queue": 212,
@@ -117,6 +121,58 @@
     ],
     "model": "claude-haiku-5-5",
     "cost_usd": 0.0679
+   }
+  },
+  {
+   "id": "schweiz",
+   "name": "Schweiz",
+   "bbox": [
+    45.8,
+    5.9,
+    47.85,
+    10.55
+   ],
+   "regions": [
+    "Genferseeregion & Wallis",
+    "Jura & Drei-Seen-Land",
+    "Bern & Berner Oberland",
+    "Mittelland & Nordwestschweiz",
+    "Zentralschweiz",
+    "Zürich & Ostschweiz",
+    "Graubünden",
+    "Tessin"
+   ],
+   "routes": [],
+   "schedule": "woechentlich",
+   "weekday": 1,
+   "links": [
+    {
+     "name": "Wohnmobilland",
+     "url": "https://womoland.ch/Fueer_Wohnmobilisten/Stellplaetze/"
+    }
+   ],
+   "osm": 0,
+   "spots": 0,
+   "last_run": "2026-10-25T18:48:27Z",
+   "queue": 0,
+   "videos_total": 0,
+   "last": {
+    "date": "2026-10-25T18:48:27Z",
+    "videos": 0,
+    "spots_new": 0,
+    "transcripts": {
+     "ok": 0,
+     "keins": 0,
+     "blockiert": 0,
+     "fehler": 0
+    },
+    "youtube_units": 0,
+    "claude_tokens": [
+     0,
+     0
+    ],
+    "model": "claude-haiku-5-5",
+    "cost_usd": 0.0
    }
   }
  ],
