@@ -35,32 +35,10 @@
      "length_km": 1956
     }
    ],
-   "schedule": "woechentlich",
-   "weekday": 1,
-   "links": [],
-   "osm": 0,
    "spots": 49,
    "last_run": "2026-10-25T17:50:26Z",
    "queue": 406,
-   "videos_total": 40,
-   "last": {
-    "date": "2026-10-25T17:50:26Z",
-    "videos": 40,
-    "spots_new": 49,
-    "transcripts": {
-     "ok": 40,
-     "keins": 0,
-     "blockiert": 0,
-     "fehler": 0
-    },
-    "youtube_units": 2459,
-    "claude_tokens": [
-     481080,
-     66295
-    ],
-    "model": "claude-haiku-5-5",
-    "cost_usd": 0.0813
-   }
+   "videos_total": 40
   },
   {
    "id": "marokko",
@@ -96,77 +74,10 @@
      "length_km": 1543
     }
    ],
-   "schedule": "taeglich",
-   "weekday": 1,
-   "links": [],
-   "osm": 0,
    "spots": 22,
    "last_run": "2026-10-25T17:58:34Z",
    "queue": 210,
-   "videos_total": 55,
-   "last": {
-    "date": "2026-10-25T17:58:34Z",
-    "videos": 40,
-    "spots_new": 19,
-    "transcripts": {
-     "ok": 38,
-     "keins": 1,
-     "blockiert": 0,
-     "fehler": 1
-    },
-    "youtube_units": 1342,
-    "claude_tokens": [
-     483273,
-     28170
-    ],
-    "model": "claude-haiku-5-5",
-    "cost_usd": 0.0624
-   }
-  },
-  {
-   "id": "schweiz",
-   "name": "Schweiz",
-   "bbox": [
-    45.8,
-    5.9,
-    47.85,
-    10.55
-   ],
-   "regions": [
-    "Genferseeregion & Wallis",
-    "Jura & Drei-Seen-Land",
-    "Bern & Berner Oberland",
-    "Mittelland & Nordwestschweiz",
-    "Zentralschweiz",
-    "Zürich & Ostschweiz",
-    "Graubünden",
-    "Tessin"
-   ],
-   "routes": [],
-   "schedule": "woechentlich",
-   "weekday": 1,
-   "links": [
-    {
-     "name": "Wohnmobilland",
-     "url": "https://womoland.ch/Fueer_Wohnmobilisten/Stellplaetze/"
-    }
-   ],
-   "osm": 0,
-   "spots": 0,
-   "last_run": null,
-   "queue": 0,
-   "videos_total": 0,
-   "last": null
+   "videos_total": 55
   }
- ],
- "model": "claude-haiku-5-5",
- "fixkosten": [
-  {
-   "name": "Webshare Rotating Residential (1 GB)",
-   "plattform": "Webshare",
-   "usd_pro_monat": 3.5,
-   "seit": "2026-10"
-  }
- ],
- "youtube_budget": 9000
+ ]
 }
