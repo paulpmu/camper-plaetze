@@ -1,0 +1,35 @@
+{
+  "search_queries": [
+    "Morocco overlanding",
+    "Morocco van life",
+    "Morocco camper wild camping",
+    "Dakhla van",
+    "Dakhla camper",
+    "Marokko Wohnmobil",
+    "Marokko Camper Reise",
+    "Dakhla Wohnmobil",
+    "Maroc fourgon aménagé",
+    "Maroc camping-car bivouac",
+    "Dakhla camping-car",
+    "Marokko camper overnachten"
+  ],
+  "channels": [],
+  "relevance_keywords": [
+    "morocco", "maroc", "marokko", "marruecos", "marocco", "marrocos", "المغرب",
+    "dakhla", "sahara", "atlas", "agadir", "essaouira", "marrakech", "marrakesch",
+    "merzouga", "taghazout", "tanger", "tangier", "chefchaouen", "fes", "fès",
+    "ouarzazate", "zagora", "sidi ifni", "tafraoute", "laayoune", "tarfaya",
+    "legzira", "mirleft", "imsouane", "erg chebbi", "draa", "dades", "todra"
+  ],
+  "search_window_days": 21,
+  "backfill_days": 365,
+  "backfill_pages": 3,
+  "min_duration_seconds": 180,
+  "max_videos_per_run": 25,
+  "max_comments": 40,
+  "transcript_languages": ["de", "en", "fr", "nl", "es", "it", "pt"],
+  "max_transcript_chars": 150000,
+  "claude_model": "claude-opus-5-5",
+  "claude_effort": "medium",
+  "merge_distance_m": 300
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marokko Camper</title>
+<meta name="description" content="Übernachtungsplätze in Marokko und Dakhla aus aktuellen Overlander-Videos">
+<meta name="theme-color" content="#b5532e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Marokko Camper">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map" aria-label="Karte"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <strong>Marokko Camper</strong>
+    <span id="count">lädt …</span>
+  </div>
+  <div class="actions">
+    <button id="btn-list" class="icon-btn" aria-label="Liste"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
+    <button id="btn-filter" class="icon-btn" aria-label="Filter"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="filter-dot" class="dot" hidden></span></button>
+    <button id="btn-info" class="icon-btn" aria-label="Info">i</button>
+  </div>
+</header>
+
+<button id="btn-locate" class="fab" aria-label="Mein Standort"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></button>
+
+<div id="backdrop" hidden></div>
+
+<!-- Detail -->
+<section id="sheet-detail" class="sheet" hidden aria-live="polite">
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <div id="detail"></div>
+</section>
+
+<!-- Liste -->
+<section id="sheet-list" class="sheet tall" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2>Plätze <small id="list-sort"></small></h2>
+  <input id="search" type="search" placeholder="Suchen: Ort, Name, Kanal …" autocomplete="off">
+  <ul id="list"></ul>
+</section>
+
+<!-- Filter -->
+<section id="sheet-filter" class="sheet tall" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2>Filter</h2>
+
+  <label class="field">Region
+    <select id="f-region"><option value="">Alle Regionen</option></select>
+  </label>
+
+  <div class="field">Platztyp
+    <div class="chips" id="f-type">
+      <button data-v="wildplatz" class="chip on">Wildplatz</button>
+      <button data-v="camping" class="chip on">Camping</button>
+      <button data-v="stellplatz" class="chip on">Stellplatz</button>
+      <button data-v="andere" class="chip on">Andere</button>
+    </div>
+  </div>
+
+  <div class="field">Mindestbewertung
+    <div class="seg" id="f-rating">
+      <button data-v="0" class="on">Alle</button><button data-v="3">3+</button><button data-v="4">4+</button><button data-v="4.5">4.5+</button>
+    </div>
+  </div>
+
+  <div class="field">Video nicht älter als
+    <div class="seg" id="f-age">
+      <button data-v="90">3 Mt.</button><button data-v="180">6 Mt.</button><button data-v="365" class="on">12 Mt.</button><button data-v="0">Alle</button>
+    </div>
+  </div>
+
+  <div class="field">Muss haben
+    <div class="chips" id="f-infra">
+      <button data-v="water" class="chip">💧 Wasser</button>
+      <button data-v="dump_station" class="chip">🚽 Ver-/Entsorgung</button>
+      <button data-v="electricity" class="chip">⚡ Strom</button>
+      <button data-v="showers" class="chip">🚿 Dusche</button>
+    </div>
+  </div>
+
+  <label class="toggle"><input type="checkbox" id="f-no4wd"> Ohne Allrad erreichbar</label>
+  <label class="toggle"><input type="checkbox" id="f-exact"> Nur genaue Koordinaten</label>
+  <label class="toggle"><input type="checkbox" id="f-safe"> Nur ohne Sicherheitsbedenken</label>
+
+  <div class="row">
+    <button id="f-reset" class="btn ghost">Zurücksetzen</button>
+    <button data-close class="btn">Anzeigen</button>
+  </div>
+</section>
+
+<!-- Info -->
+<section id="sheet-info" class="sheet" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2>Über diese Karte</h2>
+  <p>Die Plätze stammen aus aktuellen YouTube-Reisevideos von Camper-Overlandern in Marokko und Dakhla. Sie werden täglich automatisch aktualisiert.</p>
+  <p><strong>Wichtig:</strong> Die Bewertungen geben die subjektiven Aussagen der YouTuber wieder und sind keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie deshalb auf das Videodatum.</p>
+  <p>«Ungefährer Standort» bedeutet, dass nur der Ort bekannt ist. Der Platz kann einige Kilometer entfernt liegen.</p>
+  <div class="legend">
+    <span><i class="lg wildplatz"></i>Wildplatz</span>
+    <span><i class="lg camping"></i>Camping</span>
+    <span><i class="lg stellplatz"></i>Stellplatz</span>
+    <span><i class="lg andere"></i>Andere</span>
+  </div>
+  <p id="meta" class="muted"></p>
+  <p class="muted">Kartendaten © OpenStreetMap-Mitwirkende</p>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
