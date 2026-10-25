@@ -596,9 +596,11 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
     limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"])
     if yt and os.getenv("NEU_AUSWERTEN", "").strip().lower() in ("ja", "1", "true"):
-        limit = max(limit, requeue(state, yt, everything=True))  # alles in diesem Lauf, nicht über Nächte verteilt
+        requeue(state, yt, everything=True)
     elif yt and proxy_configured():
         requeue(state, yt, everything=False)
+    # Erneut auszuwertende Videos immer vollständig in diesem Lauf, nicht über Nächte verteilt
+    limit = max(limit, sum(1 for v in state["queue"].values() if v.get("retry")))
 
     schema = extraction_model(dest)
     # Erneut auszuwertende Videos zuerst, danach die neuesten
