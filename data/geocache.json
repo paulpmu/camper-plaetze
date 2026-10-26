@@ -1,2045 +1,3167 @@
 {
- "ma,eh|tanger, tanger-tétouan-al hoceima": [
-  35.7694908,
-  -5.8044679
- ],
- "ma,eh|kenitra": [
-  34.26457,
-  -6.570169
- ],
- "ma,eh|marrakesch": [
-  31.6258257,
-  -7.9891608
- ],
- "ma,eh|erg chegaga, m'hamid el ghizlane": [
-  29.8492152,
-  -6.2095159
- ],
- "ma,eh|agadir": [
-  30.4205162,
-  -9.5838532
- ],
- "ma,eh|tiznit": [
-  29.698624,
-  -9.7312815
- ],
- "ma,eh|guelmim": [
-  28.9863852,
-  -10.0574351
- ],
- "ma,eh|tan-tan": [
-  28.437553,
-  -11.098664
- ],
- "ma,eh|tarfaya": [
-  27.9401204,
-  -12.9249934
- ],
- "ma,eh|laâyoune": [
-  27.154512,
-  -13.1953921
- ],
- "ma,eh|boujdour": [
-  26.1263378,
-  -14.4836537
- ],
- "ma,eh|dakhla": [
-  23.6940663,
-  -15.9431274
- ],
- "ma,eh|assa": [
-  28.611352,
-  -9.436696
- ],
- "ma,eh|tata": [
-  29.746392,
-  -7.9696051
- ],
- "ma,eh|foum zguid": [
-  30.085933,
-  -6.874903
- ],
- "ma,eh|zagora": [
-  30.3279053,
-  -5.8369957
- ],
- "es,pt|praia das bicas, sines, alentejo": [
-  38.4647687,
-  -9.192498
- ],
- "es,pt|sines, alentejo": [
-  37.9858448,
-  -8.7812651
- ],
- "es,pt|algodonales, provinz cádiz": [
-  36.879693,
-  -5.4047755
- ],
- "es,pt|lapeza, sierra nevada, provinz granada": null,
- "es,pt|jimena de la frontera, provinz cádiz": [
-  36.4327335,
-  -5.4527477
- ],
- "es,pt|umland von barcelona, katalonien": null,
- "es,pt|foz de arouce, lousã, coimbra": [
-  40.158653,
-  -8.278448
- ],
- "es,pt|zwischen coimbra und lissabon, zentrum portugal": null,
- "es,pt|batalha, leiria": [
-  39.6578998,
-  -8.8243713
- ],
- "es,pt|crato, portalegre": [
-  39.2851221,
-  -7.6454266
- ],
- "es,pt|teruel, aragón": [
-  40.6005259,
-  -0.9229282
- ],
- "es,pt|stausee bei teruel, aragón": null,
- "es,pt|stausee, spanien (lage unklar, kommentar nennt la manga)": null,
- "es,pt|algarve, portugal": [
-  37.2449218,
-  -8.1959563
- ],
- "es,pt|foz do sizandro, torres vedras": [
-  39.1094566,
-  -9.3960504
- ],
- "es,pt|benissa, alicante": [
-  38.7163735,
-  0.0534016
- ],
- "es,pt|archena, murcia": [
-  38.1178119,
-  -1.3025236
- ],
- "es,pt|úbeda, jaén": [
-  38.0111398,
-  -3.3719098
- ],
- "es,pt|osuna, sevilla": [
-  37.2373532,
-  -5.1033306
- ],
- "es,pt|antequera, málaga": [
-  37.0183652,
-  -4.5596649
- ],
- "es,pt|la vall d'uixó, castellón": [
-  39.8235837,
-  -0.2316995
- ],
- "es,pt|puerto lumbreras, murcia": [
-  37.5635045,
-  -1.8076233
- ],
- "es,pt|el grao de moncofa, castellón": [
-  39.7979847,
-  -0.1321222
- ],
- "es,pt|los alcázares, murcia (mar menor)": [
-  37.7480488,
-  -0.8648602
- ],
- "es,pt|lissabon, lisboa": [
-  38.7077507,
-  -9.1365919
- ],
- "es,pt|apúlia, esposende, minho": [
-  41.4824433,
-  -8.7651879
- ],
- "es,pt|oeiras, lissabon": [
-  38.6925777,
-  -9.3123076
- ],
- "es,pt|cabo da roca, sintra": [
-  38.7809045,
-  -9.4994163
- ],
- "es,pt|praia das maçãs, sintra": [
-  38.825643,
-  -9.4629412
- ],
- "es,pt|lousã, coimbra": [
-  40.111052,
-  -8.2460668
- ],
- "es,pt|son serra de marina, mallorca": [
-  39.7359615,
-  3.2235713
- ],
- "es,pt|atlantikküste, nordspanien (ort nicht genannt)": null,
- "es,pt|kleinstadt an der nordküste, spanien (name nicht genannt)": null,
- "es,pt|bucht an der nordküste, spanien (name nicht genannt)": null,
- "es,pt|vera playa, vera, almería": [
-  37.2282081,
-  -1.8025371
- ],
- "es,pt|benidorm, costa blanca": [
-  38.5608323,
-  -0.0920015
- ],
- "es,pt|bragança, trás-os-montes": [
-  41.4576442,
-  -7.1542194
- ],
- "es,pt|raposeira, peneda-gerês nationalpark": [
-  32.7570409,
-  -17.2205326
- ],
- "es,pt|braga, minho": [
-  41.7360007,
-  -8.346108
- ],
- "es,pt|grenze zu gibraltar, la línea de la concepción, cádiz": null,
- "es,pt|góis, coimbra": [
-  40.1546195,
-  -8.1099454
- ],
- "es,pt|roses, costa brava": [
-  42.2632018,
-  3.1755328
- ],
- "es,pt|ancora, portugal": [
-  41.7959527,
-  -8.8510326
- ],
- "es,pt|villa chão, nordportugal": [
-  42.8451617,
-  -8.0406231
- ],
- "es,pt|strand 10 km südlich von porto, matosinhos-küste": null,
- "es,pt|campingplatz in portugal, küstenregion (ort nicht genannt)": null,
- "es,pt|nazaré, zentrum portugal": [
-  39.6029108,
-  -9.0701572
- ],
- "es,pt|schleuse, kastilien und león": null,
- "es,pt|osichos, palencia": null,
- "es,pt|la marina, alicante, costa blanca": [
-  38.5789908,
-  -0.093477
- ],
- "es,pt|torre la sal, castellón, costa del azahar": [
-  40.1308276,
-  0.1631257
- ],
- "es,pt|guardamar del segura, alicante, costa blanca": [
-  38.0899985,
-  -0.65381
- ],
- "es,pt|murcia, costa cálida": [
-  37.4333128,
-  -1.500491
- ],
- "es,pt|andalusien": [
-  37.3399964,
-  -4.5811614
- ],
- "es,pt|mazarrón, murcia, costa cálida": [
-  37.5629708,
-  -1.2615782
- ],
- "es,pt|costa del sol, andalusien": [
-  36.7236437,
-  -4.1296936
- ],
- "es,pt|alhama de murcia, murcia, costa cálida": [
-  37.8515145,
-  -1.4251045
- ],
- "es,pt|monsanto, castelo branco": [
-  40.0356955,
-  -7.1145351
- ],
- "es,pt|umgebung monsanto, castelo branco": null,
- "es,pt|umgebung castelo branco, beira baixa": null,
- "es,pt|hügel bei castelo branco, beira baixa": null,
- "es,pt|la jonquera": [
-  42.4340121,
-  2.8645567
- ],
- "es,pt|barcelona": [
-  41.3825802,
-  2.177073
- ],
- "es,pt|valencia": [
-  39.4697065,
-  -0.3763353
- ],
- "es,pt|alicante": [
-  38.3436365,
-  -0.4881708
- ],
- "es,pt|almería": [
-  36.8685739,
-  -2.3120282
- ],
- "es,pt|málaga": [
-  36.7647913,
-  -4.4422005
- ],
- "es,pt|algeciras": [
-  36.1311725,
-  -5.4473991
- ],
- "es,pt|tarifa": [
-  36.0129082,
-  -5.6050213
- ],
- "es,pt|cádiz": [
-  36.5297438,
-  -6.2928976
- ],
- "es,pt|huelva": [
-  37.2575874,
-  -6.9484945
- ],
- "es,pt|faro": [
-  37.0162944,
-  -7.935182
- ],
- "es,pt|sagres": [
-  37.0078288,
-  -8.941924
- ],
- "es,pt|lissabon": [
-  38.7077507,
-  -9.1365919
- ],
- "es,pt|porto": [
-  41.1502195,
-  -8.6103497
- ],
- "es,pt|santiago de compostela": [
-  42.9064576,
-  -8.5192983
- ],
- "es,pt|bilbao": [
-  43.2630018,
-  -2.9350039
- ],
- "ma,eh|mohammedia, casablanca": [
-  33.6958383,
-  -7.3893292
- ],
- "ma,eh|anti-atlas, gegend oase, marokko": [
-  30.1184766,
-  -8.2715446
- ],
- "ma,eh|hoher atlas, gegend schneefelder, marokko": [
-  32.3294894,
-  -5.4368736
- ],
- "ma,eh|hoher atlas, ca. 2700 m, marokko": [
-  32.3294894,
-  -5.4368736
- ],
- "ma,eh|zedernwald, mittlerer atlas (gegend azrou/ifrane), marokko": null,
- "ma,eh|erg chebbi, merzouga": [
-  31.1382361,
-  -3.9707751
- ],
- "ma,eh|tanger, mittelmeer & rif": [
-  35.7694908,
-  -5.8044679
- ],
- "ma,eh|tanger, marokko": [
-  35.7694908,
-  -5.8044679
- ],
- "ma,eh|chefchaouen, marokko": [
-  35.1700832,
-  -5.2766583
- ],
- "ma,eh|lagadier (ca. 20 min. außerhalb), marokko": null,
- "ma,eh|taghazout, agadir": [
-  30.5846695,
-  -9.6784988
- ],
- "ma,eh|guelmim, südwesten marokkos": [
-  28.9863852,
-  -10.0574351
- ],
- "ma,eh|foum zguid, antiatlas & draa": [
-  30.085933,
-  -6.874903
- ],
- "ma,eh|tafraout, antiatlas": [
-  34.845784,
-  -4.871343
- ],
- "ma,eh|landesinneres zwischen tafraout und tan-tan": null,
- "ma,eh|plage blanche, tan-tan": [
-  28.4455337,
-  -11.1589932
- ],
- "ma,eh|küste zwischen plage blanche und sidi ifni, aglou-gebiet": null,
- "ma,eh|legzira, sidi ifni": [
-  29.4464595,
-  -10.1156151
- ],
- "ma,eh|strand nördlich von legzira, südatlantik": null,
- "ma,eh|region agadir": [
-  30.4016677,
-  -9.5892645
- ],
- "ma,eh|asilah": [
-  35.4555716,
-  -5.9216889
- ],
- "ma,eh|marrakesch, marokko": [
-  31.6258257,
-  -7.9891608
- ],
- "es,pt|sesimbra, setúbal": [
-  38.4436932,
-  -9.0996273
- ],
- "es,pt|lissabon, lissabon": [
-  38.7077507,
-  -9.1365919
- ],
- "es,pt|camping lisboa, lissabon": [
-  38.7244254,
-  -9.2050576
- ],
- "es,pt|algodonales, cádiz": [
-  36.879693,
-  -5.4047755
- ],
- "es,pt|sierra delira, algodonales": null,
- "es,pt|lapeza, granada": null,
- "es,pt|jimena de la frontera, cádiz": [
-  36.4327335,
-  -5.4527477
- ],
- "es,pt|teruel, teruel": [
-  40.3436719,
-  -1.1081939
- ],
- "es,pt|moncofa, castellón": [
-  39.808205,
-  -0.1452657
- ],
- "es,pt|apúlia, esposende (braga)": [
-  41.4824433,
-  -8.7651879
- ],
- "es,pt|cabo da roca, cabo da roca": [
-  38.7804947,
-  -9.4988505
- ],
- "es,pt|vera playa, almería": [
-  37.2282081,
-  -1.8025371
- ],
- "es,pt|bragança, bragança": [
-  41.8071182,
-  -6.7589839
- ],
- "es,pt|raposeira, braga": [
-  41.5170771,
-  -8.0004716
- ],
- "es,pt|parque nacional da peneda-gerês, raposeira": [
-  41.8775008,
-  -8.2358063
- ],
- "es,pt|braga, braga": [
-  41.5510583,
-  -8.4280045
- ],
- "es,pt|parque de campismo de braga, braga": [
-  41.5386658,
-  -8.4223035
- ],
- "es,pt|la línea de la concepción, cádiz": [
-  36.1677899,
-  -5.3482396
- ],
- "es,pt|roses, girona": [
-  42.2632018,
-  3.1755328
- ],
- "es,pt|camping salata, roses": [
-  42.266535,
-  3.1575209
- ],
- "es,pt|ancora, viana do castelo": [
-  41.7959527,
-  -8.8510326
- ],
- "es,pt|vila chã, porto": [
-  41.2965412,
-  -8.7253665
- ],
- "es,pt|küste südlich porto, porto": null,
- "es,pt|nazaré, leiria": [
-  39.6029108,
-  -9.0701572
- ],
- "ma,eh|mohammedia, préfecture mohammédia": [
-  33.6958383,
-  -7.3893292
- ],
- "ma,eh|camping saïd, mohammedia": [
-  33.725448,
-  -7.3367753
- ],
- "ma,eh|mirim monte resort, tanger": null,
- "ma,eh|chefchaouen, tanger-tétouan-al hoceima": [
-  35.1700832,
-  -5.2766583
- ],
- "ma,eh|lagadier, chefchaouen": null,
- "ma,eh|tanger, tanger-assilah": [
-  35.746,
-  -5.797
- ],
- "ma,eh|camping terre d'océan, taghazout": null,
- "ma,eh|guelmim, guelmim-es semara": [
-  28.9863852,
-  -10.0574351
- ],
- "ma,eh|wohlfühloase, guelmim": null,
- "ma,eh|foum zguid, tata": [
-  30.0854,
-  -6.8732
- ],
- "ma,eh|tafraoute, antiatlas": [
-  35.114625,
-  -4.920862
- ],
- "ma,eh|plage blanche, plage blanche": [
-  28.8252696,
-  -10.8942182
- ],
- "ma,eh|legzira beach, legzira": [
-  29.4436222,
-  -10.1179213
- ],
- "ma,eh|asilah, larache": [
-  35.4651588,
-  -6.031032
- ],
- "ma,eh|camping saada, asilah": [
-  35.4719705,
-  -6.0287982
- ],
- "ma,eh|kénitra, kénitra": [
-  34.2514611,
-  -6.5818162
- ],
- "ma,eh|settat, settat": [
-  32.993908,
-  -7.623451
- ],
- "ma,eh|marrakesch, marrakesch-safi": [
-  31.6258257,
-  -7.9891608
- ],
- "5|es,pt|barcelona": [
+ "6|es,pt|barcelona": [
   [
    41.3825802,
-   2.177073
+   2.177073,
+   "es"
   ],
   [
    41.75787,
-   2.031182
+   2.031182,
+   "es"
   ]
  ],
- "5|es,pt|girona": [
+ "6|es,pt|girona": [
   [
    41.9793006,
-   2.8199439
+   2.8199439,
+   "es"
   ],
   [
    42.0730285,
-   2.8357137
+   2.8357137,
+   "es"
   ]
  ],
- "5|es,pt|tarragona": [
+ "6|es,pt|tarragona": [
   [
    41.1172364,
-   1.2546057
+   1.2546057,
+   "es"
   ],
   [
    41.0527108,
-   0.6268385
+   0.6268385,
+   "es"
   ]
  ],
- "5|es,pt|lleida": [
+ "6|es,pt|lleida": [
   [
    41.6147605,
-   0.6267842
+   0.6267842,
+   "es"
   ],
   [
    42.0673316,
-   1.1793592
+   1.1793592,
+   "es"
   ]
  ],
- "5|es,pt|roses": [
+ "6|es,pt|roses": [
   [
    42.2632018,
-   3.1755328
+   3.1755328,
+   "es"
   ]
  ],
- "5|es,pt|andorra la vella": [
+ "6|es,pt|andorra la vella": [
   [
    41.2910291,
-   1.2532015
+   1.2532015,
+   "es"
   ],
   [
    38.4499445,
-   -0.3589065
+   -0.3589065,
+   "es"
   ],
   [
    41.2911992,
-   1.2530326
+   1.2530326,
+   "es"
   ],
   [
    41.3892191,
-   2.1783959
+   2.1783959,
+   "es"
   ]
  ],
- "5|es,pt|castellón de la plana": [
+ "6|es,pt|castellón de la plana": [
   [
    39.9860347,
-   -0.0377354
+   -0.0377354,
+   "es"
   ]
  ],
- "5|es,pt|valencia": [
+ "6|es,pt|valencia": [
   [
    39.4697065,
-   -0.3763353
+   -0.3763353,
+   "es"
   ],
   [
    39.6819591,
-   -0.7654406
+   -0.7654406,
+   "es"
   ],
   [
    39.3342058,
-   -0.7973474
+   -0.7973474,
+   "es"
   ]
  ],
- "5|es,pt|alicante": [
+ "6|es,pt|alicante": [
   [
    38.3436365,
-   -0.4881708
+   -0.4881708,
+   "es"
   ],
   [
    38.365691,
-   -0.7485501
+   -0.7485501,
+   "es"
   ]
  ],
- "5|es,pt|murcia": [
+ "6|es,pt|murcia": [
   [
    37.9347521,
-   -1.1131029
+   -1.1131029,
+   "es"
   ],
   [
    37.9923795,
-   -1.1305431
+   -1.1305431,
+   "es"
   ],
   [
    37.9166355,
-   -1.4779797
+   -1.4779797,
+   "es"
   ],
   [
    38.0646533,
-   -1.6721805
+   -1.6721805,
+   "es"
   ]
  ],
- "5|es,pt|benidorm": [
+ "6|es,pt|benidorm": [
   [
    38.5406255,
-   -0.1290929
+   -0.1290929,
+   "es"
   ]
  ],
- "5|es,pt|almería": [
+ "6|es,pt|almería": [
   [
    36.8685739,
-   -2.3120282
+   -2.3120282,
+   "es"
   ],
   [
    37.2983144,
-   -2.1885065
+   -2.1885065,
+   "es"
   ]
  ],
- "5|es,pt|granada": [
+ "6|es,pt|granada": [
   [
    37.1734995,
-   -3.5995337
+   -3.5995337,
+   "es"
   ],
   [
    37.388831,
-   -3.2393184
+   -3.2393184,
+   "es"
   ]
  ],
- "5|es,pt|málaga": [
+ "6|es,pt|málaga": [
   [
    36.7647913,
-   -4.4422005
+   -4.4422005,
+   "es"
   ],
   [
    36.7960087,
-   -4.5473784
+   -4.5473784,
+   "es"
   ]
  ],
- "5|es,pt|tarifa": [
+ "6|es,pt|tarifa": [
   [
    36.0129082,
-   -5.6050213
+   -5.6050213,
+   "es"
   ],
   [
    37.5867592,
-   -2.4189224
+   -2.4189224,
+   "es"
   ]
  ],
- "5|es,pt|cádiz": [
+ "6|es,pt|cádiz": [
   [
    36.5297438,
-   -6.2928976
+   -6.2928976,
+   "es"
   ],
   [
    36.5262463,
-   -5.9008367
+   -5.9008367,
+   "es"
   ]
  ],
- "5|es,pt|sevilla": [
+ "6|es,pt|sevilla": [
   [
    37.3886303,
-   -5.9953403
+   -5.9953403,
+   "es"
   ],
   [
    37.5192586,
-   -5.6504755
+   -5.6504755,
+   "es"
   ]
  ],
- "5|es,pt|madrid": [
+ "6|es,pt|madrid": [
   [
    40.416782,
-   -3.703507
+   -3.703507,
+   "es"
   ]
  ],
- "5|es,pt|toledo": [
+ "6|es,pt|toledo": [
   [
    39.8558913,
-   -4.024265
+   -4.024265,
+   "es"
   ],
   [
    39.7884265,
-   -4.1013496
+   -4.1013496,
+   "es"
   ]
  ],
- "5|es,pt|salamanca": [
+ "6|es,pt|salamanca": [
   [
    40.9651572,
-   -5.6640182
+   -5.6640182,
+   "es"
   ],
   [
    40.7665582,
-   -6.021765
+   -6.021765,
+   "es"
   ],
   [
    40.4270451,
-   -3.6806024
+   -3.6806024,
+   "es"
   ]
  ],
- "5|es,pt|cáceres": [
+ "6|es,pt|cáceres": [
   [
    39.4745175,
-   -6.3716761
+   -6.3716761,
+   "es"
   ],
   [
    39.7591268,
-   -6.137771
+   -6.137771,
+   "es"
   ]
  ],
- "5|es,pt|teruel": [
+ "6|es,pt|teruel": [
   [
    40.6005259,
-   -0.9229282
+   -0.9229282,
+   "es"
   ],
   [
    40.3436719,
-   -1.1081939
+   -1.1081939,
+   "es"
   ]
  ],
- "5|es,pt|zaragoza": [
+ "6|es,pt|zaragoza": [
   [
    41.6915847,
-   -0.9101268
+   -0.9101268,
+   "es"
   ],
   [
    41.6521342,
-   -0.8809428
+   -0.8809428,
+   "es"
   ],
   [
    41.840047,
-   -1.169509
+   -1.169509,
+   "es"
   ],
   [
    41.700571,
-   -0.909086
+   -0.909086,
+   "es"
   ]
  ],
- "5|es,pt|santiago de compostela": [
+ "6|es,pt|santiago de compostela": [
   [
    42.9064576,
-   -8.5192983
+   -8.5192983,
+   "es"
   ],
   [
    42.8804219,
-   -8.5458608
+   -8.5458608,
+   "es"
   ]
  ],
- "5|es,pt|a coruña": [
+ "6|es,pt|a coruña": [
   [
    43.3454621,
-   -8.4138519
+   -8.4138519,
+   "es"
   ],
   [
    43.1539943,
-   -8.5805076
+   -8.5805076,
+   "es"
   ],
   [
    43.2712595,
-   -8.4267389
+   -8.4267389,
+   "es"
   ]
  ],
- "5|es,pt|oviedo": [
+ "6|es,pt|oviedo": [
   [
    43.3533452,
-   -5.8795096
+   -5.8795096,
+   "es"
   ],
   [
    43.3618625,
-   -5.8483581
+   -5.8483581,
+   "es"
   ]
  ],
- "5|es,pt|santander": [
+ "6|es,pt|santander": [
   [
    43.4618932,
-   -3.8100255
+   -3.8100255,
+   "es"
   ],
   [
    43.1595664,
-   -4.0878382
+   -4.0878382,
+   "es"
   ]
  ],
- "5|es,pt|bilbao": [
+ "6|es,pt|bilbao": [
   [
    43.2630018,
-   -2.9350039
+   -2.9350039,
+   "es"
   ]
  ],
- "5|es,pt|san sebastián": [
+ "6|es,pt|san sebastián": [
   [
    43.3224219,
-   -1.9838889
+   -1.9838889,
+   "es"
   ]
  ],
- "5|es,pt|porto": [
+ "6|es,pt|porto": [
   [
    41.1502195,
-   -8.6103497
+   -8.6103497,
+   "pt"
   ],
   [
    41.1537738,
-   -8.6144367
+   -8.6144367,
+   "pt"
   ],
   [
    41.2366885,
-   -8.3020183
+   -8.3020183,
+   "pt"
   ],
   [
    42.1553614,
-   -6.8651279
+   -6.8651279,
+   "es"
   ]
  ],
- "5|es,pt|braga": [
+ "6|es,pt|braga": [
   [
    41.5510583,
-   -8.4280045
+   -8.4280045,
+   "pt"
   ],
   [
    41.5698319,
-   -8.3059409
+   -8.3059409,
+   "pt"
   ],
   [
    41.5559599,
-   -8.4213773
+   -8.4213773,
+   "pt"
   ],
   [
    41.5527239,
-   -8.4135068
+   -8.4135068,
+   "pt"
   ]
  ],
- "5|es,pt|viana do castelo": [
+ "6|es,pt|viana do castelo": [
   [
    41.7181408,
-   -8.7637237
+   -8.7637237,
+   "pt"
   ],
   [
    41.6935131,
-   -8.828277
+   -8.828277,
+   "pt"
   ],
   [
    41.8803257,
-   -8.5228271
+   -8.5228271,
+   "pt"
   ]
  ],
- "5|es,pt|bragança": [
+ "6|es,pt|bragança": [
   [
    41.5084468,
-   -6.7733024
+   -6.7733024,
+   "pt"
   ],
   [
    41.8071182,
-   -6.7589839
+   -6.7589839,
+   "pt"
   ]
  ],
- "5|es,pt|vila real": [
+ "6|es,pt|vila real": [
   [
    39.9372616,
-   -0.1004465
+   -0.1004465,
+   "es"
   ],
   [
    41.5229299,
-   -7.5466312
+   -7.5466312,
+   "pt"
   ],
   [
    41.2976935,
-   -7.7457614
+   -7.7457614,
+   "pt"
   ],
   [
    41.3029257,
-   -7.7413878
+   -7.7413878,
+   "pt"
   ]
  ],
- "5|es,pt|chaves": [
+ "6|es,pt|chaves": [
   [
    41.7399003,
-   -7.4715213
+   -7.4715213,
+   "pt"
   ]
  ],
- "5|es,pt|lissabon": [
+ "6|es,pt|lissabon": [
   [
    38.7077507,
-   -9.1365919
+   -9.1365919,
+   "pt"
   ],
   [
    38.9952469,
-   -9.1435928
+   -9.1435928,
+   "pt"
   ]
  ],
- "5|es,pt|coimbra": [
+ "6|es,pt|coimbra": [
   [
    40.2111874,
-   -8.4291478
+   -8.4291478,
+   "pt"
   ],
   [
    40.2215372,
-   -8.3381059
+   -8.3381059,
+   "pt"
   ],
   [
    40.2204397,
-   -8.4471535
+   -8.4471535,
+   "pt"
   ]
  ],
- "5|es,pt|leiria": [
+ "6|es,pt|leiria": [
   [
    39.7437902,
-   -8.8071119
+   -8.8071119,
+   "pt"
   ],
   [
    39.6505969,
-   -8.8741295
+   -8.8741295,
+   "pt"
   ]
  ],
- "5|es,pt|nazaré": [
+ "6|es,pt|nazaré": [
   [
    39.6029108,
-   -9.0701572
+   -9.0701572,
+   "pt"
   ],
   [
    39.612089,
-   -9.0585832
+   -9.0585832,
+   "pt"
   ],
   [
    32.6461777,
-   -16.9353326
+   -16.9353326,
+   "pt"
   ]
  ],
- "5|es,pt|sintra": [
+ "6|es,pt|sintra": [
   [
    38.8355446,
-   -9.3522371
+   -9.3522371,
+   "pt"
   ],
   [
    38.79846,
-   -9.3881
+   -9.3881,
+   "pt"
   ],
   [
    38.7885078,
-   -9.3913576
+   -9.3913576,
+   "pt"
   ]
  ],
- "5|es,pt|castelo branco": [
+ "6|es,pt|castelo branco": [
   [
    39.9767583,
-   -7.4460599
+   -7.4460599,
+   "pt"
   ],
   [
    39.8266322,
-   -7.4919318
+   -7.4919318,
+   "pt"
   ],
   [
    41.2773349,
-   -6.755895
+   -6.755895,
+   "pt"
   ],
   [
    39.8115002,
-   -7.4518301
+   -7.4518301,
+   "pt"
   ],
   [
    38.524216,
-   -28.7239089
+   -28.7239089,
+   "pt"
   ]
  ],
- "5|es,pt|évora": [
+ "6|es,pt|évora": [
   [
    38.5707742,
-   -7.9092808
+   -7.9092808,
+   "pt"
   ],
   [
    38.5906963,
-   -7.9571934
+   -7.9571934,
+   "pt"
   ],
   [
    38.5721347,
-   -7.9082224
+   -7.9082224,
+   "pt"
   ]
  ],
- "5|es,pt|beja": [
+ "6|es,pt|beja": [
   [
    38.0154479,
-   -7.8650368
+   -7.8650368,
+   "pt"
   ],
   [
    37.8250335,
-   -7.9338551
+   -7.9338551,
+   "pt"
   ],
   [
    38.0142056,
-   -7.9037483
+   -7.9037483,
+   "pt"
   ],
   [
    38.0353664,
-   -7.8461289
+   -7.8461289,
+   "pt"
   ]
  ],
- "5|es,pt|portalegre": [
+ "6|es,pt|portalegre": [
   [
    39.2076447,
-   -7.7215134
+   -7.7215134,
+   "pt"
   ],
   [
    39.2911347,
-   -7.4333887
+   -7.4333887,
+   "pt"
   ]
  ],
- "5|es,pt|sines": [
+ "6|es,pt|sines": [
   [
    37.956549,
-   -8.8689639
+   -8.8689639,
+   "pt"
   ],
   [
    37.9574843,
-   -8.8122989
+   -8.8122989,
+   "pt"
   ]
  ],
- "5|es,pt|vila nova de milfontes": [
+ "6|es,pt|vila nova de milfontes": [
   [
    37.7252803,
-   -8.7822865
+   -8.7822865,
+   "pt"
   ]
  ],
- "5|es,pt|faro": [
+ "6|es,pt|faro": [
   [
    37.0162944,
-   -7.935182
+   -7.935182,
+   "pt"
   ],
   [
    37.2448086,
-   -8.1507562
+   -8.1507562,
+   "pt"
   ]
  ],
- "5|es,pt|lagos": [
+ "6|es,pt|lagos": [
   [
    37.1027964,
-   -8.6728689
+   -8.6728689,
+   "pt"
   ]
  ],
- "5|es,pt|sagres": [
+ "6|es,pt|sagres": [
   [
    37.0078288,
-   -8.941924
+   -8.941924,
+   "pt"
   ]
  ],
- "5|es,pt|tavira": [
+ "6|es,pt|tavira": [
   [
    37.1262493,
-   -7.6499121
+   -7.6499121,
+   "pt"
   ],
   [
    37.1918872,
-   -7.6769848
+   -7.6769848,
+   "pt"
   ]
  ],
- "5|es,pt|portimão": [
+ "6|es,pt|portimão": [
   [
    37.1375808,
-   -8.5368426
+   -8.5368426,
+   "pt"
   ],
   [
    37.1800317,
-   -8.5312516
+   -8.5312516,
+   "pt"
   ]
  ],
- "5|es,pt|aljezur": [
+ "6|es,pt|aljezur": [
   [
    37.3151549,
-   -8.8040533
+   -8.8040533,
+   "pt"
   ],
   [
    37.2999561,
-   -8.8070353
+   -8.8070353,
+   "pt"
   ]
  ],
- "5|es,pt|lagos, faro": [
+ "6|es,pt|albufeira, faro": [
+  [
+   37.088241,
+   -8.2526339,
+   "pt"
+  ]
+ ],
+ "6|es,pt|coruche, santarém": [
+  [
+   38.958218,
+   -8.5283498,
+   "pt"
+  ],
+  [
+   38.9373882,
+   -8.4730907,
+   "pt"
+  ]
+ ],
+ "6|es,pt|castelo branco, castelo branco": [
+  [
+   39.8266322,
+   -7.4919318,
+   "pt"
+  ],
+  [
+   39.8115002,
+   -7.4518301,
+   "pt"
+  ],
+  [
+   39.8253,
+   -7.4972,
+   "pt"
+  ],
+  [
+   38.5247514,
+   -28.7511743,
+   "pt"
+  ]
+ ],
+ "6|es,pt|lidl, castelo branco": [
+  [
+   40.268928,
+   -7.5060584,
+   "pt"
+  ],
+  [
+   39.8097366,
+   -7.5135509,
+   "pt"
+  ],
+  [
+   39.9177037,
+   -7.469694,
+   "pt"
+  ],
+  [
+   39.8212531,
+   -7.486435,
+   "pt"
+  ],
+  [
+   40.1544622,
+   -7.4976802,
+   "pt"
+  ]
+ ],
+ "6|es,pt|valerias, guarda": [
+  [
+   41.1797268,
+   -8.4920356,
+   "pt"
+  ],
+  [
+   42.4333126,
+   -8.6447563,
+   "es"
+  ]
+ ],
+ "6|es,pt|évora, évora": [
+  [
+   38.5707742,
+   -7.9092808,
+   "pt"
+  ],
+  [
+   38.5721347,
+   -7.9082224,
+   "pt"
+  ]
+ ],
+ "6|es,pt|área de motorhomes de la ciudad, évora": [],
+ "6|es,pt|o grove, pontevedra": [
+  [
+   42.4701381,
+   -8.8961829,
+   "es"
+  ],
+  [
+   42.4693872,
+   -8.8949654,
+   "es"
+  ],
+  [
+   42.4963582,
+   -8.8650861,
+   "es"
+  ]
+ ],
+ "6|es,pt|área das pipas / reborido, o grove": [],
+ "6|es,pt|níjar, almería": [
+  [
+   36.962894,
+   -2.2063758,
+   "es"
+  ]
+ ],
+ "6|es,pt|playa de monsul / playa de los genoveses, níjar": [],
+ "6|es,pt|orihuela costa, alicante": [
+  [
+   37.9258884,
+   -0.7344818,
+   "es"
+  ],
+  [
+   37.9538005,
+   -0.7364495,
+   "es"
+  ],
+  [
+   38.0794539,
+   -0.9457207,
+   "es"
+  ],
+  [
+   37.9113059,
+   -0.7409239,
+   "es"
+  ],
+  [
+   37.9095382,
+   -0.7433419,
+   "es"
+  ]
+ ],
+ "6|es,pt|zenia boulevard, orihuela costa": [
+  [
+   37.9303776,
+   -0.7359634,
+   "es"
+  ]
+ ],
+ "6|es,pt|tarifa, cádiz": [
+  [
+   36.0129082,
+   -5.6050213,
+   "es"
+  ]
+ ],
+ "6|es,pt|playa de los lances, tarifa": [
+  [
+   36.0300253,
+   -5.624059,
+   "es"
+  ],
+  [
+   36.0178274,
+   -5.6131463,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping tarifa, tarifa": [
+  [
+   36.055206,
+   -5.6511658,
+   "es"
+  ],
+  [
+   36.0548764,
+   -5.6493824,
+   "es"
+  ],
+  [
+   36.0542074,
+   -5.6486721,
+   "es"
+  ]
+ ],
+ "6|es,pt|bulfeira, faro": [],
+ "6|es,pt|seixal, setúbal": [
+  [
+   38.6422246,
+   -9.1072662,
+   "pt"
+  ],
+  [
+   38.6460299,
+   -9.0897577,
+   "pt"
+  ]
+ ],
+ "6|es,pt|san sebastián, gipuzkoa": [
+  [
+   43.3224219,
+   -1.9838889,
+   "es"
+  ]
+ ],
+ "6|es,pt|bilbao, bizkaia": [
+  [
+   43.2630018,
+   -2.9350039,
+   "es"
+  ]
+ ],
+ "6|es,pt|l'hospitalet de l'infant, tarragona": [
+  [
+   40.9996481,
+   0.9124003,
+   "es"
+  ],
+  [
+   40.9916294,
+   0.9217301,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping cala d'oques, l'hospitalet de l'infant": [
+  [
+   40.979001,
+   0.9040533,
+   "es"
+  ]
+ ],
+ "6|es,pt|amarante, porto": [
+  [
+   41.2699316,
+   -8.0804563,
+   "pt"
+  ]
+ ],
+ "6|es,pt|nazaré, leiria": [
+  [
+   39.6029108,
+   -9.0701572,
+   "pt"
+  ],
+  [
+   39.612089,
+   -9.0585832,
+   "pt"
+  ]
+ ],
+ "6|es,pt|campillos, málaga": [
+  [
+   37.0470137,
+   -4.8621698,
+   "es"
+  ]
+ ],
+ "6|es,pt|el coronil, sevilla": [
+  [
+   37.0796909,
+   -5.6329514,
+   "es"
+  ]
+ ],
+ "6|es,pt|el rompido, huelva": [
+  [
+   37.2225915,
+   -7.1237849,
+   "es"
+  ]
+ ],
+ "6|es,pt|barrancos, beja": [
+  [
+   38.1315902,
+   -6.9779893,
+   "pt"
+  ],
+  [
+   38.1544546,
+   -7.0527279,
+   "pt"
+  ]
+ ],
+ "6|es,pt|castelo de noudar, barrancos": [
+  [
+   38.178003,
+   -7.0630676,
+   "pt"
+  ]
+ ],
+ "6|es,pt|marvão, portalegre": [
+  [
+   39.394765,
+   -7.3775491,
+   "pt"
+  ],
+  [
+   39.3813644,
+   -7.3390857,
+   "pt"
+  ]
+ ],
+ "6|es,pt|lagos, faro": [
   [
    37.1027964,
-   -8.6728689
+   -8.6728689,
+   "pt"
   ]
  ],
- "5|es,pt|aljezur, faro": [
+ "6|es,pt|odeceixe, odemira": [
   [
-   37.3151549,
-   -8.8040533
+   37.4421223,
+   -8.7973934,
+   "pt"
   ],
   [
-   37.2999561,
-   -8.8070353
+   37.5057068,
+   -8.7518281,
+   "pt"
+  ],
+  [
+   37.5501963,
+   -8.7240343,
+   "pt"
+  ],
+  [
+   37.5071447,
+   -8.707434,
+   "pt"
   ]
  ],
- "5|es,pt|monte clérigo, aljezur": [
+ "6|es,pt|praia de odeceixe, odeceixe": [
+  [
+   37.4421223,
+   -8.7973934,
+   "pt"
+  ],
+  [
+   37.440467,
+   -8.7975093,
+   "pt"
+  ],
+  [
+   37.4404751,
+   -8.7977817,
+   "pt"
+  ]
+ ],
+ "6|es,pt|sines, sines": [
+  [
+   37.9574843,
+   -8.8122989,
+   "pt"
+  ]
+ ],
+ "6|es,pt|sesimbra, setúbal": [
+  [
+   38.4436932,
+   -9.0996273,
+   "pt"
+  ],
+  [
+   38.4876084,
+   -9.1143697,
+   "pt"
+  ],
+  [
+   38.4454915,
+   -9.0994728,
+   "pt"
+  ],
+  [
+   38.4528045,
+   -9.106763,
+   "pt"
+  ]
+ ],
+ "6|es,pt|sintra, lissabon": [
+  [
+   38.8355446,
+   -9.3522371,
+   "pt"
+  ],
+  [
+   38.79846,
+   -9.3881,
+   "pt"
+  ],
+  [
+   38.7885078,
+   -9.3913576,
+   "pt"
+  ]
+ ],
+ "6|es,pt|foz do arelho, leiria": [
+  [
+   39.4329582,
+   -9.2173901,
+   "pt"
+  ]
+ ],
+ "6|es,pt|alvor, faro": [
+  [
+   37.129109,
+   -8.5929383,
+   "pt"
+  ]
+ ],
+ "6|es,pt|camping alvor, alvor": [
+  [
+   37.1344414,
+   -8.5896419,
+   "pt"
+  ]
+ ],
+ "6|es,pt|algarve motorhome park falésia, albufeira": [
+  [
+   37.089375,
+   -8.1615555,
+   "pt"
+  ]
+ ],
+ "6|es,pt|monte gordo, vila real de santo antónio, faro": [
+  [
+   37.1824461,
+   -7.451945,
+   "pt"
+  ],
+  [
+   37.1900762,
+   -7.4483465,
+   "pt"
+  ],
+  [
+   37.1900411,
+   -7.4483282,
+   "pt"
+  ],
+  [
+   37.1766931,
+   -7.4427844,
+   "pt"
+  ]
+ ],
+ "6|es,pt|parque de campismo montegordo, monte gordo": [],
+ "6|es,pt|torrox costa, málaga": [
+  [
+   36.7307283,
+   -3.9650488,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping el pino, torrox costa": [
+  [
+   36.7402379,
+   -3.9492942,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping rio jara, tarifa": [
+  [
+   36.0431658,
+   -5.6286351,
+   "es"
+  ]
+ ],
+ "6|es,pt|lisboa, lissabon": [
+  [
+   38.7077507,
+   -9.1365919,
+   "pt"
+  ]
+ ],
+ "6|es,pt|lisboa camping, lisboa": [
+  [
+   38.7244254,
+   -9.2050576,
+   "pt"
+  ],
+  [
+   38.7245759,
+   -9.2077526,
+   "pt"
+  ]
+ ],
+ "6|es,pt|camping lisboa, lissabon": [
+  [
+   38.7244254,
+   -9.2050576,
+   "pt"
+  ],
+  [
+   38.7245759,
+   -9.2077526,
+   "pt"
+  ]
+ ],
+ "6|es,pt|algodonales, cádiz": [
+  [
+   36.879693,
+   -5.4047755,
+   "es"
+  ]
+ ],
+ "6|es,pt|jimena de la frontera, cádiz": [
+  [
+   36.4327335,
+   -5.4527477,
+   "es"
+  ]
+ ],
+ "6|es,pt|foz de arouce, lousã, coimbra": [
+  [
+   40.158653,
+   -8.278448,
+   "pt"
+  ],
+  [
+   40.1636013,
+   -8.2738853,
+   "pt"
+  ]
+ ],
+ "6|es,pt|batalha, leiria": [
+  [
+   39.6578998,
+   -8.8243713,
+   "pt"
+  ],
+  [
+   39.6574463,
+   -8.8318802,
+   "pt"
+  ]
+ ],
+ "6|es,pt|teruel, teruel": [
+  [
+   40.3436719,
+   -1.1081939,
+   "es"
+  ]
+ ],
+ "6|es,pt|monte clérigo, aljezur": [
   [
    37.3389161,
-   -8.8534287
+   -8.8534287,
+   "pt"
   ],
   [
    37.3223983,
-   -8.8300541
+   -8.8300541,
+   "pt"
   ],
   [
    37.3401466,
-   -8.8521545
+   -8.8521545,
+   "pt"
   ]
  ],
- "5|es,pt|isla cristina, huelva": [
-  [
-   37.2036925,
-   -7.3238913
-  ]
- ],
- "5|es,pt|camping giralda, isla cristina": [
+ "6|es,pt|camping giralda, isla cristina": [
   [
    37.2010214,
-   -7.2997363
+   -7.2997363,
+   "es"
   ]
  ],
- "5|es,pt|teruel, teruel": [
-  [
-   40.3436719,
-   -1.1081939
-  ]
- ],
- "5|es,pt|alarcón, cuenca": [
+ "6|es,pt|alarcón, cuenca": [
   [
    39.5462409,
-   -2.0867234
+   -2.0867234,
+   "es"
   ]
  ],
- "5|es,pt|foz do arelho, leiria": [
+ "6|es,pt|crato, portalegre": [
   [
-   39.4329582,
-   -9.2173901
+   39.2851221,
+   -7.6454266,
+   "pt"
   ]
  ],
- "5|es,pt|parque de pernoita de autocaravanas da foz do arelho, foz do arelho": [],
- "5|es,pt|praia da assenta, nördlich von lissabon, portugal": [
+ "6|es,pt|foz do sizandro, torres vedras": [
+  [
+   39.1094566,
+   -9.3960504,
+   "pt"
+  ],
+  [
+   39.0991261,
+   -9.398663,
+   "pt"
+  ],
+  [
+   39.1062762,
+   -9.3965889,
+   "pt"
+  ],
+  [
+   39.1012224,
+   -9.4025657,
+   "pt"
+  ]
+ ],
+ "6|es,pt|benissa, alicante": [
+  [
+   38.7163735,
+   0.0534016,
+   "es"
+  ]
+ ],
+ "6|es,pt|archena, murcia": [
+  [
+   38.1178119,
+   -1.3025236,
+   "es"
+  ]
+ ],
+ "6|es,pt|úbeda, jaén": [
+  [
+   38.0111398,
+   -3.3719098,
+   "es"
+  ]
+ ],
+ "6|es,pt|osuna, sevilla": [
+  [
+   37.2373532,
+   -5.1033306,
+   "es"
+  ]
+ ],
+ "6|es,pt|antequera, málaga": [
+  [
+   37.0183652,
+   -4.5596649,
+   "es"
+  ],
+  [
+   37.0491949,
+   -4.6224765,
+   "es"
+  ]
+ ],
+ "6|es,pt|la vall d'uixó, castellón": [
+  [
+   39.8235837,
+   -0.2316995,
+   "es"
+  ]
+ ],
+ "6|es,pt|moncofa, castellón": [
+  [
+   39.808205,
+   -0.1452657,
+   "es"
+  ]
+ ],
+ "6|es,pt|puerto lumbreras, murcia": [
+  [
+   37.5635045,
+   -1.8076233,
+   "es"
+  ]
+ ],
+ "6|es,pt|lissabon, lisboa": [
+  [
+   38.7077507,
+   -9.1365919,
+   "pt"
+  ]
+ ],
+ "6|es,pt|apúlia, esposende (braga)": [
+  [
+   41.4824433,
+   -8.7651879,
+   "pt"
+  ]
+ ],
+ "6|es,pt|oeiras, lissabon": [
+  [
+   38.6925777,
+   -9.3123076,
+   "pt"
+  ]
+ ],
+ "6|es,pt|cabo da roca, cabo da roca": [
+  [
+   38.7811071,
+   -9.4972473,
+   "pt"
+  ],
+  [
+   38.7804947,
+   -9.4988505,
+   "pt"
+  ],
+  [
+   38.7805069,
+   -9.4990218,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia das maçãs, sintra": [
+  [
+   38.825643,
+   -9.4629412,
+   "pt"
+  ],
+  [
+   38.827016,
+   -9.46789,
+   "pt"
+  ],
+  [
+   38.8249184,
+   -9.4701399,
+   "pt"
+  ],
+  [
+   38.8255022,
+   -9.4692162,
+   "pt"
+  ],
+  [
+   38.8258322,
+   -9.4686003,
+   "pt"
+  ]
+ ],
+ "6|es,pt|lousã, coimbra": [
+  [
+   40.111052,
+   -8.2460668,
+   "pt"
+  ],
+  [
+   40.1034475,
+   -8.2497045,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia da assenta, praia da assenta": [
   [
    39.060108,
-   -9.4150444
+   -9.4150444,
+   "pt"
   ]
  ],
- "5|es,pt|praia da assenta, praia da assenta": [
+ "6|es,pt|vera playa, almería": [
   [
-   39.060108,
-   -9.4150444
+   37.2282081,
+   -1.8025371,
+   "es"
   ]
  ],
- "5|es,pt|soria, soria": [
+ "6|es,pt|bragança, bragança": [
+  [
+   41.8071182,
+   -6.7589839,
+   "pt"
+  ]
+ ],
+ "6|es,pt|raposeira, braga": [
+  [
+   41.5170771,
+   -8.0004716,
+   "pt"
+  ],
+  [
+   41.6794554,
+   -8.1858019,
+   "pt"
+  ],
+  [
+   41.4500475,
+   -8.4564129,
+   "pt"
+  ],
+  [
+   41.4497348,
+   -8.4564982,
+   "pt"
+  ],
+  [
+   41.4214848,
+   -8.0985149,
+   "pt"
+  ]
+ ],
+ "6|es,pt|parque de campismo de braga, braga": [
+  [
+   41.5386658,
+   -8.4223035,
+   "pt"
+  ]
+ ],
+ "6|es,pt|la línea de la concepción, cádiz": [
+  [
+   36.1677899,
+   -5.3482396,
+   "es"
+  ]
+ ],
+ "6|es,pt|soria, soria": [
   [
    41.7633842,
-   -2.4642041
+   -2.4642041,
+   "es"
   ]
  ],
- "5|es,pt|verín, ourense": [
+ "6|es,pt|verín, ourense": [
   [
    41.8954832,
-   -7.418129
+   -7.418129,
+   "es"
   ],
   [
    42.0056743,
-   -7.4066135
+   -7.4066135,
+   "es"
   ]
  ],
- "5|es,pt|praia del rey, leiria": [
+ "6|es,pt|góis, coimbra": [
   [
-   28.2124438,
-   -14.22536
-  ]
- ],
- "5|es,pt|praia del rey, praia del rey": [
+   40.1546195,
+   -8.1099454,
+   "pt"
+  ],
   [
-   28.2124438,
-   -14.22536
+   40.1401894,
+   -8.1244419,
+   "pt"
   ]
  ],
- "5|es,pt|lissabon, lissabon": [
-  [
-   38.7077507,
-   -9.1365919
-  ]
- ],
- "5|es,pt|vila real de santo antónio, faro": [
+ "6|es,pt|vila real de santo antónio, faro": [
   [
    37.1946052,
-   -7.4155628
+   -7.4155628,
+   "pt"
   ],
   [
    37.1884271,
-   -7.4242165
+   -7.4242165,
+   "pt"
   ]
  ],
- "5|es,pt|benicarlo, castellón": [
-  [
-   40.4180244,
-   0.4229813
-  ]
- ],
- "5|es,pt|camping alegria, benicarlo": [
+ "6|es,pt|camping alegria, benicarlo": [
   [
    40.4253365,
-   0.4369294
+   0.4369294,
+   "es"
   ]
  ],
- "5|es,pt|espinho, aveiro": [
+ "6|es,pt|espinho, aveiro": [
   [
    41.0083643,
-   -8.6394111
+   -8.6394111,
+   "pt"
   ],
   [
    41.0076279,
-   -8.6402608
+   -8.6402608,
+   "pt"
   ]
  ],
- "5|es,pt|vagueira, aveiro": [
+ "6|es,pt|vagueira, aveiro": [
   [
    40.562027,
-   -8.7653996
+   -8.7653996,
+   "pt"
   ],
   [
    40.5585205,
-   -8.7431406
+   -8.7431406,
+   "pt"
   ],
   [
    40.5702668,
-   -8.7471393
+   -8.7471393,
+   "pt"
   ],
   [
    40.5580305,
-   -8.7530668
+   -8.7530668,
+   "pt"
   ],
   [
-   40.5609857,
-   -8.7576279
+   40.5581268,
+   -8.7449229,
+   "pt"
   ]
  ],
- "5|es,pt|alcobaça, leiria": [
+ "6|es,pt|alcobaça, leiria": [
   [
    39.5519199,
-   -8.9763396
+   -8.9763396,
+   "pt"
   ]
  ],
- "5|es,pt|formigal, huesca": [
+ "6|es,pt|camping salata, roses": [
+  [
+   42.266535,
+   3.1575209,
+   "es"
+  ]
+ ],
+ "6|es,pt|roses, girona": [
+  [
+   42.2632018,
+   3.1755328,
+   "es"
+  ]
+ ],
+ "6|es,pt|ancora, viana do castelo": [
+  [
+   41.7959527,
+   -8.8510326,
+   "pt"
+  ],
+  [
+   41.818023,
+   -8.8556697,
+   "pt"
+  ],
+  [
+   41.8135365,
+   -8.8624681,
+   "pt"
+  ],
+  [
+   41.8112515,
+   -8.8186725,
+   "pt"
+  ],
+  [
+   41.8006741,
+   -8.795829,
+   "pt"
+  ]
+ ],
+ "6|es,pt|vila chã, porto": [
+  [
+   41.2965412,
+   -8.7253665,
+   "pt"
+  ]
+ ],
+ "6|es,pt|monsanto, castelo branco": [
+  [
+   40.038751,
+   -7.1151133,
+   "pt"
+  ],
+  [
+   40.0356955,
+   -7.1145351,
+   "pt"
+  ],
+  [
+   39.6842919,
+   -7.4530431,
+   "pt"
+  ],
+  [
+   40.0042821,
+   -7.0738864,
+   "pt"
+  ],
+  [
+   40.0043221,
+   -7.1061931,
+   "pt"
+  ]
+ ],
+ "6|es,pt|raum castelo branco, castelo branco": [],
+ "6|es,pt|formigal, huesca": [
   [
    42.7741349,
-   -0.3608611
+   -0.3608611,
+   "es"
   ]
  ],
- "5|es,pt|praia del rei, marinha grande, leiria": [
+ "6|es,pt|lissabon, lissabon": [
+  [
+   38.7077507,
+   -9.1365919,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia del rei, praia del rei": [
   [
    39.2446844,
-   -0.2559783
+   -0.2559783,
+   "es"
   ]
  ],
- "5|es,pt|praia del rei, praia del rei": [
-  [
-   39.2446844,
-   -0.2559783
-  ]
- ],
- "5|ma,eh|tanger": [
+ "6|ma,eh|tanger": [
   [
    35.7694908,
-   -5.8044679
+   -5.8044679,
+   "ma"
   ]
  ],
- "5|ma,eh|tétouan": [
+ "6|ma,eh|tétouan": [
   [
    35.5696561,
-   -5.3758075
+   -5.3758075,
+   "ma"
   ]
  ],
- "5|ma,eh|chefchaouen": [
+ "6|ma,eh|chefchaouen": [
   [
    35.1700832,
-   -5.2766583
+   -5.2766583,
+   "ma"
   ],
   [
    35.1687748,
-   -5.2683454
+   -5.2683454,
+   "ma"
   ],
   [
    34.578344,
-   -2.502961
+   -2.502961,
+   "ma"
   ],
   [
    35.1001607,
-   -5.0070759
+   -5.0070759,
+   "ma"
   ]
  ],
- "5|ma,eh|al hoceima": [
+ "6|ma,eh|al hoceima": [
   [
    35.2449737,
-   -3.9313017
+   -3.9313017,
+   "ma"
   ]
  ],
- "5|ma,eh|nador": [
+ "6|ma,eh|nador": [
   [
    35.1736389,
-   -2.9368384
+   -2.9368384,
+   "ma"
   ]
  ],
- "5|ma,eh|saïdia": [
+ "6|ma,eh|saïdia": [
   [
    35.0822208,
-   -2.2245756
+   -2.2245756,
+   "ma"
   ]
  ],
- "5|ma,eh|asilah": [
+ "6|ma,eh|asilah": [
   [
    35.4555716,
-   -5.9216889
+   -5.9216889,
+   "ma"
   ],
   [
    35.4617881,
-   -6.0376607
+   -6.0376607,
+   "ma"
   ]
  ],
- "5|ma,eh|larache": [
+ "6|ma,eh|larache": [
   [
    35.1950923,
-   -6.1540287
+   -6.1540287,
+   "ma"
   ]
  ],
- "5|ma,eh|kénitra": [
+ "6|ma,eh|kénitra": [
   [
    34.26457,
-   -6.570169
+   -6.570169,
+   "ma"
   ],
   [
    33.9204332,
-   -6.3676093
+   -6.3676093,
+   "ma"
   ]
  ],
- "5|ma,eh|rabat": [
+ "6|ma,eh|rabat": [
   [
    34.0218454,
-   -6.8408929
+   -6.8408929,
+   "ma"
   ]
  ],
- "5|ma,eh|casablanca": [
+ "6|ma,eh|casablanca": [
   [
    33.5945144,
-   -7.6200284
+   -7.6200284,
+   "ma"
   ]
  ],
- "5|ma,eh|el jadida": [
+ "6|ma,eh|el jadida": [
   [
    33.2293229,
-   -8.4993567
+   -8.4993567,
+   "ma"
   ],
   [
    33.2433309,
-   -8.49884
+   -8.49884,
+   "ma"
   ]
  ],
- "5|ma,eh|fès": [
+ "6|ma,eh|fès": [
   [
    34.0346534,
-   -5.0161926
+   -5.0161926,
+   "ma"
   ],
   [
    34.0261952,
-   -5.0231849
+   -5.0231849,
+   "ma"
   ]
  ],
- "5|ma,eh|meknès": [
+ "6|ma,eh|meknès": [
   [
    33.8984131,
-   -5.5321582
+   -5.5321582,
+   "ma"
   ],
   [
    33.9999973,
-   -5.4983972
+   -5.4983972,
+   "ma"
   ],
   [
    33.8333136,
-   -4.8556382
+   -4.8556382,
+   "ma"
   ]
  ],
- "5|ma,eh|ifrane": [
+ "6|ma,eh|ifrane": [
   [
    33.527605,
-   -5.107408
+   -5.107408,
+   "ma"
   ],
   [
    35.128754,
-   -3.335681
+   -3.335681,
+   "ma"
   ],
   [
    31.7030483,
-   -6.348985
+   -6.348985,
+   "ma"
   ],
   [
    33.3529338,
-   -5.2509333
+   -5.2509333,
+   "ma"
   ]
  ],
- "5|ma,eh|azrou": [
+ "6|ma,eh|azrou": [
   [
    35.13024,
-   -3.544397
+   -3.544397,
+   "ma"
   ],
   [
    35.1596346,
-   -3.7715293
+   -3.7715293,
+   "ma"
   ],
   [
    33.4417206,
-   -5.2230701
+   -5.2230701,
+   "ma"
   ],
   [
    33.4415843,
-   -5.2269528
+   -5.2269528,
+   "ma"
   ],
   [
    33.436117,
-   -5.221913
+   -5.221913,
+   "ma"
   ]
  ],
- "5|ma,eh|midelt": [
+ "6|ma,eh|midelt": [
   [
    32.680347,
-   -4.739897
+   -4.739897,
+   "ma"
   ],
   [
    32.4861314,
-   -4.7256909
+   -4.7256909,
+   "ma"
   ]
  ],
- "5|ma,eh|marrakesch": [
+ "6|ma,eh|marrakesch": [
   [
    31.6258257,
-   -7.9891608
+   -7.9891608,
+   "ma"
   ],
   [
    31.7203273,
-   -8.1541684
+   -8.1541684,
+   "ma"
   ]
  ],
- "5|ma,eh|imlil": [
+ "6|ma,eh|imlil": [
   [
    31.7554271,
-   -7.0121066
+   -7.0121066,
+   "ma"
   ],
   [
    31.143889,
-   -7.921819
+   -7.921819,
+   "ma"
   ],
   [
    31.136817,
-   -7.920757
+   -7.920757,
+   "ma"
   ],
   [
    30.8979731,
-   -8.4427161
+   -8.4427161,
+   "ma"
   ],
   [
    31.1317987,
-   -7.9218392
+   -7.9218392,
+   "ma"
   ]
  ],
- "5|ma,eh|azilal": [
+ "6|ma,eh|azilal": [
   [
    31.959295,
-   -6.570991
+   -6.570991,
+   "ma"
   ],
   [
    31.231137,
-   -8.5922835
+   -8.5922835,
+   "ma"
   ],
   [
    31.8663842,
-   -6.4242107
+   -6.4242107,
+   "ma"
   ]
  ],
- "5|ma,eh|ouirgane": [
+ "6|ma,eh|ouirgane": [
   [
    31.175727,
-   -8.0789
+   -8.0789,
+   "ma"
   ],
   [
    31.17766,
-   -8.073286
+   -8.073286,
+   "ma"
   ]
  ],
- "5|ma,eh|demnate": [
+ "6|ma,eh|demnate": [
   [
    31.732224,
-   -7.002676
+   -7.002676,
+   "ma"
   ],
   [
    31.7276565,
-   -7.0105027
+   -7.0105027,
+   "ma"
   ]
  ],
- "5|ma,eh|essaouira": [
+ "6|ma,eh|essaouira": [
   [
    31.5118281,
-   -9.7620903
+   -9.7620903,
+   "ma"
   ]
  ],
- "5|ma,eh|imsouane": [
+ "6|ma,eh|imsouane": [
   [
    30.841899,
-   -9.819964
+   -9.819964,
+   "ma"
   ]
  ],
- "5|ma,eh|taghazout": [
+ "6|ma,eh|taghazout": [
   [
    30.5846695,
-   -9.6784988
+   -9.6784988,
+   "ma"
   ],
   [
    30.544722,
-   -9.709128
+   -9.709128,
+   "ma"
   ]
  ],
- "5|ma,eh|agadir": [
+ "6|ma,eh|agadir": [
   [
    30.4205162,
-   -9.5838532
+   -9.5838532,
+   "ma"
   ]
  ],
- "5|ma,eh|tiznit": [
+ "6|ma,eh|tiznit": [
   [
    29.698624,
-   -9.7312815
+   -9.7312815,
+   "ma"
   ],
   [
    29.5919306,
-   -9.3477725
+   -9.3477725,
+   "ma"
   ]
  ],
- "5|ma,eh|sidi ifni": [
+ "6|ma,eh|sidi ifni": [
   [
    29.3791253,
-   -10.1715632
+   -10.1715632,
+   "ma"
   ]
  ],
- "5|ma,eh|tafraoute": [
+ "6|ma,eh|tafraoute": [
   [
    35.114625,
-   -4.920862
+   -4.920862,
+   "ma"
   ],
   [
    29.720472,
-   -8.9744529
+   -8.9744529,
+   "ma"
   ],
   [
    30.6735085,
-   -4.6890711
+   -4.6890711,
+   "ma"
   ]
  ],
- "5|ma,eh|ouarzazate": [
+ "6|ma,eh|ouarzazate": [
   [
    30.920193,
-   -6.910923
+   -6.910923,
+   "ma"
   ]
  ],
- "5|ma,eh|zagora": [
+ "6|ma,eh|zagora": [
   [
    30.3279053,
-   -5.8369957
+   -5.8369957,
+   "ma"
   ],
   [
    30.3032822,
-   -5.7810852
+   -5.7810852,
+   "ma"
   ],
   [
    30.1017204,
-   -5.7969168
+   -5.7969168,
+   "ma"
   ]
  ],
- "5|ma,eh|tata": [
+ "6|ma,eh|tata": [
   [
    29.746392,
-   -7.9696051
+   -7.9696051,
+   "ma"
   ],
   [
    29.7467942,
-   -7.9662115
+   -7.9662115,
+   "ma"
   ],
   [
    29.3862218,
-   -8.0378987
+   -8.0378987,
+   "ma"
   ]
  ],
- "5|ma,eh|foum zguid": [
+ "6|ma,eh|foum zguid": [
   [
    30.085933,
-   -6.874903
+   -6.874903,
+   "ma"
   ]
  ],
- "5|ma,eh|tinghir": [
+ "6|ma,eh|tinghir": [
   [
    31.52133,
-   -5.531164
+   -5.531164,
+   "ma"
   ],
   [
    31.3173124,
-   -5.7494232
+   -5.7494232,
+   "ma"
   ]
  ],
- "5|ma,eh|merzouga": [
+ "6|ma,eh|merzouga": [
   [
    31.0999166,
-   -4.0140878
+   -4.0140878,
+   "ma"
   ]
  ],
- "5|ma,eh|erfoud": [
+ "6|ma,eh|erfoud": [
   [
    31.4349921,
-   -4.2328293
+   -4.2328293,
+   "ma"
   ]
  ],
- "5|ma,eh|rissani": [
+ "6|ma,eh|rissani": [
   [
    31.2618886,
-   -3.9593135
+   -3.9593135,
+   "ma"
   ],
   [
    31.284735,
-   -4.266987
+   -4.266987,
+   "ma"
   ]
  ],
- "5|ma,eh|errachidia": [
+ "6|ma,eh|errachidia": [
   [
    31.929089,
-   -4.4340807
+   -4.4340807,
+   "ma"
   ],
   [
    31.13729,
-   -4.2089343
+   -4.2089343,
+   "ma"
   ]
  ],
- "5|ma,eh|figuig": [
+ "6|ma,eh|figuig": [
   [
    32.7263134,
-   -2.6446272
+   -2.6446272,
+   "ma"
   ],
   [
    32.115048,
-   -1.230396
+   -1.230396,
+   "ma"
   ]
  ],
- "5|ma,eh|guelmim": [
+ "6|ma,eh|guelmim": [
   [
    28.9863852,
-   -10.0574351
+   -10.0574351,
+   "ma"
   ],
   [
    28.5273703,
-   -10.0315515
+   -10.0315515,
+   "ma"
   ]
  ],
- "5|ma,eh|tan-tan": [
+ "6|ma,eh|tan-tan": [
   [
    28.437553,
-   -11.098664
+   -11.098664,
+   "ma"
   ]
  ],
- "5|ma,eh|tarfaya": [
+ "6|ma,eh|tarfaya": [
   [
    27.9401204,
-   -12.9249934
+   -12.9249934,
+   "ma"
   ],
   [
    27.5370175,
-   -12.5761152
+   -12.5761152,
+   "ma"
   ]
  ],
- "5|ma,eh|laâyoune": [
+ "6|ma,eh|laâyoune": [
   [
    27.154512,
-   -13.1953921
+   -13.1953921,
+   "ma"
   ]
  ],
- "5|ma,eh|boujdour": [
+ "6|ma,eh|boujdour": [
   [
    26.1263378,
-   -14.4836537
+   -14.4836537,
+   "ma"
   ],
   [
    25.5312046,
-   -13.3532844
+   -13.3532844,
+   "ma"
   ]
  ],
- "5|ma,eh|assa": [
+ "6|ma,eh|assa": [
   [
    28.611352,
-   -9.436696
+   -9.436696,
+   "ma"
   ],
   [
    29.9991813,
-   -8.2876396
+   -8.2876396,
+   "ma"
   ],
   [
    28.6075188,
-   -9.4398772
+   -9.4398772,
+   "ma"
   ],
   [
    27.978305,
-   -9.4935605
+   -9.4935605,
+   "ma"
   ],
   [
    28.5465285,
-   -9.3954254
+   -9.3954254,
+   "ma"
   ]
  ],
- "5|ma,eh|dakhla": [
+ "6|ma,eh|dakhla": [
   [
    23.6940663,
-   -15.9431274
+   -15.9431274,
+   "ma"
   ],
   [
    30.4107934,
-   -9.5495306
+   -9.5495306,
+   "ma"
   ]
  ],
- "5|ma,eh|bir gandouz": [
+ "6|ma,eh|bir gandouz": [
   [
    21.8352819,
-   -16.4037424
+   -16.4037424,
+   "ma"
   ],
   [
    21.613729,
-   -16.471069
+   -16.471069,
+   "ma"
   ],
   [
    22.0555968,
-   -16.7479559
+   -16.7479559,
+   "ma"
   ]
  ],
- "5|ma,eh|guerguerat": [],
- "5|ma,eh|mehdia, kénitra": [
+ "6|ma,eh|guerguerat": [],
+ "6|ma,eh|rabat, rabat-salé-kénitra": [
   [
-   34.2643937,
-   -6.5697933
-  ],
-  [
-   34.2703875,
-   -6.6014248
-  ],
-  [
-   34.2648909,
-   -6.6520185
-  ],
-  [
-   34.258877,
-   -6.67326
-  ],
-  [
-   34.2678045,
-   -6.6266025
+   34.0218454,
+   -6.8408929,
+   "ma"
   ]
  ],
- "5|ma,eh|camping international, mehdia": [
+ "6|ma,eh|imi ouaddar, agadir": [
   [
-   34.2586785,
-   -6.6734691
+   30.5871774,
+   -9.7578609,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|atlantica park, imi ouaddar": [
+  [
+   30.5887625,
+   -9.7492579,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|mohammedia, casablanca-settat": [
+  [
+   33.6958383,
+   -7.3893292,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|les mimosas, mohammedia": [
+  [
+   33.5880059,
+   -7.634789,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|rissani, errachidia": [
+  [
+   31.2618886,
+   -3.9593135,
+   "ma"
   ],
   [
-   34.258877,
-   -6.67326
+   31.284735,
+   -4.266987,
+   "ma"
   ]
  ],
- "5|ma,eh|camping le relais, marrakesch": [
+ "6|ma,eh|dadès-schlucht bzw. todra-gebiet, tinghir": [],
+ "6|ma,eh|kathedrale der rosen, dadès-schlucht bzw. todra-gebiet": [],
+ "6|ma,eh|azrou, mittlerer atlas": [
   [
-   31.7067668,
-   -7.9900179
-  ]
- ],
- "5|ma,eh|tinghir, provinz tinghir": [
-  [
-   31.52133,
-   -5.531164
+   35.13024,
+   -3.544397,
+   "ma"
   ],
   [
-   31.5185427,
-   -5.5317508
+   35.1596346,
+   -3.7715293,
+   "ma"
   ],
   [
-   31.3906275,
-   -5.5283392
-  ]
- ],
- "5|ma,eh|alnif, region drâa-tafilalet": [
+   33.4417206,
+   -5.2230701,
+   "ma"
+  ],
   [
-   31.116268,
-   -5.16687
+   33.4415843,
+   -5.2269528,
+   "ma"
+  ],
+  [
+   33.436117,
+   -5.221913,
+   "ma"
   ]
  ],
- "5|ma,eh|asilah, tanger-assilah": [
+ "6|ma,eh|barrage elan, azrou": [],
+ "6|ma,eh|plage blanche, guelmim": [
+  [
+   28.9249173,
+   -10.6843466,
+   "ma"
+  ],
+  [
+   28.8252696,
+   -10.8942182,
+   "ma"
+  ],
+  [
+   28.9960928,
+   -10.5593068,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ford boucherf, plage blanche": [],
+ "6|ma,eh|tan-tan, guelmim": [
+  [
+   28.437553,
+   -11.098664,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|m'hamid el ghizlane, zagora": [
+  [
+   29.8273291,
+   -5.7238782,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|erg chigaga, m'hamid el ghizlane": [
+  [
+   29.8364631,
+   -5.7381888,
+   "ma"
+  ],
+  [
+   29.837593,
+   -5.7473884,
+   "ma"
+  ],
+  [
+   29.8331915,
+   -5.736677,
+   "ma"
+  ],
+  [
+   29.8277845,
+   -5.728277,
+   "ma"
+  ],
+  [
+   29.8278009,
+   -5.7282825,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|aït ben haddou, ouarzazate": [
+  [
+   31.0451536,
+   -7.1309706,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|safi, safi": [
+  [
+   32.2650776,
+   -9.230554,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|mrizika, safi": [
+  [
+   33.2542012,
+   -8.5010605,
+   "ma"
+  ],
+  [
+   35.7623629,
+   -5.757636,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping la dune de mrizika, mrizika": [
+  [
+   32.9503196,
+   -8.7796863,
+   "ma"
+  ],
+  [
+   32.949756,
+   -8.7788882,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|gourougou, nador": [
+  [
+   35.2206783,
+   -2.9973479,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|gourougou park, gourougou": [],
+ "6|ma,eh|ichniwen (ichemaouen), provinz al hoceima": [],
+ "6|ma,eh|ouezzane, chefchaouen": [
+  [
+   35.1796667,
+   -5.278748,
+   "ma"
+  ],
+  [
+   35.1653234,
+   -5.2627992,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|barrage al wahda, ouezzane": [
+  [
+   34.5979104,
+   -5.200165,
+   "ma"
+  ],
+  [
+   34.6096946,
+   -5.1480044,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|nador, nador": [
+  [
+   35.1754779,
+   -2.921135,
+   "ma"
+  ],
+  [
+   35.176,
+   -2.925,
+   "ma"
+  ],
+  [
+   35.1753339,
+   -2.9205242,
+   "ma"
+  ],
+  [
+   35.1633107,
+   -2.9592457,
+   "ma"
+  ],
+  [
+   35.183925,
+   -2.9280038,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|akchour, chefchaouen": [
+  [
+   35.2426399,
+   -5.1818629,
+   "ma"
+  ],
+  [
+   35.1675638,
+   -5.2753723,
+   "ma"
+  ],
+  [
+   35.1701668,
+   -5.2687185,
+   "ma"
+  ],
+  [
+   35.1681435,
+   -5.2752996,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|akchour, akchour": [
+  [
+   35.2389831,
+   -5.160465,
+   "ma"
+  ],
+  [
+   35.2537927,
+   -5.2152994,
+   "ma"
+  ],
+  [
+   35.2386791,
+   -5.1793176,
+   "ma"
+  ],
+  [
+   35.2379876,
+   -5.1732837,
+   "ma"
+  ],
+  [
+   35.218478,
+   -5.1385098,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|oued ifrane bei akchour, chefchaouen": [],
+ "6|ma,eh|oued ifrane, oued ifrane bei akchour": [
+  [
+   33.1242162,
+   -5.2662042,
+   "ma"
+  ],
+  [
+   29.0979443,
+   -9.6013272,
+   "ma"
+  ],
+  [
+   33.2522537,
+   -5.478881,
+   "ma"
+  ],
+  [
+   29.2324995,
+   -9.4569653,
+   "ma"
+  ],
+  [
+   33.3262058,
+   -5.5051714,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tanger med, tanger-assilah": [
+  [
+   35.7693736,
+   -5.8032208,
+   "ma"
+  ],
+  [
+   35.7714795,
+   -5.7872974,
+   "ma"
+  ],
+  [
+   35.7719772,
+   -5.7846363,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|asilah, tanger-assilah": [
   [
    35.4680522,
-   -6.0306332
+   -6.0306332,
+   "ma"
   ]
  ],
- "5|ma,eh|wohnmobilparkplatz am meer, asilah": [],
- "5|ma,eh|campingplatz nördlich marrakesch, marrakesch": [],
- "5|ma,eh|tafraoute, provinz tiznit": [
+ "6|ma,eh|mohammedia, casablanca": [
   [
-   29.7857084,
-   -8.6634492
+   33.6958383,
+   -7.3893292,
+   "ma"
   ]
  ],
- "5|ma,eh|overlanding area tafraoute, tafraoute": [],
- "5|ma,eh|merzouga, provinz errachidia": [
+ "6|ma,eh|oualidia, provinz el jadida": [
+  [
+   32.7314358,
+   -9.0340271,
+   "ma"
+  ],
+  [
+   32.73267,
+   -9.0384027,
+   "ma"
+  ],
+  [
+   32.6512309,
+   -8.9566789,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|banana beach nördlich agadir, agadir": [],
+ "6|ma,eh|banana beach (banana point), banana beach nördlich agadir": [],
+ "6|ma,eh|foum zguid, tata": [
+  [
+   30.0854,
+   -6.8732,
+   "ma"
+  ],
+  [
+   30.085933,
+   -6.874903,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|merzouga, errachidia": [
   [
    31.0999166,
-   -4.0140878
+   -4.0140878,
+   "ma"
   ]
  ],
- "5|ma,eh|gara medua, merzouga": [],
- "5|ma,eh|erg chebbi, merzouga": [
+ "6|ma,eh|camping heaven la chance, merzouga": [],
+ "6|ma,eh|lac dayet srij, merzouga": [
   [
-   31.1382361,
-   -3.9707751
+   31.0958301,
+   -4.0539708,
+   "ma"
   ]
  ],
- "5|ma,eh|ouarzazate, provinz ouarzazate": [
+ "6|ma,eh|zagora, drâa-tafilalet": [
   [
-   30.920193,
-   -6.910923
+   30.3279053,
+   -5.8369957,
+   "ma"
+  ],
+  [
+   30.3032822,
+   -5.7810852,
+   "ma"
+  ],
+  [
+   30.1017204,
+   -5.7969168,
+   "ma"
   ]
  ],
- "5|ma,eh|findoase, ouarzazate": [],
- "5|ma,eh|ouzoud, provinz azilal": [
+ "6|ma,eh|ouzoud, azilal": [
   [
    32.0153547,
-   -6.7192297
+   -6.7192297,
+   "ma"
   ],
   [
    32.0139913,
-   -6.7144177
+   -6.7144177,
+   "ma"
   ]
  ],
- "5|ma,eh|campingplatz ouzoud, ouzoud": [],
- "5|ma,eh|cirque de jaafar, provinz midelt": [
+ "6|ma,eh|camping zebra, ouzoud": [
   [
-   32.5422024,
-   -4.8928411
+   32.0050753,
+   -6.7202906,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|oualidia, el jadida": [
+  [
+   32.7333981,
+   -9.0338921,
+   "ma"
   ],
   [
-   32.5458264,
-   -4.9215147
+   33.2447493,
+   -8.5188957,
+   "ma"
   ]
  ],
- "5|ma,eh|cirque de jaafar, cirque de jaafar": [
+ "6|ma,eh|camping oualidia, oualidia": [
   [
-   32.5458264,
-   -4.9215147
+   32.7253972,
+   -9.0434556,
+   "ma"
   ]
  ],
- "5|ma,eh|chefchaouen, provinz chefchaouen": [
+ "6|ma,eh|taghazout, agadir-ida-ou-tanane": [
+  [
+   30.5846695,
+   -9.6784988,
+   "ma"
+  ],
+  [
+   30.544722,
+   -9.709128,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping terre d'océan, taghazout": [],
+ "6|ma,eh|jaifia, laâyoune": [],
+ "6|ma,eh|dakhla, dakhla": [
+  [
+   30.4077357,
+   -9.5556791,
+   "ma"
+  ],
+  [
+   23.6940663,
+   -15.9431274,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|gorges du ziz, errachidia": [],
+ "6|ma,eh|palm eagle, gorges du ziz": [],
+ "6|ma,eh|imilchil, hoher atlas": [
+  [
+   32.156119,
+   -5.633585,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tinghir, antiatlas & draa": [
+  [
+   31.52133,
+   -5.531164,
+   "ma"
+  ],
+  [
+   31.3173124,
+   -5.7494232,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|asilah, tanger-tétouan-al hoceïma": [
+  [
+   35.4555716,
+   -5.9216889,
+   "ma"
+  ],
+  [
+   35.4617881,
+   -6.0376607,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|qued laou, tétouan": [
+  [
+   35.4477361,
+   -5.0924241,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping saïd, mohammedia": [
+  [
+   33.725448,
+   -7.3367753,
+   "ma"
+  ],
+  [
+   29.7239904,
+   -8.9782309,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tanger, tanger-tétouan-al hoceima": [
+  [
+   35.7694908,
+   -5.8044679,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|chefchaouen, tanger-tétouan-al hoceima": [
   [
    35.1700832,
-   -5.2766583
+   -5.2766583,
+   "ma"
   ],
   [
    35.1687748,
-   -5.2683454
-  ],
-  [
-   34.578344,
-   -2.502961
+   -5.2683454,
+   "ma"
   ],
   [
    35.1001607,
-   -5.0070759
+   -5.0070759,
+   "ma"
   ]
  ],
- "5|ma,eh|campingplatz chefchaouen, chefchaouen": [],
- "5|ma,eh|erg chegaga, zagora": [
+ "6|ma,eh|tanger, tanger-assilah": [
   [
-   29.8492152,
-   -6.2095159
-  ]
- ],
- "5|ma,eh|campement chez naji, erg chegaga": [],
- "5|ma,eh|fès, région fès-meknès": [
-  [
-   34.0360135,
-   -5.0026876
-  ]
- ],
- "5|ma,eh|tanger, provinz tanger-assilah": [
-  [
-   35.7694908,
-   -5.8044679
-  ]
- ],
- "5|ma,eh|tanger med hafen, tanger": [],
- "5|ma,eh|aït mansour, tiznit": [
-  [
-   29.5474987,
-   -8.8750376
+   35.7438961,
+   -5.8171676,
+   "ma"
   ],
   [
-   29.5420301,
-   -8.8674325
-  ]
- ],
- "5|ma,eh|puerto kaizen, aït mansour": [],
- "5|ma,eh|tifnit, tiznit": [
-  [
-   30.1983725,
-   -9.6379822
-  ]
- ],
- "5|ma,eh|merzouga, errachidia": [
-  [
-   31.0999166,
-   -4.0140878
-  ]
- ],
- "5|ma,eh|tahinberg, merzouga": [],
- "5|ma,eh|plage blanche, südwesten marokkos (kurz vor der westsahara)": [
-  [
-   28.9249173,
-   -10.6843466
+   35.781,
+   -5.815,
+   "ma"
   ],
   [
-   28.8252696,
-   -10.8942182
+   35.746,
+   -5.797,
+   "ma"
   ],
   [
-   28.9960928,
-   -10.5593068
-  ]
- ],
- "5|ma,eh|plage blanche, plage blanche": [
-  [
-   28.9249173,
-   -10.6843466
+   35.786,
+   -5.828,
+   "ma"
   ],
   [
-   28.8252696,
-   -10.8942182
+   35.754,
+   -5.8,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|taghazout, agadir": [
+  [
+   30.5846695,
+   -9.6784988,
+   "ma"
   ],
   [
-   28.9960928,
-   -10.5593068
+   30.544722,
+   -9.709128,
+   "ma"
   ]
  ],
- "5|ma,eh|essaouira, provinz essaouira": [
+ "6|ma,eh|guelmim, guelmim-es semara": [
   [
-   31.3252294,
-   -9.3120507
-  ]
- ],
- "5|ma,eh|meknes, fès-meknès": [
-  [
-   33.8984131,
-   -5.5321582
+   28.9863852,
+   -10.0574351,
+   "ma"
   ],
   [
-   33.9999973,
-   -5.4983972
+   28.5273703,
+   -10.0315515,
+   "ma"
   ]
  ],
- "5|ma,eh|el jadida, province el jadida": [
-  [
-   33.2433309,
-   -8.49884
-  ],
-  [
-   33.2293229,
-   -8.4993567
-  ]
- ],
- "5|ma,eh|mohammedia, province mohammedia": [
-  [
-   33.2367123,
-   -8.4925373
-  ]
- ],
- "5|ma,eh|mimosa camping, mohammedia": [],
- "5|ma,eh|fiwid, zagora": [],
- "5|ma,eh|tafraoute, antiatlas": [
+ "6|ma,eh|tafraoute, antiatlas": [
   [
    35.114625,
-   -4.920862
+   -4.920862,
+   "ma"
   ],
   [
    29.720472,
-   -8.9744529
+   -8.9744529,
+   "ma"
   ],
   [
    30.6735085,
-   -4.6890711
+   -4.6890711,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|plage blanche, tan-tan": [
+  [
+   28.4455337,
+   -11.1589932,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|legzira beach, legzira": [
+  [
+   29.4436222,
+   -10.1179213,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping saada, asilah": [
+  [
+   35.4719705,
+   -6.0287982,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|aït mansour, tiznit": [
+  [
+   29.5474987,
+   -8.8750376,
+   "ma"
+  ],
+  [
+   29.5420301,
+   -8.8674325,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tifnit, tiznit": [
+  [
+   30.1983725,
+   -9.6379822,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|kénitra, kénitra": [
+  [
+   34.2514611,
+   -6.5818162,
+   "ma"
+  ],
+  [
+   34.2431646,
+   -6.5752913,
+   "ma"
+  ],
+  [
+   34.2515382,
+   -6.5825528,
+   "ma"
+  ],
+  [
+   34.2662294,
+   -6.5793045,
+   "ma"
+  ],
+  [
+   34.2562662,
+   -6.5790378,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|settat, settat": [
+  [
+   32.9939424,
+   -7.6235292,
+   "ma"
+  ],
+  [
+   32.993908,
+   -7.623451,
+   "ma"
+  ],
+  [
+   33.002397,
+   -7.619867,
+   "ma"
+  ],
+  [
+   33.0122229,
+   -7.6236284,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|marrakesch, marrakesch-safi": [
+  [
+   31.6258257,
+   -7.9891608,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping international, mehdia": [
+  [
+   34.2586785,
+   -6.6734691,
+   "ma"
+  ],
+  [
+   34.258877,
+   -6.67326,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping le relais, marrakesch": [
+  [
+   31.7067668,
+   -7.9900179,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tinghir, provinz tinghir": [
+  [
+   31.52133,
+   -5.531164,
+   "ma"
+  ],
+  [
+   31.5185427,
+   -5.5317508,
+   "ma"
+  ],
+  [
+   31.3906275,
+   -5.5283392,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|alnif, region drâa-tafilalet": [
+  [
+   31.116268,
+   -5.16687,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tafraoute, provinz tiznit": [
+  [
+   29.7857084,
+   -8.6634492,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|merzouga, provinz errachidia": [
+  [
+   31.0999166,
+   -4.0140878,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|erg chebbi, merzouga": [
+  [
+   31.1382361,
+   -3.9707751,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ouarzazate, provinz ouarzazate": [
+  [
+   30.920193,
+   -6.910923,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ouzoud, provinz azilal": [
+  [
+   32.0153547,
+   -6.7192297,
+   "ma"
+  ],
+  [
+   32.0139913,
+   -6.7144177,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|cirque de jaafar, cirque de jaafar": [
+  [
+   32.5458264,
+   -4.9215147,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|chefchaouen, provinz chefchaouen": [
+  [
+   35.1700832,
+   -5.2766583,
+   "ma"
+  ],
+  [
+   35.1687748,
+   -5.2683454,
+   "ma"
+  ],
+  [
+   34.578344,
+   -2.502961,
+   "ma"
+  ],
+  [
+   35.1001607,
+   -5.0070759,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|erg chegaga, zagora": [
+  [
+   29.8492152,
+   -6.2095159,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|fès, région fès-meknès": [
+  [
+   34.0360135,
+   -5.0026876,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tanger, provinz tanger-assilah": [
+  [
+   35.7694908,
+   -5.8044679,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|plage blanche, plage blanche": [
+  [
+   28.9249173,
+   -10.6843466,
+   "ma"
+  ],
+  [
+   28.8252696,
+   -10.8942182,
+   "ma"
+  ],
+  [
+   28.9960928,
+   -10.5593068,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|essaouira, provinz essaouira": [
+  [
+   31.3252294,
+   -9.3120507,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|meknes, fès-meknès": [
+  [
+   33.8984131,
+   -5.5321582,
+   "ma"
+  ],
+  [
+   33.9999973,
+   -5.4983972,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|el jadida, province el jadida": [
+  [
+   33.2433309,
+   -8.49884,
+   "ma"
+  ],
+  [
+   33.2293229,
+   -8.4993567,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|mohammedia, province mohammedia": [
+  [
+   33.2367123,
+   -8.4925373,
+   "ma"
   ]
  ]
 }
