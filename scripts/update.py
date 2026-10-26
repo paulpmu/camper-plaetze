@@ -587,37 +587,36 @@ REGION_RADIUS_KM = 250  # weiter weg von allen Ankerpunkten der Region gilt ein 
 
 
 def check_spots(spots: list[dict], dest: dict, geocode: Geocoder, anchors: dict) -> int:
-    """Standorte gegen die Region prüfen: falsch zugeordnete gleichnamige Orte neu verorten,
-    sonst die Region nach dem Standort korrigieren. Gibt die Zahl der Korrekturen zurück."""
+    """Standorte und Regionen prüfen, bei jedem Lauf auch für bestehende Plätze.
+
+    - Ungefähr oder über einen Namen verortete Plätze werden mit der aktuellen Logik neu verortet
+      (gleichnamige Orte: der erste Treffer, der zur Region passt).
+    - Liegt ein Platz weit weg von seiner Region oder in einem anderen Land als die Region,
+      wird er der nächstgelegenen passenden Region zugeordnet.
+    Gibt die Zahl der Korrekturen zurück."""
     fixed = 0
     for s in spots:
-        if s["lat"] is None or s.get("source") == "osm" or not anchors.get(s["region"]):
+        if s["lat"] is None or s.get("source") == "osm" or not (anchors.get(s["region"]) or {}).get("points"):
             continue
-        point = (s["lat"], s["lng"])
-        own = distance_to_region(point, anchors, s["region"])
-        if own <= REGION_RADIUS_KM:
-            # Liegt der Platz direkt bei einem Ort einer anderen Region und klar weiter weg von der eigenen?
-            other = min((r for r in anchors if r != s["region"] and anchors[r]),
-                        key=lambda r: distance_to_region(point, anchors, r), default=None)
-            if other and distance_to_region(point, anchors, other) <= 30 and own >= 60 \
-                    and own >= 3 * distance_to_region(point, anchors, other):
-                log(f"    Region korrigiert: {s['name']}: {s['region']} → {other}")
-                s["region"] = other
-                fixed += 1
-            continue
+        country = ""
         if s["precision"] in ("ort", "genau"):
             query = f"{s['poi']}, {s['place'].split(',')[0]}" if s["precision"] == "genau" and s.get("poi") else s["place"]
-            pos = geocode(query, dest["countrycodes"], near=anchors[s["region"]])
-            if pos and in_bbox(*pos, dest["bbox"]) and distance_to_region(pos, anchors, s["region"]) <= REGION_RADIUS_KM:
-                log(f"    Standort korrigiert: {s['name']} ({s['lat']}, {s['lng']}) → {pos}")
-                s["lat"], s["lng"] = round(pos[0], 5), round(pos[1], 5)
+            hit = geocode.locate(query, dest["countrycodes"], near=anchors[s["region"]]["points"])
+            if hit and in_bbox(hit[0], hit[1], dest["bbox"]):
+                country = hit[2]
+                if haversine_km((s["lat"], s["lng"]), hit[:2]) > 1:
+                    log(f"    Standort korrigiert: {s['name']} ({s['lat']}, {s['lng']}) → ({hit[0]:.5f}, {hit[1]:.5f})")
+                    s["lat"], s["lng"] = round(hit[0], 5), round(hit[1], 5)
+                    fixed += 1
+        point = (s["lat"], s["lng"])
+        wrong_country = country and anchors[s["region"]]["country"] and country != anchors[s["region"]]["country"]
+        if distance_to_region(point, anchors, s["region"]) > REGION_RADIUS_KM or wrong_country:
+            options = [r for r, a in anchors.items() if a["points"] and (not country or a["country"] in ("", country))]
+            best = min(options, key=lambda r: distance_to_region(point, anchors, r), default=s["region"])
+            if best != s["region"]:
+                log(f"    Region korrigiert: {s['name']}: {s['region']} → {best}")
+                s["region"] = best
                 fixed += 1
-                continue
-        best = min(anchors, key=lambda r: distance_to_region((s["lat"], s["lng"]), anchors, r) if anchors[r] else 1e9)
-        if best != s["region"]:
-            log(f"    Region korrigiert: {s['name']}: {s['region']} → {best}")
-            s["region"] = best
-            fixed += 1
     return fixed
 
 
@@ -628,7 +627,7 @@ def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder, anchors: d
     elif sp.location_precision == "region":
         precision = "region"  # erscheint nur in der Liste, nicht auf der Karte
     else:
-        near = anchors.get(sp.region)
+        near = (anchors.get(sp.region) or {}).get("points")
         town = geocode(sp.place, dest["countrycodes"], near=near)
         town = town if town and in_bbox(*town, dest["bbox"]) else None
         poi = geocode(f"{sp.poi_name}, {sp.place.split(',')[0]}", dest["countrycodes"], near=near) if sp.poi_name else None
