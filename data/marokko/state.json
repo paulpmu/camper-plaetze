@@ -1298,113 +1298,126 @@
    "title": "Nobody's Coming to Pull Us Out : Offroad Morocco Solo",
    "channel": "Defintothewild",
    "published": "2026-10-04",
-   "transcript": "blockiert",
-   "spots": 0
+   "transcript": "ok",
+   "spots": 0,
+   "retried": true
   },
   "h9seR5jHcmg": {
    "title": "Herbst-Winterreise 2026/27 Marokko - von Tanger Med über Rabat nach Marrakesh...",
    "channel": "Wir sind dann mal eben weg",
    "published": "2026-10-04",
-   "transcript": "blockiert",
-   "spots": 2
+   "transcript": "ok",
+   "spots": 2,
+   "retried": true
   },
   "Ju7FiOW411U": {
    "title": "I’ve Cracked The Free Camping Code In Morocco! Solo Bike Touring Sahara | Overlanding Africa",
    "channel": "hels on wheels",
    "published": "2026-10-03",
-   "transcript": "blockiert",
-   "spots": 0,
-   "skipped": "irrelevant"
+   "transcript": "ok",
+   "spots": 2,
+   "retried": true
   },
   "1_dpRTE8bj4": {
    "title": "Marokko-Tour 24; Zurück in Spanien",
    "channel": "all-wheels-outside",
    "published": "2026-10-02",
-   "transcript": "blockiert",
-   "spots": 0
+   "transcript": "ok",
+   "spots": 0,
+   "retried": true,
+   "skipped": "irrelevant"
   },
   "Q7OHNr_Oz_w": {
    "title": "Bis in die Sahara. Schnee! Schlamm, Sand und Wüste. Roadtrip im Expeditionsmobil / 4x4-Wohnmobil",
    "channel": "4x4 OverlandTravel  Offroad - Reisen - Overlanding",
    "published": "2026-10-02",
-   "transcript": "blockiert",
-   "spots": 0
+   "transcript": "ok",
+   "spots": 15,
+   "retried": true
   },
   "lqtSrCYI0qE": {
    "title": "Maroc : fêter mon anniversaire dans le désert, avec mes potes",
    "channel": "HORS-PISTE",
    "published": "2026-10-02",
-   "transcript": "blockiert",
-   "spots": 1
+   "transcript": "ok",
+   "spots": 2,
+   "retried": true
   },
   "fAO5jvZldrs": {
    "title": "Flash Floods Damaged My Brakes! Solo Bike Touring Sahara Desert Morocco | Overlanding Africa  ",
    "channel": "hels on wheels",
    "published": "2026-10-01",
-   "transcript": "blockiert",
+   "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "vsSEMd-4iy8": {
    "title": "Risking A Solo Wild Camp In The Moroccan Desert | Bike Touring Sahara, Overlanding Africa ",
    "channel": "hels on wheels",
    "published": "2026-09-29",
-   "transcript": "blockiert",
-   "spots": 0,
-   "skipped": "irrelevant"
+   "transcript": "ok",
+   "spots": 2,
+   "retried": true
   },
   "xRWacDXIgUo": {
    "title": "Marokko Teil 13, Fes mit dem Wohnmobil.",
    "channel": "Günter Schneiderat",
    "published": "2026-09-29",
-   "transcript": "blockiert",
-   "spots": 0
+   "transcript": "ok",
+   "spots": 1,
+   "retried": true
   },
   "63kIhb_5LzI": {
    "title": "Rallye du Maroc, Agadir Bivouac, the preparation before the rally, but it’s not straight forward ! ",
    "channel": "Project Purdey. Building & rallying Land Rovers.",
    "published": "2026-09-27",
-   "transcript": "blockiert",
-   "spots": 0
+   "transcript": "ok",
+   "spots": 0,
+   "retried": true
   },
   "KP5hHLWq7nI": {
    "title": "Herbst Winterreise 2026/27 - Mit der Fähre von Genua nach Marokko",
    "channel": "Wir sind dann mal eben weg",
    "published": "2026-09-27",
-   "transcript": "blockiert",
-   "spots": 0,
-   "skipped": "irrelevant"
+   "transcript": "ok",
+   "spots": 1,
+   "retried": true
   },
   "eBgiLv52fMM": {
    "title": "En route vers le Maroc 🇲🇦 nous traversons l'Espagne🇪🇸 (épisode 1)",
    "channel": "un_autre_voyage",
    "published": "2026-09-27",
-   "transcript": "blockiert",
+   "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "ld04JEdcvKU": {
    "title": "MAROC : ils s'offrent des vacances all-inclusives à 550€",
    "channel": "AILLEURS ▸ reportages voyages",
    "published": "2026-09-27",
-   "transcript": "blockiert",
+   "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "1pgBytDS6tw": {
    "title": "#28 Motorhome, dog and Dali: Our road trip to Morocco continues.",
    "channel": "Jeff & Russell Adventures ",
    "published": "2026-09-25",
-   "transcript": "blockiert",
+   "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "EjOxorhROiE": {
    "title": "Ingenious Moroccan Engineering Saved My Tent! Atlas Mountains Solo Bike Tour | Overlanding Africa",
    "channel": "hels on wheels",
    "published": "2026-09-23",
-   "transcript": "blockiert",
+   "transcript": "ok",
    "spots": 0,
+   "retried": true,
    "skipped": "irrelevant"
   },
   "AT3oic6_sOQ": {
@@ -1571,6 +1584,217 @@
   },
   "hMxUJ9XUm8Y": {
    "skipped": "kurz"
+  },
+  "HlyZn2GG10s": {
+   "skipped": "kurz"
+  },
+  "bTjUDvM4l5A": {
+   "skipped": "kurz"
+  },
+  "gwkanFNs2iA": {
+   "skipped": "kurz"
+  },
+  "oSIfz2JKSNs": {
+   "skipped": "kurz"
+  },
+  "pKnUIT1UkKc": {
+   "skipped": "kurz"
+  },
+  "qwoCnyLqSLM": {
+   "skipped": "kurz"
+  },
+  "sREKDOJo1bA": {
+   "skipped": "kurz"
+  },
+  "yULwRfXoUyc": {
+   "skipped": "kurz"
+  },
+  "SdJhRT3pk4Y": {
+   "title": "45 Minuten am Kabel – nichts geladen! | Elektrisch nach Marokko – Tag 2",
+   "channel": "Michis Hasenbau",
+   "published": "2026-10-26",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "HxnBRhrxW9k": {
+   "title": "Washing the Living Room Floor with Water?! 🇲🇦 Daily Life in Morocco as a Korean wife",
+   "channel": "YUKJI",
+   "published": "2026-10-25",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "aupL0HPuqFc": {
+   "title": "Elektrisch nach Marokko, jetzt schon in Spanien",
+   "channel": "Michis Hasenbau",
+   "published": "2026-10-25",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "y0tqi705AH8": {
+   "title": "Maroc trip 2026 dashcam highlights ",
+   "channel": "George Posso",
+   "published": "2026-10-19",
+   "transcript": "ok",
+   "spots": 0
+  },
+  "h1SCkOp-kIA": {
+   "title": "Maroc : la Fenêtre de la Vie",
+   "channel": "HORS-PISTE",
+   "published": "2026-10-16",
+   "transcript": "ok",
+   "spots": 1
+  },
+  "49dAPbSpirc": {
+   "title": "De la casse mécanique au CAMBRIOLAGE : Fin compliquée au Maroc (Episode 4 - Afrique)",
+   "channel": "Sans pied à terre",
+   "published": "2026-10-11",
+   "transcript": "ok",
+   "spots": 2
+  },
+  "bVrFWquKR1Y": {
+   "title": "⁠Tough Day Cycling Atlas Mountains Saved By Moroccan Kindness | Solo Bike Touring Africa⁠",
+   "channel": "hels on wheels",
+   "published": "2026-10-11",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "mpgu8KZLKEg": {
+   "title": "𝗣𝗢𝗧𝗛𝗢𝗟𝗘 𝗥𝗢𝗗𝗘𝗢 𝗠𝗔𝗥𝗢𝗞𝗞𝗢 ★ 𝗦𝗧𝗔𝗥𝗧 𝗧𝗛𝗘 𝗠𝗔𝗗𝗡𝗘𝗦𝗦 - Übers Riffgebirge in den Atlas",
+   "channel": "Back Road Club",
+   "published": "2026-10-09",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "yhrAXZ4NoRM": {
+   "title": "Underground Village & How To Quickly Enrage Me 🤬 Bike Touring Morocco | Overlanding Africa",
+   "channel": "hels on wheels",
+   "published": "2026-09-21",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "cMjneKv3WAs": {
+   "title": "Nos astuces pour partir au Maroc ",
+   "channel": "un_autre_voyage",
+   "published": "2026-09-20",
+   "transcript": "ok",
+   "spots": 0
+  },
+  "m1O3w4nUWj4": {
+   "title": "#9 The Morocco Project | Der letzte Offroad Track",
+   "channel": "Florian Stiebing",
+   "published": "2026-09-20",
+   "transcript": "ok",
+   "spots": 2
+  },
+  "Q9dncWhLoTg": {
+   "title": "Cycling GORGEOUS Todgha Gorge, But The Campsite is Missing! Morocco Bike Tour | Overlanding Africa ",
+   "channel": "hels on wheels",
+   "published": "2026-09-19",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "pGWrZ6nfOXs": {
+   "title": "The Track Was Gone, So We Built One (Morocco Overland)",
+   "channel": "Defintothewild",
+   "published": "2026-09-18",
+   "transcript": "ok",
+   "spots": 2
+  },
+  "QEkX8N6osus": {
+   "title": "Reprendre la route vers le Maroc ",
+   "channel": "un_autre_voyage",
+   "published": "2026-09-13",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "2wIPC6YlEaw": {
+   "title": "Ep. 21 Da Tarfaya a Dakhla nel viaggio Trecime Dolomiti to Dakar to Nordkapp con Bruno e Laura",
+   "channel": "Sportavventuraday Bruno e Laura",
+   "published": "2026-09-09",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "XSaFks6pKS0": {
+   "title": "Marokko Teil 12. Meknes mit dem Wohnmobil.",
+   "channel": "Günter Schneiderat",
+   "published": "2026-09-08",
+   "transcript": "ok",
+   "spots": 1
+  },
+  "nQLU3tHrFi8": {
+   "title": "Chasing waves, freedom and beautiful roads through Morocco 🇲🇦🌊🚐",
+   "channel": "Lou Little Roads",
+   "published": "2026-09-06",
+   "transcript": "ok",
+   "spots": 0
+  },
+  "QTUhHRuGs8o": {
+   "title": "Mit dem Fahrrad nach Afrika! 3.245KM BIKEPACKING - Der Film",
+   "channel": "filipmahoni",
+   "published": "2026-09-05",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "3KqfoSV5Ai4": {
+   "title": "WOULD WE DRIVE TO MOROCCO AGAIN? (Final motorhome episode)",
+   "channel": "ITCHY WHEELS",
+   "published": "2026-09-04",
+   "transcript": "ok",
+   "spots": 2
+  },
+  "lqP74ztsJBI": {
+   "title": "72 jours en van au Maroc, la vérité sur notre aventure",
+   "channel": "Aventure au Menu",
+   "published": "2026-08-30",
+   "transcript": "ok",
+   "spots": 0
+  },
+  "V-_ixiGxfEM": {
+   "title": "I Stupidly Crashed Into a Wadi With My Mercedes W124 | Morocco Rally Ep.8",
+   "channel": "Bijon de Kock and Cars",
+   "published": "2026-08-28",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "b_ZJkJmUaiw": {
+   "title": "Our Sahara Offroad Week Ended With Two Trucks Buried in Sand",
+   "channel": "Defintothewild",
+   "published": "2026-08-28",
+   "transcript": "ok",
+   "spots": 1
+  },
+  "bPtefAUM7ko": {
+   "title": "Se vedi qualcuno che ha bisogno di aiuto, ti fermi | In giro in giro – Marocco S1 Ep.6 – Incontri",
+   "channel": "in giro in giro",
+   "published": "2026-08-23",
+   "transcript": "ok",
+   "spots": 1
+  },
+  "-713bwYExfk": {
+   "title": "The Other Side of the EU Border: Inside Morocco 🇲🇦",
+   "channel": "Dutch Travel Maniac",
+   "published": "2026-08-21",
+   "transcript": "ok",
+   "spots": 0,
+   "skipped": "irrelevant"
+  },
+  "tMGWbmYE4Xk": {
+   "title": "We Got Stranded in Morocco's Deadliest Pass",
+   "channel": "Dark Zebra",
+   "published": "2026-08-21",
+   "transcript": "ok",
+   "spots": 1
   }
  },
  "queue": {
@@ -1581,14 +1805,6 @@
    "published": "2026-01-25",
    "description": "🇫🇮🇬🇧 This video is in both English and Finnish – with full subtitles available in both languages!\n\n⏪️⏪️In this episode we rewind to 2023, the very beginning of our vanlife journey in Finland, and do something we’d never done before: we visit a protected nature reserve with our motorhome for the first time. 🚐🌲🌳 Incredibly beautiful grove reserve in Huittinen was the perfect place to start, as it’s an easy and van-friendly spot to spend the night while being surrounded by nature.🌳🐦🐑\n\nWild parking in Finland is easy and well tolerated, if you remember to respect nature and other people.🌲\n\n⏩️⏩️Fast \nforward to 2026, and we’re already deep into overlanding and Morocco travel, cruising through the country in a two-vehicle convoy. 🚐🚐🌵\n\nThis time we mixed things up with a slightly different kind of overnight stay and ended up sleeping in a Marjane supermarket parking lot.🛒🛍\n\n If you’re craving more desert road trip energy and convoy adventures, make sure to check out Mad Max’s journeys as well! 👇\n\n\n👉Conservation areas in Finland\nhttps://luonnonperintosaatio.fi/en/conservation-areas/\n👉 MadMax Instagram https://www.instagram.com/whatamadmaxday/\n👉 MadMax Youtube https://youtube.com/@mirkokekkonen?si=xDw9e7j3L0smD7V0\n\n––––––––––––––––––––––––––\n🌍LOCATIONS\n\n👉Morocco, Muddy feet Spot\nhttps://maps.app.goo.gl/1CUDAnsjjLjJGqqq7\n\n👉Morocco, Guelmim, Marjane Parking Lot\nhttps://maps.app.goo.gl/bUXP6uU3RjPqc54v8\n\n👉Finland, Huittinen, Grove\nhttps://maps.app.goo.gl/EdepSoMf46tEjXYE7\n\n––––––––––––––––––––––––––\n⏰ TIMESTAMPS ⏰\n\n00:00 Intro \n00:15 Life Update from Morocco\n01:22 Muddy Incident\n02:10 Driving to Guelmim\n03:43 Marjane Parking Lot and Shopping\n07:00 Back to Finland: Heading to Grove Conservation Area in Huittinen\n08:46 Wild Parking in Conservation Areas\n09:58 Arrival at the Grove Area\n11:31 Let's Go for a Walk\n13:10 Info Blast: Finnish Groves\n14:28 Let's Go for a Walk, It'll be Fun\n18:47 Grove Conservation Area in Huittinen\n19:22 We Found the Rapids!\n22:11 Hanging out at Car Home\n\n––––––––––––––––––––––––––\n📲 CONNECT WITH US  \n🌟 Instagram: https://www.instagram.com/valoavaloa/\n––––––––––––––––––––––––––\n\n❤️ THANK YOU FOR WATCHING  ❤️\nIf you enjoyed this episode, hit like, leave a comment, and subscribe,\n it really helps us keep going and growing 🙏\n\n––––––––––––––––––––––––––\n#motorhome #vanlife #valoavaloa #travelvlog #ontheroad #nomadlife #slowtravel\n#matkailuauto #valoavaloa #reissuelämää #suomestamaailmalle",
    "duration": 1436
-  },
-  "-713bwYExfk": {
-   "id": "-713bwYExfk",
-   "title": "The Other Side of the EU Border: Inside Morocco 🇲🇦",
-   "channel": "Dutch Travel Maniac",
-   "published": "2026-08-21",
-   "description": "Use coupon code: DTM1 and Buy your DNA kit here: https://bit.ly/DutchTravelManiac_DNA \nWith Coupon Code DTM1 you get FREE shipping, and an exclusive 30-day free trial, available only for DTM viewers. Two weeks after investigating the intense border situation in Ceuta, I traveled to Morocco to document the other side of the fence. To truly understand why so many people risk everything to reach Europe, you have to see where the journey begins and how the border operates from the Moroccan side.\n\nIn this documentary, I travel through northern border hubs including Tetouan, Fnideq (bordering Ceuta), Nador, and the Beni Ensar border crossing near Melilla. I spent time talking with Moroccan locals to understand their daily reality, average wages, and perspectives on the ongoing border dynamics.\n\nWe also head up Mount Gourougou, a well-known vantage point and historic gathering spot where migrants wait for the right moment to make the crossing into Europe. From candid conversations with people who have attempted the crossing to an unfiltered look at life in these border regions, this is the complete picture of the EU-Morocco border conflict.\n\n💼 Sponsors & Business Inquiries:\nFor brand partnerships, sponsorships, and business inquiries, please contact us at: dutchtravelmaniac@get-seen.nl\n\n☕ Donations help keep these independent street documentaries alive: https://dutchtravelmaniac.backme.org/\n\n📲 Follow my daily travels and behind-the-scenes on TikTok & Instagram: @DutchTravelManiac\n🌐 Official website: https://dutchtravelmaniac.com\n\n#Morocco #Ceuta #Melilla #StreetDocumentary #TravelVlog #BorderCrisis #Fnideq #Nador #DutchTravelManiac",
-   "duration": 3818
   },
   "-dQUISs97OQ": {
    "id": "-dQUISs97OQ",
@@ -1670,14 +1886,6 @@
    "description": "#travelvlog #camperlife #viaggio   \n\nNel sud del Marocco esiste un luogo dove il deserto incontra l’oceano in un paesaggio quasi surreale: Dakhla. In questo episodio continuiamo a esplorare questa incredibile penisola fatta di lagune turchesi, piste sabbiose e spot spettacolari. Passeggiamo lungo la laguna fino a raggiungere a piedi la suggestiva Isola del Drago, assaggiamo il pane tipico locale e ci regaliamo qualche piccola avventura con il camper lungo la costa sabbiosa che lambisce l’Atlantico.\nUn luogo dove il tempo sembra rallentare e gli occhi si riempiono di spazi infiniti, vento e luce.\n\nMa il viaggio continua: lasciamo Dakhla e iniziamo una lunga tappa di 1200 km verso il nord del Marocco, pronti a scoprire nuovi paesaggi lungo la strada. 🚐 \n⸻\n\nCiao, siamo Giampiero e Federica! Dal 2021 viviamo, viaggiamo e lavoriamo sul nostro van. Nomademic è lo spirito libero che c’è in ognuno di noi, quel virus che risveglia la parte più selvaggia di te, quella curiosa, pronta a scoprire ed esplorare ogni angolo del mondo che la vita regala.\nNomademic è per chi vuole essere libero. Per chi vuole evadere dalle mura domestiche e vivere il mondo da itinerante. \n\nCondividiamo la nostra vita in camper, un nuovo episodio ogni martedì alle 20:45\n🚐: + 🏄🏻‍♀️ + 🏄🏻‍♂️\n\nSeguici per lasciarti contagiare dalla pandemia della libertà :)\n\n📸 Seguici anche su Instagram: @nomademic_\n#vanlife #camperlife #roadtrip",
    "duration": 997
   },
-  "2wIPC6YlEaw": {
-   "id": "2wIPC6YlEaw",
-   "title": "Ep. 21 Da Tarfaya a Dakhla nel viaggio Trecime Dolomiti to Dakar to Nordkapp con Bruno e Laura",
-   "channel": "Sportavventuraday Bruno e Laura",
-   "published": "2026-09-09",
-   "description": "🏍️ **DA TARFAYA A DAKHLA IN MOTO – MAROCCO, SAHARA E UN AIUTO INASPETTATO**\n\nContinua il nostro lungo viaggio in moto **dalle Tre Cime di Lavaredo a Dakar, con destinazione finale Capo Nord**.\n\nIn questo episodio lasciamo **Tarfaya** e ci dirigiamo verso **Dakhla**, percorrendo una delle strade più affascinanti e selvagge del **Marocco meridionale**, attraverso il deserto del Sahara Occidentale.\n\nChilometri di strada, vento, paesaggi desertici e l'immensità dell'Africa ci accompagnano durante questa tappa. Ma durante il viaggio incontriamo una persona **rimasta in panne con l'auto** e decidiamo di fermarci per darle una mano.\n\nPerché un viaggio in moto non è fatto soltanto di chilometri e destinazioni: sono spesso gli incontri lungo la strada a lasciare i ricordi più belli.\n\n📍 **Tappa:** Tarfaya → Dakhla\n🏍️ **Viaggio:** Tre Cime Dolomiti → Dakar → Capo Nord\n🌍 **Paese:** Marocco / Sahara Occidentale\n🏜️ **Destinazione:** Dakhla\n\nSe ti piacciono i **viaggi in moto, gli itinerari in Africa, il Marocco, il Sahara, le avventure on the road e i grandi viaggi motociclistici**, seguici in questa incredibile traversata verso Dakar e poi verso Capo Nord.\n\n👍 Se il video ti è piaciuto, lascia un LIKE\n💬 Scrivimi nei commenti cosa ne pensi di questa tappa\n🔔 ISCRIVITI al canale per non perdere i prossimi episodi del viaggio!\n\n#Dakhla #Tarfaya #Marocco #ViaggioInMoto #MotoInAfrica #Sahara #Dakar #CapoNord #AdventureMotorcycle #Mototurismo #AfricaInMoto #ViaggioOnTheRoad",
-   "duration": 1984
-  },
   "2wdzZsEk_Rk": {
    "id": "2wdzZsEk_Rk",
    "title": "Un traguardo importante per il nostro viaggio! 🤩 Una delle mete più ambite da tutti i viaggiatori 😍",
@@ -1709,14 +1917,6 @@
    "published": "2026-08-20",
    "description": "Mit dem Wohnmobil nach Rabat. Vorstellung Parkplatz dicht an der Innenstadt. Besichtigung der schönen Hauptstadt, Marktplatz, und Park.\nWenn euch das Video gefallen hat, würden wir uns über einen Daumen nach oben seht freuen. solltet ihr noch kein Abo haben, so macht doch eins, es ist kostenlos und ihr verpasst damit nichts von unseren Reisen.",
    "duration": 770
-  },
-  "3KqfoSV5Ai4": {
-   "id": "3KqfoSV5Ai4",
-   "title": "WOULD WE DRIVE TO MOROCCO AGAIN? (Final motorhome episode)",
-   "channel": "ITCHY WHEELS",
-   "published": "2026-09-04",
-   "description": "After weeks of exploring Morocco in our motorhome, we’ve reached the final leg of our incredible journey! 🇲🇦🚐\n\nIn this final episode of our Morocco series, we take you along for the last stretch of our road trip as we look back on the entire experience—from the stunning landscapes and historic cities to navigating the roads and motorhome life in North Africa.\n\nWas traveling Morocco in a motorhome worth it? Would we do it again? Join us for our final thoughts, favorite moments, and a proper send-off to an unforgettable adventure!\n\n🔔 Subscribe to Itchy Wheels for more motorhome travel vlogs and road trip adventures across Europe and beyond!\n\n#Motorhome #Morocco #CampingCar #ItchyWheels #TravelVlog #VanLife #MoroccoRoadTrip",
-   "duration": 373
   },
   "3mdY1Dulfwo": {
    "id": "3mdY1Dulfwo",
@@ -2190,30 +2390,6 @@
    "description": "🇲🇦 VOUS PRÉPAREZ VOTRE VOYAGE AU MAROC EN CAMPING-CAR ?\n🚐 J'ai préparé un guide pratique de 18 pages pour vous aider à préparer votre voyage sereinement.\nhttps://claudepierre5.gumroad.com/l/bien-preparer-voyage-maroc-camping-car\n=============================\nAprès avoir eu de nombreuses questions , je vous fait là un résumé des choses importantes à savoir avant  de partir au#Maroc en camping car .\n==========================================================\nConseils pour votre voyage au Maroc en camping-car, Ou aller, quoi faire, comment faire.\n===================================================================\nvoici le lien qui vous permettra d'obtenir 10% sur vos achat DE L'EXPRESSO OUTIN  :https://outin.com/CLAUDE\n===================\nje vous met ci dessous le lien avec le code : CVC10\nAvec lequel vous bénéficierez d'une remise de 10% sur l'achat de votre barbecue\n https://www.nomadiqbbq.com/en/shop\n====================\n je vous joint le lien qui vous permettra de bénéficier de 5% de remise sur l'achat de la glacière Vevor en cliquant dessus .      https://s.vevor.com/bfROiC\nle code est VEVR50FF.\n==================\n===================================================================\n   Pour Gutteriez prendre la sortie 1113 à El Barios :\n              GPS : 36° 10' 46 N\n                       : 5° 26'28 w\n=================================================================\n=================================================================\nCoordonnées du camping de TAKAT : GPS ;  30°15.223' N\n                                                                                9°35.122' W\n    TEL Marocain (00212) (0)6 71 22 27 34.\npour les tarifs tout dépend du temps que vous restez,moins de 1 à 7  jours: 85 dh soit environ 8,5 euros\n                                                                                                 de 8 à 60 jours 75 dh soit 7,5 euros\n                                                                                                 de 61 à 120 jours 70 dh soit 7 euros\n                                                                                                 + de 120 jours 65 dh\n                                                                plus 25 dh d'électricité (10 amps)\n======================================================\nMes playlistes :\n Maroc d'Antan  : https://www.youtube.com/playlist?list=PLA5er1dMKlTAJmFxmuSCbLe3e3WMkhd8G\n Campings du Maroc. :https://www.youtube.com/playlist?list=PLA5er1dMKlTD1OA1DOQjyWbFI12lMuS9H\n Partir au Maroc en camping car:  https://www.youtube.com/playlist?list=PLA5er1dMKlTByt8TitH37ZBpC_hHpW8eK\n====================================================================\n   Contact commerciaux ,partenaria, collaboration :     claude1049@sfr.fr\n===================================================================\n  ABONNEZ-VOUS, c'est gratuit et pour recevoir les notifications de nouvelle vidéo et ne rien rater cliquez sur la petite cloche, et si ces vidéos vous plaisent laissez un petit Like.\n======================================================\n  Retrouvez nous sur : \n La page Facebook:  Partir au Maroc en camping-car :   www.facebook.com/ressonus02\n======================================================\n                                MES AUTRES CHAÎNES \nMa chaîne de conseil pour le cyclisme \n https://www.youtube.com/@pedalageatoutage8778\n======================================================\n#partirauMarocencampingcar,#campingduMaroc,#quefaire auMaroc,#campingcar,#visiterMaroc\ngoogle.com, pub-0052794370889764, DIRECT, f08c47fec0942fa0",
    "duration": 1958
   },
-  "Q9dncWhLoTg": {
-   "id": "Q9dncWhLoTg",
-   "title": "Cycling GORGEOUS Todgha Gorge, But The Campsite is Missing! Morocco Bike Tour | Overlanding Africa ",
-   "channel": "hels on wheels",
-   "published": "2026-09-19",
-   "description": "Riding through the towering 400-meter vertical walls of Morocco’s Todgha Gorge and past the lush palm oasis of Tinghir made Day 139 one of the most visually stunning legs of the entire journey. But after restocking on dates, celebrating an unexpected exchange rate bonus, and grabbing a secret cold beer from a hidden bottle shop, the end-of-day search for shelter turned into a wild goose chase when my planned campsite vanished entirely into thin air.\n\nCheck out the previous vlog here: https://youtu.be/Q9dncWhLoTg?si=WFJRGHRWSVlzb7_7\n\nFind all my links, route details, and support options here:\nhttps://helsonwheels.bio.link\n\nSupport the ride on Patreon:\nhttps://www.patreon.com/helsonwheels?fan_landing=true\n\n00:00 - Morning Routine & Downhill Realities\n01:48 - Headwinds & Entering Todgha Gorge\n03:25 - Abandoned Rockfall Hotel & Local Life\n04:14 - Spectacular Tinghir Palm Oasis\n05:12 - ATM Success & Dates Market\n06:17 - Finding the Secret Bottle Shop\n07:00 - Cold Beer Behind the Wall\n07:24 - The Missing Campsite & Petrol Station Pitch\n07:58 - Tent Beers & Milestone Countdown\n\n#biketouring #morocco #todghagorge #bikepacking #solofemaletravel #stealthcamping #wildcamping",
-   "duration": 499
-  },
-  "QEkX8N6osus": {
-   "id": "QEkX8N6osus",
-   "title": "Reprendre la route vers le Maroc ",
-   "channel": "un_autre_voyage",
-   "published": "2026-09-13",
-   "description": "Après une escapade en Auvergne direction plein sud ! \nDécouvrez l'article de la rencontre voyageurs sur le site web du \"le monde du camping car\" : https://www.lemondeducampingcar.fr/actualite/rencontres-entre-voyageurs-au-coeur-du-larzac-nos-photos-et-5-interviews/249164 #vanlife #vantravel #campingcar #campingcarlife #nomad #nomadlife #auvergne #españa #maroc #roadtrip #ontheroad #bivouac #aventura #voyage",
-   "duration": 811
-  },
-  "QTUhHRuGs8o": {
-   "id": "QTUhHRuGs8o",
-   "title": "Mit dem Fahrrad nach Afrika! 3.245KM BIKEPACKING - Der Film",
-   "channel": "filipmahoni",
-   "published": "2026-09-05",
-   "description": "Hi ich bin Filip und 29 Jahre alt :)\n\nMotiviert durch Fritz Meinecke und Co. bin ich im Mai 2026 von meiner Haustür in Düsseldorf auf eine über 3200km lange Fahrradreise nach Marokko aufgebrochen. \n\nWährend der Reise sind über 2.400 Euro Spenden für Ralphys Ranch - eine Tierauffangstation und Lebenshof zusammen gekommen.\n\nDie Spendenaktion läuft noch, Ihr findet sie in meiner Instagram Beschreibung oder unter \n\nhttps://www.gofundme.com/f/road-to-africa-3000km-fahrradreise-fur-den-tierschutz\n\nDanke an alle Unterstützer!\n\nLasst ein Abo, Like und nen coolen Kommentar dar, um den Kanal zu unterstützen!\n\n\nHier mal die wichtigsten Sachen, die ich dabei hatte.\nDiese Liste kostet dich ein Abo, ein Like und einen Kommentar!\nSchreibt mir einfach bei Fragen!\n\nFahrrad: Cube Nuroad\nLenkertasche: Ortlieb Handle Bar 11L\nLenkerrolle: Rhinowalk 12L (auf der Lenkertasche platziert - keine Empfehlung)\nRahmentasche unten: Ortlieb Frame Pack 4 L\nRahmentasche oben: Temu 2L\nSatteltasche: Ortlieb Seat-Pack 16,5 L\nReifen: Schwalbe Marathon Mondial\n\n\nZelt: Fern Gökotta 1 (FLOP, da nicht atmungsaktiv und beschädigt nach 8x Nutzen)\nSchlafsack: Mountain Equipment Helium 400 (TOP aber zu warm)\nIso Matte: Nemo Tensor Extreme (TOP aber hatte ein 1 Loch)\n\n\nGaskocher: BRS - 3000T (TOP)\nTopf: 1,5 L Stahltopf No Name\nFaltbecher: Sea To Summit\nLöffel: Temu\n\nMultitool: BTWIN 920 (TOP)\nFahrradpumpe: Rose airik T-Flex HP/HV Minipumpe (TOP)\n\nDrohne: DJI MIni 4 Pro\nKamera: DJI Osmo Action 5 Pro\nPowerbanks: Anker PowerCore 26.800mAh UND Hiluckey 26.800mAh und Quechua \n10.000 mAh (währen der Reise dazu gekauft)\nKopflampe: Everbeam H6 Pro\n\nClick Schuhe:  MTB EXPL 100 schwarz\n\nArschsalbe: Ilon Protect Salbe\n\n📸 Instagram:    / filipmahoni  \n\n🔮 TikTok:   / filipmahoni  \n\n#bikepacking #fahrradtour #marokko #deutschland #cyclinglife #abenteuer #reise #solotravel #bikepackingadventures #afrika",
-   "duration": 6199
-  },
   "QaKdFDoM6iY": {
    "id": "QaKdFDoM6iY",
    "title": "Marokko Vanlife 🇲🇦 VOM ANTI-ATLAS BIS ANS MEER / Tafraoute, Mansur Gorges, Window of Life & Meer",
@@ -2318,14 +2494,6 @@
    "description": "This week, we explore Tafraout, Morocco, a hidden gem tucked away in the Anti-Atlas Mountains. From dramatic desert landscapes to the famous Painted Rocks created by Belgian artist Jean Verame, this place completely blew us away.\n\nTafraout is one of the most unique spots in Morocco. Surrounded by granite mountains and palm-filled valleys, it feels wild, remote and totally off the beaten path. We take you along as we visit the Coloured Rocks, wild camp in the mountains, and experience van life in one of the most surreal desert locations in North Africa.\n\nIf you’re planning a Morocco road trip, travelling by campervan, overlanding, or just looking for incredible places to visit in Morocco, Tafraout needs to be on your list. The Painted Rocks in the Anti-Atlas are unlike anything else, and the scenery out here is next level.\n\nIn this episode:\n• Tafraout Morocco travel\n• Painted Rocks Morocco\n• Anti-Atlas Mountains road trip\n• Morocco van life and wild camping\n• Hidden gems in Morocco\n• Off the beaten path North Africa\n\nMorocco continues to surprise us, and this mountain town might be one of our favourite stops so far.\n\n#tafraout #vanlifemorocco #moroccotravel  \n\nFOLLOW ON INSTAGRAM...\n\nOur Van Tales - https://www.instagram.com/our_van_tales\n\nWANT TO SUPPORT THE CHANNEL? \n \nwww.buymeacoffee.com/OurVanTales\nwww.revolut.me/ourvantales\n\nAFFILIATE LINKS & DISCOUNT CODES\n'Solo Stove' from www.adventurevanlife.com \n5% Discount Code - ovt5\n\n'VanGuardian' from www.adventurevanlife.com\n5% Discount Code - ovt5\n\n'Boo Fridge/Freezer' from www.adventurevanlife.com\n5% Discount Code - ovt5\n\n'Sirocco II 12V/24V Campervan Fan'  from www.adventurevanlife.com\n5% Discount Code - ovt5",
    "duration": 1458
   },
-  "V-_ixiGxfEM": {
-   "id": "V-_ixiGxfEM",
-   "title": "I Stupidly Crashed Into a Wadi With My Mercedes W124 | Morocco Rally Ep.8",
-   "channel": "Bijon de Kock and Cars",
-   "published": "2026-08-28",
-   "description": "Episode 8 takes us deeper into the Moroccan desert, where soft sand, high speeds and unpredictable terrain begin pushing both us and Opa Gerhard to the limit.\nWe get stuck, get pulled out, cross remote desert landscapes and slowly become a little too confident in what our old Mercedes W124 can handle. Then one mistake changes the mood completely: I hit a dried-out wadi far too fast, damaging the suspension and leaving me wondering whether I had pushed the car too far.\nSometimes the biggest danger on an adventure isn’t the terrain. It’s becoming too confident in yourself.\n\nA special thank you to De Wildeveldt, who has been far more than just a sponsor of this adventure. Their support, encouragement and belief in this project have helped make this journey possible.\n\nIf you're looking for an unforgettable place to stay surrounded by nature on South Africa's beautiful West Coast, be sure to have a look at De Wildeveldt and Rondeberg. Whether you're seeking peace, open spaces, wildlife, spectacular sunsets or simply a break from everyday life, they offer a truly unique West Coast experience.\n\nLearn more at www.dewildeveldt.com and www.rondeberg.co.za\n\nI would also like to thank my good friend, co-driver and fellow adventurer Marcus Hölper. Over the years, Marcus has played a significant role in igniting and nurturing my passion for classic Mercedes-Benz vehicles, and sharing this journey with him has made it even more special.\n\nIf you love classic cars, unique road trips and unforgettable adventures, be sure to check out his work at www.retrorentals.co.za\n\nInstagram: @bijondekock\nwww.bijondekock.com\n\n#oldtimers #classiccars #cars #automotive #review #mercedesbenzw124 #mercedes #w124",
-   "duration": 788
-  },
   "Vo19dn7H8yk": {
    "id": "Vo19dn7H8yk",
    "title": "Todra, Dadès... et Amejgag, la gorge oubliée du MAROC",
@@ -2373,14 +2541,6 @@
    "published": "2026-04-19",
    "description": "Marokko Camper Kosten: 6 Wochen Vanlife mit Kind, Diesel, Essen, Stellplätze, Aktivitäten und alle versteckten Ausgaben. Transparent aufgelistet mit Travelspend-App. Ist Marokko wirklich so günstig wie alle sagen? 🎁 Reisekosten tracken mit Travelspend 👉 https://get.travelspend.app/?o=emiliaundknut  Video nicht gesponsert. Einige Links sind Affiliate-Links.\n📱 Dominic auf Instagram 👉 https://www.instagram.com/dominicraw_\n\n📒 SHOW NOTES 📒\n\n6 Wochen Marokko mit dem Camper und Kind. Wir zeigen euch ehrlich unsere Kosten für Diesel, Essen, Stellplätze und Aktivitäten. Alles genau dokumentiert und transparent, für Familien im Van.\n\n⏱️ KAPITEL\n00:00 Intro\n00:37 Womit tracken wir unsere Ausgaben\n00:47 Einkäufe in Marokko\n01:14 Restaurants: eine Überraschung\n01:34 Tanken und Spritpreise in Marokko\n02:27 Aktivitäten\n02:45 Campingplätze und Freistehen in Marokko\n03:17 Sonstige Ausgaben mit denen keiner rechnet\n03:50 Unser Fazit\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n📋 WAS DU LERNST\n✓ Womit wir Reisekosten transparent tracken (Travelspend-App)\n✓ Preise für Einkäufe und Restaurants in Marokko\n✓ Tanken und Spritpreise\n✓ Kosten für Aktivitäten und Campingplätze\n✓ Versteckte Ausgaben mit denen niemand rechnet\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n🎁 TRAVELSPEND APP für Reisekosten\n👉 https://get.travelspend.app/?o=emiliaundknut\n\n🌐 STARLINK (kostenloser Testmonat)\n👉 https://starlink.com/residential?referral=RC-DF-11009241-30207-76\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n📱 WHATSAPP COMMUNITY (kostenlos) 👉 http://go.emiliaundknut.de/whatsapp\n✉️ BRAVE DIARY NEWSLETTER 👉 https://plan.emiliaundknut.de/newsletter/?utm_source=youtube\n🛒 AMAZON SHOP 👉 https://www.amazon.de/shop/emiliaundknut\n🔧 CAMPER TECHNIK BUNDLE 👉 https://amzn.eu/d/0415b5zQ\n🎥 CONTENT CREATOR BUNDLE 👉 https://amzn.eu/d/0gJ09XcB\n🧸 SPIELZEUG VANLIFE 👉 https://amzn.eu/d/0gvrqJGV\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n🎥 WEITERE VIDEOS AUS MAROKKO\n→ 6 Wochen Marokko mit Kind (Fazit): https://youtu.be/rmIKP7AHqPQ\n→ Fähre nach Marokko, Zoll, erste Nacht: https://youtu.be/zFiTm97pIGU\n→ Marrakesch: das ist uns passiert: https://youtu.be/4qctkLo4MSQ\n→ Internet Marokko Starlink vs SIM: https://youtu.be/zdGwtGPWesI\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n❓ FAQ\n\nIst Marokko mit Camper und Kind teuer?\nNein. Camping und Essen sind günstiger als in Europa. Fähre und Diesel sind der Hauptkostenblock.\n\nWie viel kostet die Fähre nach Marokko?\nZwischen 200 und 400 Euro je nach Route und Saison.\n\nKann man in Marokko freistehen?\nAn vielen Orten ja, aber Sicherheit geht vor.\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n👨‍👩‍👧 EMILIA UND KNUT\n\nZwei Zuhause. Eins fährt. Eins ist gerade Zypern.\n\nWir sind Bianca, Dominic und Emilia. Knut ist unser Zuhause auf Rädern für die großen Fahrten durch Europa. Die zweite Basis ist aktuell Zypern.\n\nNeue Videos jeden Sonntag 18:00 Uhr.\n\n🎁 Nochmal Travelspend App 👉 https://get.travelspend.app/?o=emiliaundknut\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n🤝 KOOPERATIONEN 👉 info@biancabehr.de\n🔗 ALLE LINKS 👉 https://links.emiliaundknut.de/yt\n\n📱 Instagram: https://instagram.com/emiliaundknut\n📱 TikTok: https://tiktok.com/@BiancaBehr_\n\n⚠️ Affiliate-Links. Provision bei Bestellung, Preis bleibt gleich. Danke 🤍\n\n#emiliaundknut #marokkocamper #vanlifemarokko #marokkoreisekosten #campermarokko #marokkomitkind #wohnmobilmarokko #vanlifefamily #familienreise #vanlife",
    "duration": 324
-  },
-  "XSaFks6pKS0": {
-   "id": "XSaFks6pKS0",
-   "title": "Marokko Teil 12. Meknes mit dem Wohnmobil.",
-   "channel": "Günter Schneiderat",
-   "published": "2026-09-08",
-   "description": "Beschreibung Stellplatz in Meknes. Erkundung der Medina und Umgebung.",
-   "duration": 724
   },
   "YVolP-wX7lQ": {
    "id": "YVolP-wX7lQ",
@@ -2486,14 +2646,6 @@
    "description": "Is the famous coastal city of Essaouira really worth adding to your Morocco road trip itinerary?\n\nIn this quick 5-minute tour, we take a look around one of Morocco’s most atmospheric coastal towns. Known for its iconic blue fishing boats, sweeping ramparts, vibrant medina streets, and famous coastal winds, Essaouira is a popular stop for motorhomes, vanlifers, overlanders and travelers alike—but does it live up to the hype?\n\nJoin us as we explore the harbor, soak in the views down in the port of Essaouira and share our honest thoughts on whether this historic port town deserves a spot on your travel list!\n\n\n📍 Featured Location: Essaouira, Morocco\n\n🚐 Follow the Journey:\n\nIf you enjoyed this quick look at Morocco, don't forget to Like, Comment, and Subscribe to Itchy Wheels for more road trips, motorhome travel, and overlanding adventures across Europe and beyond!\n\n#Essaouira #Morocco #TravelMorocco #ItchyWheels #MotorhomeTravel #Overland #Camping-cars",
    "duration": 274
   },
-  "bPtefAUM7ko": {
-   "id": "bPtefAUM7ko",
-   "title": "Se vedi qualcuno che ha bisogno di aiuto, ti fermi | In giro in giro – Marocco S1 Ep.6 – Incontri",
-   "channel": "in giro in giro",
-   "published": "2026-08-23",
-   "description": "Ho abbassato il finestrino e gli ho chiesto: \"everything ok?\" \nNon ci ho pensato. \nNel deserto, se vedi qualcuno fermo, ti fermi. \nMarocco S1 Ep.6.\n\nI lowered the window and asked: \"everything ok?\" \nI didn't think about it. In the desert, \nif you see someone stopped, you stop. \nMorocco S1 Ep.6.\n\nhttps://www.facebook.com/ingiro.ingiro.ingiro.ingiro/\nhttps://www.instagram.com/_ingiroingiro_/\n\n#maroccocamper #overlandingmarocco #4x4marocco #desertomarocco #documentarioviaggio #ingiroingiro #malattiacronica #viaggiareconmalattiacronica #sjogren #vitaconmalattia #viaggioesalute #chronicillnesstravel #campervita",
-   "duration": 762
-  },
   "bTud0yrNdr8": {
    "id": "bTud0yrNdr8",
    "title": "Bivouac dans le désert à Merzouga 🌅🐪",
@@ -2501,22 +2653,6 @@
    "published": "2025-10-26",
    "description": "Partez avec nous pour une aventure magique au départ de l’hôtel Ksar Merzouga ! 🐪\n\nNous avons rejoint notre campement à dos de dromadaire, traversant les dunes dorées au coucher du soleil. Après 1h30 de balade, nous nous sommes installés dans une tente berbère traditionnelle, avons partagé un repas aux chandelles, et vibré au son des chants et tambours autour du feu. 🔥✨\n\nAu lever du soleil, à 7h, nous avons assisté à un spectacle naturel à couper le souffle avant de retourner à notre camping-car Bachata, des souvenirs plein la tête. 🌄\n\nUn moment unique entre nature, culture et authenticité au cœur du Sahara marocain.\n\nUn grand merci à toute l'équipe de Ksar Merzouga qui nous a permis de passer une semaine de rêve au pied des dunes.\n\nA bientôt pour de nouvelles aventures et découvertes au Maroc, le road trip continue...\n\n#maroc #Merzouga #Sahara #Bivouac #Dromadaire #AventureMaroc #VoyageAuthentique #dunes",
    "duration": 558
-  },
-  "b_ZJkJmUaiw": {
-   "id": "b_ZJkJmUaiw",
-   "title": "Our Sahara Offroad Week Ended With Two Trucks Buried in Sand",
-   "channel": "Defintothewild",
-   "published": "2026-08-28",
-   "description": "Sahara offroad, episode 2: a sandstorm buried both our trucks overnight in the dunes. This is the week the desert stopped playing nice.\n\nWe finally reached the dunes we'd dreamed about, and Morocco gave us one perfect day before it turned on us. Sand up to the axles, a ripped-off bumper, a broken shock absorber, and a Defender stuck on its side in the erg. This is week two of our Morocco overland trip, three trucks deep into the Sahara.\n\nEverything you see here, we drove ourselves. The offroad tracks we'd actually send a friend to, mapped kilometre by kilometre, are in our Morocco Sahara roadbook.\n\nTHE FULL TRACK FROM THIS EPISODE (PDF + GPX)\n👉 https://defintothewild.com/en/produit/morocco-sahara-4x4/\n\nCHAPTERS\n0:00 The desert looked calm. We were wrong.\n0:25 First time on a real Sahara dune\n1:00 The sand trap: buried up to the axles\n1:22 Gara Medouar, a fortress alone in the desert\n2:15 Airing down for the deep dunes of the erg\n4:15 Pizza in the Sahara\n[?:??] The night sandstorm that buried both trucks\n[?:??] Bush mechanics in the sand: bumper and shock absorber\n[?:??] Steak and fries under the stars\n\nABOUT THIS SAHARA OFFROAD ROUTE\nThis episode runs from the first dunes of Merzouga to Gara Medouar, the fortress in the desert, then deep into the big erg with the tyres aired down. Along the way: a night sandstorm that buried both trucks, bush mechanics in the sand, and steak and fries under the stars. It is part of an 8,000 km self-supported overland trip across Morocco, from the Atlantic to the Sahara.\n\nPlanning your own offroad trip in the Moroccan Sahara? The GPX tracks and roadbooks for this route are on https://defintothewild.com\n\nTHE RIG\nLand Rover Defender 130, rebuilt by hand over 7 years. Overlanding Europe and North Africa in full autonomy.\nTravelling with Paulo (Toyota) and Lucas (Defender). And Pixie, our co-pilot.\n\nTHE MOROCCO SERIES\nEpisode 1: Six Days of Rain to Reach the Sahara\nhttps://youtu.be/Krai1LfRKfI\nEpisode 3: two trucks, the most beautiful canyons in Morocco, and a gearbox about to make a very expensive noise. Subscribe so you don't miss it.\n\n#SaharaOffroad #Overlanding #LandRoverDefender",
-   "duration": 603
-  },
-  "cMjneKv3WAs": {
-   "id": "cMjneKv3WAs",
-   "title": "Nos astuces pour partir au Maroc ",
-   "channel": "un_autre_voyage",
-   "published": "2026-09-20",
-   "description": "Découvrez nos astuces pour aller au Maroc Découvrez aussi la chaîne WhatsApp de la ferme Dar Bari :  https://whatsapp.com/channel/0029Vb8tILfAe5VrFvLKeb2t\n\n#vantravel #vanlife  #campingcar #travel #voyage #bivouac #maroc #morocco #tutorial #nomad #nomadlife #voyagemaroc #roadtrip #marocco #ferry #tangermed  #algesira #spain #españa #ontheroad #maroc_news",
-   "duration": 889
   },
   "cOJ4BFoNsng": {
    "id": "cOJ4BFoNsng",
@@ -2710,22 +2846,6 @@
    "description": "Wir verbringen den Winter in angenehmeren Temperaturen in Marokko.\nIn diesem Teil fahren wir den Plage Blanche entlang.\n\nWebseite:\nhttps://allwheelsoutside.de\nDer Shop zum Kanal https://shop.spreadshirt.de/allwheelsoutside\nFür alle die mir eine Freude machen möchten. Hier meine Amazon Wunschliste:\nhttps://www.amazon.de/hz/wishlist/ls/2GY9D9YOV0P68?ref_=wl_share",
    "duration": 1556
   },
-  "lqP74ztsJBI": {
-   "id": "lqP74ztsJBI",
-   "title": "72 jours en van au Maroc, la vérité sur notre aventure",
-   "channel": "Aventure au Menu",
-   "published": "2026-08-30",
-   "description": "On vous dit tout sur notre périple au Maroc !\n\nAprès 72 jours d’un road trip inoubliable à travers le Maroc, l'heure est au grand bilan à chaud depuis le pont du ferry qui nous ramène vers la France ! Des pistes désertiques de l'Atlas aux bivouacs sauvages en bord de mer, nous avons parcouru des milliers de kilomètres au volant de Victor, notre fourgon aménagé Opel Vivaro. Dans cette vidéo vérité sans langue de bois, nous débriefons chaque aspect de cette aventure : état du réseau routier marocain, contrôles de police, sécurité au quotidien, accueil des habitants et le défi de voyager hors des sentiers battus sans 4x4.\n\nLa vanlife au Maroc réserve son lot d'émerveillements mais aussi de défis techniques et logistiques ! François vous partage son retour d’expérience brico et autonomie : gestion du frigo, électricité, réserve d'eau, et les équipements indispensables pour survivre à deux dans 6 m² au fil des semaines. De son côté, Virginie décortique l'expérience culinaire : comment manger facilement végétarien au Maroc, dénicher les meilleurs produits locaux et pratiquer la cueillette de plantes sauvages en voyage.\n\nEntre galères imprévues, budget, comparaison sincère entre l'Espagne et le Maroc, révélations sur qui on est quand on ne voyage pas, choix de notre matériel de tournage vidéo et annonce de nos futurs projets de voyage, nous répondons à toutes les questions que vous vous posez avant de franchir le détroit de Gibraltar.\n\n00:00 - On est sur le ferry, c'est le retour en France\n00:47 - La sécurité dans le pays\n01:47 - L'accueil des marocains\n03:20 - Le réseau routier au Maroc\n06:38 - La conduite\n08:09 - Le langage et la communication\n10:56 - La police\n13:53 - Hors des sentiers battus\n17:21 - L'autonomie en van\n19:10 - Notre frigo\n20:00 - Victor, notre Opel Vivaro\n20:44 - L'indispensable en van\n22:05 - La vie quotidienne en voyage\n23:47 - La recherche des meilleurs spots\n26:03 - S'entendre dans 6 m2\n27:07 - Manger végétarien au Maroc\n29:33 - La cueillette de plantes sauvages\n30:42 - Nos endroits préférés\n32:16 - Les galères\n33:08 - Espagne ou Maroc ?\n34:38 - Et si c'était à refaire ?\n36:07 - La chaine Aventure Au Menu\n37:20 - Notre matériel vidéo\n39:38 - Le budget\n40:58 - Les projets\n43:37 - Faire appel à mes services de designer\n\n👉 Et vous, avez-vous déjà voyagé au Maroc en véhicule aménagé ou rêvez-vous d'y partir ? Dites-nous en commentaire le point qui vous a le plus surpris dans notre bilan !\n\nN'oubliez pas de laisser un pouce bleu si cette série marocaine vous a plu et de vous abonner pour suivre nos prochaines aventures nomades !\n\nVous souhaitez soutenir nos futures aventures, et faire appel à un designer ? ! \nwww.pointvirgulecreation.com\n\n#maroc #vanlifemaroc #roadtrip #fourgonaménagé #faq #faq Maroc  #f #voyagemaroc  #AventureAuMenu",
-   "duration": 2624
-  },
-  "m1O3w4nUWj4": {
-   "id": "m1O3w4nUWj4",
-   "title": "#9 The Morocco Project | Der letzte Offroad Track",
-   "channel": "Florian Stiebing",
-   "published": "2026-09-20",
-   "description": "Ein letzter Track. Ein letztes Kapitel.\n\nNach zwei Monaten in Marokko geht unser Morocco Project zu Ende. Für unsere letzte Etappe verlassen wir noch einmal den Asphalt, fahren durch die Weite Marokkos und genießen genau das, weshalb wir diese Reise überhaupt gemacht haben: unterwegs sein, neue Orte entdecken und nicht immer wissen, was hinter der nächsten Kurve wartet.\n\nDieses Video ist aber mehr als nur die letzte Etappe unserer Reise. Es ist der Abschluss von zwei Monaten Marokko und neun Videos voller Wüste, Offroad-Tracks, Begegnungen und ziemlich vieler Kilometer mit unserem Camper.\n\nDanke an alle, die das Morocco Project von Anfang an verfolgt haben – für eure Kommentare, Nachrichten und dafür, dass ihr diese Reise mit uns geteilt habt.\n\nDas war The Morocco Project. ❤️\n\nFlo & Benita\n\n#TheMoroccoProject #Marokko #Vanlife #Offroad #Camper",
-   "duration": 1013
-  },
   "m8PWIQpapSQ": {
    "id": "m8PWIQpapSQ",
    "title": "#maroc #roadtrip #voyage: Les incontournables gorges de Todra et de Dades #ivecodaily4x4 #camper4x4",
@@ -2749,14 +2869,6 @@
    "published": "2026-05-17",
    "description": "When the tide goes to its lowest, this sandbank appears creating one of my favourite flat spot. \n\nGear used 9M and 12M Harlem Peak with Ascent 138. \nMystic waterwear. \n\nVideo by Maio Arias \n\nPlease like,leave a comment and share if you want to see more movie like this!",
    "duration": 200
-  },
-  "nQLU3tHrFi8": {
-   "id": "nQLU3tHrFi8",
-   "title": "Chasing waves, freedom and beautiful roads through Morocco 🇲🇦🌊🚐",
-   "channel": "Lou Little Roads",
-   "published": "2026-09-06",
-   "description": "Join me on a Van Life road trip filled with surf, slow mornings, salty hair, sunsets and the freedom of not always knowing where the road will take us.\n\nJust me, my van, the ocean and a little Moroccan adventure 🤍\n\n#VanLife #MoroccoTravel #SurfTravel #RoadTripMorocco #VanLifeMorocco",
-   "duration": 902
   },
   "nw1iFMCpkjg": {
    "id": "nw1iFMCpkjg",
@@ -2789,14 +2901,6 @@
    "published": "2026-05-17",
    "description": "Partiamo da Zagora verso Rissani, ma lungo il percorso ci fermiamo in diverse località. La nostra prima sosta è in un affascinante mercato a Ksar Ait Saadane, seguita da un pranzo ad Alnif. Proseguiamo poi verso Gara Medouar, un luogo incantevole dove sono stati girati film come La Mummia, Spectre, Sahara, Hidalgo - Oceano di fuoco, etc.... Infine, arriviamo a Rissani, dove ci dirigiamo a esplorare il meraviglioso mercato locale.\nIl giorno successivo, ripartiamo alla volta di Merzouga. Dopo vari tentativi in diversi campeggi, riusciamo finalmente a trovare un posto ideale dove fermarci e rilassarci per alcuni giorni.\n\nAbbiamo sostato a: \nBerber Truck Parking (ora diventato cantiere), Rissani\nCamping Haven La Chance, Merzouga\n\n#vanlife #camperlife #maroc #maroccoincamper #diariodiviaggio #romanoenroute",
    "duration": 1925
-  },
-  "pGWrZ6nfOXs": {
-   "id": "pGWrZ6nfOXs",
-   "title": "The Track Was Gone, So We Built One (Morocco Overland)",
-   "channel": "Defintothewild",
-   "published": "2026-09-18",
-   "description": "Morocco overland, episode 3: the 4x4 track through the Anti-Atlas had been washed away, so we spent 4 hours building a road by hand to get our Land Rover Defender 130 and Paulo's Toyota through.\n\nNo way forward and a long way back, so Paulo and Julien did the only thing left. Three sections, carried stone by stone, until the light went. Then Marrakech, where the Defender's gearbox finally started making that very expensive noise. Metal glitter in the oil. And a few days later, Paulo's Toyota said enough.\n\nEverything you see here, we drove ourselves. The off-road tracks we'd actually send a friend to, mapped kilometre by kilometre, are in our Morocco 4x4 roadbook.\n\nTHE FULL TRACK FROM THIS EPISODE (PDF + GPX)\n👉 https://defintothewild.com/en/produit/morocco-sahara-4x4/\n\nCHAPTERS\n0:00 Two trucks in, one comes back\n0:28 Wild camping on a dry lake in southern Morocco\n1:10 Morocco's Monument Valley\n2:00 Washed-out 4x4 track: the road just ends\n3:35  the finest canyon in the Anti-Atlas\n4:22 Building a road by hand for two 4x4s\n6:51 Tafraoute painted rocks\n8:55 Defender 130 gearbox problems begin\n9:44 Paulo's Toyota breaks down\n10:18 Our last overland camp together\n\nABOUT THIS MOROCCO 4X4 ROUTE\nThis episode follows an off-road route across the Anti-Atlas mountains: the painted rocks of Tafraoute, then north to Marrakech and the film studios of Ouarzazate. Along the way, a Berber grandmother's tajine, a gearbox on its way out, and one last camp before a friend heads home. It is part of an 8,000 km self-supported overland trip across Morocco, from the Atlantic coast to the Sahara.\n\nPlanning your own 4x4 road trip in Morocco? The GPX tracks and roadbooks for this route are on https://defintothewild.com\n\nTHE MOROCCO OVERLAND SERIES\nEpisode 1: Six Days of Rain to Reach the Sahara\nhttps://youtu.be/Krai1LfRKfI\nEpisode 2: A Sandstorm Buried Both Our Trucks Overnight\nhttps://youtu.be/b_ZJkJmUaiw\nEpisode 4: the Atlantic, empty beaches, and dunes where the sand runs straight into the sea. Subscribe so you don't miss it.\n\nTHE RIG\nLand Rover Defender 130, rebuilt by hand over 7 years, overlanding Europe and North Africa.\nTravelling with Paulo (Toyota) and Pixie, our co-pilot.\n\n#MoroccoOverland #Overlanding #LandRoverDefender",
-   "duration": 646
   },
   "pIXwc-pKnj0": {
    "id": "pIXwc-pKnj0",
@@ -2933,14 +3037,6 @@
    "published": "2026-08-20",
    "description": "Mit unserem neuen Webinar-Format „Travel-Talks“ wollen wir von unseren Reisen berichten, aber auch andere Traveller zu Wort kommen lassen und ihre Reiseziele und ihre Reise-Setups vorstellen. Beim Travel-Talk #4 entführen wir Euch in „unser“ Marokko\n\nIm Teil 1 und 2 des Webinars stellen wir selbst unser Lieblings-Reiseland Marokko vor. Dieses bereisen wir seit 2008 on- und offroad, haben mittlerweile kumuliert rund drei Jahre in Marokko verbracht. Gerne möchten wir dieses wundervolle Reiseland anderen Travellern ans Herz legen.\n\nIm Travel-Talk haben wir die fünf bereisenswertesten Regionen des Landes herausdestilliert, zeigen auf, wann die idealerweise zu bereisen sind und was es dort zu erleben gibt. Ein Schwerpunkt sind natürlich die Offroad-Passagen, in denen wir anhand von zahlreichen Videos die Herausforderungen beim Fahren im Sand und auf felsigem Untergrund beschreiben.\n\nIm 3. Teil des Webinars geben wir den Teilnehmern die Möglichkeit, uns Fragen zu stellen, die wir live beantworten. \n\nÜbrigens: Wir veranstalten auch geführte Offroad-Reisen durch Marokko. Wenn dich das Thema interessiert, dann klicke dich doch einfach mal durch unsere Touren-Websiten: https://touren.wohnmobil-selbstausbau.com\n\nWenn Du von einem selbst ausgebauten Reisemobil träumst, mit dem du Länder wie Marokko bereisen kannst, dann wirf doch mal einen Blick auf unsere Website: www.wohnmobil-selbstausbau.com.\n\nDort findest Du vielfältige Informationen und auch unser Buch „Wohnmobile selbst ausbauen und optimieren“, mit dem auch du zum individuell ausgebauten Reisemobile gelangen kannst. \n\nWenn du mal unverbindlich in mein Werk hineinlesen möchtest, dann kannst du dir den „Blick ins Buch“ kostenlos herunterladen. Das sind immerhin mehr als 80 von insgesamt 600 Seiten.\nhttps://www.wohnmobil-selbstausbau.com/Blick_ins_Buch.html\n\nUnd hier geht’s zur Bestellseite: \nhttps://www.wohnmobil-selbstausbau.com/Bestellen.html",
    "duration": 3391
-  },
-  "tMGWbmYE4Xk": {
-   "id": "tMGWbmYE4Xk",
-   "title": "We Got Stranded in Morocco's Deadliest Pass",
-   "channel": "Dark Zebra",
-   "published": "2026-08-21",
-   "description": "Land Rover vs Morocco’s brutal backroads — and the winner is? EPISODE 4!\n\nOur Land Rover Defender is putting in WORK in the rocky heart of Morocco! Episode 4 is packed with off-road action, lush palm groves, rocky river crossings, stunning desert landscapes, curious camels, the kindness of the Moroccan people, and that unbeatable feeling of true exploration. Would you drive this?! 🔥 This is desert exploration at its finest! Pure adventure in North Africa! 🌴🚙🐪\nWho’s ready for the next chapter?\n\nTimeline:\n\n00:00 - 00:48 What to expect to see\n00:48 - 02:30 Foum Zguid Adventure\n02:30 – 03:33 Lonely road in Morocco\n03:33 – 06:02 Hidden Oasis in Amtezguine\n06:02 – 08:30 Stunning landscape of Issil Village\n08:30 – 10:06 We’ve been warned\n10:06 – 11:04 Issil plains beauty\n11:04 – 19:12 Stranded and screwed in Morocco\n19:12 – 26:45 Fight to leave the Tizi n’ Haroun\n26:45 – 32:33 Arrive in the village of Tata and ditch Taliouine\n32:33 – 33:26 A true fight for survival\n\nPlease subscribe here :\n https://www.dark-zebra.com/\n\n https://www.facebook.com/darkzebratravels/\n\nhttps://www.instagram.com/darkzebratravels/\n\nhttps://www.polarsteps.com/DarkZebraTravels\n\n#landrover #defender #morocco #FoumZguid #Tata #MoroccoTravel #OffRoadAdventure #episode4",
-   "duration": 2007
   },
   "tNTr4XLgz7s": {
    "id": "tNTr4XLgz7s",
@@ -3094,14 +3190,6 @@
    "description": "Update over Zwerven met juki kanaal aan het einde van de video!\n\nHey allemaal,\nVandaag zijn we weer doorgereden naar Mehdya, we staan op een mooie ruime camping voor 120Dirham per nacht met stroom en water inclusief (bij iedere plek ook een eigen kraan) \n\nAls je dit een leuke vlog vind dan helpt het om te abonneren en een duimpje al helemaal, comments worden altijd gelezen!\n\n\nTot de volgende!",
    "duration": 1068
   },
-  "yhrAXZ4NoRM": {
-   "id": "yhrAXZ4NoRM",
-   "title": "Underground Village & How To Quickly Enrage Me 🤬 Bike Touring Morocco | Overlanding Africa",
-   "channel": "hels on wheels",
-   "published": "2026-09-21",
-   "description": "Cycling across Morocco into a tough headwind, today’s journey takes me to a fascinating restored underground fortified village (ksar) where people still live! However, navigating unwanted help on the road brings out a few frustrations along the way...\nFrom local bike lanes and unexpected menthol-syrup yogurt treats to finding a quiet campsite in the center of town, it's another unpredictable day of overlanding and bike touring through North Africa.\nLAST VLOG: https://youtu.be/Q9dncWhLoTg?si=Qj4fDSmKwY0Kk7nk\n\nBIOLINK: https://helsonwheels.bio.link\n\nTimestamps:\n00:00 - Petrol Station Camping & Headwinds\n00:01:28 - Slow Progress & Road Boundaries\n00:02:24 - Why Unwanted Help Frustrates Me\n00:03:03 - Exploring the Underground Fortified Village\n00:05:10 - Trying Moroccan Yogurt & Mint Syrup\n00:06:04 - Unexpected Bike Lanes & Widened Roads\n00:07:14 - Camping in Town & Finding Dinner\n\n#BikeTouring #Morocco #OverlandingAfrica #CycleTouring #HelsOnWheels",
-   "duration": 489
-  },
   "zFOWngkiPZI": {
    "id": "zFOWngkiPZI",
    "title": "From First Forest Camp to the Sahara’s Edge: Wild Camping in Finland and Morocco | EP0002",
@@ -3133,157 +3221,6 @@
    "published": "2026-05-31",
    "description": "2300 Kilometer Bikepacking quer durch Marokko 🇲🇦\n\nAuf dieser Route durchquere ich Marokko von Süden nach Norden und verbinde Küste, Wüste und Hochgebirge zu einem abwechslungsreichen Abenteuer. Mein Weg startet in Agadir und führt mich über unbefestigte Pisten durch den Anti Atlas bis tief in die Sahara. Entlang alter Karawanenwege fahre ich durch abgelegene Oasen und karge Landschaften, bevor ich den Atlas erreiche.\n\nAb Imilchil beginnt der nördliche Teil meiner Reise: anspruchsvolle Pässe, grüne Hügel und traditionelle Pfade begleiten mich bis nach Tanger an die Mittelmeerküste. Unterwegs erlebe ich einsame Wege, die besondere Gastfreundschaft der Menschen und die Vielfalt der marokkanischen Küche.\n\nAm Ende der Tour bietet sich die Möglichkeit, direkt nach Spanien überzusetzen – ein nahtloser Abschluss dieser eindrucksvollen Marokko-Durchquerung.\n_________________________________________________________________________\n\nWenn dir unsere Inhalte gefallen, würden wir uns riesig über ein Abo von dir freuen.\nDies hilft uns sehr weiter.\nVielen Dank\n\n\nDu willst mehr über unsere Reise erfahren?\n\nHier findest du unseren Film über unsere Radreise durch Südamerika:\n► https://www.youtube.com/watch?v=gvDOb4hwEoo\n\nFür mehr Infos über uns und unsere Reise besuche unsere Webseite:\n► https://www.die-podtschis.de/\n\nOder folge uns auf:\nFacebook: \n► https://facebook.com/Podtschis/\nInstagram:\n► https://www.instagram.com/die_podtschis/\n\nDu möchtest wissen wo wir uns gerade befinden? \n► www.die-podtschis.de/route-und-aktueller-standort\n\nHier findest du nützliche Tipps & Tricks zum Thema Fahrradweltreise\n► https://www.die-podtschis.de/tipps-und-tricks\n\nDu planst deine eigne große Reise mit dem Rad? Dann schau doch mal auf unserem Blog vorbei. Dort findest du allerlei Infos zur Planung deiner eigenen Reise.\n► https://www.die-podtschis.de/bereiste-laender\n\nDu würdest uns gerne unterstützen? Dann schau doch mal auf unserem blog vorbei oder direkt auf unserer Patreon Seite.\n► Patreon:     https://www.patreon.com/diepodtschis\n► Blog:           https://www.die-podtschis.de/unterst%C3%BCtze-uns\n\nMache alle deine Einkäufe über unsere Partnerlinks:\n✘ Amazon:  https://amzn.to/3ZZlTUi\n✘ Globetrotter: https://www.globetrotter.de/?utm_source=PTID13004497\n✘ Insta360 X5: https://www.insta360.com/sal/x5?utm_term=INRD76S\n✘ Insta360 X4: https://www.insta360.com/sal/x4?utm_term=INRD76S\n\nUnser Affilitate Code bei Insta360 (Einfach bei der Bestellung im Gutscheinfeld eingeben). \n►   INRD76S\n\n✘ =  Dies sind Partnerlinks/Affiliate-Links. Wir bekommen eine Provision und du kannst kostenlos unsere Reise unterstützen bzw. bekommst bei Insta360 sogar noch etwas gratis!\n \nVielen Dank\n\nVerwendete Musik in diesem Video:\n- Epidemic- Sound\n\n\n#radreise  #bikepacking  #marokko",
    "duration": 1449
-  },
-  "9I3bQ8xsm8I": {
-   "id": "9I3bQ8xsm8I",
-   "title": "Nobody's Coming to Pull Us Out : Offroad Morocco Solo",
-   "channel": "Defintothewild",
-   "published": "2026-10-04",
-   "description": "Offroad Morocco, solo for the first time: from the green cliffs of the Atlantic to thirty-seven degrees in the Sahara. This week, it was just us.\n\nOne Defender, one dog, no convoy, no plan B. We drove the clifftops with the ocean on one side, then pointed the Defender inland until the sea was a memory and the sand was everywhere. Camels on the dunes with the Atlantic an hour behind us, a rear wheel buried with no one to pull us out, wells for water, wood for the fire, and the kind of silence you only find when you're completely on your own out here.\n\nThis is week four of our Morocco overland trip, and our most remote stretch of offroad Morocco so far. Full autonomy, in a Land Rover Defender 130 we rebuilt by hand.\n\nTHE FULL TRACK FROM THIS EPISODE (PDF + GPX)\nhttps://defintothewild.com/produit/roadbook-4x4-maroc/\n\nThe offroad Morocco tracks we'd actually send a friend to, the coast road and the desert crossings, are mapped kilometre by kilometre in our Morocco roadbook → defintothewild.com\n\nTHE SETUP\nLand Rover Defender 130, rebuilt by hand over 7 years. Overlanding Europe and North Africa, full autonomy. Travelling with Pixie, our co-pilot.\n\nTHIS EPISODE\nAtlantic clifftop tracks · driving above the beach · where the dunes meet the ocean · buried in the sand, solo · bush autonomy: water, wood, fire · 37°C in the deep desert · camping under the acacias.\n\nWATCH THE SERIES\nEpisode 1: Our Morocco 4x4 Trip Started With Floods, Not Sand\nhttps://youtu.be/Krai1LfRKfI\nEpisode 2: Our Sahara Offroad Week Ended With Two Trucks Buried in Sand\nhttps://youtu.be/9I3bQ8xsm8I\nEpisode 3: We Spent 4 Hours Building a Road to Get Out\nhttps://youtu.be/pGWrZ6nfOXs\n\nSubscribe for Episode 5: back into the mountains, a storm at midnight, and the most beautiful canyon of the whole trip.\n\nCHAPTERS\n0:00 Just us on the Atlantic coast\n3:03 Where the ocean meets the sand\n5:08 Into the desert, on our own\n8:29 Villages, palm groves and 40°C\n11:11 Freedom, and what's next\n\n#OffroadMorocco #Overlanding #LandRoverDefender",
-   "duration": 753,
-   "retry": true
-  },
-  "h9seR5jHcmg": {
-   "id": "h9seR5jHcmg",
-   "title": "Herbst-Winterreise 2026/27 Marokko - von Tanger Med über Rabat nach Marrakesh...",
-   "channel": "Wir sind dann mal eben weg",
-   "published": "2026-10-04",
-   "description": "unsere #Marokkoreise kann beginnen , von Tanger Med starten wir zu unserem ersten Ziel nach Kenitra zum Camping International Media.\nÜber #Rabat , vorbei an Casablanca geht es dann nach #Marrakesh zum #CampingLeRelaise...",
-   "duration": 1271,
-   "retry": true
-  },
-  "Ju7FiOW411U": {
-   "id": "Ju7FiOW411U",
-   "title": "I’ve Cracked The Free Camping Code In Morocco! Solo Bike Touring Sahara | Overlanding Africa",
-   "channel": "hels on wheels",
-   "published": "2026-10-03",
-   "description": "Free camping in Morocco can be tricky with local regulations, but pitching my tent at petrol stations turned out to be a safe, dry, and hassle-free solution. Leaving Alnif early after a daylight saving time shift, I tackled a 300m pass between valleys, navigated pushy roadside kids, dealt with a dead solar panel, and stopped for pizza and Wi-Fi in Tinghir before racing sunset to set up camp at another mechanic’s bay.\n\nWatch the last vlog here: https://youtu.be/fAO5jvZldrs?si=-SX-99UGFbhFNBBx\n\nAll my links & support options: helsonwheels.bio.link\n\nSupport the journey:\nPatreon: https://www.patreon.com/helsonwheels?fan_landing=true\n\nTimestamps:\n00:00 Early Start & Leaving Alnif\n00:54 Dodging Floods & Roadside Date Vendors\n02:15 Mini Pass Climb & Ripping Downhill\n03:40 Rest Stop & Solar Panel Failure\n05:10 Pizza, Wi-Fi & Vlog Uploads in Tinghir\n06:45 Time Zone Surprise & Sunset Chase\n08:15 Free Camping at the Servo\n\n#biketouring #morocco #solofemaletravel #overlandingafrica #cycletouring  #helsonwheels",
-   "duration": 486,
-   "retry": true
-  },
-  "1_dpRTE8bj4": {
-   "id": "1_dpRTE8bj4",
-   "title": "Marokko-Tour 24; Zurück in Spanien",
-   "channel": "all-wheels-outside",
-   "published": "2026-10-02",
-   "description": "Wir verbringen den Winter 23/24 in angenehmeren Temperaturen in Marokko.\nIn diesem Teil Kehrern  wir nach Europa zurück.\n\nWebseite:\nhttps://allwheelsoutside.de\nDer Shop zum Kanal https://shop.spreadshirt.de/allwheelsoutside\nFür alle die mir eine Freude machen möchten. Hier meine Amazon Wunschliste:\nhttps://www.amazon.de/hz/wishlist/ls/2GY9D9YOV0P68?ref_=wl_share",
-   "duration": 1816,
-   "retry": true
-  },
-  "Q7OHNr_Oz_w": {
-   "id": "Q7OHNr_Oz_w",
-   "title": "Bis in die Sahara. Schnee! Schlamm, Sand und Wüste. Roadtrip im Expeditionsmobil / 4x4-Wohnmobil",
-   "channel": "4x4 OverlandTravel  Offroad - Reisen - Overlanding",
-   "published": "2026-10-02",
-   "description": "2 Monate und 8000Km durch Marokko in unserem 1989er Mercedes Benz, einem ehemaligen Feuerwehrauto\n\nFoto Tagebuch und Gps Track:\nhttps://www.polarsteps.com/4x4OverlandTravel/24166271-overlanding-morocco\n\n4x4OverlandTravel Englisch:\nhttps://www.youtube.com/@4x4OverlandTravelEnglish\n\n4x4OverlandTravel Deutsch:\nhttps://www.youtube.com/@4x4OverlandTravelDeutsch\n\nOur Bikepacking Channel Englisch:\nhttps://www.youtube.com/channel/UCHGZTZMkXHpnk_E_3uu_DNQ\n\nUnser Bikepacking Kanal Deutsch:\nhttps://www.youtube.com/channel/UCs_MDvTGhJrjLqQEOPVYq_g\n\n\nUnsere Hardware zum Filmen:\nGoPro:\nhttps://amzn.to/48Qc695\n\n360 Grad Kamera:\nhttps://amzn.to/435FRPy\n\nPixel Pro Foto und Filmhandy:\nhttps://amzn.to/47f5joe\n\nHoover Air Mini Drohne:\nhttps://amzn.to/4hyi54x\n\nMavic Pro Drohne:\nhttps://amzn.to/3X9Oo0d\n\n00:00 Intro\n01:35 Anreise\n02:06 Asilah, Polizeirevier\n02:56 Rabat, Ostküste\n04:55 Marrakech\n06:31 Agafay Wüste, Kamele\n06:39 Atlas Gebirge\n06:48 Tizi N'test im Schnee!\n08:24 Paradise Valley \n09:25 Tafraout Overlanding Area\n13:45 Amtoudi Castle\n14:38 Alleine in die Wüste\n18:15 Sandsturm\n24:38 Erg Chebbi, Spaß im Sand\n28:32 Todra Canyon\n29:25 Dades Canyon\n30:25 Kasbah Amridil\n31:52 Kasbah Aït Ben Haddou \n34:03 Ouzoud Wasserfälle\n35:47 La Cathédrale Imsfrane\n37:40 Cirque de Jaafar\n42:36 Fes \n45:20 Chefchaouen, die blaue Stadt\n\n\n#4x4OverlandTravel\n#offroad  #overlanding #camping  #vanlife #overlandtruck #truckcamper  #camper  #4x4 #expeditiontruck #expedition #afrika  #wohnmobil #sahara \n#exmo  #allrad  #lkw  #expeditionsmobil #unimog  #marokko  #film #dokumentation  #doku",
-   "duration": 2852,
-   "retry": true
-  },
-  "lqtSrCYI0qE": {
-   "id": "lqtSrCYI0qE",
-   "title": "Maroc : fêter mon anniversaire dans le désert, avec mes potes",
-   "channel": "HORS-PISTE",
-   "published": "2026-10-02",
-   "description": "Les fêtes imposées, c'est pas trop mon truc. Mais fêter le mien dans le désert marocain, avec deux potes en or, ça faisait longtemps que j'en rêvais.\n\nAu programme : la route vers Chegaga, la piste du Dakar vécue cette fois à trois, des retrouvailles avec Brahim, et une soirée d'anniversaire que je n'oublierai jamais.\n\nBonne route avec moi !\n\n00:00 Les anniv', je m'en fous... mais\n00:16 Direction Marrakech, retour à la civilisation\n00:42 Retrouvailles avec Fab & Seb\n00:50 Agdz et M'Hamid, avant le grand saut\n01:22 Cap sur l'Erg Chegaga, vent de sable\n04:11 Soirée EHPAD chez Naji\n04:55 Le jour J : dunes et petites galères\n09:28 Le bivouac miracle\n09:44 Soirée d'anniversaire sous les étoiles\n12:06 La piste du Dakar, version courte (et à l'envers)\n14:20 Un endroit qui ne paye pas de mine\n15:57 Dernière soirée à Agdz\n16:45 Chacun sa route",
-   "duration": 1037,
-   "retry": true
-  },
-  "fAO5jvZldrs": {
-   "id": "fAO5jvZldrs",
-   "title": "Flash Floods Damaged My Brakes! Solo Bike Touring Sahara Desert Morocco | Overlanding Africa  ",
-   "channel": "hels on wheels",
-   "published": "2026-10-01",
-   "description": "Unexpected rain and flash floods in Morocco! After a stormy night brought sand and mud into camp, I had to navigate flooded desert roads, deal with grit mangling my disc brakes, and push through police diversions and road closures.\n\nWatch the previous vlog here: https://youtu.be/vsSEMd-4iy8?si=WvmF-WeW_xBbHu9J\n\nFollow the journey: https://helsonwheels.bio.link\n\n00:00 Unexpected rain and sand in the tent\n01:44 Road closure warnings and flood risks\n03:03 Cycling through flooded roads\n03:33 Fixing damaged disc brake pads\n04:33 Fast-flowing floodwaters and police diversions\n06:54 Finding a campsite and enjoying a hot tagine\n\n#solofemaletravel #solowomencycling #solofemalebiketour #biketouring #cyclemorocco #overlandingafrica",
-   "duration": 486,
-   "retry": true
-  },
-  "vsSEMd-4iy8": {
-   "id": "vsSEMd-4iy8",
-   "title": "Risking A Solo Wild Camp In The Moroccan Desert | Bike Touring Sahara, Overlanding Africa ",
-   "channel": "hels on wheels",
-   "published": "2026-09-29",
-   "description": "Leaving Arena Desert Camp after three days, I head west across the Moroccan desert before incoming storm weather rolls through. Pushing through mud-clogged fenders, visiting the Shrine of Ali Ash-Sharif, and stocking up on supplies, I make my way toward an isolated wild camp inside a geological crater. Loaded with 10 liters of water and visible from the road, pitching the tent solo in the Sahara comes with its usual mix of desert peace and unexpected company.\n\nPrevious Vlog: https://youtu.be/Ecjy738i2bQ?si=NBZIwBmfNRt0124r\n\nhttps://helsonwheels.bio.link\n\n00:00 Leaving Arena Desert Camp\n00:34 Pushing West with a Tailwind\n01:36 Desert Water & Muddy Fenders\n04:25 Visiting the Shrine of Ali Ash-Sharif\n05:09 Friday Market & Stocking Up Supplies\n05:47 Carrying 10 Liters of Desert Water\n06:24 Finding the Remote Crater Wild Camp\n07:39 Unexpected Visitors in the Desert\n#biketouring #solofemaleTravel #morocco #sahara #wildcamping #helsonwheels #cycle touring",
-   "duration": 496,
-   "retry": true
-  },
-  "xRWacDXIgUo": {
-   "id": "xRWacDXIgUo",
-   "title": "Marokko Teil 13, Fes mit dem Wohnmobil.",
-   "channel": "Günter Schneiderat",
-   "published": "2026-09-29",
-   "description": "Mit dem Wohnmobil nach Fes. Eindrücke über Marokko. Was war gut, was war nicht so gut.\nDas war der letzte Teil unserer 3 Monatigen Tour durch Marokko.",
-   "duration": 536,
-   "retry": true
-  },
-  "63kIhb_5LzI": {
-   "id": "63kIhb_5LzI",
-   "title": "Rallye du Maroc, Agadir Bivouac, the preparation before the rally, but it’s not straight forward ! ",
-   "channel": "Project Purdey. Building & rallying Land Rovers.",
-   "published": "2026-09-27",
-   "description": "Join us on our trip to Agadir and experience the first days of our Rallye du Maroc experience with us. \nIn car footage from the Private Test and other trials and tribulations !",
-   "duration": 1304,
-   "retry": true
-  },
-  "KP5hHLWq7nI": {
-   "id": "KP5hHLWq7nI",
-   "title": "Herbst Winterreise 2026/27 - Mit der Fähre von Genua nach Marokko",
-   "channel": "Wir sind dann mal eben weg",
-   "published": "2026-09-27",
-   "description": "Wir sind auf dem Weg nach #Genua , mit der #GNV Fähre  geht es nach TangerMed in #Marokko. Im Film zeigen wir die Stellplätze bis Genua, das Ein-u. Ausschiffen und unsere Erlebnisse auf der Fähre\nWir stellen unsere neue AUTO-VOX Solar 5B  AI Rückfahrkammera vor \nHier der Link zur Kamera\n\nhttps://www.auto-vox.com/de-eu?ref=WEG",
-   "duration": 1542,
-   "retry": true
-  },
-  "eBgiLv52fMM": {
-   "id": "eBgiLv52fMM",
-   "title": "En route vers le Maroc 🇲🇦 nous traversons l'Espagne🇪🇸 (épisode 1)",
-   "channel": "un_autre_voyage",
-   "published": "2026-09-27",
-   "description": "Découvrez notre périple en Espagne, la Catalogne et l'Aragon. On vous partage des bons plans et des astuces. #vanlife #vantravel #nomad #nomadlife #campingcar #bivouac #voyage #travel #maroc #espagne #españa #spain #catalogne #aragon #morocco #bonplan #autocaravana #voyageur #roadtrip #découverte",
-   "duration": 837,
-   "retry": true
-  },
-  "ld04JEdcvKU": {
-   "id": "ld04JEdcvKU",
-   "title": "MAROC : ils s'offrent des vacances all-inclusives à 550€",
-   "channel": "AILLEURS ▸ reportages voyages",
-   "published": "2026-09-27",
-   "description": "Grâce à 340 jours de soleil par an, et des vols low-cost en provenance de toute la France, Agadir a battu son record de fréquentation l’année dernière : un million et demi de touristes. Elle est la deuxième destination préférée des français au Maroc.  Bienvenue au royaume des hôtels formule tout inclus. Des buffets à volonté et des animations toutes les trente minutes, pour des vacances à des prix imbattables.\n\nN'oubliez pas de vous abonner pour plus de reportages voyage 👉https://www.youtube.com/@AILLEURS-Officiel/?sub_confirmation=1\n \n--\n© Tous Droits Réservés\n\nMiniature générée en partie par une IA. \n\n#reportage #maroc #agadir",
-   "duration": 2800,
-   "retry": true
-  },
-  "1pgBytDS6tw": {
-   "id": "1pgBytDS6tw",
-   "title": "#28 Motorhome, dog and Dali: Our road trip to Morocco continues.",
-   "channel": "Jeff & Russell Adventures ",
-   "published": "2026-09-25",
-   "description": "#vanlife #salvadordalí #morocco  \n\nOur motorhome journey to Morocco continues — this leg takes us from Italy through France and into Spain, with Russell the golden retriever riding shotgun as always. First stop in Spain: Port Lligat, home to Salvador Dalí's house, where we wandered through his wonderfully strange and beautiful gardens. Next stop, further south toward Morocco.",
-   "duration": 1159,
-   "retry": true
-  },
-  "EjOxorhROiE": {
-   "id": "EjOxorhROiE",
-   "title": "Ingenious Moroccan Engineering Saved My Tent! Atlas Mountains Solo Bike Tour | Overlanding Africa",
-   "channel": "hels on wheels",
-   "published": "2026-09-23",
-   "description": "When my tent pole fused and broke in the Atlas Mountains, I thought I was out of luck—until a local Moroccan blacksmith fashioned a brilliant custom replacement out of an old screw! With the tent fixed, I hit the road through Goulmima and the stunning palm groves, enjoying a rare tailwind and finding an unexpected camp spot.\nIf you enjoyed this episode, please hit Like, Subscribe, and leave a comment to help support the channel!\n\n🔗 LINKS & SUPPORT:\n▶️ Watch the previous vlog: https://youtu.be/yhrAXZ4NoRM?si=02leWCDODsR0YYlJ\n\n🔗 All links & ways to support: https://helsonwheels.bio.link\n\n⏱️ TIMESTAMPS:\n00:00 Broken Tent Pole Dilemma\n00:44 Moroccan Blacksmith Genius Fix\n01:46 Testing the New Pole & Pool Break\n02:12 Exploring Palm Groves & Mud Palaces in Goulmima\n04:13 Local Food & Bike Resupply\n05:09 Cycle Touring the Valley with a Tailwind\n06:54 Searching for a Wild Campsite\n07:43 Night Camp & Big Thank You to Adam!\n\n#CycleTouring #Morocco #AtlasMountains #BicycleTouring #OverlandingAfrica #HelsOnWheels #SoloFemaleTravel #Goulmima",
-   "duration": 491,
-   "retry": true
-  },
-  "HxnBRhrxW9k": {
-   "id": "HxnBRhrxW9k",
-   "title": "Washing the Living Room Floor with Water?! 🇲🇦 Daily Life in Morocco as a Korean wife",
-   "channel": "YUKJI",
-   "published": "2026-10-25",
-   "description": "French-Moroccan husband 🇲🇦 and Korean wife 🇰🇷\nBuilding a new life together in Morocco with our dogs 🐶\nSharing Moroccan daily life, homemade Korean & Moroccan food\nand cozy couple moments from Oujda, Morocco\n\n💌 E mail : yukjistreet@gmail.com\n💛 Instagram : http://www.instagram.com/yukji_street\n\n\nThis is the English/Korean channel of YUKJI",
-   "duration": 1413
-  },
-  "aupL0HPuqFc": {
-   "id": "aupL0HPuqFc",
-   "title": "Elektrisch nach Marokko, jetzt schon in Spanien",
-   "channel": "Michis Hasenbau",
-   "published": "2026-10-25",
-   "description": "",
-   "duration": 2506
   }
  },
  "channels": {},
