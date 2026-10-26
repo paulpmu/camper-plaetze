@@ -3,6 +3,9 @@ name: Plätze aktualisieren & Webapp veröffentlichen
 on:
   schedule:
     - cron: "17 3 * * *" # täglich 03:17 UTC
+    # Reserve: GitHub lässt Zeitpläne bei Last gelegentlich aus. Ziele, die heute schon liefen, überspringt das Skript.
+    - cron: "43 9 * * *"
+    - cron: "43 15 * * *"
   workflow_dispatch:
     inputs:
       ziel:

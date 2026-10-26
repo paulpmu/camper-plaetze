@@ -79,39 +79,39 @@
  "regions": [
   {
    "name": "Katalonien & Pyrenäen",
-   "hint": "Costa Brava, Barcelona, Pyrenäen, Andorra-Nähe, Ebro-Delta"
+   "hint": "Barcelona, Girona, Tarragona, Lleida, Roses, Andorra la Vella"
   },
   {
    "name": "Levante",
-   "hint": "Valencia, Alicante, Murcia, Costa Blanca"
+   "hint": "Castellón de la Plana, Valencia, Alicante, Murcia, Benidorm"
   },
   {
    "name": "Andalusien",
-   "hint": "Almería, Cabo de Gata, Granada, Málaga, Tarifa, Cádiz, Sevilla, Huelva"
+   "hint": "Almería, Granada, Málaga, Tarifa, Cádiz, Sevilla"
   },
   {
    "name": "Zentralspanien",
-   "hint": "Madrid, Kastilien, Extremadura, Aragonien"
+   "hint": "Madrid, Toledo, Salamanca, Cáceres, Teruel, Zaragoza"
   },
   {
    "name": "Nordspanien",
-   "hint": "Galicien, Asturien, Kantabrien, Baskenland, Picos de Europa"
+   "hint": "Santiago de Compostela, A Coruña, Oviedo, Santander, Bilbao, San Sebastián"
   },
   {
    "name": "Nordportugal",
-   "hint": "Porto, Douro, Minho, Peneda-Gerês"
+   "hint": "Porto, Braga, Viana do Castelo, Bragança, Vila Real, Chaves"
   },
   {
    "name": "Zentrum Portugal",
-   "hint": "Nazaré, Peniche, Coimbra, Lissabon, Sintra, Setúbal"
+   "hint": "Lissabon, Coimbra, Leiria, Nazaré, Sintra, Castelo Branco"
   },
   {
    "name": "Alentejo",
-   "hint": "Costa Vicentina Nord, Évora, Zambujeira, Vila Nova de Milfontes"
+   "hint": "Évora, Beja, Portalegre, Sines, Vila Nova de Milfontes"
   },
   {
    "name": "Algarve",
-   "hint": "Sagres, Lagos, Faro, Tavira, Aljezur"
+   "hint": "Faro, Lagos, Sagres, Tavira, Portimão, Aljezur"
   }
  ],
  "routes": [

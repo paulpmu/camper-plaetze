@@ -117,32 +117,68 @@ class Geocoder:
     def save(self):
         save_json(GEOCACHE_FILE, self.cache)
 
-    def __call__(self, place: str, countrycodes: list[str]) -> tuple[float, float] | None:
-        m = re.fullmatch(r"\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*", place)
-        if m:
-            return float(m.group(1)), float(m.group(2))
-        key = f"{','.join(countrycodes)}|{place.strip().lower()}"
+    def candidates(self, place: str, countrycodes: list[str]) -> list[tuple[float, float]]:
+        """Bis zu fünf Treffer; zuerst die ganze Angabe, sonst nur der erste Teil vor dem Komma."""
+        key = f"5|{','.join(countrycodes)}|{place.strip().lower()}"
         if key in self.cache:
-            return tuple(self.cache[key]) if self.cache[key] else None
-        result = None
-        candidates = [place] + ([place.split(",")[0]] if "," in place else [])
-        for q in candidates:
+            return [tuple(p) for p in self.cache[key]]
+        result = []
+        for q in [place] + ([place.split(",")[0]] if "," in place else []):
             time.sleep(1.1)
             try:
                 r = requests.get("https://nominatim.openstreetmap.org/search",
-                                 params={"q": q, "format": "json", "limit": 1,
+                                 params={"q": q, "format": "json", "limit": 5,
                                          "countrycodes": ",".join(countrycodes)},
                                  headers={"User-Agent": UA}, timeout=30)
                 r.raise_for_status()
                 hits = r.json()
             except requests.RequestException as ex:
                 log(f"    Geocoding-Fehler: {ex}")
-                return None  # nicht cachen, nächstes Mal neu versuchen
+                return []  # nicht cachen, nächstes Mal neu versuchen
             if hits:
-                result = (float(hits[0]["lat"]), float(hits[0]["lon"]))
+                result = [(float(h["lat"]), float(h["lon"])) for h in hits]
                 break
         self.cache[key] = result
         return result
+
+    def __call__(self, place: str, countrycodes: list[str],
+                 near: list[tuple[float, float]] | None = None) -> tuple[float, float] | None:
+        """Bester Treffer. Mit `near` (Ankerpunkte einer Region) gewinnt bei gleichnamigen Orten
+        der Treffer, der am nächsten bei der Region liegt."""
+        m = re.fullmatch(r"\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*", place)
+        if m:
+            return float(m.group(1)), float(m.group(2))
+        hits = self.candidates(place, countrycodes)
+        if not hits:
+            return None
+        if near:
+            return min(hits, key=lambda h: min(haversine_km(h, a) for a in near))
+        return hits[0]
+
+
+def region_anchors(dest: dict, geocode: "Geocoder") -> dict[str, list[tuple[float, float]]]:
+    """Ankerpunkte pro Region aus den Orten in deren Beschreibung (hint)."""
+    import statistics
+
+    anchors = {}
+    for r in dest["regions"]:
+        towns = [t.strip() for t in r["hint"].split(",") if t.strip()][:6]
+        hits = [[h for h in geocode.candidates(t, dest["countrycodes"]) if in_bbox(*h, dest["bbox"])] for t in towns]
+        hits = [h for h in hits if h]
+        if not hits:
+            anchors[r["name"]] = []
+            continue
+        # Gleichnamige Orte: pro Ort den Treffer nehmen, der am nächsten beim Zentrum der übrigen liegt
+        center = (statistics.median(h[0][0] for h in hits), statistics.median(h[0][1] for h in hits))
+        pts = [min(h, key=lambda p: haversine_km(p, center)) for h in hits]
+        center = (statistics.median(p[0] for p in pts), statistics.median(p[1] for p in pts))
+        anchors[r["name"]] = [p for p in pts if haversine_km(p, center) <= 400] or pts
+    return anchors
+
+
+def distance_to_region(point, anchors: dict, region: str) -> float:
+    pts = anchors.get(region) or []
+    return min((haversine_km(point, a) for a in pts), default=0.0)
 
 
 # --------------------------------------------------------------------------- Routen

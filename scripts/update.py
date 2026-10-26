@@ -34,7 +34,8 @@ import requests
 from pydantic import BaseModel, Field, create_model
 
 from common import (CONFIG, DATA_DIR, FALLBACK_MODELS, REPO, ROOT, UA, WEB_DATA, Geocoder, annotate_routes, book,
-                    build_routes, cost_usd, haversine_km, in_bbox, load_destinations, load_json, log, save_json)
+                    build_routes, cost_usd, distance_to_region, haversine_km, in_bbox, load_destinations, load_json,
+                    log, region_anchors, save_json)
 
 YT_API = "https://www.googleapis.com/youtube/v3"
 
@@ -582,16 +583,55 @@ def remove_mentions(spots: list[dict], video_id: str):
     spots[:] = [s for s in spots if s["mentions"]]
 
 
-def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder):
+REGION_RADIUS_KM = 250  # weiter weg von allen Ankerpunkten der Region gilt ein Standort als unplausibel
+
+
+def check_spots(spots: list[dict], dest: dict, geocode: Geocoder, anchors: dict) -> int:
+    """Standorte gegen die Region prüfen: falsch zugeordnete gleichnamige Orte neu verorten,
+    sonst die Region nach dem Standort korrigieren. Gibt die Zahl der Korrekturen zurück."""
+    fixed = 0
+    for s in spots:
+        if s["lat"] is None or s.get("source") == "osm" or not anchors.get(s["region"]):
+            continue
+        point = (s["lat"], s["lng"])
+        own = distance_to_region(point, anchors, s["region"])
+        if own <= REGION_RADIUS_KM:
+            # Liegt der Platz direkt bei einem Ort einer anderen Region und klar weiter weg von der eigenen?
+            other = min((r for r in anchors if r != s["region"] and anchors[r]),
+                        key=lambda r: distance_to_region(point, anchors, r), default=None)
+            if other and distance_to_region(point, anchors, other) <= 30 and own >= 60 \
+                    and own >= 3 * distance_to_region(point, anchors, other):
+                log(f"    Region korrigiert: {s['name']}: {s['region']} → {other}")
+                s["region"] = other
+                fixed += 1
+            continue
+        if s["precision"] in ("ort", "genau"):
+            query = f"{s['poi']}, {s['place'].split(',')[0]}" if s["precision"] == "genau" and s.get("poi") else s["place"]
+            pos = geocode(query, dest["countrycodes"], near=anchors[s["region"]])
+            if pos and in_bbox(*pos, dest["bbox"]) and distance_to_region(pos, anchors, s["region"]) <= REGION_RADIUS_KM:
+                log(f"    Standort korrigiert: {s['name']} ({s['lat']}, {s['lng']}) → {pos}")
+                s["lat"], s["lng"] = round(pos[0], 5), round(pos[1], 5)
+                fixed += 1
+                continue
+        best = min(anchors, key=lambda r: distance_to_region((s["lat"], s["lng"]), anchors, r) if anchors[r] else 1e9)
+        if best != s["region"]:
+            log(f"    Region korrigiert: {s['name']}: {s['region']} → {best}")
+            s["region"] = best
+            fixed += 1
+    return fixed
+
+
+def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder, anchors: dict):
     lat = lng = None
     if sp.latitude is not None and sp.longitude is not None and in_bbox(sp.latitude, sp.longitude, dest["bbox"]):
         lat, lng, precision = sp.latitude, sp.longitude, "exakt"
     elif sp.location_precision == "region":
         precision = "region"  # erscheint nur in der Liste, nicht auf der Karte
     else:
-        town = geocode(sp.place, dest["countrycodes"])
+        near = anchors.get(sp.region)
+        town = geocode(sp.place, dest["countrycodes"], near=near)
         town = town if town and in_bbox(*town, dest["bbox"]) else None
-        poi = geocode(f"{sp.poi_name}, {sp.place.split(',')[0]}", dest["countrycodes"]) if sp.poi_name else None
+        poi = geocode(f"{sp.poi_name}, {sp.place.split(',')[0]}", dest["countrycodes"], near=near) if sp.poi_name else None
         if poi and in_bbox(*poi, dest["bbox"]) and (not town or haversine_km(poi, town) <= 40):
             (lat, lng), precision = poi, "genau"
         elif town:
@@ -636,6 +676,7 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     limit = max(limit, sum(1 for v in state["queue"].values() if v.get("retry")))
 
     schema = extraction_model(dest)
+    anchors = region_anchors(dest, geocode) if state["queue"] or spots else {}
     # Erneut auszuwertende Videos zuerst, danach die neuesten
     queue = sorted(state["queue"].values(), key=lambda v: v["published"], reverse=True)
     queue = sorted(queue, key=lambda v: not v.get("retry"))[:limit]
@@ -676,7 +717,7 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
             continue
 
         for sp in result.spots:
-            new, mention = to_spot(dest, v, sp, tstatus, geocode)
+            new, mention = to_spot(dest, v, sp, tstatus, geocode, anchors)
             if not new:
                 log(f"    ✗ ohne Standort: {sp.name} ({sp.place})")
                 continue
@@ -686,6 +727,10 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
             record["spots"] += 1
             log(f"    ✓ {sp.name} [{new['precision']}] {sp.rating}/5")
 
+    if anchors:
+        fixed = check_spots(spots, dest, geocode, anchors)
+        if fixed:
+            log(f"  Standortprüfung: {fixed} Korrekturen")
     finalize(spots)
     routes = build_routes(dest, geocode)
     annotate_routes(spots, routes)
@@ -823,8 +868,12 @@ def main():
     if not dests:
         sys.exit(f"Ziel «{args.ziel}» nicht gefunden oder nicht aktiv")
     if os.getenv("GITHUB_EVENT_NAME") == "schedule" and not args.ziel:
-        dests = [d for d in dests if is_due(d)]
-        log(f"Zeitplan: heute fällig {[d['id'] for d in dests] or 'keine Ziele'}")
+        today = dt.date.today().isoformat()
+        dests = [d for d in dests if is_due(d)
+                 and (load_json(WEB_DATA / d["id"] / "meta.json", {}).get("last_run") or "")[:10] != today]
+        log(f"Zeitplan: heute fällig und noch nicht gelaufen {[d['id'] for d in dests] or 'keine Ziele'}")
+        if not dests:
+            return
 
     if args.vergleich:
         compare(dests, args.vergleich, yt)

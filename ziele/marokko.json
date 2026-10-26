@@ -93,7 +93,7 @@
   },
   {
    "name": "Nordatlantik",
-   "hint": "Asilah, Larache, Rabat, Casablanca, El Jadida, Oualidia, Safi"
+   "hint": "Asilah, Larache, Kénitra, Rabat, Casablanca, El Jadida"
   },
   {
    "name": "Fès & Mittlerer Atlas",
@@ -101,27 +101,27 @@
   },
   {
    "name": "Marrakesch & Hoher Atlas",
-   "hint": "Marrakesch, Ourika, Imlil, Azilal, Bin el Ouidane, Tizi n'Tichka"
+   "hint": "Marrakesch, Imlil, Azilal, Ouirgane, Demnate"
   },
   {
    "name": "Südatlantik",
-   "hint": "Essaouira, Imsouane, Taghazout, Agadir, Tiznit, Mirleft, Sidi Ifni"
+   "hint": "Essaouira, Imsouane, Taghazout, Agadir, Tiznit, Sidi Ifni"
   },
   {
    "name": "Antiatlas & Draa",
-   "hint": "Tafraoute, Ouarzazate, Zagora, Dadès, Todra, Tata, Foum Zguid, Assa"
+   "hint": "Tafraoute, Ouarzazate, Zagora, Tata, Foum Zguid, Tinghir"
   },
   {
    "name": "Sahara Ost",
-   "hint": "Merzouga, Erg Chebbi, Erfoud, Rissani, Figuig"
+   "hint": "Merzouga, Erfoud, Rissani, Errachidia, Figuig"
   },
   {
    "name": "Südwesten",
-   "hint": "Guelmim, Plage Blanche, Tan-Tan, Akhfennir, Tarfaya, Laâyoune, Boujdour"
+   "hint": "Guelmim, Tan-Tan, Tarfaya, Laâyoune, Boujdour, Assa"
   },
   {
    "name": "Dakhla & Süden",
-   "hint": "Dakhla, Lagune, Bir Gandouz, Guerguerat und südlich davon"
+   "hint": "Dakhla, Bir Gandouz, Guerguerat"
   }
  ],
  "routes": [
