@@ -100,27 +100,27 @@
    "weekday": 1,
    "links": [],
    "osm": 0,
-   "spots": 106,
-   "last_run": "2026-10-26T07:55:23Z",
-   "queue": 138,
-   "videos_total": 120,
+   "spots": 127,
+   "last_run": "2026-10-27T09:23:39Z",
+   "queue": 100,
+   "videos_total": 160,
    "last": {
-    "date": "2026-10-26T07:55:23Z",
+    "date": "2026-10-27T09:23:39Z",
     "videos": 40,
-    "spots_new": 45,
+    "spots_new": 21,
     "transcripts": {
-     "ok": 37,
-     "keins": 2,
+     "ok": 32,
+     "keins": 1,
      "blockiert": 0,
-     "fehler": 1
+     "fehler": 7
     },
     "youtube_units": 1341,
     "claude_tokens": [
-     508723,
-     67480
+     405077,
+     43928
     ],
     "model": "claude-haiku-5-5",
-    "cost_usd": 0.0846
+    "cost_usd": 0.0625
    }
   },
   {

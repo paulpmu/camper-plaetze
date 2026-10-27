@@ -3163,5 +3163,269 @@
    -8.4925373,
    "ma"
   ]
- ]
+ ],
+ "6|ma,eh|meknès, meknès-provinz": [
+  [
+   33.8327875,
+   -5.5680257,
+   "ma"
+  ],
+  [
+   33.8431602,
+   -5.601291,
+   "ma"
+  ],
+  [
+   33.8315646,
+   -5.5629289,
+   "ma"
+  ],
+  [
+   33.8328637,
+   -5.567928,
+   "ma"
+  ],
+  [
+   33.8303807,
+   -5.5117985,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ifrane, ifrane-provinz": [
+  [
+   33.528693,
+   -5.1076162,
+   "ma"
+  ],
+  [
+   33.527605,
+   -5.107408,
+   "ma"
+  ],
+  [
+   33.4472751,
+   -5.1055374,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|nationalpark ifrane, ifrane": [],
+ "6|ma,eh|bouarfa, figuig-provinz": [
+  [
+   32.532903,
+   -1.963231,
+   "ma"
+  ],
+  [
+   32.5289195,
+   -1.9630764,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|campingplatz am hotel bouarfa, bouarfa": [],
+ "6|ma,eh|zagora, zagora-provinz": [
+  [
+   30.3207607,
+   -5.8187301,
+   "ma"
+  ],
+  [
+   30.3281021,
+   -5.8366746,
+   "ma"
+  ],
+  [
+   30.3256005,
+   -5.8216161,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|chefchaouen, chefchaouen": [
+  [
+   35.1700832,
+   -5.2766583,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|campingplatz familie schatz, marrakesch": [],
+ "6|ma,eh|imlil, al haouz": [
+  [
+   31.136817,
+   -7.920757,
+   "ma"
+  ],
+  [
+   31.143889,
+   -7.921819,
+   "ma"
+  ],
+  [
+   30.8979731,
+   -8.4427161,
+   "ma"
+  ],
+  [
+   31.1317987,
+   -7.9218392,
+   "ma"
+  ],
+  [
+   31.0951512,
+   -8.1823423,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tafraoute, tiznit": [
+  [
+   29.720472,
+   -8.9744529,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|valle delle pietre blu, tafraoute": [],
+ "6|ma,eh|safsaf, errachidia": [
+  [
+   35.1819456,
+   -5.8096647,
+   "ma"
+  ],
+  [
+   34.5579257,
+   -6.0077727,
+   "ma"
+  ],
+  [
+   34.8039642,
+   -2.4096197,
+   "ma"
+  ],
+  [
+   32.3273223,
+   -1.2988023,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|rn1 südlich essaouira, essaouira": [],
+ "6|ma,eh|restaurant lashin blue, rn1 südlich essaouira": [],
+ "6|ma,eh|asilah, larache": [
+  [
+   35.4651588,
+   -6.031032,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|campingplatz der familie schatz, marrakesch": [],
+ "6|ma,eh|umgebung marrakesch, marrakesch-safi": [],
+ "6|ma,eh|stellplatz bei familie schatz, umgebung marrakesch": [],
+ "6|ma,eh|todra-schlucht, tinghir": [
+  [
+   31.588488,
+   -5.5938417,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tinghir, tinghir": [
+  [
+   31.52133,
+   -5.531164,
+   "ma"
+  ],
+  [
+   31.5185427,
+   -5.5317508,
+   "ma"
+  ],
+  [
+   31.3906275,
+   -5.5283392,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|cap barbas, dakhla": [
+  [
+   22.201262,
+   -16.7816927,
+   "ma"
+  ],
+  [
+   22.2957077,
+   -16.6738572,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|cap barbas, cap barbas": [
+  [
+   22.201262,
+   -16.7816927,
+   "ma"
+  ],
+  [
+   22.2957077,
+   -16.6738572,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|mirleft, tiznit": [
+  [
+   29.5793463,
+   -10.0337203,
+   "ma"
+  ],
+  [
+   29.6916792,
+   -9.7207349,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|plage blanche, mirleft": [
+  [
+   28.9249173,
+   -10.6843466,
+   "ma"
+  ],
+  [
+   28.8252696,
+   -10.8942182,
+   "ma"
+  ],
+  [
+   28.9960928,
+   -10.5593068,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|fnideq, tétouan": [
+  [
+   35.8392089,
+   -5.3614246,
+   "ma"
+  ],
+  [
+   35.5986781,
+   -5.3387112,
+   "ma"
+  ],
+  [
+   35.6035371,
+   -5.3384851,
+   "ma"
+  ],
+  [
+   35.5637301,
+   -5.3660271,
+   "ma"
+  ],
+  [
+   35.8022269,
+   -5.3734805,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|playa dalia, fnideq": [
+  [
+   35.9057364,
+   -5.4769024,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|piste zwischen merzouga und zagora, sahara": []
 }

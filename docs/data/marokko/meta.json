@@ -1,8 +1,8 @@
 {
- "last_run": "2026-10-26T07:55:23Z",
- "spots": 106,
- "videos_total": 120,
- "queue": 138,
+ "last_run": "2026-10-27T09:23:39Z",
+ "spots": 127,
+ "videos_total": 160,
+ "queue": 100,
  "history": [
   {
    "date": "2026-10-25T17:15:39Z",
@@ -93,6 +93,24 @@
    ],
    "model": "claude-haiku-5-5",
    "cost_usd": 0.0846
+  },
+  {
+   "date": "2026-10-27T09:23:39Z",
+   "videos": 40,
+   "spots_new": 21,
+   "transcripts": {
+    "ok": 32,
+    "keins": 1,
+    "blockiert": 0,
+    "fehler": 7
+   },
+   "youtube_units": 1341,
+   "claude_tokens": [
+    405077,
+    43928
+   ],
+   "model": "claude-haiku-5-5",
+   "cost_usd": 0.0625
   }
  ],
  "osm_error": null
