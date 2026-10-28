@@ -3427,5 +3427,446 @@
    "ma"
   ]
  ],
- "6|ma,eh|piste zwischen merzouga und zagora, sahara": []
+ "6|ma,eh|piste zwischen merzouga und zagora, sahara": [],
+ "6|ma,eh|campingplatz l'océan bleu, mohammedia": [
+  [
+   33.7378433,
+   -7.324092,
+   "ma"
+  ],
+  [
+   33.7369888,
+   -7.3235827,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|aït-ben-haddou, ouarzazate": [
+  [
+   31.0451536,
+   -7.1309706,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ifrane, ifrane-nationalpark": [
+  [
+   33.527605,
+   -5.107408,
+   "ma"
+  ],
+  [
+   35.128754,
+   -3.335681,
+   "ma"
+  ],
+  [
+   31.7030483,
+   -6.348985,
+   "ma"
+  ],
+  [
+   33.3529338,
+   -5.2509333,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|fès, fès": [
+  [
+   34.0346534,
+   -5.0161926,
+   "ma"
+  ],
+  [
+   34.0631192,
+   -4.9737999,
+   "ma"
+  ],
+  [
+   34.0261952,
+   -5.0231849,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tétouan, tétouan": [
+  [
+   35.5590626,
+   -5.4108305,
+   "ma"
+  ],
+  [
+   35.5696561,
+   -5.3758075,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|mehdia, kénitra": [
+  [
+   34.2703875,
+   -6.6014248,
+   "ma"
+  ],
+  [
+   34.2643937,
+   -6.5697933,
+   "ma"
+  ],
+  [
+   34.2648909,
+   -6.6520185,
+   "ma"
+  ],
+  [
+   34.258877,
+   -6.67326,
+   "ma"
+  ],
+  [
+   34.2678045,
+   -6.6266025,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping mehdya, mehdia": [
+  [
+   34.2586785,
+   -6.6734691,
+   "ma"
+  ],
+  [
+   34.258877,
+   -6.67326,
+   "ma"
+  ],
+  [
+   34.2597026,
+   -6.6687539,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping international mehdia, mehdia": [
+  [
+   34.2586785,
+   -6.6734691,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|berber truck parking, rissani": [],
+ "6|ma,eh|camping haven la chance, merzouga": [
+  [
+   31.1346651,
+   -4.0164314,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|agadir, provinz agadir-ida ou tanane": [
+  [
+   30.4205162,
+   -9.5838532,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ouarzazate, ouarzazate": [
+  [
+   30.920193,
+   -6.910923,
+   "ma"
+  ],
+  [
+   30.9381968,
+   -6.9089259,
+   "ma"
+  ],
+  [
+   30.9348816,
+   -6.9078978,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|dakhla, dakhla-oued ed-dahab": [
+  [
+   23.6940663,
+   -15.9431274,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|parkplatz pk25, dakhla": [],
+ "6|ma,eh|casablanca, casablanca-settat": [
+  [
+   33.5945144,
+   -7.6200284,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|große moschee hassan ii, casablanca": [],
+ "6|ma,eh|ait benhaddou, ouarzazate": [
+  [
+   31.0451536,
+   -7.1309706,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|ait benhaddou, ait benhaddou": [
+  [
+   31.0468537,
+   -7.1296209,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping auberge spadou, todra-schlucht": [],
+ "6|ma,eh|midelt, midelt": [
+  [
+   32.6706583,
+   -4.740776,
+   "ma"
+  ],
+  [
+   32.680347,
+   -4.739897,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|fès, fès-meknès": [
+  [
+   34.0346534,
+   -5.0161926,
+   "ma"
+  ],
+  [
+   34.0261952,
+   -5.0231849,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|casablanca, casablanca": [
+  [
+   33.5945144,
+   -7.6200284,
+   "ma"
+  ],
+  [
+   33.6083681,
+   -7.5918748,
+   "ma"
+  ],
+  [
+   33.5832502,
+   -7.6573822,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|moschee hassan ii, casablanca": [
+  [
+   33.6082243,
+   -7.6324728,
+   "ma"
+  ],
+  [
+   33.6053494,
+   -7.630781,
+   "ma"
+  ],
+  [
+   33.6055002,
+   -7.6304794,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|2 stunden von merzouga, errachidia": [],
+ "6|ma,eh|auberge luna del fuego, 2 stunden von merzouga": [],
+ "6|ma,eh|mehdya, kénitra": [
+  [
+   34.258877,
+   -6.67326,
+   "ma"
+  ],
+  [
+   34.2559174,
+   -6.6577278,
+   "ma"
+  ],
+  [
+   34.2564899,
+   -6.6720598,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|dakhla, provinz oued ed-dahab": [
+  [
+   21.3643639,
+   -16.9607497,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|pk 25, dakhla, provinz oued ed-dahab": [
+  [
+   23.901518,
+   -15.7870531,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|pk 25, pk 25": [
+  [
+   23.901518,
+   -15.7870531,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|azrou, ifrane-region, ifrane": [
+  [
+   35.13024,
+   -3.544397,
+   "ma"
+  ],
+  [
+   35.1596346,
+   -3.7715293,
+   "ma"
+  ],
+  [
+   33.4417206,
+   -5.2230701,
+   "ma"
+  ],
+  [
+   33.4415843,
+   -5.2269528,
+   "ma"
+  ],
+  [
+   33.436117,
+   -5.221913,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|auberge camping lazelle bleu, merzouga": [],
+ "6|ma,eh|agadir, agadir-ida-ou-tanane": [
+  [
+   30.6735818,
+   -9.4793687,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|essaouira, essaouira": [
+  [
+   31.4960716,
+   -9.7636275,
+   "ma"
+  ],
+  [
+   31.5118281,
+   -9.7620903,
+   "ma"
+  ],
+  [
+   31.5132754,
+   -9.7688179,
+   "ma"
+  ],
+  [
+   31.5132754,
+   -9.7688179,
+   "ma"
+  ],
+  [
+   31.5106032,
+   -9.7579112,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|marrakesch, marrakesch-tensift-al haouz": [
+  [
+   31.6258257,
+   -7.9891608,
+   "ma"
+  ],
+  [
+   31.7203273,
+   -8.1541684,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|sidi ifni, provinz sidi ifni": [
+  [
+   29.3791253,
+   -10.1715632,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|legzira beach, sidi ifni": [
+  [
+   29.4436222,
+   -10.1179213,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|erg chegaga, erg chegaga": [
+  [
+   29.8492152,
+   -6.2095159,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|pk25, dakhla": [
+  [
+   23.9016663,
+   -15.7850991,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|pk25, pk25": [
+  [
+   23.9016663,
+   -15.7850991,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|guerguerat, westsahara (dakhla-attaouia)": [],
+ "6|ma,eh|ola energy gas station, guerguerat": [
+  [
+   34.0082675,
+   -6.8548178,
+   "ma"
+  ],
+  [
+   34.0098793,
+   -6.8566787,
+   "ma"
+  ],
+  [
+   34.0264074,
+   -6.8421307,
+   "ma"
+  ],
+  [
+   31.6534691,
+   -8.0190141,
+   "ma"
+  ],
+  [
+   33.8943346,
+   -5.5573054,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|pk25, dakhla, dakhla-attaouia": [
+  [
+   23.9016663,
+   -15.7850991,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|plage aziwalte, boujdour": [],
+ "6|ma,eh|plage aziwalte, plage aziwalte": [],
+ "6|ma,eh|laâyoune, laâyoune-sakia el hamra": [
+  [
+   27.1324393,
+   -13.1349829,
+   "ma"
+  ],
+  [
+   27.1290626,
+   -13.140826,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|flughafenparkplatz laâyoune, laâyoune": []
 }
