@@ -3868,5 +3868,346 @@
    "ma"
   ]
  ],
- "6|ma,eh|flughafenparkplatz laâyoune, laâyoune": []
+ "6|ma,eh|flughafenparkplatz laâyoune, laâyoune": [],
+ "6|ma,eh|pk25, dakhla, provinz oued ed-dahab": [
+  [
+   23.9016663,
+   -15.7850991,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|aourir, agadir": [
+  [
+   30.382179,
+   -9.4956235,
+   "ma"
+  ],
+  [
+   30.379721,
+   -9.5004129,
+   "ma"
+  ],
+  [
+   30.4972764,
+   -9.6701189,
+   "ma"
+  ],
+  [
+   30.498085,
+   -9.671097,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping d'aourir, aourir": [
+  [
+   30.5099364,
+   -9.6839907,
+   "ma"
+  ],
+  [
+   30.4950977,
+   -9.623583,
+   "ma"
+  ],
+  [
+   30.5108821,
+   -9.6812993,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tan-tan plage, tan-tan": [
+  [
+   28.4455337,
+   -11.1589932,
+   "ma"
+  ],
+  [
+   28.4977644,
+   -11.3319395,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tan tan plage, tan-tan plage": [
+  [
+   28.4989524,
+   -11.3347469,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|icht, tata": [
+  [
+   29.0539378,
+   -8.8462922,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tata, tata": [
+  [
+   29.7467942,
+   -7.9662115,
+   "ma"
+  ],
+  [
+   29.746392,
+   -7.9696051,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping khayma park, foum zguid": [
+  [
+   30.0797128,
+   -6.8712463,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping amerdoul, icht": [
+  [
+   29.0469921,
+   -8.8465466,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|akka (agadir owzro), provinz tata": [
+  [
+   29.4139323,
+   -8.255127,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tata, provinz tata": [
+  [
+   29.746392,
+   -7.9696051,
+   "ma"
+  ],
+  [
+   29.7467942,
+   -7.9662115,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|icht, provinz tata": [
+  [
+   29.0539378,
+   -8.8462922,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|guelmim, guelmim-oued noun": [
+  [
+   28.9863852,
+   -10.0574351,
+   "ma"
+  ],
+  [
+   28.8992056,
+   -9.9822303,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|marjane parkplatz, guelmim": [
+  [
+   34.0195042,
+   -6.816392,
+   "ma"
+  ],
+  [
+   31.6294052,
+   -8.0786479,
+   "ma"
+  ],
+  [
+   35.1223272,
+   -2.9259916,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tata, tata-provinz": [
+  [
+   29.7467942,
+   -7.9662115,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|rimal tata campsite, tata": [],
+ "6|ma,eh|el mhamid, zagora": [
+  [
+   29.8273291,
+   -5.7238782,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|lamhiriz, cap barbas, provinz dakhla": [
+  [
+   22.1974146,
+   -16.7666339,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|parking plage de lamhiriz, lamhiriz": [],
+ "6|ma,eh|tighmert, guelmim": [
+  [
+   28.9437261,
+   -9.9553655,
+   "ma"
+  ],
+  [
+   28.9452497,
+   -9.9449085,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping touareg, tighmert": [
+  [
+   28.9426942,
+   -9.9495831,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tan-tan, tan-tan": [
+  [
+   28.437553,
+   -11.098664,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|boujdour, provinz boujdour": [
+  [
+   26.1263378,
+   -14.4836537,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|sahara line camping, boujdour": [
+  [
+   26.1318335,
+   -14.4950734,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|parking falesie, dakhla": [],
+ "6|ma,eh|tigmert, tan-tan": [
+  [
+   28.9437261,
+   -9.9553655,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping touareg, tigmert": [
+  [
+   28.9426942,
+   -9.9495831,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|dakhla, oued ed-dahab": [
+  [
+   23.6998317,
+   -15.9338645,
+   "ma"
+  ],
+  [
+   23.7008027,
+   -15.9300457,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|pk 25, dakhla": [
+  [
+   23.901518,
+   -15.7870531,
+   "ma"
+  ],
+  [
+   23.9038402,
+   -15.7854636,
+   "ma"
+  ],
+  [
+   23.9016663,
+   -15.7850991,
+   "ma"
+  ],
+  [
+   23.9139101,
+   -15.781348,
+   "ma"
+  ],
+  [
+   23.901923,
+   -15.7868902,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|el jadida, provinz el jadida": [
+  [
+   33.2293229,
+   -8.4993567,
+   "ma"
+  ],
+  [
+   33.2433309,
+   -8.49884,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|zagora, provinz zagora": [
+  [
+   30.3279053,
+   -5.8369957,
+   "ma"
+  ],
+  [
+   30.1017204,
+   -5.7969168,
+   "ma"
+  ],
+  [
+   30.3516747,
+   -5.8371628,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|laâyoune, laâyoune": [
+  [
+   27.154512,
+   -13.1953921,
+   "ma"
+  ],
+  [
+   27.1406185,
+   -13.2223239,
+   "ma"
+  ],
+  [
+   27.161,
+   -13.214,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tamraght, agadir-ida-ou-tanane": [
+  [
+   30.513951,
+   -9.677378,
+   "ma"
+  ],
+  [
+   30.5146879,
+   -9.6832922,
+   "ma"
+  ],
+  [
+   30.5546034,
+   -9.5502756,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|sémaphore d'essaouira, essaouira": [],
+ "6|ma,eh|pk25, tan-tan": [
+  [
+   28.437553,
+   -11.098664,
+   "ma"
+  ]
+ ]
 }
