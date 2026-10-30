@@ -4209,5 +4209,226 @@
    -11.098664,
    "ma"
   ]
+ ],
+ "6|ma,eh|dar bari, marrakesch": [
+  [
+   31.5131584,
+   -9.770773,
+   "ma"
+  ],
+  [
+   31.1007212,
+   -6.5978254,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|imsouane, agadir-ida-ou-tanane": [
+  [
+   30.841899,
+   -9.819964,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping antlantica, imsouane": [],
+ "6|ma,eh|umgebung imsouane, agadir-ida-ou-tanane": [],
+ "6|ma,eh|camping terre d'océan, umgebung imsouane": [],
+ "6|ma,eh|agadir-ida-ou-tanane, ca. 10 km nördlich des terre d'océan an der n1": [
+  [
+   30.6735818,
+   -9.4793687,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping atlantica park, agadir-ida-ou-tanane": [
+  [
+   30.5887625,
+   -9.7492579,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|sidi ahmed essayeh, essaouira": [
+  [
+   31.1785881,
+   -9.8173038,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|sidi ahmed essayeh, sidi ahmed essayeh": [
+  [
+   31.178669,
+   -9.8170215,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|parking camping car taghazout, taghazout": [],
+ "6|ma,eh|vallée du paradis, taghazout, agadir": [
+  [
+   30.5876107,
+   -9.5310442,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|vallée du paradis chez momo, vallée du paradis": [],
+ "6|ma,eh|sidi kaouki, essaouira": [
+  [
+   31.3557895,
+   -9.7993315,
+   "ma"
+  ],
+  [
+   31.3994347,
+   -9.6828642,
+   "ma"
+  ],
+  [
+   31.3875171,
+   -9.7295113,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|taroudant, taroudant": [
+  [
+   30.470651,
+   -8.877922,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|villa coriandre, essaouira": [
+  [
+   31.4706477,
+   -9.687104,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|gorges du dadès, boumalne-dadès, ouarzazate": [
+  [
+   31.4823087,
+   -5.9568728,
+   "ma"
+  ],
+  [
+   31.4432671,
+   -5.987377,
+   "ma"
+  ],
+  [
+   31.399807,
+   -5.9897338,
+   "ma"
+  ],
+  [
+   31.4197262,
+   -6.0077887,
+   "ma"
+  ],
+  [
+   31.4626737,
+   -5.9727884,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|asilah, provinz tanger-assilah": [
+  [
+   35.4555716,
+   -5.9216889,
+   "ma"
+  ],
+  [
+   35.4617881,
+   -6.0376607,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|mohammedia, provinz mohammedia": [
+  [
+   33.6958383,
+   -7.3893292,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping mimosa, mohammedia": [],
+ "6|ma,eh|mhamid, zagora": [
+  [
+   29.825084,
+   -5.7198081,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|zagora, zagora": [
+  [
+   30.3207607,
+   -5.8187301,
+   "ma"
+  ],
+  [
+   30.3279053,
+   -5.8369957,
+   "ma"
+  ],
+  [
+   30.3281021,
+   -5.8366746,
+   "ma"
+  ],
+  [
+   30.3256005,
+   -5.8216161,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tafraout sidi ali, errachidia": [
+  [
+   30.6735085,
+   -4.6890711,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tiznit, provinz tiznit": [
+  [
+   29.698624,
+   -9.7312815,
+   "ma"
+  ],
+  [
+   29.5919306,
+   -9.3477725,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camping tinbar, tiznit": [],
+ "6|ma,eh|agadir, provinz agadir-ida-ou-tanane": [
+  [
+   30.4205162,
+   -9.5838532,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|crocopark, agadir": [],
+ "6|ma,eh|illigh, tiznit": [
+  [
+   29.4855301,
+   -9.5210061,
+   "ma"
+  ],
+  [
+   29.4900224,
+   -9.5052633,
+   "ma"
+  ],
+  [
+   29.4904599,
+   -9.5029436,
+   "ma"
+  ],
+  [
+   29.4932801,
+   -9.5020537,
+   "ma"
+  ],
+  [
+   29.4872944,
+   -9.5084342,
+   "ma"
+  ]
  ]
 }
