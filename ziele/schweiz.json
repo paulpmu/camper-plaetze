@@ -10,7 +10,7 @@
   "osm_camping": true,
   "osm_entsorgung": true,
   "web": true,
-  "opendata": false
+  "opendata": true
  },
  "countrycodes": [
   "ch"
