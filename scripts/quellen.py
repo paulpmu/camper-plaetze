@@ -245,6 +245,9 @@ PLATFORMS = ("park4night", "camping.info", "campercontact", "ioverlander", "acsi
              "youtube.com", "youtu.be", "facebook.com", "instagram.com", "tiktok.com", "womoland", "promobil.de/stellplatz")
 
 
+DISCOVER_USAGE: list[tuple[int, int, int]] = []
+
+
 class _Text(HTMLParser):
     """Sichtbaren Text einer HTML-Seite sammeln, ohne Skripte, Navigation und Fusszeilen."""
     SKIP = {"script", "style", "noscript", "nav", "footer", "header", "aside", "form", "svg"}
@@ -296,6 +299,19 @@ def _page_text(url: str) -> tuple[str, str] | None:
     return parser.title.strip(), text[: CONFIG["max_transcript_chars"]]
 
 
+def _date(s: str) -> str:
+    """page_age der Websuche (z. B. 'March 3, 2026' oder ISO) in JJJJ-MM-TT umwandeln, sonst leer."""
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})", s)
+    if m:
+        return m.group(0)
+    for fmt in ("%B %d, %Y", "%b %d, %Y", "%d %B %Y"):
+        try:
+            return dt.datetime.strptime(s.strip(), fmt).date().isoformat()
+        except ValueError:
+            pass
+    return ""
+
+
 def discover_web(dest: dict, known: set[str]) -> tuple[list[dict], int, int, int]:
     """Claude sucht im Web nach aktuellen Reiseberichten. Gibt (Treffer, Tokens ein, Tokens aus, Suchen) zurück."""
     client = anthropic.Anthropic()
@@ -316,6 +332,7 @@ def discover_web(dest: dict, known: set[str]) -> tuple[list[dict], int, int, int
     messages = [{"role": "user", "content": prompt}]
     tin = tout = searches = 0
     resp = None
+    DISCOVER_USAGE.append((0, 0, 0))
     for _ in range(4):  # pause_turn: Server-Werkzeugschleife fortsetzen
         resp = client.messages.create(
             model=WEB_MODEL, max_tokens=16000, messages=messages, tools=tools,
@@ -326,18 +343,38 @@ def discover_web(dest: dict, known: set[str]) -> tuple[list[dict], int, int, int
         tout += resp.usage.output_tokens
         stu = getattr(resp.usage, "server_tool_use", None)
         searches += getattr(stu, "web_search_requests", 0) or 0
+        DISCOVER_USAGE[-1] = (tin, tout, searches)
         if resp.stop_reason != "pause_turn":
             break
-        messages = [messages[0], {"role": "assistant", "content": resp.content}]
-    text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text") if resp else ""
+        messages = messages + [{"role": "assistant", "content": resp.content}]
+    # 1. Claudes Auswahl (JSON am Schluss der Antwort), 2. sonst alle Treffer der Websuche selbst
+    blocks = [b for msg in messages[1:] for b in msg["content"]] + list(resp.content if resp else [])
+    text = "".join(getattr(b, "text", "") for b in blocks if getattr(b, "type", "") == "text")
+    picked = []
     m = re.search(r"\[\s*\{.*\}\s*\]", text, re.S)
-    hits = []
     if m:
         try:
-            hits = [h for h in json.loads(m.group(0)) if isinstance(h, dict) and str(h.get("url", "")).startswith("http")]
+            picked = [h for h in json.loads(m.group(0)) if isinstance(h, dict) and str(h.get("url", "")).startswith("http")]
         except ValueError:
             pass
-    hits = [h for h in hits if h["url"] not in known and not any(p in h["url"].lower() for p in PLATFORMS)]
+    found = []
+    for b in blocks:
+        if getattr(b, "type", "") == "web_search_tool_result" and isinstance(getattr(b, "content", None), list):
+            for r in b.content:
+                url = getattr(r, "url", "")
+                if url.startswith("http"):
+                    found.append({"url": url, "title": getattr(r, "title", "") or "", "published": _date(getattr(r, "page_age", "") or "")})
+    seen, hits = set(), []
+    for h in picked + found:
+        u = h["url"].split("#")[0]
+        if u in seen or u in known or any(p in u.lower() for p in PLATFORMS):
+            continue
+        seen.add(u)
+        hits.append({**h, "url": u})
+    hits = hits[: CONFIG.get("web_pages_per_run", 12) * 2]
+    if not hits:
+        raise RuntimeError(f"Websuche ohne verwertbare Treffer (stop_reason={getattr(resp, 'stop_reason', '?')}, "
+                           f"{searches} Suchen, Text: {text[:150]!r})")
     return hits, tin, tout, searches
 
 
@@ -352,7 +389,11 @@ def run_web(dest: dict, state: dict, claude, schema, geocode, anchors: dict) -> 
     due = not web["last_search"] or web["last_search"] < (dt.date.today() - dt.timedelta(days=6)).isoformat()
     if due or os.environ.get("WEB_SUCHE") == "ja":
         try:
-            hits, tin, tout, searches = discover_web(dest, set(web["pages"]))
+            try:
+                hits, tin, tout, searches = discover_web(dest, set(web["pages"]))
+            except RuntimeError as ex:
+                hits, (tin, tout, searches) = [], DISCOVER_USAGE[-1] if DISCOVER_USAGE else (0, 0, 0)
+                _error(did, "web", str(ex))
             usd = cost_usd(WEB_MODEL, tin, tout) + searches * WEB_SEARCH_USD
             book("websuche", WEB_MODEL, tin, tout, ziel=did, note=f"{searches} Suchen", extra_usd=searches * WEB_SEARCH_USD)
             stats["searches"], stats["usd"] = searches, usd
@@ -361,7 +402,8 @@ def run_web(dest: dict, state: dict, claude, schema, geocode, anchors: dict) -> 
                 web["pages"][h["url"]] = {"title": h.get("title", ""), "published": h.get("published", ""), "status": "neu"}
                 queue.append(h["url"])
             log(f"  Websuche: {searches} Suchen, {len(hits)} neue Seiten")
-            _error(did, "web", None)
+            if hits:
+                _error(did, "web", None)
         except anthropic.APIError as ex:
             _error(did, "web", f"Websuche fehlgeschlagen: {ex}")
 
