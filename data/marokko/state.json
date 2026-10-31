@@ -3203,7 +3203,140 @@
  "channels": {},
  "backfill_done": true,
  "web": {
-  "pages": {},
-  "last_search": ""
+  "pages": {
+   "https://www.franzek.com/marokko-route-reisekosten-sicherheit/": {
+    "title": "Marokko mit dem Camper 2026: Route, Kosten, Sicherheit",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 1
+   },
+   "https://trekking-marokko.de/campingfuhrer-marokko/": {
+    "title": "Campingführer Marokko: Aktuelle Camping- und Stellplätze 2025",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.2onthego.de/marokko-mit-dem-wohnmobil-bereisen/": {
+    "title": "Marokko mit dem Wohnmobil bereisen - 2ontheGo",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 2
+   },
+   "https://www.camperdays.de/ratgeber/reiseplanung/marokko-mit-dem-wohnmobil": {
+    "title": "Marokko mit dem Wohnmobil: So seid ihr optimal vorbereitet",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.christian-fiedler-wildlife.de/on-tour/reiseziele-roadtrips-in-marokko/": {
+    "title": "Marokko mit dem Wohnmobil - Reiseziele & Roadtrips",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.crosli.de/marokko/": {
+    "title": "Marokko mit dem Wohnmobil",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 2
+   },
+   "https://www.sprintour.de/marokko-reise/": {
+    "title": "Marokko Reise mit dem Wohnmobil - Erfahrungsbericht - Sprintour.de",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 3
+   },
+   "https://linasreisen.com/mit-dem-wohnmobil-nach-marokko/": {
+    "title": "Mit dem Wohnmobil nach Marokko - Linas Reisen",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://maroccampingcar.com/en/great-south-dakhla-by-camper-van-in-morocco-15-18-days/": {
+    "title": "Camper Van Trip in Morocco 2025: Casablanca",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://layla.ai/fr/itinerary/10-days-d%C3%A9part-de-marrakech-vers-dakhla-en-camping-car,-incluant-des-arr%C3%AAts-pour-d%C3%A9couvrir-des-oasis,-des-dunes,-des-villes-historiques-et-des-plages.": {
+    "title": "10 Jours De Marrakech À Dakhla En Camping-car: Itinéraire 2025 (Mise À Jour)",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.routard.com/forums/t/projet-jusqua-dakhla-en-camping-car/472001": {
+    "title": "Projet jusqu'à Dakhla en camping-car - Maroc - Forums Routard.comProjet jusqu'à Dakhla en camping-car - Forum Maroc - Forums Routard.com",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.myatlas.com/campingcar/maroc2024": {
+    "title": "Carnet de voyage - Izzie pour la 3ème fois au Maroc 2024 (campingcar)",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 1
+   },
+   "https://maroccampingcar.com/en/complete-tour-of-morocco-by-camper-van-and-4x4-camper-overland-off-road-25-30-days-of-total-adventure/": {
+    "title": "Voyage en Camping-Car au Maroc 2025 : Casablanca",
+    "published": "",
+    "status": "neu"
+   },
+   "https://ccvo70.com/explorer-le-maroc-en-camping-car-2025-conseils-pratiques-pour-un-voyage-inoubliable/": {
+    "title": "Explorer le Maroc en camping-car 2025 : conseils pratiques pour un voyage inoubliable",
+    "published": "",
+    "status": "neu"
+   },
+   "https://valisio.fr/blog/voyage-au-maroc-en-camping-car-guide-complet": {
+    "title": "Voyage au Maroc en Camping-Car : Guide Complet & Conseils",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.nkc.nl/reis/marokko-arabisch-avontuur-2025-001/": {
+    "title": "Marokko - Arabisch avontuur",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.nkc.nl/artikel/overwinteren-met-de-camper-in-marokko/": {
+    "title": "Overwinteren met de camper in Marokko - NKC",
+    "published": "",
+    "status": "neu"
+   },
+   "https://4x4nomads.com/2024-senegal-gambia-reisverslag/": {
+    "title": "2024 Senegal, Gambia reisverslag",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.nkc.nl/artikel/met-de-camper-naar-marokko/": {
+    "title": "Met de camper naar Marokko - NKC",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.mountainreporters.com/reizen/roadtrips/verslag-van-een-reis-met-de-camper-door-onbekend-marokko/": {
+    "title": "Verslag van een reis met de camper door (on)bekend Marokko - Mountainreporters",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.expeditionfareast.com/portfolio-item/camperreis-beleef-marokko-puur/": {
+    "title": "Camperreis Beleef Marokko Puur - Expedition Far East",
+    "published": "",
+    "status": "neu"
+   },
+   "https://free-on-wheels.reislogger.nl/westelijke-saharamauritanie.230840": {
+    "title": "Westelijke Sahara/Mauritanië 🇲🇷",
+    "published": "",
+    "status": "neu"
+   },
+   "https://wobbie-en-wim.jouwweb.nl/de-laatste-keer-marokko-voorjaar-2025": {
+    "title": "De laatste keer Marokko: voorjaar 2025",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.expeditionfareast.com/portfolio-item/camperreis-fascinerend-marokko/": {
+    "title": "Camperreis Fascinerend Marokko - Expedition Far East",
+    "published": "",
+    "status": "neu"
+   }
+  },
+  "last_search": "2026-10-31"
  }
 }

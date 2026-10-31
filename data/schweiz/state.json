@@ -4,7 +4,137 @@
  "channels": {},
  "backfill_done": true,
  "web": {
-  "pages": {},
-  "last_search": ""
+  "pages": {
+   "https://www.watson.ch/schweiz/reisen/333987074-uebernachten-im-wohnmobil-oder-camper-mehr-stellplaetze-in-der-schweiz": {
+    "title": "Übernachten im Wohnmobil oder Camper: Mehr Stellplätze in der Schweiz",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.srf.ch/news/schweiz/uebernachten-im-wohnmobil-schweizer-camping-stellplaetze-haben-sich-vervierfacht": {
+    "title": "Die Stellplätze für Camper haben sich vervierfacht - News - SRF",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://stellplatz.ch/dokumente/kurzversiond_2025.pdf": {
+    "title": "18. Ausgabe 2025 Stellplatzführer Schweiz",
+    "published": "",
+    "status": "leer"
+   },
+   "https://hummelnimarsch.de/mit-dem-wohnmobil-in-die-saechsische-schweiz/": {
+    "title": "Reisebericht: Mit dem Wohnmobil in die Sächsische Schweiz",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.tcs.ch/de/camping-reisen/camping-insider/ratgeber/sicheres-reisen/mit-dem-wohnmobil-unterwegs-durch-die-schweiz.php": {
+    "title": "Mit dem Wohnmobil unterwegs durch die Schweiz",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.campingwagner.de/blog/reisen/mit-dem-wohnmobil-in-die-schweiz/": {
+    "title": "Mit dem Wohnmobil in die Schweiz",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://camperstop.com/de/blog-de/kostenlose-wohnmobilstellplatze-schweiz": {
+    "title": "4x kostenlose Wohnmobilstellplätze in der Schweiz! - Camperstop.com",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 3
+   },
+   "https://www.mrandmrsheigl.com/schweiz-rundreise-urlaub-tipps/": {
+    "title": "Schweiz Roadtrip mit Camper: Die schönsten Routen, Orte & unsere Erfahrungen",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 5
+   },
+   "https://www.motorhomeland.com/de/blog/rundreise/schweiz-mit-dem-wohnmobil": {
+    "title": "Mit dem Wohnmobil & Camper durch die Schweiz",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 3
+   },
+   "https://www.reisevor9.de/themenwochen/schweiz2/camper-fuehlen-sich-im-tessin-wohl": {
+    "title": "Camper fühlen sich im Tessin wohl",
+    "published": "",
+    "status": "fehler"
+   },
+   "https://www.blick.ch/schweiz/tessin/der-groesste-campingplatz-der-schweiz-gibt-es-in-tessin/lf356s2": {
+    "title": "Der grösste Campingplatz der Schweiz gibt es in Tessin",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://meiers-on-tour.ch/tessin-und-innerschweiz.html": {
+    "title": "Wohnmobiltour Schweiz: Tessin und Innerschweiz, Reisebericht",
+    "published": "",
+    "status": "fehler"
+   },
+   "https://mycamper.com/de/magazin/schoenste-stellplaetze-im-tessin": {
+    "title": "Die 7 schönsten Stellplätze im Tessin",
+    "published": "",
+    "status": "neu"
+   },
+   "https://sofarawayfromberlin.de/campen-tessin-tipps": {
+    "title": "Campen im Tessin: 10 Tipps für deinen Roadtrip - So far",
+    "published": "",
+    "status": "neu"
+   },
+   "https://emagazin.camping.ch/campingplaetze_regionen/camping-roadtrip-tessin/": {
+    "title": "Unser Camping Roadtrip durch das Tessin - eMagazin",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.travel-sisi.com/camping-tessin-mit-kindern/": {
+    "title": "Camping Tessin mit Kindern: Der beste Familiencampingplatz im Vergleich - Reiseblog Travel Sisi",
+    "published": "",
+    "status": "neu"
+   },
+   "https://en.wikipedia.org/wiki/Switzerland_in_the_Eurovision_Song_Contest_2025": {
+    "title": "Switzerland in the Eurovision Song Contest 2025",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.goboony.de/blog/wohnmobil-schweiz": {
+    "title": "10 Insidertipps für Wohnmobilstellplätze in der Schweiz",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.promobil.de/stellplaetze/wohnmobil-stellplatztipps-graubuenden-schweiz/": {
+    "title": "Wohnmobil-Stellplätze in Graubünden",
+    "published": "",
+    "status": "neu"
+   },
+   "https://caravan-lifestyle.de/blog-freistehen-wohnmobil-schweiz.html": {
+    "title": "Wohnmobil freistehen Schweiz 2026",
+    "published": "",
+    "status": "neu"
+   },
+   "https://mycamper.ch/magazin/schoenste-stellplaetze-im-wallis": {
+    "title": "Die 8 schönsten Stellplätze im Wallis",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.womoblog.ch/Blog/Reisebericht/Bergdorf-Saas-Fee-im-Wohnmobil/512/": {
+    "title": "Saas Fee im Wallis mit dem Wohnmobil",
+    "published": "",
+    "status": "neu"
+   },
+   "https://womoblog.ch/index.php?bericht=&bis=1576256400&reiseberichtID=44&t=Unsere_Reisen&tt=Reiseberichte&vom=1575705600": {
+    "title": "Wallis",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.road-traveller.de/wohnmobil-camping-schweiz/": {
+    "title": "Mit dem Wohnmobil durch die Schweiz: Tipps und Campingplätze • Road Traveller",
+    "published": "",
+    "status": "neu"
+   }
+  },
+  "last_search": "2026-10-31"
  }
 }

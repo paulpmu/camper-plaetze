@@ -5481,5 +5481,950 @@
    8.6879351,
    "ch"
   ]
+ ],
+ "6|es,pt|santander, kantabrien": [
+  [
+   43.4618932,
+   -3.8100255,
+   "es"
+  ],
+  [
+   43.1595664,
+   -4.0878382,
+   "es"
+  ]
+ ],
+ "6|es,pt|reguengo grande, porto de mós, leiria": [
+  [
+   39.2870624,
+   -9.2160405,
+   "pt"
+  ],
+  [
+   39.2837447,
+   -9.2101967,
+   "pt"
+  ],
+  [
+   37.7187596,
+   -8.5974347,
+   "pt"
+  ]
+ ],
+ "6|es,pt|alcañices, zamora": [
+  [
+   41.697969,
+   -6.3656915,
+   "es"
+  ],
+  [
+   41.6996962,
+   -6.3471637,
+   "es"
+  ]
+ ],
+ "6|es,pt|peniche, leiria": [
+  [
+   39.3568749,
+   -9.3786838,
+   "pt"
+  ],
+  [
+   39.3620513,
+   -9.3876882,
+   "pt"
+  ]
+ ],
+ "6|es,pt|asa autocaravan service area, peniche": [],
+ "6|es,pt|costa nova, ílhavo, aveiro": [
+  [
+   40.6125817,
+   -8.7495432,
+   "pt"
+  ],
+  [
+   40.6179057,
+   -8.751094,
+   "pt"
+  ],
+  [
+   40.5995791,
+   -8.752022,
+   "pt"
+  ],
+  [
+   40.6126354,
+   -8.749809,
+   "pt"
+  ]
+ ],
+ "6|es,pt|camping costa nova, costa nova": [
+  [
+   40.5995791,
+   -8.752022,
+   "pt"
+  ]
+ ],
+ "6|es,pt|tossa de mar, girona": [
+  [
+   41.7197773,
+   2.9312155,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping cala llevadó, tossa de mar": [
+  [
+   41.7127318,
+   2.9069339,
+   "es"
+  ]
+ ],
+ "6|es,pt|vila nova de gaia, porto": [
+  [
+   41.1292264,
+   -8.6057396,
+   "pt"
+  ]
+ ],
+ "6|es,pt|orbitur canidelo, vila nova de gaia": [
+  [
+   41.1245804,
+   -8.6653495,
+   "pt"
+  ]
+ ],
+ "6|es,pt|morella, castellón": [
+  [
+   40.6188277,
+   -0.0998026,
+   "es"
+  ]
+ ],
+ "6|es,pt|pals, girona": [
+  [
+   41.9709891,
+   3.1460371,
+   "es"
+  ]
+ ],
+ "6|es,pt|playa de pals, pals": [
+  [
+   41.9928893,
+   3.2010567,
+   "es"
+  ]
+ ],
+ "6|es,pt|marbella, málaga": [
+  [
+   36.5074781,
+   -4.8047219,
+   "es"
+  ],
+  [
+   36.508976,
+   -4.88562,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping cabopino, marbella": [
+  [
+   36.4904309,
+   -4.7438396,
+   "es"
+  ],
+  [
+   36.4877441,
+   -4.7431462,
+   "es"
+  ]
+ ],
+ "6|es,pt|san javier, murcia": [
+  [
+   37.8059567,
+   -0.8345537,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping mar menor, san javier": [
+  [
+   37.7692191,
+   -0.8152768,
+   "es"
+  ],
+  [
+   37.7691782,
+   -0.813185,
+   "es"
+  ]
+ ],
+ "6|es,pt|pilar de la horadada, alicante": [
+  [
+   37.8994714,
+   -0.8257645,
+   "es"
+  ],
+  [
+   37.8675489,
+   -0.7925673,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping lo monte, pilar de la horadada": [
+  [
+   37.8788759,
+   -0.7676701,
+   "es"
+  ]
+ ],
+ "6|es,pt|monchique, faro": [
+  [
+   37.3179725,
+   -8.5558655,
+   "pt"
+  ],
+  [
+   37.3734813,
+   -8.5818551,
+   "pt"
+  ],
+  [
+   37.329007,
+   -8.5837983,
+   "pt"
+  ],
+  [
+   37.3616707,
+   -7.7374287,
+   "pt"
+  ]
+ ],
+ "6|es,pt|stellplatz valle de carasqueira, monchique": [],
+ "6|es,pt|evoramonte, évora": [
+  [
+   38.7654683,
+   -7.7162182,
+   "pt"
+  ],
+  [
+   38.7719,
+   -7.7158,
+   "pt"
+  ]
+ ],
+ "6|es,pt|area de camping alentejo, evoramonte": [],
+ "6|es,pt|monte gordo, faro": [
+  [
+   37.1824461,
+   -7.451945,
+   "pt"
+  ],
+  [
+   37.1900762,
+   -7.4483465,
+   "pt"
+  ],
+  [
+   37.1900411,
+   -7.4483282,
+   "pt"
+  ],
+  [
+   37.1766931,
+   -7.4427844,
+   "pt"
+  ]
+ ],
+ "6|es,pt|figueira bei salema, faro": [],
+ "6|es,pt|campingcar figueira, figueira bei salema": [],
+ "6|es,pt|motorhomepark peniche, peniche": [],
+ "6|es,pt|parque da galé, albufeira": [
+  [
+   38.2038551,
+   -8.7711905,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia de lavos, figueira da foz, coimbra": [
+  [
+   40.0923679,
+   -8.8760153,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia de lavos, praia de lavos": [
+  [
+   40.0923679,
+   -8.8760153,
+   "pt"
+  ]
+ ],
+ "6|es,pt|igrejinha, évora": [
+  [
+   38.7089069,
+   -7.8977181,
+   "pt"
+  ]
+ ],
+ "6|es,pt|albufeira do divor, igrejinha": [
+  [
+   38.6887255,
+   -7.9222137,
+   "pt"
+  ]
+ ],
+ "6|es,pt|la codosera, badajoz": [
+  [
+   39.2293753,
+   -7.1933584,
+   "es"
+  ],
+  [
+   39.2077505,
+   -7.1729037,
+   "es"
+  ]
+ ],
+ "6|es,pt|piscinas naturales de la codosera, la codosera": [
+  [
+   39.2387881,
+   -7.2035094,
+   "es"
+  ]
+ ],
+ "6|es,pt|la jonquera, girona": [
+  [
+   42.4340121,
+   2.8645567,
+   "es"
+  ],
+  [
+   42.4207991,
+   2.8728485,
+   "es"
+  ]
+ ],
+ "6|es,pt|santa maría, cádiz": [
+  [
+   36.5279393,
+   -6.2868833,
+   "es"
+  ],
+  [
+   36.5283782,
+   -6.291028,
+   "es"
+  ],
+  [
+   36.1294155,
+   -5.4458535,
+   "es"
+  ]
+ ],
+ "6|es,pt|torredembarra, tarragona": [
+  [
+   41.146155,
+   1.3959508,
+   "es"
+  ]
+ ],
+ "6|es,pt|guimarães, braga": [
+  [
+   41.4417677,
+   -8.2955712,
+   "pt"
+  ]
+ ],
+ "6|es,pt|cabril, leiria": [
+  [
+   40.0256658,
+   -8.2243801,
+   "pt"
+  ],
+  [
+   39.9175817,
+   -8.1323923,
+   "pt"
+  ],
+  [
+   39.917382,
+   -8.131379,
+   "pt"
+  ],
+  [
+   39.9728685,
+   -8.007098,
+   "pt"
+  ]
+ ],
+ "6|es,pt|barragem do cabril, cabril": [
+  [
+   41.6917375,
+   -8.0914042,
+   "pt"
+  ],
+  [
+   41.7489517,
+   -8.0776491,
+   "pt"
+  ],
+  [
+   41.7007107,
+   -8.0376716,
+   "pt"
+  ],
+  [
+   41.676234,
+   -8.1771869,
+   "pt"
+  ]
+ ],
+ "6|es,pt|óbidos, leiria": [
+  [
+   39.3619514,
+   -9.157153,
+   "pt"
+  ]
+ ],
+ "6|es,pt|aveiro, aveiro": [
+  [
+   40.640496,
+   -8.6537841,
+   "pt"
+  ]
+ ],
+ "6|es,pt|peralada, girona": [
+  [
+   42.3085047,
+   3.0089916,
+   "es"
+  ]
+ ],
+ "6|es,pt|area de camping car peralada, peralada": [],
+ "6|es,pt|santillana del mar, cantabria": [
+  [
+   43.3906511,
+   -4.108048,
+   "es"
+  ]
+ ],
+ "6|es,pt|caión, a coruña": [
+  [
+   43.3102423,
+   -8.6062581,
+   "es"
+  ],
+  [
+   43.6426434,
+   -7.7371134,
+   "es"
+  ],
+  [
+   43.3184858,
+   -8.605858,
+   "es"
+  ]
+ ],
+ "6|es,pt|faro, distrikt faro": [
+  [
+   37.0162944,
+   -7.935182,
+   "pt"
+  ],
+  [
+   37.2448086,
+   -8.1507562,
+   "pt"
+  ]
+ ],
+ "6|es,pt|parkplatz beim outlet la jonquera, la jonquera": [],
+ "6|es,pt|cadaqués, girona": [
+  [
+   42.2893484,
+   3.2752159,
+   "es"
+  ]
+ ],
+ "6|es,pt|parkplatz beim dalí-haus, cadaqués": [],
+ "6|es,pt|kostenfreier stellplatz am ortseingang pals, pals": [],
+ "6|es,pt|caravaca de la cruz, murcia": [
+  [
+   38.1046979,
+   -1.861118,
+   "es"
+  ]
+ ],
+ "6|es,pt|aledo, murcia": [
+  [
+   37.7954317,
+   -1.5731021,
+   "es"
+  ]
+ ],
+ "6|es,pt|estrecho de la arboleja, aledo": [
+  [
+   37.7828821,
+   -1.5968098,
+   "es"
+  ]
+ ],
+ "6|es,pt|cabra, córdoba": [
+  [
+   37.4718153,
+   -4.4335616,
+   "es"
+  ]
+ ],
+ "6|es,pt|córdoba, córdoba": [
+  [
+   37.8845813,
+   -4.7760138,
+   "es"
+  ]
+ ],
+ "6|es,pt|campo de criptana, ciudad real": [
+  [
+   39.4052539,
+   -3.1254826,
+   "es"
+  ]
+ ],
+ "6|es,pt|cerro de la paz, campo de criptana": [
+  [
+   39.4075728,
+   -3.124723,
+   "es"
+  ],
+  [
+   39.4081384,
+   -3.1240921,
+   "es"
+  ]
+ ],
+ "6|es,pt|aranjuez, madrid": [
+  [
+   40.0322289,
+   -3.6040097,
+   "es"
+  ]
+ ],
+ "6|es,pt|calatayud, zaragoza": [
+  [
+   41.3527628,
+   -1.6422977,
+   "es"
+  ]
+ ],
+ "6|es,pt|ateca, zaragoza": [
+  [
+   41.3308277,
+   -1.7928985,
+   "es"
+  ]
+ ],
+ "6|es,pt|zaragoza, zaragoza": [
+  [
+   41.6915847,
+   -0.9101268,
+   "es"
+  ],
+  [
+   41.6521342,
+   -0.8809428,
+   "es"
+  ],
+  [
+   41.700571,
+   -0.909086,
+   "es"
+  ]
+ ],
+ "6|es,pt|sallent de gállego, huesca": [
+  [
+   42.7750009,
+   -0.359075,
+   "es"
+  ],
+  [
+   42.77121,
+   -0.3340877,
+   "es"
+  ]
+ ],
+ "6|es,pt|ainsa, huesca": [
+  [
+   42.4171898,
+   0.1386444,
+   "es"
+  ],
+  [
+   42.3348021,
+   0.0564851,
+   "es"
+  ]
+ ],
+ "6|es,pt|sant jorge, spanien": [
+  [
+   40.5087496,
+   0.331352,
+   "es"
+  ],
+  [
+   38.8915542,
+   1.3966697,
+   "es"
+  ],
+  [
+   39.3183566,
+   2.9924466,
+   "es"
+  ],
+  [
+   42.3192005,
+   0.4690186,
+   "es"
+  ],
+  [
+   41.9977714,
+   -0.6465591,
+   "es"
+  ]
+ ],
+ "6|es,pt|spätzle fritz, sant jorge": [],
+ "6|es,pt|castellón de la plana, castellón": [
+  [
+   39.9860347,
+   -0.0377354,
+   "es"
+  ]
+ ],
+ "6|es,pt|la torre d'en doménec, castellón": [
+  [
+   40.2634555,
+   0.0703687,
+   "es"
+  ]
+ ],
+ "6|es,pt|la torre de la sal, castellón": [
+  [
+   40.1308276,
+   0.1631257,
+   "es"
+  ],
+  [
+   40.134417,
+   0.165365,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping bravoplaya, la torre de la sal": [
+  [
+   40.1286937,
+   0.1570557,
+   "es"
+  ],
+  [
+   40.1272484,
+   0.1601968,
+   "es"
+  ]
+ ],
+ "6|es,pt|peñíscola, castellón": [
+  [
+   40.3577844,
+   0.4073793,
+   "es"
+  ]
+ ],
+ "6|es,pt|camping eden, peñíscola": [
+  [
+   40.3710937,
+   0.4027476,
+   "es"
+  ]
+ ],
+ "6|es,pt|calafell, tarragona": [
+  [
+   41.2010618,
+   1.5686734,
+   "es"
+  ],
+  [
+   41.2105328,
+   1.5793757,
+   "es"
+  ]
+ ],
+ "6|es,pt|stellplatz am yachthafen, calafell": [],
+ "6|es,pt|besalú, girona": [
+  [
+   42.1986443,
+   2.6959559,
+   "es"
+  ]
+ ],
+ "6|es,pt|ferragudo, faro": [
+  [
+   37.1235893,
+   -8.5198921,
+   "pt"
+  ],
+  [
+   37.1387734,
+   -8.5190774,
+   "pt"
+  ],
+  [
+   37.138763,
+   -8.5190728,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia da marinha, lagoa": [
+  [
+   37.0897676,
+   -8.4127099,
+   "pt"
+  ]
+ ],
+ "6|es,pt|praia da marinha, praia da marinha": [
+  [
+   41.0290976,
+   -8.6461853,
+   "pt"
+  ]
+ ],
+ "6|es,pt|silves, faro": [
+  [
+   37.2639826,
+   -8.3487311,
+   "pt"
+  ],
+  [
+   37.2242361,
+   -8.4365819,
+   "pt"
+  ],
+  [
+   37.1894106,
+   -8.4395781,
+   "pt"
+  ]
+ ],
+ "6|es,pt|barragem do arade, silves": [
+  [
+   37.2392081,
+   -8.3753074,
+   "pt"
+  ]
+ ],
+ "6|es,pt|santa clara-a-velha, odemira, beja": [
+  [
+   37.5126218,
+   -8.4753579,
+   "pt"
+  ]
+ ],
+ "6|es,pt|santa clara stausee, santa clara-a-velha": [],
+ "6|es,pt|zambujeira do mar, odemira": [
+  [
+   37.525648,
+   -8.7848108,
+   "pt"
+  ],
+  [
+   37.5408585,
+   -8.7678566,
+   "pt"
+  ]
+ ],
+ "6|es,pt|serpa, beja": [
+  [
+   37.9436517,
+   -7.5966902,
+   "pt"
+  ],
+  [
+   37.8789544,
+   -7.5688665,
+   "pt"
+  ]
+ ],
+ "6|ma,eh|erfoud, errachidia": [
+  [
+   31.4349921,
+   -4.2328293,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|boujdour, westsahara": [
+  [
+   26.1263378,
+   -14.4836537,
+   "ma"
+  ],
+  [
+   25.5312046,
+   -13.3532844,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|asilah, tanger-tétouan-al hoceima": [
+  [
+   35.4555716,
+   -5.9216889,
+   "ma"
+  ],
+  [
+   35.4617881,
+   -6.0376607,
+   "ma"
+  ]
+ ],
+ "6|ch|basel, basel-stadt": [
+  [
+   47.5581077,
+   7.5878261,
+   "ch"
+  ]
+ ],
+ "6|ch|hérémence, wallis": [
+  [
+   46.1807413,
+   7.4057866,
+   "ch"
+  ]
+ ],
+ "6|ch|val des hérémence, hérémence": [],
+ "6|ch|saillon, wallis": [
+  [
+   46.1715641,
+   7.1849043,
+   "ch"
+  ]
+ ],
+ "6|ch|bains de saillon, saillon": [
+  [
+   46.1738438,
+   7.1940307,
+   "ch"
+  ],
+  [
+   46.173487,
+   7.1956062,
+   "ch"
+  ]
+ ],
+ "6|ch|lungern, obwalden": [
+  [
+   46.7857297,
+   8.1607283,
+   "ch"
+  ]
+ ],
+ "6|ch|bauernhof mülibachersträssli, lungern": [],
+ "6|ch|grindelwald, bern": [
+  [
+   46.6242733,
+   8.0367462,
+   "ch"
+  ]
+ ],
+ "6|ch|gletscherdorf, grindelwald": [
+  [
+   46.6207687,
+   8.0442532,
+   "ch"
+  ],
+  [
+   46.6211348,
+   8.0450214,
+   "ch"
+  ]
+ ],
+ "6|ch|thunersee, bern": [
+  [
+   46.7055892,
+   7.691442,
+   "ch"
+  ],
+  [
+   46.7002897,
+   7.6986393,
+   "ch"
+  ]
+ ],
+ "6|ch|täsch, wallis": [
+  [
+   46.0676751,
+   7.7770173,
+   "ch"
+  ]
+ ],
+ "6|ch|camping alphubel, täsch": [
+  [
+   46.0646213,
+   7.7747834,
+   "ch"
+  ]
+ ],
+ "6|ch|tenero, tessin": [
+  [
+   46.179397,
+   8.8504309,
+   "ch"
+  ]
+ ],
+ "6|ch|lido mappo, tenero": [
+  [
+   46.1759526,
+   8.8436273,
+   "ch"
+  ],
+  [
+   46.1766739,
+   8.8422457,
+   "ch"
+  ]
+ ],
+ "6|ch|lauterbrunnen, bern": [
+  [
+   46.5939043,
+   7.9078016,
+   "ch"
+  ]
+ ],
+ "6|ch|camping jungfrau, lauterbrunnen": [
+  [
+   46.587866,
+   7.9100345,
+   "ch"
+  ]
+ ],
+ "6|ch|brunnen, schwyz": [
+  [
+   46.9940439,
+   8.6054085,
+   "ch"
+  ],
+  [
+   46.9993192,
+   8.6100923,
+   "ch"
+  ]
+ ],
+ "6|ch|stellplatz brunnen, brunnen": [],
+ "6|ch|pontresina, graubünden": [
+  [
+   46.489993,
+   9.9042965,
+   "ch"
+  ]
+ ],
+ "6|ch|camping morteratsch, pontresina": [
+  [
+   46.4609452,
+   9.9344513,
+   "ch"
+  ]
  ]
 }

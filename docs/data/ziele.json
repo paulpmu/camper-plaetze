@@ -47,45 +47,47 @@
     "opendata": false
    },
    "counts": {
-    "youtube": 143,
-    "web": 0,
+    "youtube": 178,
+    "web": 36,
     "osm_stellplatz": 1922,
     "osm_camping": 2009,
     "osm_entsorgung": 0,
     "opendata": 0,
-    "total": 4041,
-    "confirmed": 33
+    "total": 4088,
+    "confirmed": 57
    },
    "youtube_ready": true,
    "errors": {},
    "opendata": [],
-   "spots": 4041,
-   "last_run": "2026-10-31T14:55:53Z",
-   "queue": 389,
-   "videos_total": 160,
+   "spots": 4088,
+   "last_run": "2026-10-31T15:22:43Z",
+   "queue": 349,
+   "videos_total": 200,
    "last": {
-    "date": "2026-10-31T14:55:53Z",
+    "date": "2026-10-31T15:22:43Z",
     "videos": 40,
-    "spots_new": 43,
+    "spots_new": 37,
     "web": {
-     "pages": 0,
-     "spots_new": 0,
+     "pages": 11,
+     "spots_new": 36,
      "searches": 8,
-     "usd": 0.14400000000000002
+     "usd": 0.1731,
+     "tokens_in": 156735,
+     "tokens_out": 30485
     },
     "transcripts": {
-     "ok": 38,
+     "ok": 40,
      "keins": 0,
      "blockiert": 0,
-     "fehler": 2
+     "fehler": 0
     },
-    "youtube_units": 1042,
+    "youtube_units": 1040,
     "claude_tokens": [
-     440410,
-     58208
+     684188,
+     85866
     ],
     "model": "claude-haiku-5-5",
-    "cost_usd": 0.2171
+    "cost_usd": 0.2535
    }
   },
   {
@@ -135,30 +137,32 @@
    },
    "counts": {
     "youtube": 203,
-    "web": 0,
+    "web": 9,
     "osm_stellplatz": 139,
     "osm_camping": 536,
     "osm_entsorgung": 0,
     "opendata": 0,
-    "total": 844,
-    "confirmed": 34
+    "total": 850,
+    "confirmed": 37
    },
    "youtube_ready": true,
    "errors": {},
    "opendata": [],
-   "spots": 844,
-   "last_run": "2026-10-31T14:57:13Z",
+   "spots": 850,
+   "last_run": "2026-10-31T15:25:32Z",
    "queue": 0,
    "videos_total": 272,
    "last": {
-    "date": "2026-10-31T14:57:13Z",
+    "date": "2026-10-31T15:25:32Z",
     "videos": 0,
     "spots_new": 0,
     "web": {
-     "pages": 0,
-     "spots_new": 0,
+     "pages": 12,
+     "spots_new": 9,
      "searches": 8,
-     "usd": 0.1274
+     "usd": 0.1693,
+     "tokens_in": 207263,
+     "tokens_out": 9094
     },
     "transcripts": {
      "ok": 0,
@@ -168,11 +172,11 @@
     },
     "youtube_units": 1300,
     "claude_tokens": [
-     0,
-     0
+     207263,
+     9094
     ],
     "model": "claude-haiku-5-5",
-    "cost_usd": 0.1274
+    "cost_usd": 0.1693
    }
   },
   {
@@ -209,34 +213,36 @@
     "osm_camping": true,
     "osm_entsorgung": true,
     "web": true,
-    "opendata": false
+    "opendata": true
    },
    "counts": {
     "youtube": 0,
-    "web": 0,
-    "osm_stellplatz": 272,
-    "osm_camping": 535,
-    "osm_entsorgung": 135,
+    "web": 11,
+    "osm_stellplatz": 286,
+    "osm_camping": 532,
+    "osm_entsorgung": 139,
     "opendata": 0,
-    "total": 942,
-    "confirmed": 0
+    "total": 960,
+    "confirmed": 8
    },
    "youtube_ready": false,
    "errors": {},
    "opendata": [],
-   "spots": 942,
-   "last_run": "2026-10-31T15:03:07Z",
+   "spots": 960,
+   "last_run": "2026-10-31T15:28:57Z",
    "queue": 0,
    "videos_total": 0,
    "last": {
-    "date": "2026-10-31T15:03:07Z",
+    "date": "2026-10-31T15:28:57Z",
     "videos": 0,
     "spots_new": 0,
     "web": {
-     "pages": 0,
-     "spots_new": 0,
+     "pages": 9,
+     "spots_new": 11,
      "searches": 8,
-     "usd": 0.14450000000000002
+     "usd": 0.17809999999999998,
+     "tokens_in": 117297,
+     "tokens_out": 8968
     },
     "transcripts": {
      "ok": 0,
@@ -246,11 +252,11 @@
     },
     "youtube_units": 0,
     "claude_tokens": [
-     0,
-     0
+     117297,
+     8968
     ],
     "model": "claude-haiku-5-5",
-    "cost_usd": 0.1445
+    "cost_usd": 0.1781
    }
   }
  ],
