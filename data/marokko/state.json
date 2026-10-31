@@ -3201,5 +3201,9 @@
  },
  "queue": {},
  "channels": {},
- "backfill_done": true
+ "backfill_done": true,
+ "web": {
+  "pages": {},
+  "last_search": "2026-10-31"
+ }
 }
