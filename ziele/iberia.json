@@ -4,6 +4,14 @@
  "active": true,
  "schedule": "woechentlich",
  "weekday": 1,
+ "sources": {
+  "youtube": true,
+  "osm_stellplatz": true,
+  "osm_camping": true,
+  "osm_entsorgung": false,
+  "web": true,
+  "opendata": false
+ },
  "countrycodes": [
   "es",
   "pt"
@@ -146,5 +154,6 @@
    ]
   }
  ],
- "notes": "In Portugal ist das Übernachten mit Wohnmobilen ausserhalb erlaubter Plätze seit 2021 gesetzlich eingeschränkt, in Spanien regeln es Gemeinden unterschiedlich. Notiere Hinweise auf Verbote, Bussen oder Kontrollen im Sicherheitstext."
+ "notes": "In Portugal ist das Übernachten mit Wohnmobilen ausserhalb erlaubter Plätze seit 2021 gesetzlich eingeschränkt, in Spanien regeln es Gemeinden unterschiedlich. Notiere Hinweise auf Verbote, Bussen oder Kontrollen im Sicherheitstext.",
+ "opendata": []
 }

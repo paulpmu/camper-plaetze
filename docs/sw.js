@@ -1,5 +1,5 @@
 // Offline-Unterstützung: App-Hülle aus dem Cache, Platzdaten zuerst frisch aus dem Netz.
-const CACHE = "cp-v7";
+const CACHE = "cp-v8";
 const SHELL = [
   "./", "index.html", "style.css", "app.js", "manifest.webmanifest", "icon-180.png",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",

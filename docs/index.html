@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Camper-Plätze</title>
-<meta name="description" content="Übernachtungsplätze für Camper aus aktuellen Overlander-Videos">
+<meta name="description" content="Übernachtungsplätze für Camper aus Overlander-Videos, Reiseberichten und offenen Verzeichnissen">
 <meta name="theme-color" content="#b5532e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -33,6 +33,7 @@
   </div>
 </header>
 
+<button id="btn-add" class="fab fab2" aria-label="Eigenen Platz erfassen"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
 <button id="btn-locate" class="fab" aria-label="Mein Standort"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></button>
 
 <div id="backdrop" hidden></div>
@@ -53,14 +54,57 @@
   <h4>Letzte Anfragen</h4>
   <ul id="req-list" class="req-list"><li class="muted">lädt …</li></ul>
 
-  <h4>GitHub-Schlüssel auf diesem Gerät</h4>
+  <h4>GitHub-Schlüssel und privates Repository</h4>
   <p id="gh-status" class="muted">Kein Schlüssel hinterlegt. Mit Schlüssel können Sie Ziele direkt starten, Zeitpläne ändern und Anfragen ohne Umweg senden.</p>
   <input id="gh-token" type="password" placeholder="github_pat_…" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <label class="field">Privates Repository für eigene Plätze, Favoriten und Logbuch
+    <input id="gh-private" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="paulpmu/camper-plaetze-privat"></label>
   <div class="row">
     <button id="gh-remove" class="btn ghost">Entfernen</button>
     <button id="gh-save" class="btn">Speichern &amp; prüfen</button>
   </div>
-  <p class="muted">Schlüssel erstellen: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained token</a>, nur für dieses Repository, Rechte: Actions, Contents und Issues jeweils «Read and write». Der Schlüssel bleibt nur auf diesem Gerät gespeichert.</p>
+  <p class="muted">Schlüssel erstellen: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained token</a>, Repositorys <b>camper-plaetze</b> und <b>camper-plaetze-privat</b>, Rechte: Actions, Contents und Issues jeweils «Read and write». Privates Repository anlegen: <a id="gh-private-new" href="https://github.com/new?name=camper-plaetze-privat&amp;visibility=private" target="_blank" rel="noopener">GitHub → neues Repository (Private)</a>. Der Schlüssel bleibt nur auf diesem Gerät gespeichert.</p>
+</section>
+
+<!-- Quellen eines Ziels -->
+<section id="sheet-sources" class="sheet tall" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2 id="src-title">Quellen</h2>
+  <p class="muted">Wählen Sie, woher die Plätze für dieses Ziel kommen. Alle Kombinationen sind möglich. Plätze, die in mehreren Quellen vorkommen, werden zusammengeführt und als «bestätigt» markiert.</p>
+  <div id="src-list"></div>
+  <h4>Link-Knöpfe pro Platz</h4>
+  <p class="muted">Öffnen andere Plattformen an der Stelle des Platzes. Platzhalter: {lat}, {lng}, {name}, {ort}.</p>
+  <ul id="src-links" class="plain"></ul>
+  <div id="src-add-box">
+    <input id="src-link-name" type="text" placeholder="Name, z. B. Campercontact" autocomplete="off">
+    <input id="src-link-url" type="url" placeholder="https://www.google.com/search?q=site%3Acampercontact.com+{ort}" autocomplete="off" autocapitalize="off">
+    <button id="src-add" class="btn ghost">Link hinzufügen</button>
+  </div>
+  <label class="toggle"><input type="checkbox" id="src-run" checked> Nach dem Speichern sofort abrufen</label>
+  <button id="src-save" class="btn wide">Speichern</button>
+  <p id="src-hint" class="muted" hidden>Zum Ändern GitHub-Schlüssel hinterlegen (Ziel wählen → ganz unten).</p>
+</section>
+
+<!-- Eigener Platz -->
+<section id="sheet-own" class="sheet tall" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2 id="own-title">Eigenen Platz erfassen</h2>
+  <label class="field">Name<input id="own-name" type="text" placeholder="z. B. Strandplatz bei Mirleft" autocomplete="off"></label>
+  <div class="field">Position
+    <div id="own-pos" class="pos"></div>
+    <div class="row"><button id="own-here" class="btn ghost">Mein Standort</button><button id="own-center" class="btn ghost">Kartenmitte</button></div>
+  </div>
+  <label class="field">Typ
+    <select id="own-type"><option value="stellplatz">Stellplatz</option><option value="wildplatz">Wildplatz</option><option value="camping">Camping</option><option value="entsorgung">Entsorgung</option><option value="andere">Andere</option></select></label>
+  <label class="field">Bewertung
+    <select id="own-rating"><option value="">–</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select></label>
+  <label class="field">Notiz<textarea id="own-note" rows="3" placeholder="Zufahrt, Preis, Ausstattung, Eindruck …"></textarea></label>
+  <label class="field">Link (optional)<input id="own-link" type="url" placeholder="https://…" autocomplete="off" autocapitalize="off"></label>
+  <label class="toggle"><input type="checkbox" id="own-visited" checked> Hier übernachtet (ins Logbuch)</label>
+  <button id="own-save" class="btn wide">Speichern</button>
+  <p class="muted">Wird im privaten Repository gespeichert und ist nur für Sie sichtbar.</p>
 </section>
 
 <!-- Detail -->
@@ -74,8 +118,21 @@
 <section id="sheet-list" class="sheet tall" hidden>
   <div class="grab"></div>
   <button class="close" data-close aria-label="Schliessen">✕</button>
+  <div class="seg tabs" id="list-mode">
+    <button data-mode="alle" class="on">Alle</button><button data-mode="favoriten">Favoriten</button><button data-mode="logbuch">Logbuch</button>
+  </div>
   <h2>Plätze <small id="list-sort"></small></h2>
-  <input id="search" type="search" placeholder="Suchen: Ort, Name, Kanal …" autocomplete="off">
+  <input id="search" type="search" placeholder="Suchen: Ort, Name, Kanal, Website …" autocomplete="off">
+  <div id="etappen" class="etappen" hidden>
+    <h4>Etappen planen</h4>
+    <div class="row">
+      <label class="field">min. km<input id="et-min" type="number" inputmode="numeric" value="150" min="20" step="10"></label>
+      <label class="field">max. km<input id="et-max" type="number" inputmode="numeric" value="250" min="30" step="10"></label>
+      <label class="field">ab<select id="et-start"><option value="start">Routenstart</option><option value="standort">Mein Standort</option></select></label>
+    </div>
+    <button id="et-plan" class="btn wide">Etappen vorschlagen</button>
+    <div id="et-result"></div>
+  </div>
   <ul id="list"></ul>
 </section>
 
@@ -101,9 +158,12 @@
   </label>
 
   <div class="field">Quelle
-    <div class="chips" id="f-source">
-      <button data-v="youtube" class="chip on">YouTube-Videos</button>
-      <button data-v="osm" class="chip on">Stellplätze OpenStreetMap</button>
+    <div class="chips" id="f-source"></div>
+  </div>
+
+  <div class="field">Verlässlichkeit
+    <div class="seg" id="f-conf">
+      <button data-v="" class="on">Alle</button><button data-v="mittel">mittel+</button><button data-v="hoch">hoch</button>
     </div>
   </div>
 
@@ -112,6 +172,7 @@
       <button data-v="wildplatz" class="chip on">Wildplatz</button>
       <button data-v="camping" class="chip on">Camping</button>
       <button data-v="stellplatz" class="chip on">Stellplatz</button>
+      <button data-v="entsorgung" class="chip on">Entsorgung</button>
       <button data-v="andere" class="chip on">Andere</button>
     </div>
   </div>
@@ -122,7 +183,7 @@
     </div>
   </div>
 
-  <div class="field">Video nicht älter als
+  <div class="field">Videos/Berichte nicht älter als
     <div class="seg" id="f-age">
       <button data-v="90">3 Mt.</button><button data-v="180">6 Mt.</button><button data-v="365" class="on">12 Mt.</button><button data-v="0">Alle</button>
     </div>
@@ -140,6 +201,7 @@
   <label class="toggle"><input type="checkbox" id="f-no4wd"> Ohne Allrad erreichbar</label>
   <label class="toggle"><input type="checkbox" id="f-exact"> Nur genaue Koordinaten</label>
   <label class="toggle"><input type="checkbox" id="f-safe"> Nur ohne Sicherheitsbedenken</label>
+  <label class="toggle"><input type="checkbox" id="f-fav"> Nur meine Favoriten</label>
 
   <div class="row">
     <button id="f-reset" class="btn ghost">Zurücksetzen</button>
@@ -157,15 +219,18 @@
 
   <div class="tab" data-tab="info">
     <h2>Über diese Karte</h2>
-    <p>Die Plätze stammen aus aktuellen YouTube-Reisevideos von Camper-Overlandern. Sie werden täglich automatisch aktualisiert. Oben links wechseln Sie das Ziel oder fügen ein neues hinzu.</p>
-    <p><strong>Wichtig:</strong> Die Bewertungen geben die subjektiven Aussagen der YouTuber wieder und sind keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie deshalb auf das Videodatum.</p>
+    <p>Die Plätze stammen je nach Ziel aus YouTube-Videos von Overlandern, Reiseberichten in Blogs und Foren, OpenStreetMap, offenen Datensätzen und Ihren eigenen Einträgen. Welche Quellen aktiv sind, wählen Sie pro Ziel: Zielname antippen → Quellen.</p>
+    <p><strong>Wichtig:</strong> Bewertungen aus Videos und Berichten sind subjektive Aussagen, keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie auf das Datum.</p>
+    <p><strong>Bestätigt</strong> heisst: Der Platz kommt in mehreren Quellen vor. Die <strong>Verlässlichkeit</strong> (0–100) berücksichtigt Standortgenauigkeit, Anzahl Quellen und Erwähnungen sowie Aktualität.</p>
     <p>«Ungefährer Standort» bedeutet, dass nur der Ort bekannt ist. Der Platz kann einige Kilometer entfernt liegen.</p>
     <div class="legend">
       <span><i class="lg wildplatz"></i>Wildplatz</span>
       <span><i class="lg camping"></i>Camping</span>
       <span><i class="lg stellplatz"></i>Stellplatz</span>
       <span><i class="lg andere"></i>Andere</span>
-      <span><i class="lg osm"></i>Stellplatz aus OpenStreetMap («P»)</span>
+      <span><i class="lg osm"></i>Verzeichnis: P Stellplatz · C Camping · E Entsorgung</span>
+      <span><i class="lg own"></i>Eigener Platz (♦)</span>
+      <span>Goldener Rand: bestätigt · ★ Favorit · ✓ besucht</span>
     </div>
     <p id="meta" class="muted"></p>
     <p class="muted">Kartendaten und Stellplätze © OpenStreetMap-Mitwirkende (ODbL) · Routen © OSRM</p>
@@ -191,6 +256,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="github.js"></script>
+<script src="privat.js"></script>
 <script src="app.js"></script>
 <script src="betrieb.js"></script>
 </body>

@@ -25,7 +25,8 @@ In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den
 |---|---|---|---|
 | **GitHub** | Code und Daten, nächtlicher Abruf (Actions), Webapp (Pages), Anfragen (Issues) | `paulpmu` | https://github.com/paulpmu/camper-plaetze |
 | **Google Cloud** | YouTube Data API: Videos suchen, Beschreibungen und Kommentare lesen | Ihr Google-Konto, Projekt `camper-plaetze` | https://console.cloud.google.com |
-| **Anthropic** | Claude liest die Videos aus und bearbeitet Anfragen aus der App | paul_p_mueller@bluewin.ch | https://console.anthropic.com |
+| **Anthropic** | Claude liest Videos und Reiseberichte aus, sucht Reiseberichte im Web und bearbeitet Anfragen aus der App | paul_p_mueller@bluewin.ch | https://console.anthropic.com |
+| **GitHub, privat** | Ihre eigenen Plätze, Favoriten, Notizen und Ihr Logbuch | `paulpmu` | https://github.com/paulpmu/camper-plaetze-privat |
 | **Webshare** | Rotating-Residential-Proxy, damit YouTube die Transkripte herausgibt | paul_p_mueller@bluewin.ch | https://dashboard.webshare.io |
 | OpenStreetMap Nominatim | wandelt Ortsnamen in Koordinaten um | kein Konto, gratis | – |
 | OSRM | Strassenverlauf der Routen | kein Konto, gratis | – |
@@ -95,9 +96,10 @@ Mit einem persönlichen GitHub-Schlüssel auf dem iPhone oder iPad steuern Sie a
 1. https://github.com/settings/personal-access-tokens/new öffnen.
 2. **Token name:** `camper-plaetze iPhone`. **Expiration:** zum Beispiel 1 Jahr.
 3. **Repository access:** **Only select repositories** → `camper-plaetze`.
-4. **Permissions → Repository permissions:** **Actions**, **Contents** und **Issues** je auf **Read and write**. **Metadata** setzt GitHub automatisch auf «Read».
-5. **Generate token**, dann den Schlüssel (`github_pat_…`) kopieren.
-6. In der App: Zielname antippen, ganz nach unten scrollen, Schlüssel einfügen, **Speichern & prüfen**. Es erscheint «Verbunden als paulpmu».
+4. Zusätzlich `camper-plaetze-privat` auswählen, falls Sie eigene Plätze nutzen (siehe 2.8).
+5. **Permissions → Repository permissions:** **Actions**, **Contents** und **Issues** je auf **Read and write**. **Metadata** setzt GitHub automatisch auf «Read».
+6. **Generate token**, dann den Schlüssel (`github_pat_…`) kopieren.
+7. In der App: Zielname antippen, ganz nach unten scrollen, Schlüssel einfügen, **Speichern & prüfen**. Es erscheint «Verbunden als paulpmu».
 
 Der Schlüssel bleibt nur auf diesem Gerät, im Speicher von Safari. Wer das entsperrte Gerät hat, kann damit das Repository verändern, aber nichts anderes. Läuft er ab oder geht das Gerät verloren, löschen Sie ihn unter https://github.com/settings/personal-access-tokens und erstellen einen neuen.
 
@@ -124,15 +126,43 @@ Jeder Platz hat eine von vier Genauigkeitsstufen:
 | **ungefähr** | nur der Ort ist bekannt, der Marker steht in der Ortsmitte | Marker gestrichelt |
 | **nur Region** | nur eine Gegend ist bekannt | nicht auf der Karte, nur in der Liste |
 
-### 2.7 Stellplätze aus OpenStreetMap und Zusatz-Links
+### 2.7 Quellen pro Ziel
 
-Ein Ziel kann neben den YouTube-Plätzen auch die offiziellen **Wohnmobil-Stellplätze aus OpenStreetMap** zeigen. Gemeint sind Einträge mit `tourism=caravan_site`, frei nutzbar unter der ODbL-Lizenz. Sie erscheinen als türkisfarbene «P»-Marker mit Gebühr, Ver- und Entsorgung, Strom, Plätzen, Öffnungszeiten und Website, soweit erfasst. Aktualisiert werden sie mit jedem Lauf des Ziels.
+Jedes Ziel wählt seine Quellen selbst, alle Kombinationen sind möglich. In der App: Zielname antippen → **Quellen**.
 
-- **Einschalten:** in der Zieldatei unter `osm_areas` die Gebiete eintragen (ISO-Code, z. B. `CH-BE` oder `NO`) und je einer Region zuordnen. Einfacher per Anfrage in der App, etwa «Bei Norwegen Stellplätze aus OpenStreetMap ergänzen».
-- **Zusatz-Links:** Unter `links` lassen sich pro Ziel Knöpfe hinterlegen, die bei jedem Platz erscheinen. Bei der Schweiz ist das **Wohnmobilland**, die Liste des Vereins Wohnmobilland Schweiz. Sie öffnet sich als Seite, die Daten werden nicht übernommen.
-- **Filter:** Unter **Filter → Quelle** blenden Sie YouTube-Plätze oder OpenStreetMap-Stellplätze ein und aus.
+| Quelle | Was | Kosten | Aktualisiert |
+|---|---|---|---|
+| **YouTube-Videos** | Overlander-Videos, ausgewertet von Claude Haiku. Braucht Suchbegriffe, die Sie per Anfrage ergänzen. | ca. 1–4 USD/Monat | gemäss Zeitplan |
+| **OSM Stellplätze** | `tourism=caravan_site` aus OpenStreetMap | gratis | bei jedem Lauf |
+| **OSM Campingplätze** | `tourism=camp_site`, ohne reine Zeltplätze | gratis | bei jedem Lauf |
+| **OSM Entsorgung** | `amenity=sanitary_dump_station` | gratis | bei jedem Lauf |
+| **Reiseberichte** | Claude Sonnet sucht einmal pro Woche aktuelle Blogs und Forenbeiträge. Claude Haiku liest bis zu 12 Seiten pro Lauf aus. Seiten, die das per robots.txt verbieten, sowie Plattformen wie park4night werden ausgelassen. | ca. 0.50–1 USD/Monat pro Ziel | wöchentliche Suche |
+| **Offene Datensätze** | amtliche oder freie Listen als CSV, GeoJSON oder JSON mit offener Lizenz. Ergänzen per Anfrage mit Download-Adresse, z. B. «Bei Spanien den Datensatz https://… (CC BY) ergänzen». | gratis | bei jedem Lauf |
+| **Eigene Plätze** | von Ihnen erfasst, siehe 2.8 | gratis | sofort |
 
-Das Ziel **Schweiz** nutzt nur OpenStreetMap und den Wohnmobilland-Link, ohne YouTube-Suche. Wildcampen ist in der Schweiz meist verboten. YouTube-Suchbegriffe lassen sich jederzeit per Anfrage ergänzen.
+**Zusammenführen und Bestätigung:** Nach jedem Lauf werden alle aktiven Quellen zu einer Liste zusammengeführt (`docs/data/<ziel>/places.json`):
+- Derselbe Platz aus Video und Blog wird ein Eintrag.
+- Passt ein Bericht namentlich zu einem OpenStreetMap-Eintrag oder Datensatz in der Nähe, übernimmt er dessen **genaue Koordinaten** und gilt als **bestätigt**. Auf der Karte hat er einen goldenen Rand.
+- Die **Verlässlichkeit** von 0 bis 100 setzt sich zusammen aus Standortgenauigkeit (bis 40 Punkte), weiteren Quellen (je 20, höchstens 40), mehreren Erwähnungen (je 5, höchstens 15) und Aktualität (bis 15). Ab 70 Punkten gilt sie als «hoch», ab 45 als «mittel». **Filter → Verlässlichkeit** blendet unsichere Plätze aus.
+
+**Link-Knöpfe:** park4night und camping.info erscheinen bei allen Zielen. camping.info wird über eine Google-Suche nach dem Ort auf camping.info geöffnet, weil es keine direkte Adresse für eine Kartenposition gibt. Weitere Knöpfe, etwa Wohnmobilland oder Campercontact, fügen Sie pro Ziel unter **Quellen** hinzu. Platzhalter in der Adresse: `{lat}`, `{lng}`, `{name}`, `{ort}`. Plattformen ohne offene Schnittstelle werden bewusst nur verlinkt, nicht ausgelesen.
+
+### 2.8 Eigene Plätze, Favoriten und Logbuch
+
+Diese Daten liegen im **privaten Repository** `camper-plaetze-privat` und sind nur für Sie sichtbar. Die Dateien heissen `eigene.json` und `merkliste.json`. Die App liest und schreibt sie mit Ihrem GitHub-Schlüssel. iPhone und iPad zeigen deshalb denselben Stand. Offline zeigt die App den zuletzt geladenen Stand.
+
+- **Eigener Platz:** der runde «+»-Knopf über dem Standort-Knopf. Position aus Ihrem Standort oder der Kartenmitte, dazu Name, Typ, Bewertung, Notiz und Link. Auf der Karte erscheint ein pinkfarbener ♦-Marker.
+- **Pro Platz:** **☆ Favorit**, **Besucht?** (trägt das heutige Datum ein), **Meine Notiz** und **Meine Bewertung**. Auf der Karte zeigen ein gelber Stern den Favoriten und ein grüner Haken den Besuch.
+- **Liste:** Unter den Reitern **Favoriten** und **Logbuch** stehen die besuchten Plätze, die neuesten zuerst, mit Notiz. **Filter → Nur meine Favoriten**.
+
+**Einrichtung** (einmalig):
+1. Privates Repository anlegen: https://github.com/new?name=camper-plaetze-privat&visibility=private, Sichtbarkeit **Private**, dann **Create repository**.
+2. Den GitHub-Schlüssel um dieses Repository erweitern: https://github.com/settings/personal-access-tokens → Ihr Schlüssel → **Repository access** → `camper-plaetze-privat` hinzufügen → **Update**. Die Rechte bleiben gleich.
+3. In der App: Zielname antippen → ganz unten **Speichern & prüfen**. Es erscheint «Privates Repository … bereit».
+
+### 2.9 Etappenplaner
+
+Ist unter **Filter** eine Route gewählt, zeigt die **Liste** oben den Bereich **Etappen planen**. Sie wählen die minimale und maximale Tagesetappe (Standard 150–250 km) und den Start (Routenstart oder Ihr Standort). Der Planer schlägt pro Etappe einen Platz vor. Favoriten haben Vorrang, sonst gewinnt die höchste Verlässlichkeit. Er berücksichtigt die aktiven Filter, etwa «ohne Allrad» oder «nur Camping». Gibt es im gewünschten Abstand nichts, wählt er etwas längere, notfalls kürzere Etappen.
 
 **park4night:** park4night bietet keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen den Knopf **park4night**. Er öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung, immer mit dem aktuellen Stand.
 
@@ -147,8 +177,10 @@ Das Ziel **Schweiz** nutzt nur OpenStreetMap und den Wohnmobilland-Link, ohne Yo
 | OpenStreetMap, OSRM | **0** | |
 | Webshare Rotating Residential | **3.50 USD pro Monat** | 1 GB Datenvolumen, monatliches Abo |
 | Claude Haiku (Videoauswertung) | **ca. 1–4 USD pro Monat** | gemessen: 0.03 USD für 40 Videos ohne Transkript. Mit Transkript geschätzt 0.002–0.005 USD pro Video |
+| Reiseberichte (Websuche mit Claude Sonnet, Auswertung mit Haiku) | ca. 0.50–1 USD pro Monat und Ziel | nur bei aktiver Quelle; pro wöchentlicher Suche bis 8 Websuchen à 0.01 USD |
 | Claude Opus (Anfragen aus der App) | ca. 0.05–0.15 USD pro Anfrage | fällt nur bei Anfragen an |
-| **Total** | **ca. 5–8 USD pro Monat** | |
+| Privates Repository | **0** | private Repositorys sind bei GitHub gratis |
+| **Total** | **ca. 6–11 USD pro Monat** | je nach Zahl der Ziele mit Reiseberichten |
 
 **Kostenbremsen:**
 - **Anthropic:** Unter **Settings → Limits** ein Monatslimit setzen, empfohlen 20 USD. Mehr kann nie belastet werden.
@@ -220,9 +252,10 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `config.json` | globale Einstellungen: Modelle, Grenzen, Kontingent |
 | `scripts/update.py` | nächtlicher Abruf und Auswertung |
 | `scripts/anfrage.py` | Verarbeitung der Anfragen aus der App |
-| `scripts/common.py` | Geodaten und Routenberechnung |
+| `scripts/quellen.py` | Quellen OpenStreetMap, Reiseberichte, offene Datensätze; Zusammenführen und Verlässlichkeit |
+| `scripts/common.py` | Geodaten, Standortprüfung, Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
-| `docs/` | die Webapp; `docs/data/` enthält die veröffentlichten Plätze |
+| `docs/` | die Webapp; `docs/data/<ziel>/places.json` enthält die zusammengeführten Plätze, die übrigen Dateien die einzelnen Quellen |
 | `data/` | interner Zustand: bearbeitete Videos, Warteschlange, Geocache |
 | `berichte/` | Modellvergleiche |
 
@@ -233,6 +266,7 @@ Der ganze Verlauf liegt in Git. Jede Datenänderung ist ein Commit und lässt si
 ## 6. Rechtliches und Grenzen
 
 - Die Transkripte werden über eine inoffizielle Schnittstelle abgerufen. Das bewegt sich im **Graubereich der YouTube-Nutzungsbedingungen**. Die App ist für den privaten Gebrauch gedacht.
-- Die Bewertungen geben die subjektiven Aussagen der YouTuber wieder und sind keine geprüfte Platzqualität.
+- Die Bewertungen geben die subjektiven Aussagen der YouTuber und Blogger wieder und sind keine geprüfte Platzqualität.
+- Reiseberichte: Die App liest öffentlich zugängliche Seiten, beachtet robots.txt und übernimmt nur Fakten (Ort, Ausstattung, Einschätzung) mit Quellenlink, keine Texte. Plattformen mit eigenen Datenbanken (park4night, camping.info, Campercontact, iOverlander u. a.) werden nicht ausgelesen, nur verlinkt.
 - Die Regeln zum Wildcampen ändern sich. Vor Ort gelten die lokalen Vorschriften. Die App zeigt deshalb standardmässig nur Plätze aus den letzten 12 Monaten.
 - Die Webapp ist öffentlich erreichbar, aber nirgends verlinkt. Die Schlüssel sind nie in der App, sondern nur in GitHub Secrets gespeichert.

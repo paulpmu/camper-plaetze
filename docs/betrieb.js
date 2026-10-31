@@ -94,8 +94,11 @@
           <div class="kpi"><b>${l.spots_new}</b><span>neue Plätze, ${z.spots} total</span></div>
           <div class="kpi"><b>${t.ok || 0} / ${l.videos}</b><span>Transkripte ok, ${t.blockiert || 0} blockiert</span></div>
           <div class="kpi"><b>${usd(l.cost_usd || 0)}</b><span>Claude, ${(l.youtube_units || 0).toLocaleString("de-CH")} YouTube-Einheiten</span></div>
-        </div></div>`;
-    }).join("") + `<p class="muted">Modell für die Auswertung: ${esc(index.model || "–")}. Automatischer Abruf täglich um 03:17 UTC (04:17 Winterzeit, 05:17 Sommerzeit).</p>`;
+          ${l.web && l.web.pages != null ? `<div class="kpi"><b>${l.web.pages}</b><span>Reiseberichte gelesen, ${l.web.searches || 0} Websuchen</span></div>` : ""}
+          ${z.counts && z.counts.confirmed != null ? `<div class="kpi"><b>${z.counts.confirmed}</b><span>Plätze von mehreren Quellen bestätigt</span></div>` : ""}
+        </div>
+        ${Object.entries(z.errors || {}).map(([k, v]) => `<p class="warntext">${esc(k)}: ${esc(v)}</p>`).join("")}</div>`;
+    }).join("") + `<p class="muted">Modell für die Auswertung: ${esc(index.model || "–")}. Automatische Abrufe gemäss Zeitplan, Startzeiten 03:17, 09:43 und 15:43 UTC; ein Ziel läuft höchstens einmal pro Tag.</p>`;
   }
 
   $("#runs").onclick = async (e) => {
@@ -138,7 +141,7 @@
     const today = new Date().toISOString().slice(0, 10);
     const unitsToday = ledger.filter((e) => e.date.startsWith(today)).reduce((s, e) => s + (e.youtube_units || 0), 0);
 
-    const kind = { abruf: "Abrufe (Haiku)", anfrage: "Anfragen aus der App", vergleich: "Modellvergleiche" };
+    const kind = { abruf: "Videos auswerten", web: "Reiseberichte auswerten", websuche: "Websuche (Sonnet)", anfrage: "Anfragen aus der App", vergleich: "Modellvergleiche" };
     const byKind = {};
     for (const e of ledger) {
       const k = kind[e.kind] || e.kind;

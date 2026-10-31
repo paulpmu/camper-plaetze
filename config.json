@@ -14,6 +14,24 @@
   "merge_distance_m": 300,
   "route_corridor_km": 50,
   "fixkosten": [
-    {"name": "Webshare Rotating Residential (1 GB)", "plattform": "Webshare", "usd_pro_monat": 3.5, "seit": "2026-10"}
-  ]
+    {
+      "name": "Webshare Rotating Residential (1 GB)",
+      "plattform": "Webshare",
+      "usd_pro_monat": 3.5,
+      "seit": "2026-10"
+    }
+  ],
+  "standard_links": [
+    {
+      "name": "park4night",
+      "url": "https://park4night.com/en/search?lat={lat}&lng={lng}&z=14"
+    },
+    {
+      "name": "camping.info",
+      "url": "https://www.google.com/search?q=site%3Acamping.info+{ort}"
+    }
+  ],
+  "web_searches_per_run": 8,
+  "web_pages_per_run": 12,
+  "web_max_age_days": 540
 }

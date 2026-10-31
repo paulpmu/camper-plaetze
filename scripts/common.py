@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import difflib
 import hashlib
 import json
 import math
@@ -61,13 +62,28 @@ def load_destinations(only_active=True) -> list[dict]:
     return out
 
 
+SOURCE_KEYS = ("youtube", "osm_stellplatz", "osm_camping", "osm_entsorgung", "web", "opendata")
+
+
+def sources_of(dest: dict) -> dict[str, bool]:
+    """Aktive Quellen eines Ziels. Ohne Eintrag 'sources' gilt, was bisher konfiguriert war."""
+    s = dest.get("sources") or {}
+    default = {
+        "youtube": bool(dest.get("search_queries") or dest.get("channels")),
+        "osm_stellplatz": bool(dest.get("osm_areas")),
+        "osm_camping": False, "osm_entsorgung": False,
+        "web": False, "opendata": bool(dest.get("opendata")),
+    }
+    return {k: bool(s.get(k, default[k])) for k in SOURCE_KEYS}
+
+
 def cost_usd(model: str, tokens_in: int, tokens_out: int) -> float:
     pin, pout = PRICES.get(model, (4.0, 20.0))
     return round((tokens_in * pin + tokens_out * pout) / 1e6, 4)
 
 
 def book(kind: str, model: str, tokens_in: int, tokens_out: int, ziel: str = "", youtube_units: int = 0,
-         videos: int = 0, note: str = ""):
+         videos: int = 0, note: str = "", extra_usd: float = 0.0):
     """Eintrag ins Kostenbuch docs/data/kosten.json (wird von der Webapp ausgewertet)."""
     import datetime as dt
 
@@ -76,7 +92,7 @@ def book(kind: str, model: str, tokens_in: int, tokens_out: int, ziel: str = "",
         ledger = _seed_ledger()
     ledger.append({
         "date": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "kind": kind, "ziel": ziel,
-        "model": model, "tokens": [tokens_in, tokens_out], "usd": cost_usd(model, tokens_in, tokens_out),
+        "model": model, "tokens": [tokens_in, tokens_out], "usd": round(cost_usd(model, tokens_in, tokens_out) + extra_usd, 4),
         "youtube_units": youtube_units, "videos": videos, "note": note,
     })
     save_json(LEDGER_FILE, ledger, compact=True)
@@ -193,6 +209,137 @@ def region_anchors(dest: dict, geocode: "Geocoder") -> dict[str, dict]:
 def distance_to_region(point, anchors: dict, region: str) -> float:
     pts = (anchors.get(region) or {}).get("points") or []
     return min((haversine_km(point, a) for a in pts), default=0.0)
+
+
+# --------------------------------------------------------------------------- Plätze zusammenführen und prüfen
+
+
+def similar(a: str, b: str) -> float:
+    return difflib.SequenceMatcher(None, a.lower(), b.lower()).ratio()
+
+
+PRECISION_RANK = {"region": 0, "ort": 1, "genau": 2, "exakt": 3}
+
+
+def merge_spot(spots: list[dict], new: dict, mention: dict):
+    limit_km = CONFIG["merge_distance_m"] / 1000
+    for s in spots:
+        if s["lat"] is None or new["lat"] is None:
+            # Ohne Koordinaten nur zusammenführen, wenn Region und Name passen
+            same = s["region"] == new["region"] and similar(s["name"], new["name"]) >= 0.6
+        else:
+            d = haversine_km((s["lat"], s["lng"]), (new["lat"], new["lng"]))
+            both_exact = s["precision"] == "exakt" and new["precision"] == "exakt"
+            same = d <= limit_km and (both_exact or similar(s["name"], new["name"]) >= 0.6)
+        if same:
+            if any(mention_key(m) == mention_key(mention) for m in s["mentions"]):
+                return
+            newer = all(mention["published"] >= m["published"] for m in s["mentions"])
+            s["mentions"].append(mention)
+            if PRECISION_RANK[new["precision"]] > PRECISION_RANK[s["precision"]]:
+                s["lat"], s["lng"], s["precision"] = new["lat"], new["lng"], new["precision"]
+            # Fakten übernehmen: neuere Videos überschreiben, ältere füllen nur Lücken
+            for k, v in new["infrastructure"].items():
+                if v is not None and (newer or s["infrastructure"].get(k) is None):
+                    s["infrastructure"][k] = v
+            for k in ("four_wd", "police_contact", "access_note", "safety_note", "price"):
+                if new[k] not in (None, "") and (newer or s.get(k) in (None, "")):
+                    s[k] = new[k]
+            return
+    new["mentions"] = [mention]
+    spots.append(new)
+
+
+def finalize(spots: list[dict]):
+    for s in spots:
+        s["mentions"].sort(key=lambda m: m["published"], reverse=True)
+        ratings = [m["rating"] for m in s["mentions"]]
+        s["rating"] = round(sum(ratings) / len(ratings), 1)
+        safety = [m["safety_rating"] for m in s["mentions"] if m.get("safety_rating")]
+        s["safety_rating"] = round(sum(safety) / len(safety), 1) if safety else None
+        latest = s["mentions"][0]
+        s["recommendation"] = latest["recommendation"]
+        s["last_seen"] = latest["published"]
+        s["first_seen"] = s["mentions"][-1]["published"]
+    spots.sort(key=lambda s: s["last_seen"], reverse=True)
+
+
+def locate_extracted(dest: dict, sp, geocode: "Geocoder", anchors: dict) -> tuple | None:
+    """Standort eines von Claude erkannten Platzes: (lat, lng, Genauigkeit) oder None."""
+    if sp.latitude is not None and sp.longitude is not None and in_bbox(sp.latitude, sp.longitude, dest["bbox"]):
+        return sp.latitude, sp.longitude, "exakt"
+    if sp.location_precision == "region":
+        return None, None, "region"  # erscheint nur in der Liste, nicht auf der Karte
+    near = (anchors.get(sp.region) or {}).get("points")
+    town = geocode(sp.place, dest["countrycodes"], near=near)
+    town = town if town and in_bbox(*town, dest["bbox"]) else None
+    poi = geocode(f"{sp.poi_name}, {sp.place.split(',')[0]}", dest["countrycodes"], near=near) if sp.poi_name else None
+    if poi and in_bbox(*poi, dest["bbox"]) and (not town or haversine_km(poi, town) <= 40):
+        return poi[0], poi[1], "genau"
+    if town:
+        return town[0], town[1], "ort"
+    return None
+
+
+def extracted_spot(sp, spot_id: str, pos: tuple) -> dict:
+    lat, lng, precision = pos
+    return {
+        "id": spot_id, "name": sp.name, "place": sp.place, "poi": sp.poi_name,
+        "lat": round(lat, 5) if lat is not None else None, "lng": round(lng, 5) if lng is not None else None,
+        "precision": precision, "region": sp.region, "type": sp.spot_type,
+        "infrastructure": sp.infrastructure.model_dump(), "four_wd": sp.four_wd_required,
+        "access_note": sp.access_note, "safety_note": sp.safety_note,
+        "police_contact": sp.police_contact, "price": sp.price,
+    }
+
+
+def mention_key(m: dict) -> str:
+    """Eindeutige Herkunft einer Erwähnung: YouTube-Video oder Web-Seite."""
+    return m.get("video_id") or m.get("url") or ""
+
+
+def remove_mentions(spots: list[dict], key: str):
+    """Erwähnungen einer Herkunft (Video-ID oder URL) entfernen; Plätze ohne Erwähnung fallen weg."""
+    for s in spots:
+        s["mentions"] = [m for m in s["mentions"] if mention_key(m) != key]
+    spots[:] = [s for s in spots if s["mentions"]]
+
+
+REGION_RADIUS_KM = 250  # weiter weg von allen Ankerpunkten der Region gilt ein Standort als unplausibel
+
+
+def check_spots(spots: list[dict], dest: dict, geocode: "Geocoder", anchors: dict) -> int:
+    """Standorte und Regionen prüfen, bei jedem Lauf auch für bestehende Plätze.
+
+    - Ungefähr oder über einen Namen verortete Plätze werden mit der aktuellen Logik neu verortet
+      (gleichnamige Orte: der erste Treffer, der zur Region passt).
+    - Liegt ein Platz weit weg von seiner Region oder in einem anderen Land als die Region,
+      wird er der nächstgelegenen passenden Region zugeordnet.
+    Gibt die Zahl der Korrekturen zurück."""
+    fixed = 0
+    for s in spots:
+        if s["lat"] is None or s.get("source") == "osm" or not (anchors.get(s["region"]) or {}).get("points"):
+            continue
+        country = ""
+        if s["precision"] in ("ort", "genau"):
+            query = f"{s['poi']}, {s['place'].split(',')[0]}" if s["precision"] == "genau" and s.get("poi") else s["place"]
+            hit = geocode.locate(query, dest["countrycodes"], near=anchors[s["region"]]["points"])
+            if hit and in_bbox(hit[0], hit[1], dest["bbox"]):
+                country = hit[2]
+                if haversine_km((s["lat"], s["lng"]), hit[:2]) > 1:
+                    log(f"    Standort korrigiert: {s['name']} ({s['lat']}, {s['lng']}) → ({hit[0]:.5f}, {hit[1]:.5f})")
+                    s["lat"], s["lng"] = round(hit[0], 5), round(hit[1], 5)
+                    fixed += 1
+        point = (s["lat"], s["lng"])
+        wrong_country = country and anchors[s["region"]]["country"] and country != anchors[s["region"]]["country"]
+        if distance_to_region(point, anchors, s["region"]) > REGION_RADIUS_KM or wrong_country:
+            options = [r for r, a in anchors.items() if a["points"] and (not country or a["country"] in ("", country))]
+            best = min(options, key=lambda r: distance_to_region(point, anchors, r), default=s["region"])
+            if best != s["region"]:
+                log(f"    Region korrigiert: {s['name']}: {s['region']} → {best}")
+                s["region"] = best
+                fixed += 1
+    return fixed
 
 
 # --------------------------------------------------------------------------- Routen

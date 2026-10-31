@@ -1,6 +1,6 @@
 # Camper-Plätze
 
-Webapp für iPhone und iPad mit Übernachtungsplätzen für Camper. Die Plätze stammen aus aktuellen YouTube-Reisevideos von Overlandern. Es gibt mehrere Reiseziele: **Marokko & Dakhla** und **Spanien & Portugal** mit Routen sowie die **Schweiz** mit den Wohnmobil-Stellplätzen aus OpenStreetMap. Neue Ziele lassen sich direkt aus der Webapp anfordern.
+Webapp für iPhone und iPad mit Übernachtungsplätzen für Camper. Die Plätze stammen aus aktuellen YouTube-Reisevideos von Overlandern. Es gibt mehrere Reiseziele: **Marokko & Dakhla** und **Spanien & Portugal** mit Routen sowie die **Schweiz**. Jedes Ziel wählt seine Quellen selbst: YouTube-Videos von Overlandern, Reiseberichte aus Blogs und Foren, Stellplätze, Campingplätze und Entsorgungsstationen aus OpenStreetMap, offene Datensätze und eigene Plätze. Gleiche Plätze aus mehreren Quellen werden zusammengeführt und als bestätigt markiert. Dazu kommen Favoriten, Logbuch und ein Etappenplaner. Neue Ziele lassen sich direkt aus der Webapp anfordern.
 
 **Webapp:** https://paulpmu.github.io/camper-plaetze/
 
@@ -103,9 +103,9 @@ Sobald ein Proxy eingetragen ist, wertet die App alle Videos, deren Transkript f
 | `max_videos_per_run` | Kostenbremse pro Ziel und Lauf |
 | `route_corridor_km` | bis zu welchem Abstand ein Platz einer Route zugeordnet wird |
 
-## Zeitplan, Standortgenauigkeit und Steuerung aus der App
+## Quellen, Zeitplan, eigene Plätze und Steuerung aus der App
 
-Siehe [BETRIEB.md](BETRIEB.md), Abschnitte 2.2 bis 2.7.
+Siehe [BETRIEB.md](BETRIEB.md), Abschnitte 2.2 bis 2.9.
 
 ## Kosten
 

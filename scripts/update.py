@@ -31,11 +31,14 @@ from typing import Literal, Optional
 
 import anthropic
 import requests
+
+import quellen
 from pydantic import BaseModel, Field, create_model
 
 from common import (CONFIG, DATA_DIR, FALLBACK_MODELS, REPO, ROOT, UA, WEB_DATA, Geocoder, annotate_routes, book,
-                    build_routes, cost_usd, distance_to_region, haversine_km, in_bbox, load_destinations, load_json,
-                    log, region_anchors, save_json)
+                    build_routes, check_spots, cost_usd, extracted_spot, finalize, in_bbox, load_destinations,
+                    load_json, locate_extracted, log, merge_spot, region_anchors, remove_mentions, save_json,
+                    sources_of)
 
 YT_API = "https://www.googleapis.com/youtube/v3"
 
@@ -248,11 +251,17 @@ def extraction_model(dest: dict):
     )
 
 
-def system_prompt(dest: dict) -> str:
+def system_prompt(dest: dict, kind: str = "video") -> str:
     regions = "\n".join(f"  - {r['name']}: {r['hint']}" for r in dest["regions"])
-    return f"""Du wertest Reisevideos von Camper-Overlandern im Gebiet «{dest['name']}» aus.
-Aus Titel, Beschreibung, Kapitelmarken, Kommentaren und Transkript extrahierst du jeden Übernachtungsplatz,
-an dem die YouTuber übernachtet haben oder den sie konkret empfehlen bzw. vor dem sie warnen.
+    if kind == "web":
+        intro = (f"Du wertest Reiseberichte (Blogs, Foren) von Camper-Reisenden im Gebiet «{dest['name']}» aus.\n"
+                 "Aus dem Text extrahierst du jeden Übernachtungsplatz, an dem die Autoren übernachtet haben\n"
+                 "oder den sie konkret empfehlen bzw. vor dem sie warnen. timestamp_seconds ist immer null.")
+    else:
+        intro = (f"Du wertest Reisevideos von Camper-Overlandern im Gebiet «{dest['name']}» aus.\n"
+                 "Aus Titel, Beschreibung, Kapitelmarken, Kommentaren und Transkript extrahierst du jeden\n"
+                 "Übernachtungsplatz, an dem die YouTuber übernachtet haben oder den sie konkret empfehlen bzw. vor dem sie warnen.")
+    return f"""{intro}
 
 Regeln:
 - Nur Orte, an denen die YouTuber mit dem Fahrzeug übernachtet haben oder die sie ausdrücklich als
@@ -265,10 +274,10 @@ Regeln:
 - Erfinde keine Fakten. Unbekanntes ist null bzw. ein leerer Text.
 - Koordinaten nur, wenn sie im Material stehen (auch DMS umrechnen) oder aus einem Kartenlink
   (Google Maps @lat,lng / q=lat,lng, Apple Maps ll=) ablesbar sind. Schätze keine Koordinaten.
-- Die Bewertung spiegelt die Aussagen und Tonalität der YouTuber wider, nicht dein Wissen.
+- Die Bewertung spiegelt die Aussagen und Tonalität der Reisenden wider, nicht dein Wissen.
 - Regionen:
 {regions}
-- Ist das Video nicht über eine Camper-Reise in diesem Gebiet, setze relevant=false und gib keine Plätze zurück.
+- Handelt das Material nicht von einer Camper-Reise in diesem Gebiet, setze relevant=false und gib keine Plätze zurück.
 {dest.get('notes', '')}"""
 
 
@@ -292,7 +301,7 @@ class Claude:
         self.tokens_in = 0
         self.tokens_out = 0
 
-    def extract(self, dest: dict, schema, prompt: str):
+    def extract(self, dest: dict, schema, prompt: str, kind: str = "video"):
         kwargs = {}
         if self.model in FALLBACK_MODELS:
             # Lehnt der Sicherheitsfilter ab, übernimmt serverseitig ein Ersatzmodell
@@ -301,7 +310,7 @@ class Claude:
         resp = self.client.messages.parse(
             model=self.model,
             max_tokens=16000,
-            system=system_prompt(dest),
+            system=system_prompt(dest, kind),
             messages=[{"role": "user", "content": prompt}],
             output_format=schema,
             output_config={"effort": CONFIG["claude_effort"]},
@@ -318,147 +327,7 @@ class Claude:
         return cost_usd(self.model, self.tokens_in, self.tokens_out)
 
 
-# --------------------------------------------------------------------------- OpenStreetMap
-
-OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
-OSM_ERRORS: dict[str, str] = {}  # letzte Fehlermeldung pro Ziel, landet in meta.json
-
-
-def overpass(query: str) -> list[dict]:
-    """Overpass-Abfrage mit Wiederholung bei Überlastung und Ersatzserver."""
-    last = ""
-    for url in OVERPASS:
-        for attempt in range(3):
-            try:
-                r = requests.post(url, data={"data": query}, headers={"User-Agent": UA}, timeout=240)
-                if r.status_code in (429, 502, 503, 504):
-                    last = f"{url}: HTTP {r.status_code}"
-                    time.sleep(20 * (attempt + 1))
-                    continue
-                r.raise_for_status()
-                return r.json().get("elements", [])
-            except (requests.RequestException, ValueError) as ex:
-                last = f"{url}: {type(ex).__name__} {ex}"[:300]
-                time.sleep(10)
-    raise RuntimeError(last)
-
-
-def _yes(v) -> bool | None:
-    if v is None:
-        return None
-    return str(v).lower() not in ("no", "none", "0", "false")
-
-
-def fetch_osm(dest: dict) -> list[dict] | None:
-    """Wohnmobil-Stellplätze (tourism=caravan_site) aus OpenStreetMap, je Gebiet aus dest['osm_areas'].
-
-    Eine einzige Abfrage für alle Gebiete; nach jedem Gebiet markiert ein «marker»-Element die Grenze.
-    Gibt None zurück, wenn die Abfrage scheitert – dann bleibt die bisherige Datei unverändert."""
-    parts = ["[out:json][timeout:200];"]
-    for area in dest.get("osm_areas", []):
-        sel = (f'["ISO3166-2"="{area["code"]}"]' if "-" in area["code"]
-               else f'["ISO3166-1"="{area["code"]}"]["admin_level"="2"]')
-        parts.append(f'area{sel}->.a;nwr["tourism"="caravan_site"](area.a);out center tags;'
-                     f'make marker code="{area["code"]}";out;')
-    try:
-        elements = overpass("".join(parts))
-    except RuntimeError as ex:
-        OSM_ERRORS[dest["id"]] = str(ex)
-        log(f"  OpenStreetMap fehlgeschlagen: {ex}")
-        return None
-    region_of = {a["code"]: a["region"] for a in dest["osm_areas"]}
-    spots, pending, seen = [], [], set()
-    for e in elements:
-        if e.get("type") == "marker":
-            region = region_of.get(e.get("tags", {}).get("code"), "")
-            for p in pending:
-                p["region"] = region
-            spots += pending
-            pending = []
-            continue
-        lat = e.get("lat", (e.get("center") or {}).get("lat"))
-        lng = e.get("lon", (e.get("center") or {}).get("lon"))
-        key = f"{e['type']}/{e['id']}"
-        if lat is None or lng is None or key in seen:
-            continue
-        seen.add(key)
-        t = e.get("tags", {})
-        pending.append({
-            "id": f"osm-{e['type'][0]}{e['id']}", "source": "osm", "osm": key,
-            "name": t.get("name") or t.get("operator") or "Wohnmobil-Stellplatz",
-            "place": t.get("addr:city") or t.get("addr:place") or "", "poi": "",
-            "lat": round(lat, 5), "lng": round(lng, 5), "precision": "exakt",
-            "region": "", "type": "stellplatz",
-            "infrastructure": {
-                "water": _yes(t.get("drinking_water") or t.get("water_point")),
-                "dump_station": _yes(t.get("sanitary_dump_station")),
-                "electricity": _yes(t.get("power_supply")),
-                "toilets": _yes(t.get("toilets")), "showers": _yes(t.get("shower")),
-            },
-            "four_wd": None, "police_contact": None, "access_note": "", "safety_note": "",
-            "price": ("gratis" if t.get("fee") == "no" else t.get("charge", "")) or ("kostenpflichtig" if t.get("fee") == "yes" else ""),
-            "capacity": t.get("capacity", ""), "opening_hours": t.get("opening_hours", ""),
-            "operator": t.get("operator", ""), "website": t.get("website") or t.get("contact:website", ""),
-            "description": t.get("description:de") or t.get("description", ""),
-            "rating": None, "mentions": [],
-        })
-    spots += pending  # falls der letzte Marker fehlt
-    OSM_ERRORS.pop(dest["id"], None)
-    log(f"  OpenStreetMap: {len(spots)} Stellplätze")
-    return spots
-
-
 # --------------------------------------------------------------------------- Plätze zusammenführen
-
-
-def similar(a: str, b: str) -> float:
-    return difflib.SequenceMatcher(None, a.lower(), b.lower()).ratio()
-
-
-PRECISION_RANK = {"region": 0, "ort": 1, "genau": 2, "exakt": 3}
-
-
-def merge_spot(spots: list[dict], new: dict, mention: dict):
-    limit_km = CONFIG["merge_distance_m"] / 1000
-    for s in spots:
-        if s["lat"] is None or new["lat"] is None:
-            # Ohne Koordinaten nur zusammenführen, wenn Region und Name passen
-            same = s["region"] == new["region"] and similar(s["name"], new["name"]) >= 0.6
-        else:
-            d = haversine_km((s["lat"], s["lng"]), (new["lat"], new["lng"]))
-            both_exact = s["precision"] == "exakt" and new["precision"] == "exakt"
-            same = d <= limit_km and (both_exact or similar(s["name"], new["name"]) >= 0.6)
-        if same:
-            if any(m["video_id"] == mention["video_id"] for m in s["mentions"]):
-                return
-            newer = all(mention["published"] >= m["published"] for m in s["mentions"])
-            s["mentions"].append(mention)
-            if PRECISION_RANK[new["precision"]] > PRECISION_RANK[s["precision"]]:
-                s["lat"], s["lng"], s["precision"] = new["lat"], new["lng"], new["precision"]
-            # Fakten übernehmen: neuere Videos überschreiben, ältere füllen nur Lücken
-            for k, v in new["infrastructure"].items():
-                if v is not None and (newer or s["infrastructure"].get(k) is None):
-                    s["infrastructure"][k] = v
-            for k in ("four_wd", "police_contact", "access_note", "safety_note", "price"):
-                if new[k] not in (None, "") and (newer or s.get(k) in (None, "")):
-                    s[k] = new[k]
-            return
-    new["mentions"] = [mention]
-    spots.append(new)
-
-
-def finalize(spots: list[dict]):
-    for s in spots:
-        s["mentions"].sort(key=lambda m: m["published"], reverse=True)
-        ratings = [m["rating"] for m in s["mentions"]]
-        s["rating"] = round(sum(ratings) / len(ratings), 1)
-        safety = [m["safety_rating"] for m in s["mentions"] if m.get("safety_rating")]
-        s["safety_rating"] = round(sum(safety) / len(safety), 1) if safety else None
-        latest = s["mentions"][0]
-        s["recommendation"] = latest["recommendation"]
-        s["last_seen"] = latest["published"]
-        s["first_seen"] = s["mentions"][-1]["published"]
-    spots.sort(key=lambda s: s["last_seen"], reverse=True)
 
 
 # --------------------------------------------------------------------------- Ablauf
@@ -576,76 +445,11 @@ def requeue(state: dict, yt: YouTube, everything: bool, limit: int = 300) -> int
     return len(ids)
 
 
-def remove_mentions(spots: list[dict], video_id: str):
-    """Erwähnungen eines Videos entfernen; Plätze ohne Erwähnung fallen weg."""
-    for s in spots:
-        s["mentions"] = [m for m in s["mentions"] if m["video_id"] != video_id]
-    spots[:] = [s for s in spots if s["mentions"]]
-
-
-REGION_RADIUS_KM = 250  # weiter weg von allen Ankerpunkten der Region gilt ein Standort als unplausibel
-
-
-def check_spots(spots: list[dict], dest: dict, geocode: Geocoder, anchors: dict) -> int:
-    """Standorte und Regionen prüfen, bei jedem Lauf auch für bestehende Plätze.
-
-    - Ungefähr oder über einen Namen verortete Plätze werden mit der aktuellen Logik neu verortet
-      (gleichnamige Orte: der erste Treffer, der zur Region passt).
-    - Liegt ein Platz weit weg von seiner Region oder in einem anderen Land als die Region,
-      wird er der nächstgelegenen passenden Region zugeordnet.
-    Gibt die Zahl der Korrekturen zurück."""
-    fixed = 0
-    for s in spots:
-        if s["lat"] is None or s.get("source") == "osm" or not (anchors.get(s["region"]) or {}).get("points"):
-            continue
-        country = ""
-        if s["precision"] in ("ort", "genau"):
-            query = f"{s['poi']}, {s['place'].split(',')[0]}" if s["precision"] == "genau" and s.get("poi") else s["place"]
-            hit = geocode.locate(query, dest["countrycodes"], near=anchors[s["region"]]["points"])
-            if hit and in_bbox(hit[0], hit[1], dest["bbox"]):
-                country = hit[2]
-                if haversine_km((s["lat"], s["lng"]), hit[:2]) > 1:
-                    log(f"    Standort korrigiert: {s['name']} ({s['lat']}, {s['lng']}) → ({hit[0]:.5f}, {hit[1]:.5f})")
-                    s["lat"], s["lng"] = round(hit[0], 5), round(hit[1], 5)
-                    fixed += 1
-        point = (s["lat"], s["lng"])
-        wrong_country = country and anchors[s["region"]]["country"] and country != anchors[s["region"]]["country"]
-        if distance_to_region(point, anchors, s["region"]) > REGION_RADIUS_KM or wrong_country:
-            options = [r for r, a in anchors.items() if a["points"] and (not country or a["country"] in ("", country))]
-            best = min(options, key=lambda r: distance_to_region(point, anchors, r), default=s["region"])
-            if best != s["region"]:
-                log(f"    Region korrigiert: {s['name']}: {s['region']} → {best}")
-                s["region"] = best
-                fixed += 1
-    return fixed
-
-
 def to_spot(dest: dict, v: dict, sp, tstatus: str, geocode: Geocoder, anchors: dict):
-    lat = lng = None
-    if sp.latitude is not None and sp.longitude is not None and in_bbox(sp.latitude, sp.longitude, dest["bbox"]):
-        lat, lng, precision = sp.latitude, sp.longitude, "exakt"
-    elif sp.location_precision == "region":
-        precision = "region"  # erscheint nur in der Liste, nicht auf der Karte
-    else:
-        near = (anchors.get(sp.region) or {}).get("points")
-        town = geocode(sp.place, dest["countrycodes"], near=near)
-        town = town if town and in_bbox(*town, dest["bbox"]) else None
-        poi = geocode(f"{sp.poi_name}, {sp.place.split(',')[0]}", dest["countrycodes"], near=near) if sp.poi_name else None
-        if poi and in_bbox(*poi, dest["bbox"]) and (not town or haversine_km(poi, town) <= 40):
-            (lat, lng), precision = poi, "genau"
-        elif town:
-            (lat, lng), precision = town, "ort"
-        else:
-            return None, None
-    new = {
-        "id": hashlib.sha1(f"{v['id']}|{sp.name}".encode()).hexdigest()[:10],
-        "name": sp.name, "place": sp.place, "poi": sp.poi_name,
-        "lat": round(lat, 5) if lat is not None else None, "lng": round(lng, 5) if lng is not None else None,
-        "precision": precision, "region": sp.region, "type": sp.spot_type,
-        "infrastructure": sp.infrastructure.model_dump(), "four_wd": sp.four_wd_required,
-        "access_note": sp.access_note, "safety_note": sp.safety_note,
-        "police_contact": sp.police_contact, "price": sp.price,
-    }
+    pos = locate_extracted(dest, sp, geocode, anchors)
+    if not pos:
+        return None, None
+    new = extracted_spot(sp, hashlib.sha1(f"{v['id']}|{sp.name}".encode()).hexdigest()[:10], pos)
     mention = {
         "video_id": v["id"], "title": v["title"], "channel": v["channel"], "published": v["published"],
         "t": sp.timestamp_seconds, "quote": sp.quote, "rating": max(1, min(5, sp.rating)),
@@ -665,17 +469,22 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     spots = load_json(spots_file, [])
     units_before, tin, tout = (yt.units if yt else 0), claude.tokens_in, claude.tokens_out
 
-    collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
-    limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"])
-    if yt and os.getenv("NEU_AUSWERTEN", "").strip().lower() in ("ja", "1", "true"):
+    flags = sources_of(dest)
+    if flags["youtube"]:
+        collect_candidates(dest, yt, state, search_today(dest, index, dests, state))
+    else:
+        log("  YouTube-Quelle ausgeschaltet")
+    limit = int(os.getenv("MAX_VIDEOS") or CONFIG["max_videos_per_run"]) if flags["youtube"] else 0
+    if flags["youtube"] and yt and os.getenv("NEU_AUSWERTEN", "").strip().lower() in ("ja", "1", "true"):
         requeue(state, yt, everything=True)
-    elif yt and proxy_configured():
+    elif flags["youtube"] and yt and proxy_configured():
         requeue(state, yt, everything=False)
     # Erneut auszuwertende Videos immer vollständig in diesem Lauf, nicht über Nächte verteilt
-    limit = max(limit, sum(1 for v in state["queue"].values() if v.get("retry")))
+    if flags["youtube"]:
+        limit = max(limit, sum(1 for v in state["queue"].values() if v.get("retry")))
 
     schema = extraction_model(dest)
-    anchors = region_anchors(dest, geocode) if state["queue"] or spots else {}
+    anchors = region_anchors(dest, geocode)
     # Erneut auszuwertende Videos zuerst, danach die neuesten
     queue = sorted(state["queue"].values(), key=lambda v: v["published"], reverse=True)
     queue = sorted(queue, key=lambda v: not v.get("retry"))[:limit]
@@ -735,28 +544,38 @@ def process_destination(dest: dict, index: int, dests: list[dict], yt: YouTube |
     annotate_routes(spots, routes)
     save_json(spots_file, spots, compact=True)
     save_json(state_file, state)
-    if dest.get("osm_areas"):
-        osm = fetch_osm(dest)
+
+    # Weitere Quellen
+    osm_kinds = [k for k in quellen.OSM_KINDS if flags[k]]
+    if osm_kinds:
+        osm = quellen.fetch_osm(dest, osm_kinds, anchors)
         if osm is not None:
-            annotate_routes(osm, routes)
             save_json(WEB_DATA / did / "osm.json", osm, compact=True)
+    if flags["opendata"] and dest.get("opendata"):
+        od = quellen.fetch_opendata(dest, anchors)
+        if od is not None:
+            save_json(WEB_DATA / did / "opendata.json", od, compact=True)
+    web_stats = quellen.run_web(dest, state, claude, schema, geocode, anchors) if flags["web"] and not stop else {}
+    save_json(state_file, state)
+    counts = quellen.merge_places(dest, flags, routes)
 
     meta_file = WEB_DATA / did / "meta.json"
     meta = load_json(meta_file, {})
     run = {
-        "date": iso(now_utc()), "videos": stats["videos"], "spots_new": stats["spots_new"],
+        "date": iso(now_utc()), "videos": stats["videos"], "spots_new": stats["spots_new"], "web": web_stats,
         "transcripts": stats["transcripts"], "youtube_units": (yt.units if yt else 0) - units_before,
         "claude_tokens": [claude.tokens_in - tin, claude.tokens_out - tout], "model": claude.model,
     }
-    run["cost_usd"] = cost_usd(claude.model, *run["claude_tokens"])
+    # Web-Kosten bucht quellen.run_web selbst; hier nur die Videoauswertung
+    video_tokens = [run["claude_tokens"][0] - web_stats.get("tokens_in", 0), run["claude_tokens"][1] - web_stats.get("tokens_out", 0)]
+    run["cost_usd"] = round(cost_usd(claude.model, *video_tokens) + web_stats.get("usd", 0), 4)
     # Vor dem Speichern von meta.json buchen, damit das einmalige Übernehmen alter Läufe nichts doppelt zählt
-    book("abruf", claude.model, *run["claude_tokens"], ziel=did, youtube_units=run["youtube_units"],
-         videos=stats["videos"])
+    book("abruf", claude.model, *video_tokens, ziel=did, youtube_units=run["youtube_units"], videos=stats["videos"])
     save_json(meta_file, {
         "last_run": run["date"], "spots": len(spots),
         "videos_total": sum(1 for x in state["videos"].values() if "transcript" in x),
         "queue": len(state["queue"]), "history": meta.get("history", [])[-59:] + [run],
-        "osm_error": OSM_ERRORS.get(did),
+        "counts": counts, "errors": quellen.ERRORS.get(did, {}),
     })
     log(f"  Fertig: {stats['videos']} Videos, {stats['spots_new']} neue Plätze, {len(spots)} total, "
         f"Transkripte {stats['transcripts']}, ca. {run['cost_usd']} USD")
@@ -774,13 +593,16 @@ def write_index():
             "regions": [r["name"] for r in d["regions"]],
             "routes": [{k: r[k] for k in ("id", "name", "color", "length_km")} for r in routes],
             "schedule": d.get("schedule", "taeglich"), "weekday": d.get("weekday", 1),
-            "links": d.get("links", []), "osm": len(load_json(WEB_DATA / d["id"] / "osm.json", [])),
-            "spots": meta.get("spots", 0), "last_run": meta.get("last_run"), "queue": meta.get("queue", 0),
+            "links": d.get("links", []), "sources": sources_of(d), "counts": meta.get("counts", {}),
+            "youtube_ready": bool(d.get("search_queries") or d.get("channels")),
+            "errors": meta.get("errors", {}), "opendata": [o["name"] for o in d.get("opendata", [])],
+            "spots": meta.get("counts", {}).get("total", meta.get("spots", 0)), "last_run": meta.get("last_run"), "queue": meta.get("queue", 0),
             "videos_total": meta.get("videos_total", 0), "last": (meta.get("history") or [None])[-1],
         })
     save_json(WEB_DATA / "ziele.json", {
         "repo": REPO, "ziele": index, "model": CONFIG["claude_model"],
         "fixkosten": CONFIG.get("fixkosten", []), "youtube_budget": CONFIG["youtube_daily_budget"],
+        "standard_links": CONFIG.get("standard_links", []),
     })
 
 

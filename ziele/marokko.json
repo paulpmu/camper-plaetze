@@ -4,6 +4,14 @@
  "active": true,
  "schedule": "taeglich",
  "weekday": 1,
+ "sources": {
+  "youtube": true,
+  "osm_stellplatz": true,
+  "osm_camping": true,
+  "osm_entsorgung": false,
+  "web": true,
+  "opendata": false
+ },
  "countrycodes": [
   "ma",
   "eh"
@@ -157,5 +165,6 @@
    ]
   }
  ],
- "notes": "Auf der Strecke Guelmim–Dakhla (N1) sind Polizei-/Gendarmeriekontrollen mit Passkopien (Fiche) üblich; Wildcampen wird dort teils untersagt. Notiere Hinweise zu Kontrollen, Wegweisen und Tankmöglichkeiten im Sicherheits- bzw. Zufahrtstext."
+ "notes": "Auf der Strecke Guelmim–Dakhla (N1) sind Polizei-/Gendarmeriekontrollen mit Passkopien (Fiche) üblich; Wildcampen wird dort teils untersagt. Notiere Hinweise zu Kontrollen, Wegweisen und Tankmöglichkeiten im Sicherheits- bzw. Zufahrtstext.",
+ "opendata": []
 }

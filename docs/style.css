@@ -273,3 +273,47 @@ button.brand #count { font-size: 12px; }
 #toast.show { opacity: 1; transform: none; }
 .actions-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
 .pin.osm, .lg.osm { background: #0f7b8a; }
+
+/* Quellen, eigene Plätze, Etappen, Merkliste */
+.fab2 { bottom: calc(var(--safe-bottom) + 88px); color: #fff; background: var(--accent); }
+.pin { position: relative; }
+.pin.confirmed { border-color: #e0a21b; border-width: 3px; }
+.pin.dir.stellplatz { background: #0f7b8a; }
+.pin.dir.camping { background: #1f6fb2; }
+.pin.dir.entsorgung, .entsorgung { background: #6b4fa0; }
+.pin.own, .lg.own { background: #c2185b; }
+.pin .mk { position: absolute; transform: rotate(45deg); font-style: normal; font-size: 11px; line-height: 14px; width: 14px; height: 14px; border-radius: 50%; text-align: center; color: #fff; }
+.pin .mk.fav { top: -8px; right: -6px; background: #e0a21b; }
+.pin .mk.vis { bottom: -6px; right: -8px; background: #2e7d4f; }
+.badge.ok { background: #fdf0c8; color: #8a6400; }
+.badge.own { background: #f8d7e5; color: #8e1446; }
+.badge.conf.hoch { background: #d7f0df; color: #1e6b3a; }
+.badge.conf.mittel { background: #e8eef7; color: #33557a; }
+.badge.conf.tief { background: #f3e3dc; color: #8a3b1d; }
+.srcs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
+.srcs span { font-size: 12px; padding: 2px 8px; border-radius: 8px; border: 1px solid var(--line); color: var(--muted); }
+.mention.web .webicon { width: 64px; height: 63px; flex: none; display: flex; align-items: center; justify-content: center; font-size: 28px; background: var(--bg); border-radius: 8px; }
+.mine { background: var(--bg); border-radius: 14px; padding: 10px 12px; margin: 10px 0; }
+.mine .row { margin-top: 8px; }
+.mine textarea, #own-note, #own-name, #own-link, #gh-private, #src-link-name, #src-link-url, .etappen input, .etappen select, #own-type, #own-rating, .mine select {
+  display: block; width: 100%; margin-top: 6px; padding: 10px 12px; font: inherit; font-size: 16px;
+  color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 12px; -webkit-appearance: none; appearance: none;
+}
+.mine select { flex: 1; margin-top: 0; }
+.btn.danger { color: #a3271b; }
+.btn.wide { width: 100%; margin-top: 10px; }
+.pos { font-size: 15px; margin: 6px 0; }
+.srcline { font-size: 12px; margin-top: 4px; }
+.srcrow { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.srcrow input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+.warntext { color: #a3271b; font-size: 13px; }
+ul.plain { list-style: none; padding: 0; margin: 6px 0; font-size: 14px; }
+ul.plain li { padding: 6px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.linkbtn { border: 0; background: none; color: var(--accent); font-size: 13px; padding: 0 4px; }
+#src-add-box input { margin-bottom: 6px; }
+.etappen { background: var(--bg); border-radius: 14px; padding: 4px 12px 12px; margin: 8px 0; }
+.etappen .row { gap: 8px; margin-top: 0; }
+.etappen .field { flex: 1; margin: 6px 0; }
+ol.stages { padding-left: 18px; margin: 10px 0; font-size: 14px; }
+ol.stages li { padding: 6px 0; cursor: pointer; border-bottom: 1px solid var(--line); }
+.note { color: var(--muted); font-size: 12px; }

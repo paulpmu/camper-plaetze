@@ -43,7 +43,24 @@ class OsmArea(BaseModel):
 
 class Link(BaseModel):
     name: str = Field(description="Kurzer Knopftext, z. B. 'Wohnmobilland'")
-    url: str
+    url: str = Field(description="Adresse; Platzhalter {lat}, {lng}, {name}, {ort} werden pro Platz ersetzt")
+
+
+class Sources(BaseModel):
+    youtube: bool = Field(description="Overlander-/Reisevideos auf YouTube auswerten (braucht Suchbegriffe)")
+    osm_stellplatz: bool = Field(description="Wohnmobil-Stellplätze aus OpenStreetMap")
+    osm_camping: bool = Field(description="Campingplätze aus OpenStreetMap")
+    osm_entsorgung: bool = Field(description="Ver-/Entsorgungsstationen aus OpenStreetMap")
+    web: bool = Field(description="Reiseberichte aus Blogs und Foren per Websuche auswerten")
+    opendata: bool = Field(description="Offene Datensätze aus 'opendata' einlesen")
+
+
+class Dataset(BaseModel):
+    name: str
+    url: str = Field(description="Direkter Download-Link (https) einer CSV-, GeoJSON- oder JSON-Datei mit offener Lizenz")
+    format: Literal["csv", "geojson", "json"]
+    type: Literal["stellplatz", "camping", "entsorgung", "wildplatz", "andere"]
+    license: str = Field(description="Lizenz des Datensatzes, z. B. 'CC BY 4.0'")
 
 
 class Destination(BaseModel):
@@ -60,6 +77,8 @@ class Destination(BaseModel):
     relevance_keywords: list[str] = Field(description="30–50 Kleinbuchstaben-Stichwörter: Ländernamen in vielen Sprachen und bekannte Orte/Gegenden")
     regions: list[Region] = Field(description="5–10 Regionen, die das Gebiet lückenlos abdecken")
     routes: list[Route]
+    sources: Sources
+    opendata: list[Dataset] = Field(description="Offene Datensätze; leer, wenn keine")
     osm_areas: list[OsmArea] = Field(description="Gebiete, aus denen Wohnmobil-Stellplätze aus OpenStreetMap übernommen werden; leer, wenn nicht gewünscht")
     links: list[Link] = Field(description="Zusätzliche Knöpfe pro Platz, z. B. zu einer offiziellen Stellplatzliste; leer, wenn keine")
     notes: str = Field(description="Hinweise für die Auswertung, z. B. lokale Regeln zum Wildcampen; leer wenn keine")
@@ -89,7 +108,10 @@ Regeln:
 - Die bbox muss alle Regionen und Routen umfassen.
 - Verwende bestehende IDs bei Änderungen unverändert.
 - Zeitplan: neue Ziele standardmässig 'woechentlich' (weekday 1), ausser der Nutzer wünscht etwas anderes.
-- OpenStreetMap-Stellplätze (osm_areas) nur, wenn der Nutzer sie wünscht oder bei bestehenden Zielen übernehmen.
+- Quellen (sources): neue Ziele standardmässig mit YouTube, OSM-Stellplätzen und OSM-Camping; Web-Reiseberichte
+  und Entsorgungsstationen nur auf Wunsch. Bei Änderungen bestehende Quellen übernehmen.
+- osm_areas nur, wenn der Nutzer Gebiete nennt; sonst leer (dann gelten die Länder des Ziels).
+- Offene Datensätze nur mit einer vom Nutzer genannten oder sicher bekannten Download-Adresse; nie erfinden.
 - Links nur auf Wunsch des Nutzers; bestehende Links bei Änderungen übernehmen."""
 
 
@@ -113,8 +135,13 @@ def validate(d: Destination, existing_ids: set[str], action: str) -> list[str]:
         s, w, n, e = d.bbox
         if not (-90 <= s < n <= 90 and -180 <= w < e <= 180):
             errors.append(f"bbox unplausibel: {d.bbox}")
-    if len(d.search_queries) > 15 or (len(d.search_queries) < 3 and not d.osm_areas):
-        errors.append("3–15 Suchbegriffe nötig (ohne OpenStreetMap-Gebiete)")
+    if len(d.search_queries) > 15 or (d.sources.youtube and len(d.search_queries) < 3):
+        errors.append("3–15 Suchbegriffe nötig, wenn YouTube aktiv ist")
+    if not any(d.sources.model_dump().values()):
+        errors.append("mindestens eine Quelle muss aktiv sein")
+    for ds in d.opendata:
+        if not ds.url.startswith("https://"):
+            errors.append(f"Datensatz «{ds.name}» braucht eine https-Adresse")
     region_names = {r.name for r in d.regions}
     for a in d.osm_areas:
         if not re.fullmatch(r"[A-Z]{2}(-[A-Z0-9]{1,3})?", a.code) or a.region not in region_names:
