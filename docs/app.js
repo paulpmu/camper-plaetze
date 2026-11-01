@@ -677,11 +677,22 @@
     if (!repo()) { $("#req-list").innerHTML = `<li class="muted">Erst über GitHub Pages verfügbar.</li>`; return; }
     try {
       const issues = (await GH.api(`/issues?state=all&per_page=30&sort=created`)).filter((i) => !i.pull_request && i.title.startsWith("[Ziel]")).slice(0, 6);
+      // Bei erledigten Anfragen das betroffene Ziel aus der Antwort lesen
+      const zielOf = {};
+      await Promise.all(issues.filter((i) => i.state === "closed" && i.comments).map(async (i) => {
+        try {
+          const body = (await GH.api(`/issues/${i.number}/comments?per_page=5`)).map((c) => c.body).join("\n");
+          const m = body.match(/<!-- ziel:([a-z0-9-]+) -->/) || body.match(/"id":\s*"([a-z0-9-]+)"/) || body.match(/\(([a-z0-9-]+)\)/);
+          if (m && index.ziele.some((z) => z.id === m[1])) zielOf[i.number] = m[1];
+        } catch { /* ohne Kommentar kein Knopf */ }
+      }));
       $("#req-list").innerHTML = issues.map((i) => {
         const done = i.state === "closed";
+        const zid = zielOf[i.number];
         return `<li><a href="${esc(i.html_url)}" target="_blank" rel="noopener">
           <span class="st ${done ? "erledigt" : "offen"}">${done ? "erledigt" : i.comments ? "Rückfrage" : "in Arbeit"}</span>${esc(i.title.replace("[Ziel] ", ""))}</a>
-          <div class="muted">${new Date(i.created_at).toLocaleString("de-CH", { dateStyle: "short", timeStyle: "short" })}${i.comments ? ` · ${i.comments} Antwort${i.comments > 1 ? "en" : ""}` : ""}</div></li>`;
+          <div class="muted">${new Date(i.created_at).toLocaleString("de-CH", { dateStyle: "short", timeStyle: "short" })}${i.comments ? ` · ${i.comments} Antwort${i.comments > 1 ? "en" : ""}` : ""} · <a href="${esc(i.html_url)}" target="_blank" rel="noopener">Antwort lesen</a></div>
+          ${zid ? `<button class="btn small" data-open-ziel="${esc(zid)}">Ziel öffnen: ${esc(index.ziele.find((z) => z.id === zid).name)}</button>` : ""}</li>`;
       }).join("") || `<li class="muted">Noch keine Anfragen.</li>`;
     } catch {
       $("#req-list").innerHTML = `<li class="muted">Anfragen nicht abrufbar (offline oder GitHub-Limit).</li>`;
@@ -708,12 +719,23 @@
   $("#btn-filter").onclick = () => open("#sheet-filter");
   $("#btn-list").onclick = () => open("#sheet-list");
   $("#btn-info").onclick = () => open("#sheet-info");
-  $("#btn-ziel").onclick = () => {
+  $("#btn-ziel").onclick = async () => {
     $("#req-text").value = loadStr("req-draft") || "";
     renderZielList();
     showTokenState();
     open("#sheet-ziel");
+    // Zielliste frisch laden, damit neu angelegte Ziele ohne Neustart der App erscheinen
+    try {
+      const fresh = await getJson("data/ziele.json");
+      index = fresh;
+      if (ziel) ziel = index.ziele.find((z) => z.id === ziel.id) || ziel;
+      renderZielList();
+    } catch { /* offline: bisherige Liste */ }
     loadRequests();
+  };
+  $("#req-list").onclick = (e) => {
+    const b = e.target.closest("[data-open-ziel]");
+    if (b) { close(); selectZiel(b.dataset.openZiel); }
   };
 
   // ---------------------------------------------------------------- GitHub-Schlüssel und privates Repository

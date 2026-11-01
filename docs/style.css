@@ -317,3 +317,4 @@ ul.plain li { padding: 6px 0; border-bottom: 1px solid var(--line); overflow-wra
 ol.stages { padding-left: 18px; margin: 10px 0; font-size: 14px; }
 ol.stages li { padding: 6px 0; cursor: pointer; border-bottom: 1px solid var(--line); }
 .note { color: var(--muted); font-size: 12px; }
+.req-list .btn.small { margin-top: 6px; }

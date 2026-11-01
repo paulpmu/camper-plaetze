@@ -226,6 +226,8 @@ def main():
             reply += "\n\n_Antworten Sie einfach mit einem Kommentar in dieser Anfrage._"
 
     OUT_DIR.mkdir(exist_ok=True)
+    if did and action in ("neu", "aendern", "aktualisieren"):
+        reply += f"\n\n<!-- ziel:{did} -->"  # unsichtbar; die App zeigt damit «Ziel öffnen»
     (OUT_DIR / "antwort.md").write_text(reply + "\n", encoding="utf-8")
     output(aktion=action, ziel=did, schliessen=close)
 
