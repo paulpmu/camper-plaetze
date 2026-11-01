@@ -1,0 +1,220 @@
+{
+ "id": "ostalpen",
+ "name": "Österreich, Bayern & Norditalien",
+ "active": true,
+ "schedule": "woechentlich",
+ "weekday": 1,
+ "countrycodes": [
+  "at",
+  "de",
+  "it"
+ ],
+ "bbox": [
+  43.7,
+  6.6,
+  50.6,
+  17.2
+ ],
+ "languages": [
+  "de",
+  "en",
+  "it",
+  "nl",
+  "fr"
+ ],
+ "search_queries": [
+  "Österreich Wohnmobil Stellplatz",
+  "Tirol Wohnmobil",
+  "Vorarlberg Camper",
+  "Südtirol Wohnmobil Stellplatz",
+  "Dolomiten Camper",
+  "Allgäu Wohnmobil Stellplatz",
+  "Bayern Wohnmobil Reise",
+  "Gardasee Wohnmobil",
+  "Austria van life",
+  "Dolomites van life wild camping",
+  "camper Dolomiti area sosta",
+  "Nord Italia camper area sosta",
+  "Oostenrijk camper",
+  "Autriche camping-car"
+ ],
+ "channels": [],
+ "relevance_keywords": [
+  "österreich",
+  "austria",
+  "autriche",
+  "oostenrijk",
+  "tirol",
+  "tyrol",
+  "vorarlberg",
+  "salzburg",
+  "kärnten",
+  "steiermark",
+  "wien",
+  "innsbruck",
+  "bregenz",
+  "zillertal",
+  "ötztal",
+  "grossglockner",
+  "großglockner",
+  "südtirol",
+  "alto adige",
+  "dolomiten",
+  "dolomites",
+  "dolomiti",
+  "trentino",
+  "gardasee",
+  "lago di garda",
+  "lake garda",
+  "comer see",
+  "lago di como",
+  "lago maggiore",
+  "veneto",
+  "venetien",
+  "friaul",
+  "lombardei",
+  "lombardia",
+  "piemont",
+  "aostatal",
+  "norditalien",
+  "northern italy",
+  "nord italia",
+  "allgäu",
+  "bayern",
+  "bavaria",
+  "oberbayern",
+  "berchtesgaden",
+  "königssee",
+  "chiemsee",
+  "zugspitze",
+  "bodensee"
+ ],
+ "regions": [
+  {
+   "name": "Bayern & Allgäu",
+   "hint": "München, Füssen, Oberstdorf, Kempten, Garmisch-Partenkirchen, Berchtesgaden, Chiemsee, Passau, Regensburg"
+  },
+  {
+   "name": "Vorarlberg",
+   "hint": "Bregenz, Dornbirn, Feldkirch, Bregenzerwald, Montafon, Kleinwalsertal"
+  },
+  {
+   "name": "Tirol",
+   "hint": "Innsbruck, Zillertal, Ötztal, Kitzbühel, Achensee, Lienz, Reutte"
+  },
+  {
+   "name": "Salzburg & Oberösterreich",
+   "hint": "Salzburg, Zell am See, Salzkammergut, Hallstatt, Linz, Gmunden"
+  },
+  {
+   "name": "Ostösterreich",
+   "hint": "Wien, Wachau, Krems, Neusiedler See, St. Pölten, Eisenstadt"
+  },
+  {
+   "name": "Kärnten & Steiermark",
+   "hint": "Klagenfurt, Wörthersee, Villach, Millstätter See, Graz, Schladming"
+  },
+  {
+   "name": "Südtirol & Trentino",
+   "hint": "Bozen, Meran, Brixen, Dolomiten, Vinschgau, Trient, Riva del Garda"
+  },
+  {
+   "name": "Lombardei & Seen",
+   "hint": "Mailand, Comer See, Lago d'Iseo, Bergamo, Sirmione, Livigno"
+  },
+  {
+   "name": "Venetien, Friaul & Emilia",
+   "hint": "Venedig, Verona, Cortina d'Ampezzo, Triest, Udine, Bologna"
+  },
+  {
+   "name": "Piemont, Aostatal & Ligurien",
+   "hint": "Turin, Aosta, Lago Maggiore, Genua, Cinque Terre, Sanremo"
+  }
+ ],
+ "routes": [],
+ "sources": {
+  "youtube": true,
+  "osm_stellplatz": true,
+  "osm_camping": true,
+  "osm_entsorgung": false,
+  "web": false,
+  "opendata": false
+ },
+ "opendata": [],
+ "osm_areas": [
+  {
+   "code": "DE-BY",
+   "region": "Bayern & Allgäu"
+  },
+  {
+   "code": "AT-8",
+   "region": "Vorarlberg"
+  },
+  {
+   "code": "AT-7",
+   "region": "Tirol"
+  },
+  {
+   "code": "AT-5",
+   "region": "Salzburg & Oberösterreich"
+  },
+  {
+   "code": "AT-4",
+   "region": "Salzburg & Oberösterreich"
+  },
+  {
+   "code": "AT-9",
+   "region": "Ostösterreich"
+  },
+  {
+   "code": "AT-3",
+   "region": "Ostösterreich"
+  },
+  {
+   "code": "AT-1",
+   "region": "Ostösterreich"
+  },
+  {
+   "code": "AT-2",
+   "region": "Kärnten & Steiermark"
+  },
+  {
+   "code": "AT-6",
+   "region": "Kärnten & Steiermark"
+  },
+  {
+   "code": "IT-32",
+   "region": "Südtirol & Trentino"
+  },
+  {
+   "code": "IT-25",
+   "region": "Lombardei & Seen"
+  },
+  {
+   "code": "IT-34",
+   "region": "Venetien, Friaul & Emilia"
+  },
+  {
+   "code": "IT-36",
+   "region": "Venetien, Friaul & Emilia"
+  },
+  {
+   "code": "IT-45",
+   "region": "Venetien, Friaul & Emilia"
+  },
+  {
+   "code": "IT-21",
+   "region": "Piemont, Aostatal & Ligurien"
+  },
+  {
+   "code": "IT-23",
+   "region": "Piemont, Aostatal & Ligurien"
+  },
+  {
+   "code": "IT-42",
+   "region": "Piemont, Aostatal & Ligurien"
+  }
+ ],
+ "links": [],
+ "notes": "Wildcampen ist in Österreich je nach Bundesland und Gemeinde geregelt und vielerorts verboten (z. B. Tirol, Wien); in Bayern wird einmaliges Übernachten zur Wiederherstellung der Fahrtüchtigkeit meist geduldet, nicht aber Campingverhalten. In Italien, besonders in Südtirol, den Dolomiten und am Gardasee, gibt es häufig Übernachtungsverbote für Wohnmobile und Kontrollen. Notiere Hinweise auf Verbote, Bussen oder Kontrollen im Sicherheitstext."
+}
