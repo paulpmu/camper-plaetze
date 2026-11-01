@@ -3197,6 +3197,16 @@
    "transcript": "ok",
    "spots": 0,
    "skipped": "irrelevant"
+  },
+  "OPv-bPSYrb0": {
+   "skipped": "kurz"
+  },
+  "uru9haCOShU": {
+   "title": "On reprend le rythme de vie à la marocaine 🇲🇦",
+   "channel": "un_autre_voyage",
+   "published": "2026-11-01",
+   "transcript": "ok",
+   "spots": 0
   }
  },
  "queue": {},
@@ -3279,62 +3289,70 @@
    "https://maroccampingcar.com/en/complete-tour-of-morocco-by-camper-van-and-4x4-camper-overland-off-road-25-30-days-of-total-adventure/": {
     "title": "Voyage en Camping-Car au Maroc 2025 : Casablanca",
     "published": "",
-    "status": "neu"
+    "status": "fehler"
    },
    "https://ccvo70.com/explorer-le-maroc-en-camping-car-2025-conseils-pratiques-pour-un-voyage-inoubliable/": {
     "title": "Explorer le Maroc en camping-car 2025 : conseils pratiques pour un voyage inoubliable",
     "published": "",
-    "status": "neu"
+    "status": "fehler"
    },
    "https://valisio.fr/blog/voyage-au-maroc-en-camping-car-guide-complet": {
     "title": "Voyage au Maroc en Camping-Car : Guide Complet & Conseils",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 0
    },
    "https://www.nkc.nl/reis/marokko-arabisch-avontuur-2025-001/": {
     "title": "Marokko - Arabisch avontuur",
     "published": "",
-    "status": "neu"
+    "status": "fehler"
    },
    "https://www.nkc.nl/artikel/overwinteren-met-de-camper-in-marokko/": {
     "title": "Overwinteren met de camper in Marokko - NKC",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 0
    },
    "https://4x4nomads.com/2024-senegal-gambia-reisverslag/": {
     "title": "2024 Senegal, Gambia reisverslag",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 8
    },
    "https://www.nkc.nl/artikel/met-de-camper-naar-marokko/": {
     "title": "Met de camper naar Marokko - NKC",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 0
    },
    "https://www.mountainreporters.com/reizen/roadtrips/verslag-van-een-reis-met-de-camper-door-onbekend-marokko/": {
     "title": "Verslag van een reis met de camper door (on)bekend Marokko - Mountainreporters",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 1
    },
    "https://www.expeditionfareast.com/portfolio-item/camperreis-beleef-marokko-puur/": {
     "title": "Camperreis Beleef Marokko Puur - Expedition Far East",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 4
    },
    "https://free-on-wheels.reislogger.nl/westelijke-saharamauritanie.230840": {
     "title": "Westelijke Sahara/Mauritanië 🇲🇷",
     "published": "",
-    "status": "neu"
+    "status": "fehler"
    },
    "https://wobbie-en-wim.jouwweb.nl/de-laatste-keer-marokko-voorjaar-2025": {
     "title": "De laatste keer Marokko: voorjaar 2025",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 5
    },
    "https://www.expeditionfareast.com/portfolio-item/camperreis-fascinerend-marokko/": {
     "title": "Camperreis Fascinerend Marokko - Expedition Far East",
     "published": "",
-    "status": "neu"
+    "status": "ausgewertet",
+    "spots": 3
    }
   },
   "last_search": "2026-10-31"
