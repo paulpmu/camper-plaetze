@@ -110,5 +110,7 @@ window.PRIV = (() => {
     await save("eigene", `Eigener Platz gelöscht: ${e ? e.name : id}`);
   }
 
-  return { repo, setRepo, load, check, merk, setMerk, eigene, saveEigen, deleteEigen, get ready() { return ready; }, get data() { return data; } };
+  async function saveMerk(message) { await save("merk", message); }
+
+  return { repo, setRepo, load, check, merk, setMerk, saveMerk, eigene, saveEigen, deleteEigen, get ready() { return ready; }, get data() { return data; } };
 })();

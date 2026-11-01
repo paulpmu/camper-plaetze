@@ -105,7 +105,7 @@ Sobald ein Proxy eingetragen ist, wertet die App alle Videos, deren Transkript f
 
 ## Quellen, Zeitplan, eigene Plätze und Steuerung aus der App
 
-Siehe [BETRIEB.md](BETRIEB.md), Abschnitte 2.2 bis 2.9.
+Siehe [BETRIEB.md](BETRIEB.md), Abschnitte 2.2 bis 2.10.
 
 ## Kosten
 

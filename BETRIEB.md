@@ -140,6 +140,8 @@ Jedes Ziel wählt seine Quellen selbst, alle Kombinationen sind möglich. In der
 | **Offene Datensätze** | amtliche oder freie Listen als CSV, GeoJSON oder JSON mit offener Lizenz. Ergänzen per Anfrage mit Download-Adresse, z. B. «Bei Spanien den Datensatz https://… (CC BY) ergänzen». | gratis | bei jedem Lauf |
 | **Eigene Plätze** | von Ihnen erfasst, siehe 2.8 | gratis | sofort |
 
+**Neue Ziele** (per Anfrage) starten ohne YouTube, dafür mit allen anderen Quellen: OSM-Stellplätze, -Camping, -Entsorgung, Reiseberichte und offene Datensätze. Die YouTube-Suchbegriffe werden trotzdem angelegt. YouTube lässt sich später unter **Quellen** per Schalter dazunehmen.
+
 **Zusammenführen und Bestätigung:** Nach jedem Lauf werden alle aktiven Quellen zu einer Liste zusammengeführt (`docs/data/<ziel>/places.json`):
 - Derselbe Platz aus Video und Blog wird ein Eintrag.
 - Passt ein Bericht namentlich zu einem OpenStreetMap-Eintrag oder Datensatz in der Nähe, übernimmt er dessen **genaue Koordinaten** und gilt als **bestätigt**. Auf der Karte hat er einen goldenen Rand.
@@ -160,7 +162,19 @@ Diese Daten liegen im **privaten Repository** `camper-plaetze-privat` und sind n
 2. Den GitHub-Schlüssel um dieses Repository erweitern: https://github.com/settings/personal-access-tokens → Ihr Schlüssel → **Repository access** → `camper-plaetze-privat` hinzufügen → **Update**. Die Rechte bleiben gleich.
 3. In der App: Zielname antippen → ganz unten **Speichern & prüfen**. Es erscheint «Privates Repository … bereit».
 
-### 2.9 Etappenplaner
+### 2.9 Mehrere Ziele, Regionen und «Meine Plätze»
+
+- **Mehrere Ziele zugleich:** Zielname oben links antippen. Das **Häkchen** neben einem Ziel blendet es zusätzlich ein oder aus. Ein Tippen auf den **Namen** zeigt nur dieses Ziel. In der Kopfzeile steht dann z. B. «Schweiz + 1». Filter, Liste, Routen und Etappenplaner gelten für alle gewählten Ziele.
+- **Mehrere Regionen:** **Filter → Regionen**, beliebig viele antippen. «Alle» hebt die Auswahl auf. Bei mehreren Zielen sind die Regionen nach Ziel gruppiert.
+- **Meine Plätze** (Filter, ganz oben), unabhängig von den gewählten Zielen:
+  - **Eigene Plätze zeigen**: alle eigenen Plätze aus allen Zielen ein- oder ausblenden.
+  - **Favoriten immer zeigen**: Favoriten erscheinen immer, auch aus nicht gewählten Zielen und trotz anderer Filter.
+  - **Besuchte Plätze immer zeigen**: dasselbe für besuchte Plätze.
+  - Ist ein Schalter aus, erscheinen Favoriten und besuchte Plätze nur als normale Plätze ihres Ziels.
+  - Ein Platz aus einem nicht gewählten Ziel zeigt den Knopf **Ziel dazunehmen**.
+  - Die Reiter **Favoriten** und **Logbuch** in der Liste zeigen immer alle Ziele.
+
+### 2.10 Etappenplaner
 
 Ist unter **Filter** eine Route gewählt, zeigt die **Liste** oben den Bereich **Etappen planen**. Sie wählen die minimale und maximale Tagesetappe (Standard 150–250 km) und den Start (Routenstart oder Ihr Standort). Der Planer schlägt pro Etappe einen Platz vor. Favoriten haben Vorrang, sonst gewinnt die höchste Verlässlichkeit. Er berücksichtigt die aktiven Filter, etwa «ohne Allrad» oder «nur Camping». Gibt es im gewünschten Abstand nichts, wählt er etwas längere, notfalls kürzere Etappen.
 

@@ -108,8 +108,10 @@ Regeln:
 - Die bbox muss alle Regionen und Routen umfassen.
 - Verwende bestehende IDs bei Änderungen unverändert.
 - Zeitplan: neue Ziele standardmässig 'woechentlich' (weekday 1), ausser der Nutzer wünscht etwas anderes.
-- Quellen (sources): neue Ziele standardmässig mit YouTube, OSM-Stellplätzen und OSM-Camping; Web-Reiseberichte
-  und Entsorgungsstationen nur auf Wunsch. Bei Änderungen bestehende Quellen übernehmen.
+- Quellen (sources): neue Ziele standardmässig OHNE YouTube (youtube=false), dafür mit allen anderen Quellen:
+  osm_stellplatz, osm_camping, osm_entsorgung, web und opendata = true. Nur wenn der Nutzer YouTube ausdrücklich
+  wünscht, youtube=true. Suchbegriffe trotzdem immer anlegen (8–14), damit YouTube später per Schalter in der App
+  sofort funktioniert. Bei Änderungen bestehender Ziele die bisherigen Quellen übernehmen.
 - osm_areas nur, wenn der Nutzer Gebiete nennt; sonst leer (dann gelten die Länder des Ziels).
 - Offene Datensätze nur mit einer vom Nutzer genannten oder sicher bekannten Download-Adresse; nie erfinden.
 - Links nur auf Wunsch des Nutzers; bestehende Links bei Änderungen übernehmen."""

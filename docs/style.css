@@ -318,3 +318,10 @@ ol.stages { padding-left: 18px; margin: 10px 0; font-size: 14px; }
 ol.stages li { padding: 6px 0; cursor: pointer; border-bottom: 1px solid var(--line); }
 .note { color: var(--muted); font-size: 12px; }
 .req-list .btn.small { margin-top: 6px; }
+
+/* Mehrere Ziele, Regionen-Chips, Ebene «Meine Plätze» */
+.zcheck { width: 22px; height: 22px; accent-color: var(--accent); flex: none; }
+.zname { flex: 1; cursor: pointer; }
+.chipgroup { width: 100%; font-size: 12px; color: var(--muted); margin: 6px 0 -2px; font-weight: 600; }
+.hint { font-weight: 400; }
+.layers .toggle { border-top: 0; padding: 6px 0; }

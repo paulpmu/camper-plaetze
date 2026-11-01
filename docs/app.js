@@ -22,17 +22,21 @@
   const SCHEDULE = { taeglich: "täglich", woechentlich: "wöchentlich", manuell: "nur manuell" };
   const WEEKDAY = ["", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const DEFAULT_FILTER = {
-    region: "", route: "", corridor: 30, hideSources: [], hideTypes: [], rating: 0, age: 365, infra: [],
+    regions: [], route: "", corridor: 30, hideSources: [], hideTypes: [], rating: 0, age: 365, infra: [],
     no4wd: false, exact: false, safe: false, conf: "", onlyFav: false, q: "",
   };
+  const DEFAULT_LAYERS = { eigene: true, fav: true, visited: false };
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   let index = { repo: "", ziele: [] };
-  let ziel = null;          // aktuelles Ziel aus ziele.json
-  let places = [];          // alle Plätze des Ziels (alle Quellen + eigene)
+  let active = [];          // gewählte Ziele (Objekte aus ziele.json); das erste ist das Hauptziel
+  let ziel = null;          // Hauptziel (für Hash, neue eigene Plätze, Anfragen)
+  let places = [];          // alle Plätze der gewählten Ziele + Ebene «Meine Plätze»
   let routes = [];
+  const loaded = {};        // Ziel-ID → { places, routes }
   let filter = load("filter", DEFAULT_FILTER);
+  let layers = load("layers", DEFAULT_LAYERS);
   let listMode = "alle";    // alle | favoriten | logbuch
   let me = null;
   let meMarker = null;
@@ -60,8 +64,10 @@
 
   const isOwn = (s) => s.sources.includes("eigene");
   const isDirectoryOnly = (s) => !s.mentions.length && !isOwn(s);
-  const merkZiel = (s) => (s.own ? s.own.ziel : ziel.id);
-  const merk = (s) => (ziel ? PRIV.merk(merkZiel(s), s.id) : {});
+  const merkZiel = (s) => (s.own ? s.own.ziel : s.zid);
+  const merk = (s) => PRIV.merk(merkZiel(s), s.id);
+  const zielById = (id) => index.ziele.find((z) => z.id === id);
+  const routeKey = (r) => `${r.zid}/${r.id}`;
 
   function pinHtml(s) {
     const m = merk(s);
@@ -109,26 +115,55 @@
     }
     await PRIV.load();
     const [hz, hs] = decodeURIComponent(location.hash.slice(1)).split("/");
-    const wanted = hz || loadStr("ziel");
-    const z = index.ziele.find((x) => x.id === wanted) || index.ziele[0];
+    let ids = (() => { try { return JSON.parse(localStorage.getItem("ziele-aktiv") || "null"); } catch { return null; } })()
+      || [loadStr("ziel")].filter(Boolean);
+    ids = ids.filter((id) => zielById(id));
+    if (hz && zielById(hz) && !ids.includes(hz)) ids = [hz];
+    if (!ids.length && index.ziele.length) ids = [index.ziele[0].id];
     renderZielList();
-    if (z) await selectZiel(z.id, hs);
+    if (ids.length) await setActive(ids, hs ? `${hz}/${hs}` : null);
     else $("#count").textContent = "noch kein Ziel";
   }
 
-  // Eigene Plätze als normale Plätze darstellen
+  function routesFor(p) {
+    const out = {};
+    for (const r of routes) { const [km, off] = locateOnRoute(p.lat, p.lng, r.coords); if (off <= 50) out[routeKey(r)] = [km, off]; }
+    return out;
+  }
+
+  // Ebene «Meine Plätze»: eigene Plätze aller Ziele
   function ownPlaces() {
-    return PRIV.eigene(ziel.id, ziel.bbox).map((e) => {
+    if (!layers.eigene) return [];
+    return PRIV.data.eigene.map((e) => {
       const p = {
-        id: e.id, name: e.name, place: e.place || "", region: "", lat: e.lat, lng: e.lng, precision: "exakt",
-        type: e.type || "stellplatz", sources: ["eigene"], mentions: [], rating: e.rating || null,
+        id: e.id, zid: e.ziel, key: `eigene/${e.id}`, name: e.name, place: e.place || "", region: "", lat: e.lat, lng: e.lng,
+        precision: "exakt", type: e.type || "stellplatz", sources: ["eigene"], mentions: [], rating: e.rating || null,
         infrastructure: { water: null, dump_station: null, electricity: null, toilets: null, showers: null, ...(e.infrastructure || {}) },
-        price: e.price || "", description: e.note || "", website: e.link || "", own: e, score: 100, confidence: "hoch",
+        price: e.price || "", description: e.note || "", website: e.link || "", own: e, score: 100, confidence: "hoch", layer: true,
       };
-      p.routes = {};
-      for (const r of routes) { const [km, off] = locateOnRoute(p.lat, p.lng, r.coords); if (off <= 50) p.routes[r.id] = [km, off]; }
+      p.ownRoutes = routesFor(p);
       return p;
     });
+  }
+
+  // Ebene «Meine Plätze»: Favoriten und besuchte Plätze aus Zielen, die gerade nicht gewählt sind
+  function merkPlaces() {
+    const shown = new Set(places.map((p) => `${merkZiel(p)}/${p.id}`));
+    const out = [];
+    for (const [k, m] of Object.entries(PRIV.data.merk)) {
+      const [zid, id] = [k.slice(0, k.indexOf("/")), k.slice(k.indexOf("/") + 1)];
+      if (shown.has(k) || m.lat == null || id.startsWith("e-")) continue;
+      if (!((layers.fav && m.fav) || (layers.visited && m.visited))) continue;
+      const p = {
+        id, zid, key: `merk/${k}`, name: m.name || "Platz", place: "", region: "", lat: m.lat, lng: m.lng, precision: "exakt",
+        type: m.type || "andere", sources: ["merkliste"], mentions: [], rating: m.rating || null,
+        infrastructure: { water: null, dump_station: null, electricity: null, toilets: null, showers: null },
+        merkOnly: true, layer: true, confidence: "", score: null,
+      };
+      p.ownRoutes = routesFor(p);
+      out.push(p);
+    }
+    return out;
   }
 
   // Ältere Datenstände ohne places.json: Quellen selbst zusammensetzen
@@ -138,27 +173,51 @@
     return spots.concat(osm);
   }
 
-  async function selectZiel(id, spotId) {
-    const z = index.ziele.find((x) => x.id === id);
-    if (!z) return;
-    const changed = ziel && ziel.id !== id;
-    ziel = z;
-    save("ziel", id);
-    $("#ziel-name").textContent = z.name;
-    $("#count").textContent = "lädt …";
-    if (changed) { filter.region = ""; filter.route = ""; }
-    let data;
-    [data, routes] = await Promise.all([
+  async function loadZiel(id) {
+    if (loaded[id]) return loaded[id];
+    const [data, rts] = await Promise.all([
       getJson(`data/${id}/places.json`).catch(async () => legacyPlaces(
         await getJson(`data/${id}/spots.json`).catch(() => []), await getJson(`data/${id}/osm.json`).catch(() => []))),
       getJson(`data/${id}/routes.json`).then((r) => r.routes || []).catch(() => []),
     ]);
-    places = data.concat(ownPlaces());
-    if (filter.region && !z.regions.includes(filter.region)) filter.region = "";
-    if (filter.route && !routes.some((r) => r.id === filter.route)) filter.route = "";
+    data.forEach((p) => { p.zid = id; p.key = `${id}/${p.id}`; });
+    rts.forEach((r) => (r.zid = id));
+    loaded[id] = { places: data, routes: rts };
+    backfillMerk(id, data);
+    return loaded[id];
+  }
+
+  // Ältere Merklisten-Einträge ohne Koordinaten ergänzen (für die Ebene «Meine Plätze»)
+  let backfillTimer = null;
+  function backfillMerk(zid, data) {
+    let changed = false;
+    for (const [k, m] of Object.entries(PRIV.data.merk)) {
+      if (!k.startsWith(zid + "/") || m.lat != null) continue;
+      const p = data.find((x) => x.id === k.slice(zid.length + 1));
+      if (p && p.lat != null) { m.lat = p.lat; m.lng = p.lng; m.type = p.type; changed = true; }
+    }
+    if (changed && GH.token()) { clearTimeout(backfillTimer); backfillTimer = setTimeout(() => PRIV.saveMerk("Merkliste: Koordinaten ergänzt").catch(() => {}), 3000); }
+  }
+
+  // Gewählte Ziele laden und anzeigen
+  async function setActive(ids, openKey) {
+    active = ids.map(zielById).filter(Boolean);
+    ziel = active[0] || null;
+    try { localStorage.setItem("ziele-aktiv", JSON.stringify(ids)); } catch { /* privater Modus */ }
+    if (ziel) save("ziel", ziel.id);
+    $("#ziel-name").textContent = active.length > 1 ? `${active[0].name} + ${active.length - 1}` : (ziel ? ziel.name : "Camper-Plätze");
+    $("#count").textContent = "lädt …";
+    const sets = await Promise.all(active.map((z) => loadZiel(z.id)));
+    routes = sets.flatMap((x) => x.routes);
+    places = sets.flatMap((x) => x.places);
+    places = places.concat(ownPlaces());
+    places = places.concat(merkPlaces());
+    const regionKeys = new Set(active.flatMap((z) => z.regions.map((r) => `${z.id}|${r}`)));
+    filter.regions = filter.regions.filter((r) => regionKeys.has(r));
+    if (filter.route && !routes.some((r) => routeKey(r) === filter.route)) filter.route = "";
     rebuildMarkers();
-    $("#f-region").innerHTML = `<option value="">Alle Regionen</option>` + z.regions.map((r) => `<option>${esc(r)}</option>`).join("");
-    $("#f-route").innerHTML = `<option value="">Keine Route</option>` + routes.map((r) => `<option value="${esc(r.id)}">${esc(r.name)} (${r.length_km} km)</option>`).join("");
+    renderRegionChips();
+    $("#f-route").innerHTML = `<option value="">Keine Route</option>` + routes.map((r) => `<option value="${esc(routeKey(r))}">${active.length > 1 ? esc(zielById(r.zid).name) + ": " : ""}${esc(r.name)} (${r.length_km} km)</option>`).join("");
     $("#route-filter").hidden = !routes.length;
     renderSourceChips();
     drawRoutes();
@@ -167,13 +226,25 @@
     $(".empty")?.remove();
     if (!places.length) {
       document.body.insertAdjacentHTML("beforeend",
-        `<div class="empty"><strong>Noch keine Plätze für ${esc(z.name)}</strong><p class="muted">${z.last_run ? "Prüfen Sie die aktiven Quellen (Zielname antippen → Quellen)." : "Der erste Abruf steht noch aus. Er startet automatisch oder über «Jetzt aktualisieren»."}</p></div>`);
+        `<div class="empty"><strong>Noch keine Plätze</strong><p class="muted">Prüfen Sie die gewählten Ziele und deren Quellen (Zielname antippen).</p></div>`);
     }
     showMeta();
     render();
-    const linked = places.find((s) => s.id === spotId);
+    const linked = openKey && places.find((s) => s.key === openKey);
     if (linked) { if (linked.lat != null) map.setView([linked.lat, linked.lng], 13); openDetail(linked); }
     else fitView();
+  }
+  const selectZiel = (id, spotId) => setActive([id], spotId ? `${id}/${spotId}` : null);
+
+  // Nur die Ebene «Meine Plätze» neu aufbauen (nach Schalter oder Änderung)
+  function rebuildLayer() {
+    places = places.filter((p) => !p.layer);
+    places = places.concat(ownPlaces());
+    places = places.concat(merkPlaces());
+    rebuildMarkers();
+    renderSourceChips();
+    syncFilterUI();
+    render();
   }
 
   function rebuildMarkers() {
@@ -182,51 +253,69 @@
       if (s.lat == null) continue;
       const m = L.marker([s.lat, s.lng], { icon: icon(s), title: s.name });
       m.on("click", () => openDetail(s));
-      markers.set(s.id, m);
+      markers.set(s.key, m);
     }
   }
   function refreshMarker(s) {
-    const m = markers.get(s.id);
+    const m = markers.get(s.key);
     if (m) m.setIcon(icon(s));
   }
 
   function fitView() {
-    const located = places.filter(matches).filter((s) => s.lat != null);
-    const r = routes.find((x) => x.id === filter.route);
+    const located = places.filter((s) => !s.layer && matches(s) && s.lat != null);
+    const r = routes.find((x) => routeKey(x) === filter.route);
     if (r) map.fitBounds(L.latLngBounds(r.coords), { padding: [40, 40] });
     else if (located.length) map.fitBounds(L.latLngBounds(located.map((s) => [s.lat, s.lng])), { padding: [40, 40], maxZoom: 12 });
-    else if (ziel) { const [s, w, n, e] = ziel.bbox; map.fitBounds([[s, w], [n, e]]); }
+    else if (active.length) map.fitBounds(L.latLngBounds(active.flatMap((z) => [[z.bbox[0], z.bbox[1]], [z.bbox[2], z.bbox[3]]])));
   }
 
   function drawRoutes() {
     routeGroup.clearLayers();
     for (const r of routes) {
-      const active = filter.route === r.id;
+      const on = filter.route === routeKey(r);
       const line = L.polyline(r.coords, {
-        color: r.color, weight: active ? 5 : 3, opacity: active ? 0.9 : 0.45, dashArray: active ? null : "6 8",
+        color: r.color, weight: on ? 5 : 3, opacity: on ? 0.9 : 0.45, dashArray: on ? null : "6 8",
       }).bindTooltip(r.name, { sticky: true });
-      line.on("click", () => { filter.route = r.id; syncFilterUI(); drawRoutes(); render(); fitView(); });
+      line.on("click", () => { filter.route = routeKey(r); syncFilterUI(); drawRoutes(); render(); fitView(); });
       routeGroup.addLayer(line);
     }
   }
 
   function showMeta() {
-    if (!ziel || !ziel.last_run) { $("#meta").textContent = "Für dieses Ziel ist noch kein Abruf erfolgt."; return; }
-    const d = new Date(ziel.last_run);
-    const c = ziel.counts || {};
-    const parts = Object.keys(SOURCES).filter((k) => c[k]).map((k) => `${SOURCES[k][0]} ${c[k]}`);
-    $("#meta").textContent = `${ziel.name}: Stand ${d.toLocaleDateString("de-CH")} ${d.toLocaleTimeString("de-CH", { hour: "2-digit", minute: "2-digit" })} · ${places.length} Plätze` +
-      (parts.length ? ` (${parts.join(", ")})` : "") + (c.confirmed ? ` · ${c.confirmed} von mehreren Quellen bestätigt` : "");
+    $("#meta").innerHTML = active.map((z) => {
+      if (!z.last_run) return `${esc(z.name)}: noch kein Abruf.`;
+      const d = new Date(z.last_run), c = z.counts || {};
+      const parts = Object.keys(SOURCES).filter((k) => c[k]).map((k) => `${SOURCES[k][0]} ${c[k]}`);
+      return `${esc(z.name)}: Stand ${d.toLocaleDateString("de-CH")} · ${c.total || z.spots} Plätze` + (parts.length ? ` (${esc(parts.join(", "))})` : "") +
+        (c.confirmed ? ` · ${c.confirmed} bestätigt` : "");
+    }).join("<br>");
   }
 
   // ---------------------------------------------------------------- Filter
   const ageDays = (s) => (s.last_seen ? (Date.now() - new Date(s.last_seen).getTime()) / 864e5 : null);
-  function onRoute(s) { return filter.route ? (s.routes || {})[filter.route] : null; }
+  function routeVal(s, r) {
+    if (s.ownRoutes) return s.ownRoutes[routeKey(r)] || null;
+    return s.zid === r.zid ? (s.routes || {})[r.id] || null : null;
+  }
+  function onRoute(s) {
+    if (!filter.route) return null;
+    const r = routes.find((x) => routeKey(x) === filter.route);
+    return r ? routeVal(s, r) : null;
+  }
+  // Ebene «Meine Plätze»: eigene sowie (je nach Schalter) Favoriten und besuchte Plätze immer zeigen
+  function inLayer(s) {
+    if (isOwn(s)) return layers.eigene;
+    const m = merk(s);
+    return (layers.fav && m.fav) || (layers.visited && m.visited);
+  }
 
   function matches(s) {
     const f = filter;
+    if (isOwn(s) && !layers.eigene) return false;
+    if (inLayer(s) && !f.route && !f.q) return true;
+    if (s.merkOnly) return false;
     if (f.route) { const r = onRoute(s); if (!r || r[1] > f.corridor) return false; }
-    if (f.region && s.region !== f.region && !isOwn(s)) return false;
+    if (f.regions.length && !isOwn(s) && !f.regions.includes(`${s.zid}|${s.region}`)) return false;
     if (f.hideTypes.includes(s.type)) return false;
     if (s.sources.every((x) => f.hideSources.includes(x))) return false;
     if (f.rating && (s.rating == null || s.rating < f.rating)) return false;
@@ -254,8 +343,9 @@
   function render() {
     const visible = places.filter(matches);
     cluster.clearLayers();
-    cluster.addLayers(visible.filter((s) => markers.has(s.id)).map((s) => markers.get(s.id)));
+    cluster.addLayers(visible.filter((s) => markers.has(s.key)).map((s) => markers.get(s.key)));
     $("#count").textContent = places.length ? `${visible.length} von ${places.length} Plätzen` : "keine Plätze";
+    save("layers", layers);
     $("#filter-dot").hidden = isDefault();
     renderList(visible);
     save("filter", filter);
@@ -271,21 +361,22 @@
 
   // ---------------------------------------------------------------- Liste, Favoriten, Logbuch
   function listItem(s, right) {
-    return `<li data-id="${esc(s.id)}">${pinHtml(s)}
-        <div><div class="t">${esc(s.name)}</div><div class="s">${esc(TYPE_LABEL[s.type] || s.type)}${s.place || s.region ? " · " + esc(s.place || s.region) : ""}</div></div>
+    const zname = !isOwn(s) && (active.length > 1 || s.layer) ? (zielById(s.zid) || {}).name : "";
+    return `<li data-id="${esc(s.key)}">${pinHtml(s)}
+        <div><div class="t">${esc(s.name)}</div><div class="s">${esc(TYPE_LABEL[s.type] || s.type)}${s.place || s.region ? " · " + esc(s.place || s.region) : ""}${zname ? " · " + esc(zname) : ""}</div></div>
         <div class="r">${right}</div></li>`;
   }
 
   function renderList(visible) {
     $("#etappen").hidden = !filter.route || listMode !== "alle";
     if (listMode === "logbuch") {
-      const visited = places.filter((s) => merk(s).visited).sort((a, b) => merk(b).visited.localeCompare(merk(a).visited));
+      const visited = allMerkPlaces().filter((s) => merk(s).visited).sort((a, b) => merk(b).visited.localeCompare(merk(a).visited));
       $("#list-sort").textContent = "besucht, neueste zuerst";
       $("#list").innerHTML = visited.map((s) => listItem(s, `${new Date(merk(s).visited).toLocaleDateString("de-CH")}${merk(s).note ? `<br><span class="note">${esc(merk(s).note.slice(0, 40))}</span>` : ""}`)).join("")
         || `<li class="muted">Noch keine besuchten Plätze. Im Platz auf «✓ Besucht» tippen.</li>`;
       return;
     }
-    const base = listMode === "favoriten" ? places.filter((s) => merk(s).fav) : visible;
+    const base = listMode === "favoriten" ? allMerkPlaces().filter((s) => merk(s).fav) : visible;
     const items = base.filter((s) => s.lat != null).map((s) => ({ s, d: distKm(s), r: onRoute(s) }));
     const regionOnly = base.filter((s) => s.lat == null);
     let label;
@@ -299,6 +390,19 @@
       + (regionOnly.length ? `<li class="group muted">Nur Region bekannt (${regionOnly.length})</li>` + regionOnly.map((s) => listItem(s, s.last_seen ? fmtDate(s.last_seen) : "")).join("") : "")
       || `<li class="muted">${listMode === "favoriten" ? "Noch keine Favoriten. Im Platz auf «★ Favorit» tippen." : "Keine Plätze für diese Filter."}</li>`;
   }
+  // Für Favoriten und Logbuch: alle gemerkten Plätze, auch aus nicht gewählten Zielen
+  function allMerkPlaces() {
+    const out = places.slice();
+    const have = new Set(out.map((p) => `${merkZiel(p)}/${p.id}`));
+    for (const [k, m] of Object.entries(PRIV.data.merk)) {
+      if (have.has(k) || k.includes("/e-")) continue;
+      const i = k.indexOf("/");
+      out.push({ id: k.slice(i + 1), zid: k.slice(0, i), key: `merk/${k}`, name: m.name || "Platz", place: "", region: "", lat: m.lat ?? null, lng: m.lng ?? null,
+        precision: "exakt", type: m.type || "andere", sources: ["merkliste"], mentions: [], rating: m.rating || null,
+        infrastructure: {}, merkOnly: true, layer: true, confidence: "", score: null });
+    }
+    return out;
+  }
   $("#list-mode").onclick = (e) => {
     const b = e.target.closest("button[data-mode]");
     if (!b) return;
@@ -309,12 +413,12 @@
 
   // ---------------------------------------------------------------- Etappenplaner
   $("#et-plan").onclick = () => {
-    const r = routes.find((x) => x.id === filter.route);
+    const r = routes.find((x) => routeKey(x) === filter.route);
     if (!r) return;
     const min = +$("#et-min").value || 150, max = Math.max(min + 10, +$("#et-max").value || 250);
     let pos = 0;
     if ($("#et-start").value === "standort" && me) pos = locateOnRoute(me[0], me[1], r.coords)[0];
-    const cands = places.filter((s) => matches(s) && s.type !== "entsorgung" && onRoute(s)).map((s) => ({ s, km: onRoute(s)[0] }));
+    const cands = places.filter((s) => matches(s) && s.type !== "entsorgung" && onRoute(s) && onRoute(s)[1] <= filter.corridor).map((s) => ({ s, km: onRoute(s)[0] }));
     const stages = [];
     while (stages.length < 20) {
       // Zuerst im gewünschten Bereich, dann etwas längere, erst zuletzt kürzere Etappen
@@ -332,7 +436,7 @@
       if (r.length_km - pos < min * 0.5) break;
     }
     $("#et-result").innerHTML = stages.length
-      ? `<ol class="stages">${stages.map((st, i) => `<li data-id="${esc(st.s.id)}"><b>Etappe ${i + 1}</b> · ${st.km - st.from} km → km ${st.km}<br>${esc(st.s.name)} <span class="muted">(${esc(TYPE_LABEL[st.s.type])}, Verlässlichkeit ${esc(st.s.confidence || "–")})</span></li>`).join("")}</ol>
+      ? `<ol class="stages">${stages.map((st, i) => `<li data-id="${esc(st.s.key)}"><b>Etappe ${i + 1}</b> · ${st.km - st.from} km → km ${st.km}<br>${esc(st.s.name)} <span class="muted">(${esc(TYPE_LABEL[st.s.type])}, Verlässlichkeit ${esc(st.s.confidence || "–")})</span></li>`).join("")}</ol>
          <p class="muted">Restliche Strecke bis Ziel: ${Math.max(0, r.length_km - pos)} km. Favoriten werden bevorzugt, sonst die verlässlichsten Plätze.</p>`
       : `<p class="muted">Keine passenden Plätze in diesem Abstand. Filter lockern oder Etappenlänge ändern.</p>`;
   };
@@ -396,8 +500,8 @@
     </div>`;
   }
 
-  function openPlace(id) {
-    const s = places.find((x) => x.id === id);
+  function openPlace(key) {
+    const s = places.find((x) => x.key === key) || (key.startsWith("merk/") && allMerkPlaces().find((x) => x.key === key));
     if (!s) return;
     if (s.lat != null) map.setView([s.lat, s.lng], Math.max(map.getZoom(), 13));
     openDetail(s);
@@ -416,24 +520,25 @@
       [isOwn(s) ? "Notiz" : "Beschreibung", s.description], ["Datensatz", s.dataset ? `${s.dataset}${s.license ? " (" + s.license + ")" : ""}` : ""],
     ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
 
-    const routeInfo = routes.filter((r) => (s.routes || {})[r.id]).map((r) => {
-      const [km, off] = s.routes[r.id];
+    const routeInfo = routes.filter((r) => routeVal(s, r)).map((r) => {
+      const [km, off] = routeVal(s, r);
       return `<div class="route-info"><span class="route-swatch" style="background:${esc(r.color)}"></span>${esc(r.name)}: km ${km} von ${r.length_km}${off >= 1 ? `, ${off} km abseits` : ""}</div>`;
     }).join("");
 
     const ll = `${s.lat},${s.lng}`;
-    const links = [...(index.standard_links || []), ...(ziel.links || [])];
+    const links = [...(index.standard_links || []), ...((zielById(s.zid) || {}).links || [])];
     const videos = s.mentions.filter((m) => m.video_id).length, reports = s.mentions.length - videos;
     const counted = [videos && `${videos} ${videos === 1 ? "Video" : "Videos"}`, reports && `${reports} ${reports === 1 ? "Bericht" : "Berichte"}`].filter(Boolean).join(", ");
 
     $("#detail").innerHTML = `
       <div class="d-head">
         <h3>${esc(s.name)}</h3>
-        <div class="muted">${[s.place, s.region].filter(Boolean).map(esc).join(" · ")}</div>
+        <div class="muted">${[s.place, s.region, (zielById(s.zid) || {}).name].filter(Boolean).map(esc).join(" · ")}</div>
       </div>
+      ${s.merkOnly ? `<p class="muted">Aus Ihrer Merkliste. Das Ziel ist gerade nicht gewählt.${s.lat != null ? ` <button class="linkbtn" data-load-ziel="${esc(s.zid)}">Ziel dazunehmen</button>` : ""}</p>` : ""}
       <div class="badges">
         <span class="badge type ${s.type}">${esc(TYPE_LABEL[s.type] || s.type)}</span>
-        ${isOwn(s) ? `<span class="badge own">eigener Platz</span>` : `<span class="badge ${PRECISION[s.precision][1]}">${PRECISION[s.precision][0]}${s.coord_source ? " (" + esc(s.coord_source) + ")" : ""}</span>`}
+        ${isOwn(s) ? `<span class="badge own">eigener Platz</span>` : s.merkOnly ? "" : `<span class="badge ${PRECISION[s.precision][1]}">${PRECISION[s.precision][0]}${s.coord_source ? " (" + esc(s.coord_source) + ")" : ""}</span>`}
         ${s.confirmed ? `<span class="badge ok">bestätigt durch ${s.sources.length} Quellen</span>` : ""}
         ${s.confidence && !isOwn(s) ? `<span class="badge conf ${s.confidence}">Verlässlichkeit ${s.confidence} (${s.score})</span>` : ""}
         ${ageDays(s) > 365 ? `<span class="badge warn">Info älter als 1 Jahr</span>` : ""}
@@ -457,12 +562,17 @@
       ${s.osm ? `<p class="muted">Daten aus OpenStreetMap, ohne Gewähr. © OpenStreetMap-Mitwirkende (ODbL).</p>` : ""}`;
     const share = $("#detail [data-share]");
     if (share) share.onclick = () => {
-      const url = location.href.split("#")[0] + "#" + ziel.id + "/" + s.id;
+      const url = location.href.split("#")[0] + "#" + s.zid + "/" + s.id;
       if (navigator.share) navigator.share({ title: s.name, url }).catch(() => {});
       else navigator.clipboard?.writeText(url);
     };
     bindMine(s);
-    history.replaceState(null, "", "#" + ziel.id + "/" + s.id);
+    const lz = $("#detail [data-load-ziel]");
+    if (lz) lz.onclick = async () => {
+      const id = lz.dataset.loadZiel;
+      if (!active.some((z) => z.id === id)) await setActive([...active.map((z) => z.id), id], `${id}/${s.id}`);
+    };
+    if (!s.merkOnly && !isOwn(s)) history.replaceState(null, "", "#" + s.zid + "/" + s.id);
     open("#sheet-detail");
   }
 
@@ -470,7 +580,10 @@
     const box = $("#detail .mine");
     if (!box) return;
     const store = async (changes, msg) => {
-      try { await PRIV.setMerk(merkZiel(s), s.id, s.name, changes); toast(msg); refreshMarker(s); openDetail(s); render(); }
+      try {
+        await PRIV.setMerk(merkZiel(s), s.id, s.name, { ...changes, lat: s.lat, lng: s.lng, type: s.type });
+        toast(msg); refreshMarker(s); openDetail(s); rebuildLayer();
+      }
       catch (err) { toast("Speichern fehlgeschlagen: " + err.message + " – privates Repository prüfen (Zielname antippen → ganz unten)."); }
     };
     box.onclick = async (e) => {
@@ -494,7 +607,7 @@
     if (!GH.token()) { toast("Für eigene Plätze zuerst GitHub-Schlüssel und privates Repository hinterlegen."); return; }
     const c = map.getCenter();
     ownDraft = entry ? { ...entry } : {
-      id: "e-" + Date.now().toString(36), ziel: ziel.id, name: "", type: "stellplatz", rating: null, note: "", link: "",
+      id: "e-" + Date.now().toString(36), ziel: ziel ? ziel.id : "", name: "", type: "stellplatz", rating: null, note: "", link: "",
       lat: me ? me[0] : +c.lat.toFixed(5), lng: me ? me[1] : +c.lng.toFixed(5), created: new Date().toISOString().slice(0, 10),
       visited: new Date().toISOString().slice(0, 10),
     };
@@ -522,19 +635,16 @@
     $("#own-save").disabled = true;
     try {
       await PRIV.saveEigen(ownDraft);
-      if (ownDraft.visited) await PRIV.setMerk(ownDraft.ziel, ownDraft.id, name, { visited: ownDraft.visited });
+      if (ownDraft.visited) await PRIV.setMerk(ownDraft.ziel, ownDraft.id, name, { visited: ownDraft.visited, lat: ownDraft.lat, lng: ownDraft.lng, type: ownDraft.type });
       toast("Eigener Platz gespeichert");
       close();
+      layers.eigene = true;
       await reloadOwn();
-      openPlace(ownDraft.id);
+      openPlace(`eigene/${ownDraft.id}`);
     } catch (err) { toast("Speichern fehlgeschlagen: " + err.message); }
     $("#own-save").disabled = false;
   };
-  async function reloadOwn() {
-    places = places.filter((s) => !isOwn(s)).concat(ownPlaces());
-    rebuildMarkers();
-    render();
-  }
+  async function reloadOwn() { rebuildLayer(); }
 
   // ---------------------------------------------------------------- Ziele, Quellen & Anfragen
   function sourceSummary(z) {
@@ -544,9 +654,10 @@
   function renderZielList() {
     const can = !!GH.token();
     $("#ziel-list").innerHTML = index.ziele.map((z) => `
-      <li data-id="${esc(z.id)}" class="${ziel && z.id === ziel.id ? "on" : ""}">
-        <div class="zrow" data-select>
-          <span>${esc(z.name)}</span>
+      <li data-id="${esc(z.id)}" class="${active.some((a) => a.id === z.id) ? "on" : ""}">
+        <div class="zrow">
+          <input type="checkbox" class="zcheck" data-toggle aria-label="${esc(z.name)} auf der Karte zeigen" ${active.some((a) => a.id === z.id) ? "checked" : ""}>
+          <span data-select class="zname">${esc(z.name)}</span>
           <span class="r">${z.spots} Plätze${z.routes.length ? ` · ${z.routes.length} Routen` : ""}<br>${z.last_run ? "Stand " + new Date(z.last_run).toLocaleDateString("de-CH") : "noch kein Abruf"}</span>
         </div>
         <div class="srcline muted">${esc(sourceSummary(z))}</div>
@@ -565,6 +676,13 @@
     if (!li) return;
     const z = index.ziele.find((x) => x.id === li.dataset.id);
     if (e.target.closest("[data-select]")) { close(); selectZiel(z.id); return; }
+    if (e.target.closest("[data-toggle]")) {
+      const ids = active.map((a) => a.id);
+      const next = ids.includes(z.id) ? ids.filter((x) => x !== z.id) : [...ids, z.id];
+      if (!next.length) { e.target.checked = true; toast("Mindestens ein Ziel muss gewählt sein."); return; }
+      await setActive(next);
+      return;
+    }
     if (e.target.closest("[data-sources]")) { openSources(z); return; }
     const run = e.target.closest("[data-run]");
     if (run) {
@@ -655,7 +773,7 @@
     if (!text) { $("#req-text").focus(); return; }
     if (!repo()) { alert("Repository unbekannt – die App muss über GitHub Pages laufen."); return; }
     const title = "[Ziel] " + text.split("\n")[0].slice(0, 70);
-    const body = `${text}\n\n---\nGesendet aus der Webapp · aktuelles Ziel: ${ziel ? ziel.name + " (" + ziel.id + ")" : "–"}`;
+    const body = `${text}\n\n---\nGesendet aus der Webapp · gewählte Ziele: ${active.map((z) => `${z.name} (${z.id})`).join(", ") || "–"}`;
     if (GH.token()) {
       $("#req-send").disabled = true;
       try {
@@ -712,6 +830,7 @@
   function close() {
     if (current) $(current).hidden = true;
     if (current === "#sheet-detail" && ziel) history.replaceState(null, "", location.pathname + "#" + ziel.id);
+    if (current === "#sheet-filter") fitView();
     current = null;
     $("#backdrop").hidden = true;
   }
@@ -729,7 +848,8 @@
     try {
       const fresh = await getJson("data/ziele.json");
       index = fresh;
-      if (ziel) ziel = index.ziele.find((z) => z.id === ziel.id) || ziel;
+      active = active.map((a) => zielById(a.id) || a);
+      ziel = active[0] || null;
       renderZielList();
     } catch { /* offline: bisherige Liste */ }
     loadRequests();
@@ -781,11 +901,17 @@
   // ---------------------------------------------------------------- Filter-UI
   function renderSourceChips() {
     const present = new Set(places.flatMap((s) => s.sources));
-    $("#f-source").innerHTML = Object.keys(SOURCES).filter((k) => present.has(k))
+    $("#f-source").innerHTML = Object.keys(SOURCES).filter((k) => present.has(k) && k !== "eigene")
       .map((k) => `<button data-v="${k}" class="chip">${SOURCES[k][0]}</button>`).join("") || `<span class="muted">–</span>`;
   }
+  function renderRegionChips() {
+    $("#f-region").innerHTML = active.map((z) => `${active.length > 1 ? `<div class="chipgroup">${esc(z.name)}</div>` : ""}` +
+      z.regions.map((r) => `<button data-v="${esc(z.id + "|" + r)}" class="chip">${esc(r)}</button>`).join("")).join("");
+  }
   function syncFilterUI() {
-    $("#f-region").value = filter.region;
+    document.querySelectorAll("#f-region .chip").forEach((b) => b.classList.toggle("on", filter.regions.includes(b.dataset.v)));
+    $("#f-region-all").classList.toggle("on", !filter.regions.length);
+    document.querySelectorAll("#f-layers input").forEach((i) => (i.checked = !!layers[i.dataset.layer]));
     $("#f-route").value = filter.route;
     $("#corridor-field").hidden = !filter.route;
     document.querySelectorAll("#f-corridor button").forEach((b) => b.classList.toggle("on", +b.dataset.v === filter.corridor));
@@ -803,9 +929,11 @@
   }
   function toggleIn(arr, v) { return arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]; }
 
-  $("#f-route").onchange = (e) => { filter.route = e.target.value; syncFilterUI(); drawRoutes(); render(); fitView(); };
+  $("#f-route").onchange = (e) => { filter.route = e.target.value; syncFilterUI(); drawRoutes(); render(); };
   $("#f-corridor").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.corridor = +b.dataset.v; syncFilterUI(); render(); };
-  $("#f-region").onchange = (e) => { filter.region = e.target.value; render(); fitView(); };
+  $("#f-region").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.regions = toggleIn(filter.regions, b.dataset.v); syncFilterUI(); render(); };
+  $("#f-region-all").onclick = () => { filter.regions = []; syncFilterUI(); render(); };
+  $("#f-layers").onchange = (e) => { const i = e.target.closest("input[data-layer]"); if (!i) return; layers[i.dataset.layer] = i.checked; rebuildLayer(); };
   $("#f-source").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.hideSources = toggleIn(filter.hideSources, b.dataset.v); syncFilterUI(); render(); };
   $("#f-type").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.hideTypes = toggleIn(filter.hideTypes, b.dataset.v); syncFilterUI(); render(); };
   $("#f-infra").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; filter.infra = toggleIn(filter.infra, b.dataset.v); syncFilterUI(); render(); };
@@ -814,7 +942,7 @@
   $("#f-conf").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; filter.conf = b.dataset.v; syncFilterUI(); render(); };
   [["no4wd", "no4wd"], ["exact", "exact"], ["safe", "safe"], ["fav", "onlyFav"]].forEach(([id, k]) => ($(`#f-${id}`).onchange = (e) => { filter[k] = e.target.checked; render(); }));
   $("#search").oninput = (e) => { filter.q = e.target.value.trim(); render(); };
-  $("#f-reset").onclick = () => { filter = structuredClone(DEFAULT_FILTER); syncFilterUI(); drawRoutes(); render(); fitView(); };
+  $("#f-reset").onclick = () => { filter = structuredClone(DEFAULT_FILTER); syncFilterUI(); drawRoutes(); render(); };
 
   // ---------------------------------------------------------------- Standort
   function getPosition(done) {

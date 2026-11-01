@@ -42,7 +42,8 @@
 <section id="sheet-ziel" class="sheet tall" hidden>
   <div class="grab"></div>
   <button class="close" data-close aria-label="Schliessen">✕</button>
-  <h2>Ziel wählen</h2>
+  <h2>Ziele</h2>
+  <p class="muted">Häkchen: Ziel zusätzlich auf der Karte zeigen. Namen antippen: nur dieses Ziel zeigen.</p>
   <ul id="ziel-list" class="ziel-list"></ul>
 
   <h2 class="mt">Ziel hinzufügen oder ändern</h2>
@@ -153,9 +154,18 @@
     </div>
   </div>
 
-  <label class="field">Region
-    <select id="f-region"><option value="">Alle Regionen</option></select>
-  </label>
+  <div class="field">Meine Plätze <span class="hint">– unabhängig von den gewählten Zielen</span>
+    <div id="f-layers" class="layers">
+      <label class="toggle"><input type="checkbox" data-layer="eigene"> ♦ Eigene Plätze zeigen</label>
+      <label class="toggle"><input type="checkbox" data-layer="fav"> ★ Favoriten immer zeigen</label>
+      <label class="toggle"><input type="checkbox" data-layer="visited"> ✓ Besuchte Plätze immer zeigen</label>
+    </div>
+  </div>
+
+  <div class="field">Regionen <span class="hint">– mehrere wählbar</span>
+    <div class="chips"><button id="f-region-all" class="chip on">Alle</button></div>
+    <div class="chips" id="f-region"></div>
+  </div>
 
   <div class="field">Quelle
     <div class="chips" id="f-source"></div>
