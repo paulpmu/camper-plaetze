@@ -1,0 +1,38 @@
+{
+ "last_run": "2026-11-01T06:19:34Z",
+ "spots": 32,
+ "videos_total": 40,
+ "queue": 449,
+ "history": [
+  {
+   "date": "2026-11-01T06:19:34Z",
+   "videos": 40,
+   "spots_new": 32,
+   "web": {},
+   "transcripts": {
+    "ok": 37,
+    "keins": 0,
+    "blockiert": 0,
+    "fehler": 3
+   },
+   "youtube_units": 3163,
+   "claude_tokens": [
+    525312,
+    51115
+   ],
+   "model": "claude-haiku-5-5",
+   "cost_usd": 0.0781
+  }
+ ],
+ "counts": {
+  "youtube": 32,
+  "web": 0,
+  "osm_stellplatz": 1851,
+  "osm_camping": 2246,
+  "osm_entsorgung": 0,
+  "opendata": 0,
+  "total": 4109,
+  "confirmed": 20
+ },
+ "errors": {}
+}
