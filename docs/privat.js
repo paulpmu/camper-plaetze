@@ -94,7 +94,11 @@ window.PRIV = (() => {
   }
 
   // ---------------------------------------------------------------- Eigene Plätze
-  function eigene(zielId) { return data.eigene.filter((e) => e.ziel === zielId); }
+  // Eigene Plätze eines Ziels: dort erfasst oder im Gebiet des Ziels gelegen
+  function eigene(zielId, bbox) {
+    const inside = (e) => bbox && e.lat >= bbox[0] && e.lat <= bbox[2] && e.lng >= bbox[1] && e.lng <= bbox[3];
+    return data.eigene.filter((e) => e.ziel === zielId || inside(e));
+  }
   async function saveEigen(entry) {
     const i = data.eigene.findIndex((e) => e.id === entry.id);
     if (i >= 0) data.eigene[i] = entry; else data.eigene.push(entry);

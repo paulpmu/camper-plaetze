@@ -60,7 +60,8 @@
 
   const isOwn = (s) => s.sources.includes("eigene");
   const isDirectoryOnly = (s) => !s.mentions.length && !isOwn(s);
-  const merk = (s) => (ziel ? PRIV.merk(ziel.id, s.id) : {});
+  const merkZiel = (s) => (s.own ? s.own.ziel : ziel.id);
+  const merk = (s) => (ziel ? PRIV.merk(merkZiel(s), s.id) : {});
 
   function pinHtml(s) {
     const m = merk(s);
@@ -117,7 +118,7 @@
 
   // Eigene Plätze als normale Plätze darstellen
   function ownPlaces() {
-    return PRIV.eigene(ziel.id).map((e) => {
+    return PRIV.eigene(ziel.id, ziel.bbox).map((e) => {
       const p = {
         id: e.id, name: e.name, place: e.place || "", region: "", lat: e.lat, lng: e.lng, precision: "exakt",
         type: e.type || "stellplatz", sources: ["eigene"], mentions: [], rating: e.rating || null,
@@ -469,7 +470,7 @@
     const box = $("#detail .mine");
     if (!box) return;
     const store = async (changes, msg) => {
-      try { await PRIV.setMerk(ziel.id, s.id, s.name, changes); toast(msg); refreshMarker(s); openDetail(s); render(); }
+      try { await PRIV.setMerk(merkZiel(s), s.id, s.name, changes); toast(msg); refreshMarker(s); openDetail(s); render(); }
       catch (err) { toast("Speichern fehlgeschlagen: " + err.message + " – privates Repository prüfen (Zielname antippen → ganz unten)."); }
     };
     box.onclick = async (e) => {
@@ -521,7 +522,7 @@
     $("#own-save").disabled = true;
     try {
       await PRIV.saveEigen(ownDraft);
-      if (ownDraft.visited) await PRIV.setMerk(ziel.id, ownDraft.id, name, { visited: ownDraft.visited });
+      if (ownDraft.visited) await PRIV.setMerk(ownDraft.ziel, ownDraft.id, name, { visited: ownDraft.visited });
       toast("Eigener Platz gespeichert");
       close();
       await reloadOwn();
