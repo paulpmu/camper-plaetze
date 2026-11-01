@@ -7536,5 +7536,442 @@
    "at"
   ]
  ],
- "6|at,de,it|camping gosau, gosau": []
+ "6|at,de,it|camping gosau, gosau": [],
+ "6|at,de,it|wohnmobilstellplatz oberstdorf, oberstdorf": [
+  [
+   47.4078607,
+   10.2853175,
+   "de"
+  ]
+ ],
+ "6|at,de,it|nesselwang, ostallgäu": [
+  [
+   47.6218885,
+   10.5003482,
+   "de"
+  ]
+ ],
+ "6|at,de,it|wohnmobilstellplatz nesselwang, nesselwang": [
+  [
+   47.6198821,
+   10.4981028,
+   "de"
+  ]
+ ],
+ "6|at,de,it|pfronten, ostallgäu": [
+  [
+   47.5813782,
+   10.5579673,
+   "de"
+  ]
+ ],
+ "6|at,de,it|wohnmobilstellplatz pfronten, pfronten": [
+  [
+   47.5980806,
+   10.5518754,
+   "de"
+  ]
+ ],
+ "6|at,de,it|kempten, bayern": [
+  [
+   47.7267063,
+   10.3168835,
+   "de"
+  ]
+ ],
+ "6|at,de,it|wohnmobilstellplatz kempten an der iller, kempten": [
+  [
+   47.7324919,
+   10.3206757,
+   "de"
+  ]
+ ],
+ "6|at,de,it|schwangau, ostallgäu": [
+  [
+   47.5796844,
+   10.7589108,
+   "de"
+  ],
+  [
+   47.576803,
+   10.7373475,
+   "de"
+  ]
+ ],
+ "6|at,de,it|camping auf dem jägerhof, schwangau": [],
+ "6|at,de,it|burgberg im allgäu, oberallgäu": [
+  [
+   47.5434035,
+   10.3036018,
+   "de"
+  ]
+ ],
+ "6|at,de,it|moosbauer hof, burgberg im allgäu": [
+  [
+   49.2978533,
+   12.8991795,
+   "de"
+  ],
+  [
+   46.511905,
+   11.2366586,
+   "it"
+  ],
+  [
+   46.9792437,
+   14.7736117,
+   "at"
+  ],
+  [
+   46.8789657,
+   14.8381017,
+   "at"
+  ]
+ ],
+ "6|at,de,it|bolsterlang, oberallgäu": [
+  [
+   47.4616922,
+   10.2120576,
+   "de"
+  ],
+  [
+   47.4602203,
+   10.2338534,
+   "de"
+  ]
+ ],
+ "6|at,de,it|wohnmobilstellplatz an der hörnerbahn, bolsterlang": [],
+ "6|at,de,it|altusried, oberallgäu": [
+  [
+   47.7920474,
+   10.1804179,
+   "de"
+  ],
+  [
+   47.8052615,
+   10.2136981,
+   "de"
+  ]
+ ],
+ "6|at,de,it|fröhliche aussicht, altusried": [],
+ "6|at,de,it|bad hindelang, oberallgäu": [
+  [
+   47.465757,
+   10.4007695,
+   "de"
+  ],
+  [
+   47.5062921,
+   10.3699251,
+   "de"
+  ]
+ ],
+ "6|at,de,it|wohnmobilstellplatz hotel wiesengrund, bad hindelang": [],
+ "6|at,de,it|wertach, oberallgäu": [
+  [
+   47.6031162,
+   10.4124996,
+   "de"
+  ]
+ ],
+ "6|at,de,it|sonthofen, oberallgäu": [
+  [
+   47.5056059,
+   10.2994096,
+   "de"
+  ],
+  [
+   47.5135363,
+   10.281931,
+   "de"
+  ]
+ ],
+ "6|at,de,it|illercamping sonthofen, sonthofen": [
+  [
+   47.5055287,
+   10.2748029,
+   "de"
+  ]
+ ],
+ "6|at,de,it|castelfondo, trient": [
+  [
+   46.455713,
+   11.116772,
+   "it"
+  ]
+ ],
+ "6|at,de,it|bassano del grappa, vicenza": [
+  [
+   45.7726007,
+   11.7206547,
+   "it"
+  ]
+ ],
+ "6|at,de,it|cittadella, padua": [
+  [
+   45.644988,
+   11.7818926,
+   "it"
+  ],
+  [
+   45.6487941,
+   11.7835801,
+   "it"
+  ]
+ ],
+ "6|at,de,it|lido degli estensi, comacchio (ferrara)": [
+  [
+   44.6692798,
+   12.2433254,
+   "it"
+  ]
+ ],
+ "6|at,de,it|lido di spina, lido degli estensi": [
+  [
+   44.6607401,
+   12.2426741,
+   "it"
+  ],
+  [
+   44.6571475,
+   12.2452308,
+   "it"
+  ],
+  [
+   44.6587248,
+   12.244846,
+   "it"
+  ],
+  [
+   44.6549776,
+   12.2409473,
+   "it"
+  ],
+  [
+   44.6594048,
+   12.2490489,
+   "it"
+  ]
+ ],
+ "6|at,de,it|wildflecken, bayern": [
+  [
+   50.37692,
+   9.8535083,
+   "de"
+  ],
+  [
+   50.3768644,
+   9.9084296,
+   "de"
+  ]
+ ],
+ "6|at,de,it|stellplatz rhöner auersberg, wildflecken": [],
+ "6|at,de,it|riedenburg, bayern": [
+  [
+   48.9717049,
+   11.6927181,
+   "de"
+  ],
+  [
+   48.9622789,
+   11.6835952,
+   "de"
+  ],
+  [
+   48.345227,
+   13.3230545,
+   "de"
+  ],
+  [
+   48.3449931,
+   13.3233174,
+   "de"
+  ]
+ ],
+ "6|at,de,it|landgasthof kastlhof, riedenburg": [
+  [
+   48.9410764,
+   11.7555931,
+   "de"
+  ]
+ ],
+ "6|at,de,it|breitenbrunn, bayern": [
+  [
+   48.1359081,
+   10.4020197,
+   "de"
+  ],
+  [
+   49.091469,
+   11.6222048,
+   "de"
+  ],
+  [
+   49.0827731,
+   11.6208026,
+   "de"
+  ],
+  [
+   50.0227341,
+   11.988319,
+   "de"
+  ],
+  [
+   49.4425315,
+   11.4427507,
+   "de"
+  ]
+ ],
+ "6|at,de,it|juracamping breitenbrunn, breitenbrunn": [
+  [
+   49.0779782,
+   11.6219817,
+   "de"
+  ]
+ ],
+ "6|at,de,it|ramsau bei berchtesgaden, bayern": [
+  [
+   47.6070066,
+   12.8968243,
+   "de"
+  ]
+ ],
+ "6|at,de,it|simonhof campingplatz, ramsau bei berchtesgaden": [
+  [
+   47.6271276,
+   12.8699651,
+   "de"
+  ]
+ ],
+ "6|at,de,it|caldonazzo, trentino": [
+  [
+   45.9843304,
+   11.2724168,
+   "it"
+  ]
+ ],
+ "6|at,de,it|camping mario village, caldonazzo": [
+  [
+   46.0035681,
+   11.2617017,
+   "it"
+  ]
+ ],
+ "6|at,de,it|st. lorenzen, pustertal, südtirol": [
+  [
+   46.7658098,
+   11.8715758,
+   "it"
+  ],
+  [
+   46.7832559,
+   11.9023655,
+   "it"
+  ]
+ ],
+ "6|at,de,it|camping wildberg, st. lorenzen": [
+  [
+   46.7803588,
+   11.8979948,
+   "it"
+  ]
+ ],
+ "6|at,de,it|waidring, tirol": [
+  [
+   47.5842705,
+   12.5687421,
+   "at"
+  ]
+ ],
+ "6|at,de,it|camping steinplatte, waidring": [
+  [
+   47.5845396,
+   12.584187,
+   "at"
+  ]
+ ],
+ "6|at,de,it|zirndorf, bayern": [
+  [
+   49.4334921,
+   10.9282447,
+   "de"
+  ],
+  [
+   49.1925962,
+   10.4728787,
+   "de"
+  ],
+  [
+   49.445762,
+   10.9560462,
+   "de"
+  ],
+  [
+   48.9808045,
+   10.6698111,
+   "de"
+  ]
+ ],
+ "6|at,de,it|camping zur mühle, zirndorf": [
+  [
+   49.4313933,
+   10.9258891,
+   "de"
+  ]
+ ],
+ "6|at,de,it|wildflecken, landkreis bad kissingen": [
+  [
+   50.37692,
+   9.8535083,
+   "de"
+  ],
+  [
+   50.3768644,
+   9.9084296,
+   "de"
+  ]
+ ],
+ "6|at,de,it|riedenburg, landkreis kelheim": [
+  [
+   48.9717049,
+   11.6927181,
+   "de"
+  ],
+  [
+   48.9622789,
+   11.6835952,
+   "de"
+  ]
+ ],
+ "6|at,de,it|breitenbrunn, landkreis neumarkt in der oberpfalz": [
+  [
+   49.091469,
+   11.6222048,
+   "de"
+  ],
+  [
+   49.0827731,
+   11.6208026,
+   "de"
+  ]
+ ],
+ "6|at,de,it|ramsau bei berchtesgaden, berchtesgadener land": [
+  [
+   47.6070066,
+   12.8968243,
+   "de"
+  ]
+ ],
+ "6|at,de,it|zirndorf, landkreis fürth": [
+  [
+   49.4334921,
+   10.9282447,
+   "de"
+  ],
+  [
+   49.445762,
+   10.9560462,
+   "de"
+  ]
+ ]
 }

@@ -5815,5 +5815,141 @@
   }
  },
  "channels": {},
- "backfill_done": true
+ "backfill_done": true,
+ "web": {
+  "pages": {
+   "https://www.promobil.de/uebernachtungstipps/bodensee-und-allgaeu-stellplaetze-die-camper-kennen-sollten/": {
+    "title": "Bodensee und Allgäu: Stellplätze, die Camper kennen sollten",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.promobil.de/camping-allgaeu-tipps-infos-stellplaetze-wohnmobil/": {
+    "title": "Camping im Allgäu - Infos, Tipps und die besten Stellplätze",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 3
+   },
+   "https://www.promobil.de/uebernachtungstipps/12-top-stellplaetze-im-allgaeu-diese-plaetze-sind-bei-campenden-am-beliebtesten/": {
+    "title": "12 Top Stellplätze im Allgäu: Schön campen in Süddeutschlands beliebtester Ferienregion",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 5
+   },
+   "https://womosuche.de/wohnmobil-reiseberichte/mit-dem-wohnmobil-durch-das-allgaeu-eine-rundreise-zu-bergen-seen-und-atemberaubenden-landschaften/": {
+    "title": "Reisebericht Allgäu - Eine Wohnmobil-Rundreise zu Bergen, Seen und atemberaubenden Landschaften",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.alpacacamping.de/discover/allgaeu": {
+    "title": "Camping im Allgäu: Wohnmobilstellplätze & Campingplätze",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://bayernsbestes.de/region/mit-dem-wohnmobil-durchs-allgaeu-die-schoensten-stellplaetze/15355": {
+    "title": "Mit dem Wohnmobil durchs Allgäu: Die schönsten Stellplätze • Bayerns Bestes",
+    "published": "",
+    "status": "fehler"
+   },
+   "https://en.wikipedia.org/wiki/Memmingen_%E2%80%93_Unterallg%C3%A4u": {
+    "title": "Memmingen %E2%80%93 Unterallg%C3%A4u",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://inselcamper.com/en/blogs/news/camping-allgaeu-der-grosse-guide": {
+    "title": "Camping Allgäu",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://camperbanner.de/stellplaetze/allgaeu-stellplaetze-sandras-geheimtipps/": {
+    "title": "3 Allgäu-Stellplätze mit Alpen-Panorama — Sandras Geheimtipps - Camper Banner",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 3
+   },
+   "https://www.zuhause-im-wohnmobil.de/italien-2025-tirol-bis-abruzzen/": {
+    "title": "Reisebericht Italien 2025-Tirol bis Abruzzen im Wohnmobil",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 5
+   },
+   "https://viercampen.de/reisberichte/reisebericht-bayern-bis-suedtirol/": {
+    "title": "Reisebericht Bayern bis Südtirol mit dem Wohnmobil 2024",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 8
+   },
+   "https://viercampen.de/reisberichte/bayern-suedtirol-wohnmobil-reisebericht/": {
+    "title": "Bayern bis Südtirol mit dem Wohnmobil 2024",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 8
+   },
+   "https://www.promobil.de/uebernachtungstipps/stellplaetze-brennerautobahn-suedtirol-legale-uebernachtung-fuer-camper/": {
+    "title": "Stellplätze entlang der Brennerautobahn in Südtirol",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.leniundtoni.de/wohnmobilstellplaetzesuedtirol/": {
+    "title": "10 Tage mit dem Wohnmobil in Südtirol unterwegs",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.camperdays.de/blog/europa/italien/suedtirol-wohnmobil-route.html": {
+    "title": "Mit dem Wohnmobil durch Südtirol: Meine Tour für 8 Tage",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.camperdays.de/magazin/europa/italien/suedtirol-wohnmobil-route": {
+    "title": "Route: Mit dem Wohnmobil durch Südtirol",
+    "published": "",
+    "status": "neu"
+   },
+   "http://www.dammer-wohnmobilreisen.de/index.php/italien/63-wohnmobilreise-vom-bodensee-ueber-suedtirol-durch-die-dolomiten-ins-veneto": {
+    "title": "Wohnmobilreise vom Bodensee über Südtirol durch die Dolomiten ins Veneto",
+    "published": "",
+    "status": "neu"
+   },
+   "https://friedi-muss-mit.de/reiseziele/europa/italien-europa/suedtirol-mit-dem-wohnmobil/": {
+    "title": "So besser NICHT! Südtirol mit dem Wohnmobil - Friedi muss mit Reiseblog - Reisetipps für Familien- Paar- und Wohnmobilreisen",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.autobild.de/artikel/wohnmobil-die-besten-ziele-stellplaetze-in-kaernten-28243581.html": {
+    "title": "Wohnmobil: Die besten Ziele & Stellplätze in Kärnten - AUTO BILD",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.camping.at/de/content/mein-erster-kurzurlaub-in-einem-wohnmobil-tag-1/": {
+    "title": "Wohnmobil Urlaub Erfahrungen",
+    "published": "",
+    "status": "neu"
+   },
+   "https://roadsurfer.com/de/blog/die-schoensten-stellplaetze-in-oesterreich/": {
+    "title": "Die schönsten Stellplätze in Österreich",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.promobil.de/tour/reise-tipp-kaernten-info-stellplaetze/": {
+    "title": "Kärnten mit dem Wohnmobil: Info & Stellplätze (Seite 2)",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.alpacacamping.de/discover/kaernten": {
+    "title": "Camping & Wohnmobilstellplatz Kärnten",
+    "published": "",
+    "status": "neu"
+   },
+   "https://roadsurfer.com/de/blog/mit-dem-wohnmobil/oesterreich/": {
+    "title": "Mit dem Wohnmobil nach Österreich roadsurfer.com",
+    "published": "",
+    "status": "neu"
+   }
+  },
+  "last_search": "2026-11-01"
+ }
 }
