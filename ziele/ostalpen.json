@@ -133,12 +133,12 @@
  ],
  "routes": [],
  "sources": {
-  "youtube": true,
+  "youtube": false,
   "osm_stellplatz": true,
   "osm_camping": true,
-  "osm_entsorgung": false,
-  "web": false,
-  "opendata": false
+  "osm_entsorgung": true,
+  "web": true,
+  "opendata": true
  },
  "opendata": [],
  "osm_areas": [
