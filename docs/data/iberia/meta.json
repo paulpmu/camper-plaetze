@@ -1,5 +1,5 @@
 {
- "last_run": "2026-11-01T06:56:09Z",
+ "last_run": "2026-11-02T11:52:08Z",
  "spots": 182,
  "videos_total": 200,
  "queue": 349,
@@ -151,6 +151,30 @@
    ],
    "model": "claude-haiku-5-5",
    "cost_usd": 0.0405
+  },
+  {
+   "date": "2026-11-02T11:52:08Z",
+   "videos": 0,
+   "spots_new": 0,
+   "web": {
+    "pages": 0,
+    "spots_new": 0,
+    "searches": 0,
+    "usd": 0.0
+   },
+   "transcripts": {
+    "ok": 0,
+    "keins": 0,
+    "blockiert": 0,
+    "fehler": 0
+   },
+   "youtube_units": 0,
+   "claude_tokens": [
+    0,
+    0
+   ],
+   "model": "claude-haiku-5-5",
+   "cost_usd": 0.0
   }
  ],
  "counts": {
@@ -163,5 +187,7 @@
   "total": 4835,
   "confirmed": 30
  },
- "errors": {}
+ "errors": {
+  "osm": "OpenStreetMap fehlgeschlagen: https://overpass.kumi.systems/api/interpreter: HTTP 504"
+ }
 }
