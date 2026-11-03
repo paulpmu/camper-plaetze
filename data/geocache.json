@@ -9745,5 +9745,101 @@
    8.9383607,
    "ch"
   ]
+ ],
+ "6|ma,eh|kenitra, provinz kénitra": [
+  [
+   34.26457,
+   -6.570169,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|marrakesch, provinz marrakech": [
+  [
+   31.6066343,
+   -8.3913754,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|campingplatz relais, marrakesch": [
+  [
+   31.7067668,
+   -7.9900179,
+   "ma"
+  ],
+  [
+   31.7068073,
+   -7.9901254,
+   "ma"
+  ],
+  [
+   31.7074984,
+   -7.9895284,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tarfaya, tarfaya": [
+  [
+   27.9421014,
+   -12.9231516,
+   "ma"
+  ],
+  [
+   27.9489888,
+   -12.9170578,
+   "ma"
+  ],
+  [
+   27.9401204,
+   -12.9249934,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|dakhla, dakhla & süden": [
+  [
+   23.6940663,
+   -15.9431274,
+   "ma"
+  ],
+  [
+   30.4107934,
+   -9.5495306,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|oasis 212, dakhla": [
+  [
+   23.9145887,
+   -15.7635036,
+   "ma"
+  ],
+  [
+   23.6306,
+   -15.8605003,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|camp sahara travel, mhamid": [],
+ "6|ma,eh|oasis palmer, zagora": [],
+ "6|ma,eh|arica camping, marrakesch": [],
+ "6|ma,eh|tizi n'test, taroudant": [
+  [
+   30.8333941,
+   -8.4511526,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|tizi n'test, tizi n'test": [
+  [
+   30.8443049,
+   -8.3900154,
+   "ma"
+  ]
+ ],
+ "6|ma,eh|hadida, ouarzazate": [
+  [
+   31.3355035,
+   -6.1731733,
+   "ma"
+  ]
  ]
 }
