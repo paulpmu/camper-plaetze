@@ -1,6 +1,6 @@
-# Betriebshandbuch Camper-Plätze
+# Betriebshandbuch Camper-Planer
 
-Stand: 25. Oktober 2026 · Inhaber: Paul Müller · Repository: https://github.com/paulpmu/camper-plaetze
+Stand: 7. November 2026 · Inhaber: Paul Müller · Repository: https://github.com/paulpmu/camper-plaetze (der Repository-Name bleibt `camper-plaetze`, die App heisst Camper-Planer)
 
 Dieses Dokument beschreibt, was wo läuft, was es kostet und wie das Werkzeug gepflegt wird. Die technische Einrichtung steht im [README](README.md).
 
@@ -14,7 +14,7 @@ Jede Nacht um 04:17 (Winterzeit) bzw. 05:17 (Sommerzeit) startet **GitHub Action
 2. **Webshare → YouTube**: Transkripte holen.
 3. **Anthropic Claude (Haiku)**: Übernachtungsplätze herauslesen.
 4. **OpenStreetMap / OSRM**: Ortsnamen in Koordinaten umwandeln, Routenverlauf berechnen.
-5. **GitHub**: Daten speichern und die Webapp über **GitHub Pages** neu veröffentlichen.
+5. **GitHub**: Daten speichern. **Cloudflare Pages** veröffentlicht die Webapp, geschützt durch **Cloudflare Access** (siehe 2.13). Bis zur Umstellung läuft sie noch über GitHub Pages.
 6. **Safari auf iPhone/iPad** lädt die Webapp mit den neuen Plätzen.
 
 In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den Stand der Läufe, die aufgelaufenen Kosten und dieses Handbuch.
@@ -23,7 +23,8 @@ In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den
 
 | Plattform | Wofür | Konto / Zugang | Wo verwaltet |
 |---|---|---|---|
-| **GitHub** | Code und Daten, nächtlicher Abruf (Actions), Webapp (Pages), Anfragen (Issues) | `paulpmu` | https://github.com/paulpmu/camper-plaetze |
+| **GitHub** | Code und Daten, nächtlicher Abruf (Actions), Anfragen (Issues) | `paulpmu` | https://github.com/paulpmu/camper-plaetze |
+| **Cloudflare** | Webapp ausliefern (Pages) und Zugang nur für freigegebene Personen (Zero Trust Access) | paul_p_mueller@bluewin.ch | https://dash.cloudflare.com, https://one.dash.cloudflare.com |
 | **Google Cloud** | YouTube Data API: Videos suchen, Beschreibungen und Kommentare lesen | Ihr Google-Konto, Projekt `camper-plaetze` | https://console.cloud.google.com |
 | **Anthropic** | Claude liest Videos und Reiseberichte aus, sucht Reiseberichte im Web und bearbeitet Anfragen aus der App | paul_p_mueller@bluewin.ch | https://console.anthropic.com |
 | **GitHub, privat** | Ihre eigenen Plätze, Favoriten, Notizen und Ihr Logbuch | `paulpmu` | https://github.com/paulpmu/camper-plaetze-privat |
@@ -46,6 +47,10 @@ Diese Schlüssel stehen unter **Settings → Secrets and variables → Actions**
 | `ANTHROPIC_API_KEY` | Anthropic Console → API Keys | der Schlüssel gelöscht oder kompromittiert ist |
 | `YOUTUBE_API_KEY` | Google Cloud → APIs & Dienste → Anmeldedaten | dito |
 | `WEBSHARE_USER` / `WEBSHARE_PASS` | Webshare → Rotating Residential → Proxy List | das Webshare-Passwort geändert wurde |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare → My Profile → API Tokens, Recht «Cloudflare Pages: Edit» | der Schlüssel abläuft oder kompromittiert ist |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare → Workers & Pages, rechts «Account ID» | nie, ausser bei Kontowechsel |
+
+Dazu kommt unter **Variables** die Variable `HOSTING` mit dem Wert `cloudflare`. Sie schaltet die Veröffentlichung von GitHub Pages auf Cloudflare um.
 
 ---
 
@@ -227,13 +232,77 @@ So wissen Sie ungefähr, was Sie antreffen:
 
 **park4night:** park4night bietet keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen den Knopf **park4night**. Er öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung, immer mit dem aktuellen Stand.
 
+### 2.13 Zugang und Sicherheit
+
+Die Webapp ist nur für Personen zugänglich, die Sie freigeben. Das übernimmt **Cloudflare Access**: Wer die Adresse öffnet, gibt zuerst seine E-Mail-Adresse ein und erhält einen Einmalcode. Nur Adressen auf Ihrer Liste kommen hinein. Das schützt die App und alle Daten-Dateien. Gratis bis 50 Personen.
+
+**Was zusätzlich schützt:**
+- Die App lädt keine Skripte mehr von fremden Servern. Leaflet, Markercluster und das Handbuch-Modul liegen in `docs/vendor/`.
+- Strenge Sicherheits-Header in `docs/_headers`: Skripte nur von der eigenen Adresse, Abfragen nur an die Dienste, die die App nutzt (GitHub, Open-Meteo, Panoramax, Mapillary, Wikimedia). Damit kann eingeschleuster Code Ihren GitHub-Schlüssel kaum abgreifen.
+- Das Repository ist privat. Code, Daten und dieses Handbuch sind nicht mehr öffentlich.
+- Steuern (Abrufe, Ziele, Anfragen, eigene Plätze) kann weiterhin nur, wer einen GitHub-Schlüssel hinterlegt hat, also nur Sie.
+
+**Was freigegebene Personen sehen:** Karte, Plätze, Wetter, Fotos, Etappenplaner, ausserdem unter **i** die Läufe, die Kosten und dieses Handbuch. Favoriten, Logbuch und eigene Plätze sehen sie nicht, die liegen in Ihrem privaten Repository. Eigene Rollen und Daten pro Person folgen in einer späteren Ausbaustufe.
+
+#### Umstellung, einmalig, etwa 30 Minuten
+
+Die Reihenfolge ist wichtig: Das Repository erst privat stellen, wenn die neue Adresse funktioniert.
+
+**1. Cloudflare-Konto und Schlüssel**
+1. https://dash.cloudflare.com/sign-up öffnen und ein Gratiskonto anlegen.
+2. **Workers & Pages** öffnen. Rechts steht die **Account ID**. Kopieren.
+3. Oben rechts **My Profile → API Tokens → Create Token → Create Custom Token**.
+   - **Token name:** `camper-planer GitHub`
+   - **Permissions:** `Account` · `Cloudflare Pages` · `Edit`
+   - **Account Resources:** Ihr Konto
+   - **Continue to summary → Create Token**, den Schlüssel kopieren. Er wird nur einmal angezeigt.
+
+**2. In GitHub eintragen**
+1. Im Repository **Settings → Secrets and variables → Actions → New repository secret**:
+   `CLOUDFLARE_API_TOKEN` und `CLOUDFLARE_ACCOUNT_ID` mit den beiden Werten.
+2. Daneben den Reiter **Variables → New repository variable**: Name `HOSTING`, Wert `cloudflare`.
+3. **Actions → «Plätze aktualisieren & Webapp veröffentlichen» → Run workflow**, bei **Ziel** ein `-` eintragen. Damit wird nur veröffentlicht, nichts abgerufen.
+4. Nach etwa 2 Minuten läuft die App unter **https://camper-planer.pages.dev**. Ist der Name bei Cloudflare schon vergeben, steht die tatsächliche Adresse unter **Workers & Pages → camper-planer**.
+
+**3. Zugang schützen (Cloudflare Zero Trust)**
+1. https://one.dash.cloudflare.com öffnen. Beim ersten Mal einen **Team-Namen** wählen, etwa `paulpmu`, und den Plan **Free** wählen. Cloudflare verlangt dafür eventuell ein Zahlungsmittel, belastet beim Gratisplan aber nichts.
+2. **Access → Applications → Add an application → Self-hosted**.
+   - **Application name:** `Camper-Planer`
+   - **Session Duration:** `1 month`, damit Sie sich nicht ständig neu anmelden müssen
+   - **Public hostname:** Domain `camper-planer.pages.dev`. Mit **Add public hostname** zusätzlich `*.camper-planer.pages.dev` eintragen, das deckt die Vorschau-Adressen ab.
+3. **Next → Add a policy**:
+   - **Policy name:** `Freigegebene Personen`, **Action:** `Allow`
+   - **Include → Selector: Emails** → Ihre Adresse und die der freigegebenen Personen
+4. Bei **Login methods** «One-time PIN» eingeschaltet lassen. **Save**.
+5. Testen: Die Adresse in einem privaten Safari-Fenster öffnen. Es erscheint die Anmeldeseite von Cloudflare. E-Mail-Adresse eingeben, Code aus der E-Mail eintippen, dann öffnet sich die App.
+
+**4. Repository privat stellen und GitHub Pages abschalten**
+1. **Settings → General → ganz unten «Change repository visibility» → Make private**.
+2. **Settings → Pages → Unpublish site**, falls noch angezeigt. Die alte Adresse `paulpmu.github.io/camper-plaetze` ist dann nicht mehr erreichbar.
+
+**5. iPhone und iPad umstellen**
+1. Das alte Symbol auf dem Home-Bildschirm löschen.
+2. Die neue Adresse in Safari öffnen, anmelden, dann **Teilen → Zum Home-Bildschirm**.
+3. Den **GitHub-Schlüssel** neu einfügen: Zielname antippen, ganz unten. Ebenso den Mapillary-Token, falls Sie ihn nutzen. Safari speichert solche Angaben pro Adresse. Favoriten, Logbuch und eigene Plätze sind sofort wieder da, sie liegen im privaten Repository.
+
+#### Personen freigeben oder entfernen
+
+**Zero Trust → Access → Applications → Camper-Planer → Policies → Freigegebene Personen → Edit**, E-Mail-Adresse ergänzen oder löschen, **Save**. Die neue Person öffnet einfach die Adresse und meldet sich mit ihrer E-Mail-Adresse an.
+
+Eine entfernte Person kommt nach Ablauf ihrer Sitzung nicht mehr hinein, spätestens nach einem Monat. Sofort sperren: **Zero Trust → My Team → Users** → Person → **Revoke session**.
+
+#### Actions-Minuten im privaten Repository
+
+Für private Repositories enthält das Gratiskonto von GitHub **2000 Minuten Actions pro Monat**. Der Verbrauch liegt im Normalbetrieb bei etwa 1400–1800 Minuten. Die Veröffentlichung auf Cloudflare läuft deshalb im selben Job wie der Abruf und kostet kaum zusätzliche Minuten. Den Stand sehen Sie unter https://github.com/settings/billing. Sind die Minuten aufgebraucht, laufen die Abläufe bis Monatsende nicht mehr. Es entstehen keine Kosten, solange Sie kein Ausgabenlimit über 0 setzen. Bei Bedarf: den Wetter-Ablauf in `.github/workflows/wetter.yml` von alle 3 auf alle 6 Stunden umstellen.
+
 ---
 
 ## 3. Kosten
 
 | Posten | Kosten | Bemerkung |
 |---|---|---|
-| GitHub (Repository, Actions, Pages) | **0** | gratis, weil das Repository öffentlich ist |
+| GitHub (privates Repository, Actions) | **0** | 2000 Actions-Minuten pro Monat gratis, siehe 2.13 |
+| Cloudflare Pages und Zero Trust Access | **0** | gratis bis 50 Personen |
 | YouTube Data API | **0** | 10'000 Einheiten pro Tag gratis, die App plant mit höchstens 9'000 |
 | OpenStreetMap, OSRM | **0** | |
 | Webshare Rotating Residential | **3.50 USD pro Monat** | 1 GB Datenvolumen, monatliches Abo |
@@ -287,6 +356,10 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | nächtlicher Lauf startet nicht mehr | GitHub pausiert Zeitpläne nach 60 Tagen ohne Aktivität im Repository | Unter **Actions** den Workflow wieder aktivieren (**Enable workflow**) |
 | App meldet «Schlüssel ungültig» oder Fehler 401 | GitHub-Schlüssel abgelaufen | neuen Schlüssel erstellen, siehe 2.4 |
 | App zeigt alte Daten | Safari-Cache | App schliessen und neu öffnen, notfalls neu laden |
+| App verlangt erneut die Anmeldung | Sitzung von Cloudflare Access abgelaufen (nach einem Monat) | E-Mail-Adresse eingeben, Code aus der E-Mail eintippen. Ohne Netz zeigt die App den zuletzt geladenen Stand |
+| Freigegebene Person erhält keinen Code | Adresse nicht in der Liste oder Code im Spam | Liste prüfen, siehe 2.13; Spam-Ordner prüfen |
+| Lauf rot beim Schritt «Webapp veröffentlichen (Cloudflare)» | Cloudflare-Schlüssel abgelaufen oder ohne Recht «Cloudflare Pages: Edit» | neuen Schlüssel erstellen und als `CLOUDFLARE_API_TOKEN` eintragen |
+| Abläufe laufen nicht mehr, Hinweis auf «spending limit» | Actions-Minuten des Monats aufgebraucht | bis Monatsanfang warten oder Wetter-Ablauf seltener stellen, siehe 2.13 |
 
 ### 4.4 Technische Wartung, etwa zweimal pro Jahr
 
@@ -301,7 +374,7 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 |---|---|
 | vorübergehend pausieren | **Actions** → Workflow «Plätze aktualisieren» → **…** → **Disable workflow**. Die App bleibt online mit den letzten Daten |
 | Kosten stoppen | Webshare-Abo kündigen (**Subscription**), Anthropic-Guthaben nicht mehr aufladen |
-| ganz stilllegen | zusätzlich unter **Settings → Pages** die Webapp abschalten und die API-Schlüssel bei Google und Anthropic löschen |
+| ganz stilllegen | zusätzlich bei Cloudflare unter **Workers & Pages → camper-planer → Settings → Delete** die Webapp löschen und die API-Schlüssel bei Google, Anthropic und Cloudflare löschen |
 
 ---
 
@@ -316,6 +389,9 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `scripts/quellen.py` | Quellen OpenStreetMap, Reiseberichte, offene Datensätze; Zusammenführen und Verlässlichkeit |
 | `scripts/common.py` | Geodaten, Standortprüfung, Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
+| `.github/actions/cloudflare/` | Veröffentlichung auf Cloudflare Pages, von allen Abläufen genutzt |
+| `docs/_headers` | Sicherheits-Header für Cloudflare Pages |
+| `docs/vendor/` | Kartenbibliotheken Leaflet und Markercluster sowie marked, lokal statt von fremden Servern |
 | `docs/fotos.js` | Fotos & Umgebung: Panoramax, Mapillary, Wikimedia Commons, Wikipedia, Street-View-Links |
 | `scripts/wetter_update.py` | bereitet Warnungen (MeteoAlarm) und MeteoSchweiz-Lokalprognose auf; übernommen aus dem Werkzeug «wetter-check» |
 | `docs/data/wetter/` | `warnungen.json` und `ch.json` für die Webapp (alle 3 Stunden neu) |

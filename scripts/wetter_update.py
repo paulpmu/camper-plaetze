@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ZIELE_DIR = ROOT / "ziele"
 OUT_DIR = ROOT / "docs" / "data" / "wetter"
 CACHE_DIR = ROOT / "data" / "wetter-cache"  # nicht im Repository (siehe .gitignore), in der Action zwischengespeichert
-UA = {"User-Agent": "camper-plaetze/1.0 (https://github.com/paulpmu/camper-plaetze)"}
+UA = {"User-Agent": "camper-planer/1.0 (https://github.com/paulpmu/camper-plaetze)"}
 ZH = ZoneInfo("Europe/Zurich")
 
 

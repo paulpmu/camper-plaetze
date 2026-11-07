@@ -1,0 +1,15 @@
+# Sicherheits-Header für Cloudflare Pages (GitHub Pages ignoriert diese Datei).
+# Skripte nur von der eigenen Adresse; Abfragen nur an die Dienste, die die App wirklich nutzt.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://api.open-meteo.com https://ensemble-api.open-meteo.com https://api.panoramax.xyz https://graph.mapillary.com https://commons.wikimedia.org https://*.wikipedia.org; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://github.com; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin
+
+/sw.js
+  Cache-Control: no-cache
+
+/data/*
+  Cache-Control: no-cache

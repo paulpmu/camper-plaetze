@@ -59,7 +59,7 @@ jobs:
         run: python scripts/update.py
       - name: Daten speichern
         run: |
-          git config user.name "camper-plaetze-bot"
+          git config user.name "camper-planer-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A data docs/data
           if [ -d berichte ]; then git add -A berichte; fi
@@ -67,10 +67,37 @@ jobs:
           git commit -m "Daten aktualisiert $(date -u +%F)"
           git pull --rebase origin main
           git push
+      # Hosting auf Cloudflare (Repository-Variable HOSTING = cloudflare): im selben Job veröffentlichen
+      - name: Webapp veröffentlichen (Cloudflare)
+        if: vars.HOSTING == 'cloudflare'
+        uses: ./.github/actions/cloudflare
+        with:
+          api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+  # Änderung an docs/ oder ziele/ auf main: nur veröffentlichen
+  cloudflare:
+    if: github.event_name == 'push' && vars.HOSTING == 'cloudflare'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - uses: ./.github/actions/cloudflare
+        with:
+          api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  # Bisheriges Hosting auf GitHub Pages, solange HOSTING nicht auf cloudflare steht
   deploy:
     needs: update
-    if: always() && (needs.update.result == 'success' || needs.update.result == 'skipped')
+    if: always() && vars.HOSTING != 'cloudflare' && (needs.update.result == 'success' || needs.update.result == 'skipped')
     runs-on: ubuntu-latest
     environment:
       name: github-pages

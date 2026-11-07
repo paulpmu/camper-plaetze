@@ -182,11 +182,10 @@
   async function loadHandbook() {
     try {
       await getIndex();
-      let r = await fetch("handbuch.md", { cache: "no-cache" });
-      if (!r.ok && repo()) r = await fetch(`https://raw.githubusercontent.com/${repo()}/main/BETRIEB.md`);
+      const r = await fetch("handbuch.md", { cache: "no-cache" });
       if (!r.ok) throw new Error(r.status);
       const text = await r.text();
-      if (!window.marked) await loadScript("https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js");
+      if (!window.marked) await loadScript("vendor/marked/marked.min.js");
       $("#handbuch").innerHTML = window.marked.parse(text);
       $("#handbuch").querySelectorAll("a[href]").forEach((a) => {
         const href = a.getAttribute("href");

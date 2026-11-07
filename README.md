@@ -1,8 +1,8 @@
-# Camper-Plätze
+# Camper-Planer
 
 Webapp für iPhone und iPad mit Übernachtungsplätzen für Camper. Die Plätze stammen aus aktuellen YouTube-Reisevideos von Overlandern. Es gibt mehrere Reiseziele: **Marokko & Dakhla** und **Spanien & Portugal** mit Routen sowie die **Schweiz**. Jedes Ziel wählt seine Quellen selbst: YouTube-Videos von Overlandern, Reiseberichte aus Blogs und Foren, Stellplätze, Campingplätze und Entsorgungsstationen aus OpenStreetMap, offene Datensätze und eigene Plätze. Gleiche Plätze aus mehreren Quellen werden zusammengeführt und als bestätigt markiert. Dazu kommen Favoriten, Logbuch, ein Etappenplaner und **Wetter**: Wetternote 1–10 pro Platz und Etappe aus ECMWF, ICON und GFS, Wahrscheinlichkeit für trockene Tage, Hinweise auf Hochnebel, eine Wetterkarte, eine Rangliste der Regionen, offizielle Unwetterwarnungen (MeteoAlarm) und in der Schweiz die MeteoSchweiz-Lokalprognose (alles ohne Schlüssel; Warnungen und MeteoSchweiz alle 3 Stunden über `.github/workflows/wetter.yml`). Pro Platz zeigt die App ausserdem **Fotos & Umgebung**: Strassenbilder (Panoramax, optional Mapillary), Fotos aus Wikimedia Commons, bekannte Orte aus Wikipedia sowie Links zu Google Street View und zum Satellitenbild. Neue Ziele lassen sich direkt aus der Webapp anfordern.
 
-**Webapp:** https://paulpmu.github.io/camper-plaetze/
+**Webapp:** https://camper-planer.pages.dev, nur für freigegebene Personen (Cloudflare Access). Umstellung und Personenverwaltung: [BETRIEB.md, Abschnitt 2.13](BETRIEB.md#213-zugang-und-sicherheit)
 
 **Betrieb, Kosten und Pflege:** siehe [BETRIEB.md](BETRIEB.md)
 
@@ -12,7 +12,7 @@ GitHub Action (täglich 03:17 UTC), pro Ziel:
   ├─ Transkripte (youtube-transcript-api, optional über Proxy)
   ├─ Claude Haiku: Plätze, Typ, Infrastruktur, Zufahrt, Sicherheit, Bewertung
   ├─ fehlende Koordinaten über OpenStreetMap Nominatim, Strassenverlauf der Routen über OSRM
-  └─ docs/data/<ziel>/spots.json → GitHub Pages → Safari auf iPhone/iPad
+  └─ docs/data/<ziel>/spots.json → Cloudflare Pages (mit Access-Anmeldung) → Safari auf iPhone/iPad
 
 Anfrage aus der Webapp («Ziel hinzufügen oder ändern»):
   Webapp → GitHub-Issue «[Ziel] …» → Action → Claude erstellt ziele/<id>.json → Abruf startet → Antwort im Issue
@@ -43,9 +43,9 @@ Im Repository **Settings → Secrets and variables → Actions → New repositor
 | `ANTHROPIC_API_KEY` | `sk-ant-…` |
 | `YOUTUBE_API_KEY` | `AIza…` |
 
-### 4. GitHub Pages einschalten
+### 4. Veröffentlichung einrichten
 
-**Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Die Webapp läuft auf Cloudflare Pages hinter Cloudflare Access. Die Schritte stehen in [BETRIEB.md, Abschnitt 2.13](BETRIEB.md#213-zugang-und-sicherheit). Ohne die Repository-Variable `HOSTING = cloudflare` veröffentlichen die Abläufe wie früher auf GitHub Pages (**Settings → Pages → Source: GitHub Actions**). Das geht gratis nur bei öffentlichem Repository.
 
 ### 5. Ersten Lauf starten
 
