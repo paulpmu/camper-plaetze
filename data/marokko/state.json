@@ -3473,6 +3473,18 @@
    "transcript": "fehler",
    "spots": 0,
    "skipped": "irrelevant"
+  },
+  "K48aJIrVOTQ": {
+   "skipped": "kurz"
+  },
+  "NzCGz47ohuU": {
+   "skipped": "kurz"
+  },
+  "QEuZcFP4Mks": {
+   "skipped": "kurz"
+  },
+  "QThZBf_VxhQ": {
+   "skipped": "kurz"
   }
  },
  "queue": {},
@@ -3619,8 +3631,140 @@
     "published": "",
     "status": "ausgewertet",
     "spots": 3
+   },
+   "https://www.franzek.com/marokko-reise/": {
+    "title": "Marokko mit dem Camper (Übersicht der Reiseberichte mit Stellplätzen, aktualisiert 2025/26)",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.promobil.de/touren/mit-dem-wohnmobil-durch-marokko/": {
+    "title": "Mit dem Wohnmobil durch Marokko: Eine Tour zu den Lieblingsplätzen",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 12
+   },
+   "https://www.myatlas.com/GuidoLine/maroc-2025": {
+    "title": "Carnet de voyage - Maroc 2025 (GuidoLine) - MyAtlas",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 18
+   },
+   "https://www.thelliervoyages.com/destination/maroc": {
+    "title": "Circuit Maroc en Camping Car",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://camperdromen.be/begeleide-camper-reis-marokko/": {
+    "title": "Camper reis Marokko 2025 in kleine groep",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://vrolijkopreis.nl/camperroute-marokko/": {
+    "title": "Camperroute Marokko: 30 dagen - Vrolijk op Reis.nl",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 14
+   },
+   "https://www.globus2.nl/en/post/morocco-with-a-camper": {
+    "title": "Marokko met de camper?!",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://www.overlandsite.com/blog/4x4-trip-morocco/": {
+    "title": "An Incredible 4x4 Trip Across Morocco",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 2
+   },
+   "https://sahara-overland.com/": {
+    "title": "Sahara Overland",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://bewilderedinmorocco.com/camping-in-morocco-your-complete-guide-to-desert-adventures-and-beyond/": {
+    "title": "Camping in Morocco: Your Complete Guide to Desert Adventures and Beyond",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://en.wikipedia.org/wiki/2025_in_Morocco": {
+    "title": "2025 in Morocco",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://citytoursmorocco.com/morocco-camping-guide": {
+    "title": "Camping in Morocco 2026",
+    "published": "",
+    "status": "ausgewertet",
+    "spots": 0
+   },
+   "https://citytoursmorocco.com/morocco-wild-camping": {
+    "title": "Wild Camping in Morocco 2026",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.overlandingwestafrica.com/marrakech-dakar/": {
+    "title": "Senegal to Morocco Africa Overland Adventure Tour",
+    "published": "",
+    "status": "neu"
+   },
+   "https://moroccobeat.com/tourism-travel/dakhla-morocco-adventure-travel-guide/": {
+    "title": "Dakhla Rising: Where the Sahara Desert Embraces the Atlantic Ocean - Morocco Beat",
+    "published": "",
+    "status": "neu"
+   },
+   "https://en.wikipedia.org/wiki/Tourism_in_Mauritania": {
+    "title": "Tourism in Mauritania",
+    "published": "",
+    "status": "neu"
+   },
+   "https://citytoursmorocco.com/overlanding": {
+    "title": "4x4 Overlanding & Vanlife in Morocco",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.maroccaravan.de/marokkotouren/daten-touren-preise-2025/winter-karawane-48-tage/": {
+    "title": "Winter-Karawane 48 Tage - Geführte Wohnmobilreise Marokko, Womotouren, geführte Touren Wohnmobil Marokko",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.rent-motorhome.com/de/blog/wohnmobil-camping-in-marokko-beste-campingpl%C3%A4tze": {
+    "title": "Wohnmobil-Camping in Marokko",
+    "published": "",
+    "status": "neu"
+   },
+   "https://nomadmaroc.de/": {
+    "title": "Geführte Wohnmobilreisen",
+    "published": "",
+    "status": "neu"
+   },
+   "https://hummelnimarsch.de/ueberwintern-in-marokko-mit-dem-wohnmobil/": {
+    "title": "Überwintern in Marokko mit dem Wohnmobil - Erfahrungen & Tipps",
+    "published": "",
+    "status": "neu"
+   },
+   "https://outdoornomaden.de/wohnmobil-marokko/": {
+    "title": "Mit dem Wohnmobil nach Marokko • Das solltest du wissen!",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.fritz-berger.de/blog/reisen/reiseberichte/unsere-wohnmobil-tour-in-marokko-route-tipps-erfahrungen-teil-i/": {
+    "title": "Unsere Wohnmobil-Tour in Marokko: Route, Tipps & Erfahrungen - Teil I Fritz Berger Campingbedarf - Reiseberichte",
+    "published": "",
+    "status": "neu"
+   },
+   "https://www.reisemobilcouch.de/de/reisen/routen/marokko-rundreise-mit-dem-wohnmobil": {
+    "title": "Rundreise durch Marokko mit dem Wohnmobil",
+    "published": "",
+    "status": "neu"
    }
   },
-  "last_search": "2026-10-31"
+  "last_search": "2026-11-07"
  }
 }
