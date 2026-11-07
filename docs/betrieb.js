@@ -187,8 +187,11 @@
       const text = await r.text();
       if (!window.marked) await loadScript("vendor/marked/marked.min.js");
       $("#handbuch").innerHTML = window.marked.parse(text);
+      // Bilder und Links auf docs/… liegen in der App direkt neben dem Handbuch
+      $("#handbuch").querySelectorAll("img[src^='docs/']").forEach((img) => { img.src = img.getAttribute("src").slice(5); img.classList.add("md-bild"); });
       $("#handbuch").querySelectorAll("a[href]").forEach((a) => {
         const href = a.getAttribute("href");
+        if (href.startsWith("docs/")) { a.href = href.slice(5); a.target = "_blank"; a.rel = "noopener"; return; }
         if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
         else if (repo()) { a.href = `https://github.com/${repo()}/blob/main/${href}`; a.target = "_blank"; a.rel = "noopener"; }
       });

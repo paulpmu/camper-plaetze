@@ -19,6 +19,23 @@ Jede Nacht um 04:17 (Winterzeit) bzw. 05:17 (Sommerzeit) startet **GitHub Action
 
 In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den Stand der Läufe, die aufgelaufenen Kosten und dieses Handbuch.
 
+### Übersicht: was läuft wo und wieso
+
+[![Übersicht: iPhone und iPad, Cloudflare, GitHub und die genutzten Dienste](docs/uebersicht.svg)](docs/uebersicht.svg)
+
+*Antippen vergrössert die Grafik.*
+
+| Nr. | Was passiert | Wo | Wieso so |
+|---|---|---|---|
+| **①** | Jede Nacht holen die Abläufe neue Videos, Reiseberichte, Stellplätze und Wetterwarnungen. Claude liest daraus die Plätze heraus | GitHub Actions | läuft ohne eigenen Server und gratis; die Schlüssel für YouTube, Claude und Webshare liegen sicher in GitHub Secrets, nie auf dem Handy |
+| **②** | Nach jedem Lauf werden die Daten gespeichert und die App neu veröffentlicht | GitHub → Cloudflare Pages | Git hält jeden Datenstand nachvollziehbar fest; Cloudflare liefert die App schnell aus |
+| **③** | Wer die App öffnet, meldet sich mit E-Mail-Adresse und Code an. Danach lädt die App ihre Dateien und Plätze | Cloudflare Access und Pages | nur freigegebene Personen kommen hinein, ohne eigenes Passwortsystem |
+| **④** | Favoriten, Notizen, Logbuch, eigene Plätze und Fotos werden gespeichert und auf allen Geräten abgeglichen | Cloudflare Functions, D1, R2 | getrennt pro Person, geprüft nach Rolle; dieselbe Anmeldung wie ③ |
+| **⑤** | Wetterprognose, Kartenbild, Fotos und Strassenbilder lädt die App direkt beim Anbieter | Open-Meteo, OpenStreetMap, Wikimedia, Panoramax, Mapillary | immer aktuell, gratis und ohne Schlüssel |
+| **⑥** | Ziele starten, Zeitpläne und Quellen ändern, Anfragen an Claude senden | App → GitHub | nur der Admin mit GitHub-Schlüssel; der Schlüssel bleibt auf dem Gerät |
+
+Offline funktioniert die App mit dem zuletzt geladenen Stand. Änderungen ohne Netz merkt sie sich in der Warteschlange und sendet sie bei ④, sobald wieder Empfang da ist.
+
 ### Plattformen und ihre Rolle
 
 | Plattform | Wofür | Konto / Zugang | Wo verwaltet |

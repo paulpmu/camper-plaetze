@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 850" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Camper-Planer: was läuft wo und wieso</title>
+  <desc id="d">iPhone und iPad öffnen die App über Cloudflare Access und Pages; persönliche Daten laufen über Cloudflare Functions in die Datenbank D1 und den Fotospeicher R2. GitHub Actions holen nachts Daten von YouTube, Claude, OpenStreetMap und den Wetterdiensten und veröffentlichen die App auf Cloudflare. Wetter, Karte und Fotos lädt die App direkt bei den Anbietern.</desc>
+  <style>
+    :root { --bg:#fbf7f2; --card:#ffffff; --text:#2a2420; --muted:#7a6e66; --line:#d9cfc5; --cf:#f38020; --cfsoft:#fdecdc; --gh:#24292f; --ghsoft:#eceef1; --dev:#1f6fb2; --devsoft:#e3eef8; --ext:#2e7d4f; --extsoft:#e2f1e8; --arrow:#5a4f48; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#1d1a18; --card:#282422; --text:#f1ebe5; --muted:#a99d94; --line:#4a423d; --cf:#f7a35c; --cfsoft:#3a2a1c; --gh:#c9d1d9; --ghsoft:#2b2f35; --dev:#6fb1ea; --devsoft:#1c2b3a; --ext:#6cc495; --extsoft:#1d3127; --arrow:#cbbfb5; }
+    }
+    .bg { fill: var(--bg); }
+    .card { fill: var(--card); stroke: var(--line); stroke-width: 1; }
+    .h { font-size: 19px; font-weight: 700; fill: var(--text); }
+    .sub { font-size: 12.5px; fill: var(--muted); }
+    .t { font-size: 14px; font-weight: 600; fill: var(--text); }
+    .s { font-size: 12px; fill: var(--muted); }
+    .lbl { font-size: 12px; font-weight: 600; fill: var(--arrow); }
+    .num { font-size: 12px; font-weight: 700; fill: var(--bg); }
+    .a { stroke: var(--arrow); stroke-width: 1.8; fill: none; marker-end: url(#pfeil); }
+    .dash { stroke-dasharray: 6 5; }
+    .cf  { fill: var(--cfsoft);  stroke: var(--cf); }
+    .gh  { fill: var(--ghsoft);  stroke: var(--gh); }
+    .dev { fill: var(--devsoft); stroke: var(--dev); }
+    .ext { fill: var(--extsoft); stroke: var(--ext); }
+    .zone { stroke-width: 1.6; }
+    .badge { fill: var(--arrow); }
+  </style>
+  <defs>
+    <marker id="pfeil" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="badge" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1000" height="850" rx="16"/>
+
+  <!-- ⑥ Steuerung durch den Admin -->
+  <path class="a dash" d="M135,92 V46 H845 V92"/>
+  <circle class="badge" cx="300" cy="46" r="10"/><text class="num" x="300" y="50" text-anchor="middle">6</text>
+  <text class="lbl" x="316" y="40">Ziele starten und ändern – nur Admin, mit GitHub-Schlüssel</text>
+
+  <!-- Geräte -->
+  <rect class="dev zone" x="20" y="92" width="230" height="440" rx="14"/>
+  <text class="h" x="36" y="122">iPhone / iPad</text>
+  <text class="sub" x="36" y="141">Safari, App auf dem Home-Bildschirm</text>
+  <rect class="card" x="36" y="160" width="198" height="62" rx="10"/>
+  <text class="t" x="48" y="185">Camper-Planer</text>
+  <text class="s" x="48" y="205">Karte, Plätze, Planer, Wetter</text>
+  <rect class="card" x="36" y="236" width="198" height="78" rx="10"/>
+  <text class="t" x="48" y="261">Offline-Speicher</text>
+  <text class="s" x="48" y="281">App und zuletzt geladene</text>
+  <text class="s" x="48" y="298">Plätze ohne Netz nutzbar</text>
+  <rect class="card" x="36" y="328" width="198" height="78" rx="10"/>
+  <text class="t" x="48" y="353">Warteschlange</text>
+  <text class="s" x="48" y="373">Änderungen ohne Netz, später</text>
+  <text class="s" x="48" y="390">automatisch gesendet</text>
+  <rect class="card" x="36" y="420" width="198" height="94" rx="10"/>
+  <text class="t" x="48" y="445">GitHub-Schlüssel</text>
+  <text class="s" x="48" y="465">nur beim Admin, nur auf</text>
+  <text class="s" x="48" y="482">diesem Gerät, für die</text>
+  <text class="s" x="48" y="499">Steuerung ⑥</text>
+
+  <!-- Cloudflare -->
+  <rect class="cf zone" x="300" y="92" width="360" height="440" rx="14"/>
+  <text class="h" x="316" y="122">Cloudflare</text>
+  <text class="sub" x="316" y="141">ausliefern, Zugang prüfen, persönliche Daten</text>
+  <rect class="card" x="316" y="156" width="328" height="58" rx="10"/>
+  <text class="t" x="328" y="180">Access – der Türsteher</text>
+  <text class="s" x="328" y="200">nur freigegebene E-Mail-Adressen, Code per Mail</text>
+  <rect class="card" x="316" y="240" width="328" height="64" rx="10"/>
+  <text class="t" x="328" y="264">Pages – die App</text>
+  <text class="s" x="328" y="285">Dateien aus docs/: App, Plätze, Warnungen</text>
+  <rect class="card" x="316" y="330" width="328" height="64" rx="10"/>
+  <text class="t" x="328" y="354">Functions – Server-Teil</text>
+  <text class="s" x="328" y="375">prüft Anmeldung und Rolle (server/)</text>
+  <rect class="card" x="316" y="430" width="156" height="86" rx="10"/>
+  <text class="t" x="328" y="454">D1 Datenbank</text>
+  <text class="s" x="328" y="474">Personen, Rollen,</text>
+  <text class="s" x="328" y="491">Favoriten, Logbuch,</text>
+  <text class="s" x="328" y="508">eigene Plätze</text>
+  <rect class="card" x="488" y="430" width="156" height="86" rx="10"/>
+  <text class="t" x="500" y="454">R2 Fotospeicher</text>
+  <text class="s" x="500" y="474">Meine Fotos,</text>
+  <text class="s" x="500" y="491">getrennt pro Person</text>
+  <path class="a" d="M480,214 V238"/>
+  <path class="a" d="M394,394 V428"/>
+  <path class="a" d="M566,394 V428"/>
+
+  <!-- GitHub -->
+  <rect class="gh zone" x="710" y="92" width="270" height="440" rx="14"/>
+  <text class="h" x="726" y="122">GitHub</text>
+  <text class="sub" x="726" y="141">Code, Daten und Automatik</text>
+  <rect class="card" x="726" y="156" width="238" height="80" rx="10"/>
+  <text class="t" x="738" y="180">Repository (privat)</text>
+  <text class="s" x="738" y="200">Code, Ziele in ziele/,</text>
+  <text class="s" x="738" y="217">Platzdaten in docs/data/</text>
+  <text class="sub" x="726" y="262">Actions – laufen von selbst</text>
+  <rect class="card" x="726" y="272" width="238" height="64" rx="10"/>
+  <text class="t" x="738" y="296">Nächtlicher Abruf</text>
+  <text class="s" x="738" y="316">neue Videos, Berichte, Plätze</text>
+  <rect class="card" x="726" y="346" width="238" height="64" rx="10"/>
+  <text class="t" x="738" y="370">Wetter, alle 3 Stunden</text>
+  <text class="s" x="738" y="390">Warnungen, MeteoSchweiz</text>
+  <rect class="card" x="726" y="420" width="238" height="64" rx="10"/>
+  <text class="t" x="738" y="444">Anfragen aus der App</text>
+  <text class="s" x="738" y="464">Claude legt Ziele an, ändert sie</text>
+  <text class="s" x="726" y="514">jeder Lauf speichert und veröffentlicht</text>
+
+  <!-- ③ öffnen und anmelden -->
+  <path class="a" d="M250,185 H314"/>
+  <circle class="badge" cx="270" cy="168" r="10"/><text class="num" x="270" y="172" text-anchor="middle">3</text>
+  <!-- App laden -->
+  <path class="a" d="M316,272 H252"/>
+  <text class="lbl" x="258" y="262">lädt</text>
+  <!-- ④ persönliche Daten -->
+  <path class="a" d="M252,362 H314" marker-start="url(#pfeil)"/>
+  <circle class="badge" cx="283" cy="345" r="10"/><text class="num" x="283" y="349" text-anchor="middle">4</text>
+  <!-- ② veröffentlichen -->
+  <path class="a" d="M726,304 H690 V272 H646"/>
+  <circle class="badge" cx="685" cy="250" r="10"/><text class="num" x="685" y="254" text-anchor="middle">2</text>
+
+  <!-- Dienste -->
+  <rect class="ext zone" x="20" y="600" width="460" height="230" rx="14"/>
+  <text class="h" x="36" y="630">Direkt von der App genutzt</text>
+  <text class="sub" x="36" y="649">live, ohne Konto, ohne Kosten</text>
+  <text class="t" x="36" y="682">Open-Meteo</text><text class="s" x="200" y="682">Wetterprognose und Wetternote</text>
+  <text class="t" x="36" y="712">OpenStreetMap</text><text class="s" x="200" y="712">Kartenbild</text>
+  <text class="t" x="36" y="742">Wikimedia, Wikipedia</text><text class="s" x="200" y="742">Fotos und bekannte Orte</text>
+  <text class="t" x="36" y="772">Panoramax, Mapillary</text><text class="s" x="200" y="772">Strassenbilder</text>
+  <text class="t" x="36" y="802">Google, Apple Karten</text><text class="s" x="200" y="802">Street View, Navigation (Links)</text>
+
+  <rect class="ext zone" x="520" y="600" width="460" height="230" rx="14"/>
+  <text class="h" x="536" y="630">Vom nächtlichen Abruf genutzt</text>
+  <text class="sub" x="536" y="649">mit Schlüsseln in GitHub Secrets</text>
+  <text class="t" x="536" y="682">YouTube + Webshare</text><text class="s" x="742" y="682">Videos, Kommentare, Transkripte</text>
+  <text class="t" x="536" y="712">Anthropic Claude</text><text class="s" x="742" y="712">Plätze herauslesen, Anfragen</text>
+  <text class="t" x="536" y="742">Blogs und Foren</text><text class="s" x="742" y="742">Reiseberichte (Websuche)</text>
+  <text class="t" x="536" y="772">OpenStreetMap, OSRM</text><text class="s" x="742" y="772">Stellplätze, Koordinaten, Routen</text>
+  <text class="t" x="536" y="802">MeteoAlarm, MeteoSchweiz</text><text class="s" x="742" y="802">Warnungen, Lokalprognose</text>
+
+  <!-- ⑤ live -->
+  <path class="a" d="M135,534 V598"/>
+  <circle class="badge" cx="155" cy="566" r="10"/><text class="num" x="155" y="570" text-anchor="middle">5</text>
+  <!-- ① Daten holen -->
+  <path class="a" d="M845,600 V536"/>
+  <circle class="badge" cx="865" cy="566" r="10"/><text class="num" x="865" y="570" text-anchor="middle">1</text>
+</svg>

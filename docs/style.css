@@ -398,3 +398,6 @@ table.wx.rank tr[data-region] { cursor: pointer; }
 /* Personen und Rollen */
 .personen .st { background: var(--accent-soft); color: var(--accent); }
 #p-rolle { flex: 1; min-width: 0; }
+
+/* Grafiken im Handbuch */
+.md img.md-bild { display: block; width: 100%; height: auto; border-radius: 12px; margin: 8px 0; }
