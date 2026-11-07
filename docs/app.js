@@ -654,6 +654,7 @@
         <h3>${esc(s.name)}</h3>
         <div class="muted">${[s.place, s.region, (zielById(s.zid) || {}).name].filter(Boolean).map(esc).join(" · ")}</div>
       </div>
+      ${s.lat != null && window.FOTOS ? FOTOS.schnell(s.lat, s.lng) + `<div id="ft-hero" class="ft-strip"></div>` : ""}
       ${s.merkOnly ? `<p class="muted">Aus Ihrer Merkliste. Das Ziel ist gerade nicht gewählt.${s.lat != null ? ` <button class="linkbtn" data-load-ziel="${esc(s.zid)}">Ziel dazunehmen</button>` : ""}</p>` : ""}
       <div class="badges">
         <span class="badge type ${s.type}">${esc(TYPE_LABEL[s.type] || s.type)}</span>
@@ -688,7 +689,7 @@
     };
     bindMine(s);
     if (s.lat != null && window.WETTER) WETTER.detail($("#wx-detail"), s.lat, s.lng);
-    if (s.lat != null && window.FOTOS) FOTOS.detail($("#ft-detail"), s.lat, s.lng);
+    if (s.lat != null && window.FOTOS) { FOTOS.leiste($("#ft-hero"), s.lat, s.lng); FOTOS.detail($("#ft-detail"), s.lat, s.lng); bindSchnell(s.lat, s.lng); }
     const lz = $("#detail [data-load-ziel]");
     if (lz) lz.onclick = async () => {
       const id = lz.dataset.loadZiel;
@@ -697,6 +698,32 @@
     if (!s.merkOnly && !isOwn(s)) history.replaceState(null, "", "#" + s.zid + "/" + s.id);
     open("#sheet-detail");
   }
+
+  // Schnellknöpfe oben im Platz bzw. am gewählten Kartenpunkt
+  function bindSchnell(lat, lng) {
+    const f = $("#detail [data-q='fotos']"), w = $("#detail [data-q='wetter']");
+    if (f) f.onclick = () => FOTOS.fotosZeigen(lat, lng);
+    if (w) w.onclick = () => $("#wx-detail")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Langer Druck (oder Rechtsklick) auf die Karte: Street View, Fotos und Wetter für genau diese Stelle
+  function openPunkt(lat, lng) {
+    $("#detail").innerHTML = `
+      <div class="d-head"><h3>Gewählte Stelle</h3><div class="muted">${lat.toFixed(5)}, ${lng.toFixed(5)}</div></div>
+      ${FOTOS.schnell(lat, lng)}<div id="ft-hero" class="ft-strip"></div>
+      <div class="links">
+        <a class="btn" href="https://maps.apple.com/?daddr=${lat},${lng}" target="_blank" rel="noopener">Apple Karten</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener">Google Maps</a>
+        <a class="btn ghost" href="https://park4night.com/en/search?lat=${lat}&lng=${lng}&z=14" target="_blank" rel="noopener">park4night</a>
+      </div>
+      <div id="wx-detail" class="wx-box"></div><div id="ft-detail" class="ft-box"></div>`;
+    FOTOS.leiste($("#ft-hero"), lat, lng);
+    FOTOS.detail($("#ft-detail"), lat, lng);
+    if (window.WETTER) WETTER.detail($("#wx-detail"), lat, lng);
+    bindSchnell(lat, lng);
+    open("#sheet-detail");
+  }
+  map.on("contextmenu", (e) => { if (window.FOTOS) openPunkt(e.latlng.lat, e.latlng.lng); });
 
   function bindMine(s) {
     const box = $("#detail .mine");

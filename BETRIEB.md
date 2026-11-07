@@ -196,13 +196,20 @@ Die App holt die Prognosen direkt beim Wetterdienst Open-Meteo, ohne Schlüssel 
 
 ### 2.12 Fotos & Umgebung
 
-Jeder Platz zeigt unter dem Wetter den Abschnitt **Fotos & Umgebung**, damit Sie ungefähr wissen, was Sie antreffen:
+So wissen Sie ungefähr, was Sie antreffen:
 
-- **Links:**
+- **Schnellknöpfe direkt unter dem Platznamen:**
+  - **Street View:** öffnet Google Street View an genau dieser Stelle.
+  - **Fotos:** öffnet die Bilder gross in der App. Wischen oder die Pfeile wechseln das Bild.
+  - **Wetter:** springt zur Wettertabelle.
+  - **Satellit:** öffnet das Luftbild.
+- **Bilderleiste:** liegt gleich darunter. Ein Bild antippen öffnet es gross. Im Bild führt der Link zur 360°-Ansicht (Panoramax/Mapillary, dort kann man weitergehen) oder zu Urheber und Lizenz (Wikimedia).
+- **Jede beliebige Stelle:** lange auf die Karte drücken. Es erscheint die «Gewählte Stelle» mit denselben Knöpfen, Wetter und Umgebung. Das hilft etwa, um einen Wildplatz oder eine Zufahrt vorher anzuschauen.
+- **Abschnitt «Umgebung» weiter unten:**
   - **Google Street View:** öffnet die Strassenansicht von Google an dieser Stelle. Eine Einbettung in die App wäre bei Google kostenpflichtig.
   - **Google Satellit:** Luftbild.
   - **Mapillary** und **Panoramax:** offene Strassenbilder.
-- **Bilderleiste:** Strassenbilder aus Panoramax im Umkreis von rund 200 m und Fotos mit Standort von Wikimedia Commons im Umkreis von 1,5 km, mit Entfernung. Ein Bild antippen öffnet es gross, mit Urheber und Lizenz.
+- **Quellen der Bilder:** Strassenbilder aus Panoramax im Umkreis von rund 200 m (optional Mapillary) und Fotos mit Standort von Wikimedia Commons im Umkreis von 1,5 km, jeweils mit Entfernung.
 - **Bekannte Orte in der Nähe:** bis zu 10 Wikipedia-Artikel im Umkreis von 5 km, wie bei OsmAnd.
 - **Mapillary-Vorschaubilder (optional):** Mapillary hat die beste Abdeckung mit Strassenbildern. Für Vorschaubilder in der App braucht es einen kostenlosen Client-Token:
   1. Auf mapillary.com anmelden.
