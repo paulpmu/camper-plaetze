@@ -32,6 +32,8 @@ In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den
 | OSRM | Strassenverlauf der Routen | kein Konto, gratis | – |
 | OpenStreetMap-Kacheln | Kartenbild in der App | kein Konto, gratis | – |
 | Open-Meteo | Wetterprognosen und Ensembles, direkt aus der App abgerufen | kein Konto, gratis (nicht-kommerziell) | https://open-meteo.com |
+| MeteoAlarm (EUMETNET) | offizielle Unwetterwarnungen; Regionsumrisse von gitlab.com/meteoalarm-pm-group | kein Konto, gratis (CC BY 4.0) | https://meteoalarm.org |
+| MeteoSchweiz Open Data | Lokalprognose für Plätze in der Schweiz | kein Konto, gratis | https://opendatadocs.meteoswiss.ch |
 | Wikimedia Commons, Wikipedia, Panoramax | Fotos, Strassenbilder und bekannte Orte in der Nähe eines Platzes | kein Konto, gratis | – |
 | Mapillary (optional) | Vorschaubilder von Strassenbildern | gratis Client-Token, nur auf Ihrem Gerät | https://www.mapillary.com/dashboard/developers |
 
@@ -191,6 +193,9 @@ Die App holt die Prognosen direkt beim Wetterdienst Open-Meteo, ohne Schlüssel 
 - **Wetter-Knopf (☀) oben:**
   - **Wetterkarte für Kartenausschnitt:** färbt den sichtbaren Ausschnitt nach der Wetternote des gewählten Tages ein, mit 7 × 7 Feldern. Antippen zeigt Note, Sonne und Regen. Zum Ausblenden den Knopf nochmals antippen.
   - **Regionen vergleichen:** Rangliste der Regionen aller gewählten Ziele nach der mittleren Note der nächsten 7 Tage, berechnet aus bis zu 3 Plätzen pro Region. Eine Region antippen filtert die Karte auf diese Region.
+- **Offizielle Warnungen:** Oben in der Wettertabelle stehen die aktiven Unwetterwarnungen der staatlichen Wetterdienste (MeteoAlarm), passend zur Warnregion des Platzes: gelb, orange oder rot, mit Ereignis und Zeitraum. Sonst erscheint «✓ Keine offiziellen Unwetterwarnungen». Im Wetter-Fenster (☀) listet **Offizielle Warnungen** alle Warnungen in den gewählten Zielen; Antippen zeigt das Gebiet auf der Karte. Abgedeckt sind rund 30 Länder Europas. In der Schweiz gibt es keine Regionsumrisse, dort zeigt die App alle Schweizer Warnungen. Marokko ist nicht dabei.
+- **MeteoSchweiz:** Bei Plätzen in der Schweiz zeigt die Tabelle zusätzlich die Note und die Regenwahrscheinlichkeit der offiziellen MeteoSchweiz-Lokalprognose für die nächste Postleitzahl oder den nächsten Bergpunkt (höchstens 6 km entfernt). Diese Prognose berücksichtigt den Schatten der Berge und ist für Schweizer Täler meist die beste Quelle.
+- **Aktualisierung:** Warnungen und MeteoSchweiz-Daten bereitet der Ablauf **«Wetterdaten aktualisieren & Webapp veröffentlichen»** (`.github/workflows/wetter.yml`) alle 3 Stunden auf (Minute 23). Er ist gratis, braucht keinen Schlüssel und veröffentlicht die Webapp nur, wenn sich etwas geändert hat. Ein Lauf dauert rund 2 Minuten. Manuell starten: **Actions → Wetterdaten aktualisieren → Run workflow**.
 - **Zwischenspeicher:** Die App speichert Prognosen 3 Stunden zwischen. Offline gibt es kein Wetter.
 - **Grenzen:** Ab dem 4. Tag werden Prognosen deutlich unsicherer. Die Hochnebel-Schätzung ist eine Faustregel.
 
@@ -312,6 +317,8 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `scripts/common.py` | Geodaten, Standortprüfung, Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
 | `docs/fotos.js` | Fotos & Umgebung: Panoramax, Mapillary, Wikimedia Commons, Wikipedia, Street-View-Links |
+| `scripts/wetter_update.py` | bereitet Warnungen (MeteoAlarm) und MeteoSchweiz-Lokalprognose auf; übernommen aus dem Werkzeug «wetter-check» |
+| `docs/data/wetter/` | `warnungen.json` und `ch.json` für die Webapp (alle 3 Stunden neu) |
 | `docs/wetter.js` | Wetter: Abruf bei Open-Meteo, Wetternote, Ensemble, Hochnebel |
 | `tests/wetter.test.js` | Tests der Wetterlogik (`node --test tests/wetter.test.js`) |
 | `docs/` | die Webapp; `docs/data/<ziel>/places.json` enthält die zusammengeführten Plätze, die übrigen Dateien die einzelnen Quellen |

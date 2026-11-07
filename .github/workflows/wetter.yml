@@ -1,0 +1,83 @@
+name: Wetterdaten aktualisieren & Webapp veröffentlichen
+
+# Offizielle Warnungen (MeteoAlarm) und MeteoSchweiz-Lokalprognose für die Webapp, alle 3 Stunden.
+on:
+  schedule:
+    - cron: "23 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: repo-write
+  cancel-in-progress: false
+
+jobs:
+  wetter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      geaendert: ${{ steps.speichern.outputs.geaendert }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "requests>=2.32"
+      # Regionsumrisse der Warnungen (~33 MB) zwischenspeichern; das Skript erneuert sie monatlich
+      - uses: actions/cache@v4
+        with:
+          path: data/wetter-cache
+          key: wetter-cache-${{ github.run_id }}
+          restore-keys: wetter-cache-
+      - name: Warnungen und MeteoSchweiz aufbereiten
+        run: python scripts/wetter_update.py
+      - name: Speichern
+        id: speichern
+        run: |
+          git config user.name "camper-plaetze-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs/data/wetter
+          if git diff --staged --quiet; then echo "geaendert=nein" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git commit -m "Wetterdaten $(date -u +'%F %H:%M')"
+          git pull --rebase origin main
+          git push
+          echo "geaendert=ja" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: wetter
+    if: needs.wetter.outputs.geaendert == 'ja'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url || steps.pages2.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Zielübersicht und Handbuch für die Webapp
+        run: |
+          python scripts/update.py --nur-index
+          cp BETRIEB.md docs/handbuch.md
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: pages
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      - if: steps.pages.outcome == 'failure'
+        run: sleep 90
+      - id: pages2
+        if: steps.pages.outcome == 'failure'
+        uses: actions/deploy-pages@v4

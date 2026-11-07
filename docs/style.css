@@ -377,3 +377,11 @@ table.wx.rank tr[data-region] { cursor: pointer; }
 #ft-lightbox .ft-x { position: absolute; top: calc(var(--safe-top) + 12px); right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.18); color: #fff; font-size: 20px; }
 #ft-lightbox .ft-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 64px; border: 0; background: rgba(255,255,255,.12); color: #fff; font-size: 34px; border-radius: 10px; }
 #ft-lightbox .ft-prev { left: 8px; } #ft-lightbox .ft-next { right: 8px; }
+
+/* Warnungen */
+.wx-warns { margin: 6px 0 10px; }
+.wx-warn { padding: 8px 10px; border-radius: 10px; margin: 6px 0; font-size: 14px; border-left: 5px solid #e0b100; background: color-mix(in srgb, #e0b100 12%, var(--card)); cursor: default; }
+.wx-warn.orange { border-color: #e67e22; background: color-mix(in srgb, #e67e22 14%, var(--card)); }
+.wx-warn.rot { border-color: #c0392b; background: color-mix(in srgb, #c0392b 14%, var(--card)); }
+#wx-warn .wx-warn { cursor: pointer; }
+.wx-ok { color: #2e8b57; }

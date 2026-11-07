@@ -550,7 +550,43 @@
         <p class="muted">Ø = mittlere Wetternote der nächsten 7 Tage (ECMWF, je bis zu 3 Plätze pro Region). Region antippen, um sie auf der Karte zu filtern.</p>`;
     } catch (e) { $("#wx-rank").innerHTML = `<p class="muted">Rangliste nicht verfügbar: ${esc(e.message)}</p>`; }
   }
-  $("#btn-wetter").onclick = () => { wxTage(); open("#sheet-wetter"); };
+  // Offizielle Warnungen in den gewählten Zielen (Datei der GitHub Action, alle 3 Stunden)
+  const warnGroup = L.layerGroup().addTo(map);
+  let warnListe = [];
+  async function wxWarnungen() {
+    const el = $("#wx-warn");
+    el.innerHTML = `<p class="muted">lädt …</p>`;
+    try {
+      const d = await WETTER.warnungenAlle();
+      const boxen = active.map((z) => z.bbox);
+      const ueber = (b) => boxen.some((a) => !(a[2] < b[0] || b[2] < a[0] || a[3] < b[1] || b[3] < a[1]));
+      const jetzt = Date.now();
+      warnListe = d.warnungen.filter((w) => new Date(w.ende).getTime() > jetzt &&
+        (w.codes.some((c) => d.flaechen[c] && ueber(d.flaechen[c].bbox)) || (!w.codes.length && w.land === "CH" && ueber([45.8, 5.95, 47.85, 10.5]))));
+      const order = { rot: 0, orange: 1, gelb: 2 };
+      warnListe.sort((a, b) => order[a.stufe] - order[b.stufe] || a.beginn.localeCompare(b.beginn));
+      el.innerHTML = warnListe.length
+        ? `<ul class="plain wx-warns">${warnListe.slice(0, 40).map((w, i) => WETTER.warnHtml(w).replace('<li class="', `<li data-w="${i}" class="`)).join("")}</ul>
+           ${warnListe.length > 40 ? `<p class="muted">… und ${warnListe.length - 40} weitere</p>` : ""}
+           <p class="muted">Warnung antippen zeigt das Gebiet auf der Karte. Stand ${new Date(d.stand).toLocaleString("de-CH", { dateStyle: "short", timeStyle: "short" })} · ${esc(d.quelle)}</p>`
+        : `<p class="muted wx-ok">✓ Keine offiziellen Unwetterwarnungen in den gewählten Zielen (Stand ${new Date(d.stand).toLocaleString("de-CH", { dateStyle: "short", timeStyle: "short" })}).</p>`;
+      el.onclick = (e) => {
+        const li = e.target.closest("li[data-w]");
+        if (!li) return;
+        const w = warnListe[+li.dataset.w];
+        warnGroup.clearLayers();
+        const farbe = { gelb: "#e0b100", orange: "#e67e22", rot: "#c0392b" }[w.stufe];
+        const shapes = w.codes.map((c) => d.flaechen[c]).filter(Boolean).flatMap((f) => f.poly.map((poly) => poly.map((ring) => ring.map(([x, y]) => [y, x]))));
+        if (!shapes.length) { toast("Für diese Warnung gibt es keinen Umriss (Region im Land prüfen)."); return; }
+        const layer = L.polygon(shapes, { color: farbe, weight: 2, fillOpacity: 0.25 }).bindTooltip(`${w.ereignis} – ${w.region}`).addTo(warnGroup);
+        close();
+        map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+      };
+    } catch (e) {
+      el.innerHTML = `<p class="muted">Warnungen noch nicht verfügbar (${esc(e.message)}).</p>`;
+    }
+  }
+  $("#btn-wetter").onclick = () => { wxTage(); open("#sheet-wetter"); wxWarnungen(); };
   $("#wx-days").onclick = (e) => { const b = e.target.closest("button[data-i]"); if (!b) return; wxTag = +b.dataset.i; wxTage(); wxZeichnen(); };
   $("#wx-karte").onclick = () => {
     if (wxGrid) { wxGrid = null; wxGroup.clearLayers(); $("#wx-karte").textContent = "Wetterkarte für Kartenausschnitt"; return; }

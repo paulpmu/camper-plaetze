@@ -230,6 +230,75 @@ window.WETTER = (() => {
     return out;
   }
 
+  // ------------------------------------------------------------ Warnungen und MeteoSchweiz (von der GitHub Action aufbereitet)
+  const lokal = {};
+  async function lokalLaden(name, maxAlterMin) {
+    const e = lokal[name];
+    if (e && Date.now() - e.t < maxAlterMin * 60000) return e.v;
+    const r = await fetch(`data/wetter/${name}`, { cache: "no-cache" });
+    if (!r.ok) throw new Error(`${name} ${r.status}`);
+    lokal[name] = { t: Date.now(), v: await r.json() };
+    return lokal[name].v;
+  }
+  function imRing(x, y, ring) {
+    let innen = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const [xi, yi] = ring[i], [xj, yj] = ring[j];
+      if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / ((yj - yi) || 1e-15) + xi) innen = !innen;
+    }
+    return innen;
+  }
+  function inFlaeche(f, lat, lng) {
+    const [a, b, c, d] = f.bbox;
+    if (lat < a || lat > c || lng < b || lng > d) return false;
+    return f.poly.some((poly) => imRing(lng, lat, poly[0]) && !poly.slice(1).some((h) => imRing(lng, lat, h)));
+  }
+  const CH_BOX = [45.8, 5.95, 47.85, 10.5];
+  const inCH = (lat, lng) => lat >= CH_BOX[0] && lat <= CH_BOX[2] && lng >= CH_BOX[1] && lng <= CH_BOX[3];
+
+  // Aktive Warnungen am Ort: über die Regionsumrisse; in der Schweiz (keine Umrisse) alle Schweizer Warnungen
+  async function warnungenFuer(lat, lng) {
+    const d = await lokalLaden("warnungen.json", 30);
+    const jetzt = Date.now();
+    const liste = d.warnungen.filter((w) => new Date(w.ende).getTime() > jetzt && (
+      w.codes.some((c) => d.flaechen[c] && inFlaeche(d.flaechen[c], lat, lng)) ||
+      (w.land === "CH" && d.ohne_umrisse.includes("CH") && inCH(lat, lng))));
+    return { stand: d.stand, liste, abgedeckt: d.laender.length > 0 };
+  }
+  async function warnungenAlle() { return lokalLaden("warnungen.json", 30); }
+
+  // MeteoSchweiz-Lokalprognose: nächster Punkt (Postleitzahl oder Bergpunkt) im Umkreis von 6 km
+  async function meteoschweiz(lat, lng) {
+    if (!inCH(lat, lng)) return null;
+    const d = await lokalLaden("ch.json", 60);
+    let best = null;
+    for (const p of d.punkte) {
+      const dist = Math.hypot((p[1] - lat) * 111, (p[2] - lng) * 111 * Math.cos(lat * Math.PI / 180));
+      if (dist <= 6 && (!best || dist < best.dist)) best = { p, dist };
+    }
+    if (!best) return null;
+    const [name, , , hoehe, reihe] = best.p;
+    const tage = d.tage.map((datum, i) => {
+      const v = reihe[i];
+      if (!v) return { datum, note: null };
+      const [so, re, wk, tief, mittel, hoch, std] = v;
+      const gesamt = tief == null ? null : 100 * (1 - (1 - tief / 100) * (1 - (mittel || 0) / 100) * (1 - (hoch || 0) / 100));
+      const t = { regen: re / 10, wkeit: wk, tief, gesamt, sonne: so / 10, stunden: std };
+      return { datum, note: note(t), sonne: so / 10, regen: re / 10, wkeit: wk };
+    });
+    return { name, hoehe, dist: best.dist, lauf: d.lauf, tage };
+  }
+
+  const STUFE_ICON = { gelb: "🟡", orange: "🟠", rot: "🔴" };
+  function zeitraum(w) {
+    const f = (x) => new Date(x).toLocaleString("de-CH", { weekday: "short", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
+    return `${f(w.beginn)} – ${f(w.ende)}`;
+  }
+  function warnHtml(w) {
+    return `<li class="wx-warn ${w.stufe}">${STUFE_ICON[w.stufe] || "⚠️"} <b>${w.stufe[0].toUpperCase() + w.stufe.slice(1)}e Warnung: ${w.ereignis.replace(/ warning$/i, "")}</b><br>
+      <span class="muted">${w.region} · ${zeitraum(w)}</span></li>`;
+  }
+
   // ------------------------------------------------------------ Darstellung
   const fmt = (x, n = 0) => (x == null ? "–" : x.toFixed(n));
   function tagLabel(datum, heute = new Date()) {
@@ -250,25 +319,32 @@ window.WETTER = (() => {
   async function detail(el, lat, lng) {
     el.innerHTML = `<h4>Wetter</h4><p class="muted">lädt …</p>`;
     try {
-      const w = await ort(lat, lng);
+      const [w, warn, ms] = await Promise.all([ort(lat, lng), warnungenFuer(lat, lng).catch(() => null), meteoschweiz(lat, lng).catch(() => null)]);
+      const msTag = (datum) => ms && ms.tage.find((t) => t.datum === datum);
+      const warnBlock = warn ? (warn.liste.length
+        ? `<ul class="plain wx-warns">${warn.liste.slice(0, 6).map(warnHtml).join("")}</ul>${warn.liste.length > 6 ? `<p class="muted">… und ${warn.liste.length - 6} weitere</p>` : ""}`
+        : `<p class="muted wx-ok">✓ Keine offiziellen Unwetterwarnungen (MeteoAlarm, Stand ${new Date(warn.stand).toLocaleTimeString("de-CH", { hour: "2-digit", minute: "2-digit" })})</p>`) : "";
       const nebelHinweise = w.tage.filter((t) => t.nebel && t.nebel.text).slice(0, 3);
       el.innerHTML = `
         <h4>Wetter <small class="muted">tagsüber 08–17 Uhr</small></h4>
+        ${warnBlock}
         <div class="wx-scroll"><table class="wx">
           <tr><th></th>${w.tage.map((t) => `<th>${tagLabel(t.datum)}</th>`).join("")}</tr>
           <tr><td>Note</td>${w.tage.map((t) => `<td>${chip(t.note)}${t.streuung != null && t.streuung > 3 ? `<i class="wx-unsicher" title="Modelle uneinig">?</i>` : ""}</td>`).join("")}</tr>
+          ${ms ? `<tr><td>MeteoSchweiz</td>${w.tage.map((t) => `<td>${msTag(t.datum) ? chip(msTag(t.datum).note) : "–"}</td>`).join("")}</tr>
+          <tr><td>Regen-W'keit</td>${w.tage.map((t) => `<td>${msTag(t.datum)?.wkeit != null ? msTag(t.datum).wkeit + " %" : "–"}</td>`).join("")}</tr>` : ""}
           <tr><td>Sonne</td>${w.tage.map((t) => `<td>${fmt(t.sonne)} h</td>`).join("")}</tr>
           <tr><td>Regen</td>${w.tage.map((t) => `<td>${fmt(t.regen, 1)} mm</td>`).join("")}</tr>
           ${w.ensemble ? `<tr><td>trocken</td>${w.tage.map((t) => `<td>${t.ens ? fmt(t.ens.trocken) + " %" : "–"}</td>`).join("")}</tr>` : ""}
           <tr><td>Sonnen&shy;untergang</td>${w.tage.map((t) => `<td>${t.sonnenuntergang || "–"}</td>`).join("")}</tr>
         </table></div>
         ${nebelHinweise.length ? `<ul class="wx-hinweise">${nebelHinweise.map((t) => `<li><b>${tagLabel(t.datum)}:</b> ${t.nebel.text}</li>`).join("")}</ul>` : ""}
-        <p class="muted">Höhe ${fmt(w.hoehe)} m · Note 1–10 aus ECMWF, ICON und GFS · «trocken» = Anteil der 51 ECMWF-Ensembleläufe mit weniger als 1 mm · ? = Modelle uneinig ·
+        <p class="muted">Höhe ${fmt(w.hoehe)} m · Note 1–10 aus ECMWF, ICON und GFS ·${ms ? ` MeteoSchweiz-Lokalprognose für ${ms.name} (${fmt(ms.dist, 1)} km, berücksichtigt Bergschatten) ·` : ""} «trocken» = Anteil der 51 ECMWF-Ensembleläufe mit weniger als 1 mm · ? = Modelle uneinig ·
           <a href="${webcamLink(lat, lng)}" target="_blank" rel="noopener">Webcams in der Nähe</a> · Daten: Open-Meteo</p>`;
     } catch (e) {
       el.innerHTML = `<h4>Wetter</h4><p class="muted">Wetter nicht verfügbar (${e.message || "offline"}). <a href="${webcamLink(lat, lng)}" target="_blank" rel="noopener">Webcams in der Nähe</a></p>`;
     }
   }
 
-  return { ort, viele, detail, tagLabel, chip, klasse, farbe, webcamLink, note, inversion, ensembleTage, tageswerte, fmt };
+  return { warnungenFuer, warnungenAlle, warnHtml, meteoschweiz, inFlaeche, ort, viele, detail, tagLabel, chip, klasse, farbe, webcamLink, note, inversion, ensembleTage, tageswerte, fmt };
 })();
