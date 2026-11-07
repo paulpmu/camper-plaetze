@@ -325,3 +325,28 @@ ol.stages li { padding: 6px 0; cursor: pointer; border-bottom: 1px solid var(--l
 .chipgroup { width: 100%; font-size: 12px; color: var(--muted); margin: 6px 0 -2px; font-weight: 600; }
 .hint { font-weight: 400; }
 .layers .toggle { border-top: 0; padding: 6px 0; }
+
+/* Wetter */
+.wx-box { margin: 14px 0; }
+.wx-box h4 small { font-weight: 400; }
+.wx-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; }
+table.wx { border-collapse: collapse; font-size: 13px; white-space: nowrap; }
+table.wx th, table.wx td { padding: 4px 6px; text-align: center; border-bottom: 1px solid var(--line); }
+table.wx th { font-weight: 600; color: var(--muted); font-size: 12px; }
+table.wx td:first-child, table.wx th:first-child { text-align: left; color: var(--muted); position: sticky; left: 0; background: var(--card); }
+table.wx.rank td:first-child { color: var(--text); white-space: normal; min-width: 120px; }
+table.wx.rank tr[data-region] { cursor: pointer; }
+.wx-note { display: inline-block; min-width: 30px; padding: 2px 5px; border-radius: 8px; font-weight: 700; color: #fff; }
+.wx-note.n5, .wx-dot.n5 { background: #2e8b57; }
+.wx-note.n4, .wx-dot.n4 { background: #8fbc3f; }
+.wx-note.n3, .wx-dot.n3 { background: #e0b100; }
+.wx-note.n2, .wx-dot.n2 { background: #e67e22; }
+.wx-note.n1, .wx-dot.n1 { background: #c0392b; }
+.wx-note.na, .wx-dot.na { background: #999; }
+.wx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: middle; }
+.wx-unsicher { font-style: normal; font-weight: 700; color: var(--muted); margin-left: 2px; }
+.wx-hinweise { margin: 8px 0; padding-left: 18px; font-size: 13px; }
+.wx-legende { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 12px; color: var(--muted); margin: 8px 0 14px; }
+.seg.wx-days { flex-wrap: wrap; }
+.wx-et { margin-top: 4px; font-size: 13px; }
+.seg.wx-days button { flex: 1 0 22%; font-size: 13px; padding: 7px 0; }

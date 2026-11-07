@@ -31,6 +31,7 @@ In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den
 | OpenStreetMap Nominatim | wandelt Ortsnamen in Koordinaten um | kein Konto, gratis | – |
 | OSRM | Strassenverlauf der Routen | kein Konto, gratis | – |
 | OpenStreetMap-Kacheln | Kartenbild in der App | kein Konto, gratis | – |
+| Open-Meteo | Wetterprognosen und Ensembles, direkt aus der App abgerufen | kein Konto, gratis (nicht-kommerziell) | https://open-meteo.com |
 
 ### Gespeicherte Schlüssel (GitHub Secrets)
 
@@ -178,6 +179,19 @@ Diese Daten liegen im **privaten Repository** `camper-plaetze-privat` und sind n
 
 Ist unter **Filter** eine Route gewählt, zeigt die **Liste** oben den Bereich **Etappen planen**. Sie wählen die minimale und maximale Tagesetappe (Standard 150–250 km) und den Start (Routenstart oder Ihr Standort). Der Planer schlägt pro Etappe einen Platz vor. Favoriten haben Vorrang, sonst gewinnt die höchste Verlässlichkeit. Er berücksichtigt die aktiven Filter, etwa «ohne Allrad» oder «nur Camping». Gibt es im gewünschten Abstand nichts, wählt er etwas längere, notfalls kürzere Etappen.
 
+**Wetter je Etappe:** Unter **Abfahrt** wählen Sie das Datum, Standard ist heute. Jede Etappe zeigt dann die Wetternote für den Tag, an dem Sie dort ankommen: Etappe 1 am Abfahrtstag, Etappe 2 am Folgetag und so weiter. Bei einer Note unter 4 schlägt die App einen Ruhetag, eine Therme oder einen Stadtbesuch vor. Die Prognose reicht 8 Tage weit.
+
+### 2.11 Wetter
+
+Die App holt die Prognosen direkt beim Wetterdienst Open-Meteo, ohne Schlüssel und ohne Kosten. Die **Wetternote 1–10** gilt für tagsüber (08–17 Uhr). Sie gewichtet Regen am stärksten (35 %), dann tiefe Wolken und Hochnebel (25 %), Gesamtbewölkung (15 %), Nebel (10 %) und Sonne (15 %).
+
+- **Im Platz:** Für 8 Tage zeigt die App die Note als Mittel der Wettermodelle ECMWF, ICON und GFS, dazu Sonnenstunden, Regen und den Sonnenuntergang. **trocken** ist der Anteil der 51 ECMWF-Ensembleläufe mit weniger als 1 mm Regen tagsüber. Ein **?** heisst: Die Modelle sind uneinig, die Prognose ist unsicher. Darunter stehen Hinweise auf **Hochnebel**, etwa «Platz liegt darin; über ~900 m meist sonnig». Sie werden aus dem Temperaturprofil geschätzt. Der Link **Webcams in der Nähe** öffnet die Webcam-Karte von Windy.
+- **Wetter-Knopf (☀) oben:**
+  - **Wetterkarte für Kartenausschnitt:** färbt den sichtbaren Ausschnitt nach der Wetternote des gewählten Tages ein, mit 7 × 7 Feldern. Antippen zeigt Note, Sonne und Regen. Zum Ausblenden den Knopf nochmals antippen.
+  - **Regionen vergleichen:** Rangliste der Regionen aller gewählten Ziele nach der mittleren Note der nächsten 7 Tage, berechnet aus bis zu 3 Plätzen pro Region. Eine Region antippen filtert die Karte auf diese Region.
+- **Zwischenspeicher:** Die App speichert Prognosen 3 Stunden zwischen. Offline gibt es kein Wetter.
+- **Grenzen:** Ab dem 4. Tag werden Prognosen deutlich unsicherer. Die Hochnebel-Schätzung ist eine Faustregel.
+
 **park4night:** park4night bietet keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen den Knopf **park4night**. Er öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung, immer mit dem aktuellen Stand.
 
 ---
@@ -269,6 +283,8 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `scripts/quellen.py` | Quellen OpenStreetMap, Reiseberichte, offene Datensätze; Zusammenführen und Verlässlichkeit |
 | `scripts/common.py` | Geodaten, Standortprüfung, Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
+| `docs/wetter.js` | Wetter: Abruf bei Open-Meteo, Wetternote, Ensemble, Hochnebel |
+| `tests/wetter.test.js` | Tests der Wetterlogik (`node --test tests/wetter.test.js`) |
 | `docs/` | die Webapp; `docs/data/<ziel>/places.json` enthält die zusammengeführten Plätze, die übrigen Dateien die einzelnen Quellen |
 | `data/` | interner Zustand: bearbeitete Videos, Warteschlange, Geocache |
 | `berichte/` | Modellvergleiche |

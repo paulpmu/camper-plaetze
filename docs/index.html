@@ -29,6 +29,7 @@
   <div class="actions">
     <button id="btn-list" class="icon-btn" aria-label="Liste"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
     <button id="btn-filter" class="icon-btn" aria-label="Filter"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="filter-dot" class="dot" hidden></span></button>
+    <button id="btn-wetter" class="icon-btn" aria-label="Wetter"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
     <button id="btn-info" class="icon-btn" aria-label="Info">i</button>
   </div>
 </header>
@@ -131,10 +132,28 @@
       <label class="field">max. km<input id="et-max" type="number" inputmode="numeric" value="250" min="30" step="10"></label>
       <label class="field">ab<select id="et-start"><option value="start">Routenstart</option><option value="standort">Mein Standort</option></select></label>
     </div>
+    <label class="field">Abfahrt (für das Wetter je Etappe)<input id="et-date" type="date"></label>
     <button id="et-plan" class="btn wide">Etappen vorschlagen</button>
     <div id="et-result"></div>
   </div>
   <ul id="list"></ul>
+</section>
+
+<!-- Wetter -->
+<section id="sheet-wetter" class="sheet tall" hidden>
+  <div class="grab"></div>
+  <button class="close" data-close aria-label="Schliessen">✕</button>
+  <h2>Wetter</h2>
+  <p class="muted">Wetternote 1–10 für tagsüber (08–17 Uhr): Regen zählt am stärksten, dann tiefe Wolken und Nebel, dann Sonne.</p>
+  <div class="field">Tag
+    <div class="seg wx-days" id="wx-days"></div>
+  </div>
+  <button id="wx-karte" class="btn wide">Wetterkarte für Kartenausschnitt</button>
+  <div class="wx-legende"><span class="wx-dot n5"></span>8–10 <span class="wx-dot n4"></span>6.5–8 <span class="wx-dot n3"></span>5–6.5 <span class="wx-dot n2"></span>3.5–5 <span class="wx-dot n1"></span>unter 3.5</div>
+  <h4>Wo ist es am schönsten?</h4>
+  <button id="wx-rank-btn" class="btn ghost wide">Regionen der gewählten Ziele vergleichen</button>
+  <div id="wx-rank"></div>
+  <p class="muted">Prognosen von ECMWF, ICON und GFS sowie ECMWF-Ensemble über Open-Meteo (CC BY 4.0). Ab dem 4. Tag unsicherer. Webcams und Details im Platz.</p>
 </section>
 
 <!-- Filter -->
@@ -232,6 +251,7 @@
     <p>Die Plätze stammen je nach Ziel aus YouTube-Videos von Overlandern, Reiseberichten in Blogs und Foren, OpenStreetMap, offenen Datensätzen und Ihren eigenen Einträgen. Welche Quellen aktiv sind, wählen Sie pro Ziel: Zielname antippen → Quellen.</p>
     <p><strong>Wichtig:</strong> Bewertungen aus Videos und Berichten sind subjektive Aussagen, keine geprüfte Platzqualität. Die Regeln zum Wildcampen werden lokal unterschiedlich gehandhabt. Achten Sie auf das Datum.</p>
     <p><strong>Bestätigt</strong> heisst: Der Platz kommt in mehreren Quellen vor. Die <strong>Verlässlichkeit</strong> (0–100) berücksichtigt Standortgenauigkeit, Anzahl Quellen und Erwähnungen sowie Aktualität.</p>
+    <p><strong>Wetter</strong> (☀ oben und im Platz): Die Note 1–10 gilt für tagsüber. Regen zählt am stärksten, dann tiefe Wolken und Nebel, dann Sonne. Quelle: Open-Meteo (ECMWF, ICON, GFS). Ab dem 4. Tag unsicherer.</p>
     <p>«Ungefährer Standort» bedeutet, dass nur der Ort bekannt ist. Der Platz kann einige Kilometer entfernt liegen.</p>
     <div class="legend">
       <span><i class="lg wildplatz"></i>Wildplatz</span>
@@ -267,6 +287,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="github.js"></script>
 <script src="privat.js"></script>
+<script src="wetter.js"></script>
 <script src="app.js"></script>
 <script src="betrieb.js"></script>
 </body>

@@ -436,13 +436,132 @@
       if (r.length_km - pos < min * 0.5) break;
     }
     $("#et-result").innerHTML = stages.length
-      ? `<ol class="stages">${stages.map((st, i) => `<li data-id="${esc(st.s.key)}"><b>Etappe ${i + 1}</b> · ${st.km - st.from} km → km ${st.km}<br>${esc(st.s.name)} <span class="muted">(${esc(TYPE_LABEL[st.s.type])}, Verlässlichkeit ${esc(st.s.confidence || "–")})</span></li>`).join("")}</ol>
+      ? `<ol class="stages">${stages.map((st, i) => `<li data-id="${esc(st.s.key)}"><b>Etappe ${i + 1}</b> · ${st.km - st.from} km → km ${st.km}<br>${esc(st.s.name)} <span class="muted">(${esc(TYPE_LABEL[st.s.type])}, Verlässlichkeit ${esc(st.s.confidence || "–")})</span><div class="wx-et" data-i="${i}"></div></li>`).join("")}</ol>
          <p class="muted">Restliche Strecke bis Ziel: ${Math.max(0, r.length_km - pos)} km. Favoriten werden bevorzugt, sonst die verlässlichsten Plätze.</p>`
       : `<p class="muted">Keine passenden Plätze in diesem Abstand. Filter lockern oder Etappenlänge ändern.</p>`;
+    if (stages.length && window.WETTER) etappenWetter(stages);
   };
+
+  { const d = new Date(); $("#et-date").value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
+
+  // Wetter am Ankunftstag jeder Etappe (Etappe 1 = Abfahrtstag); Prognose reicht 8 Tage
+  async function etappenWetter(stages) {
+    const start = $("#et-date").value ? new Date($("#et-date").value + "T12:00:00") : new Date();
+    const datum = (i) => { const d = new Date(start); d.setDate(d.getDate() + i); return d.toISOString().slice(0, 10); };
+    const boxes = document.querySelectorAll("#et-result .wx-et");
+    boxes.forEach((b) => (b.innerHTML = `<span class="muted">Wetter lädt …</span>`));
+    try {
+      const res = await WETTER.viele(stages.map((st) => [st.s.lat, st.s.lng]));
+      let schlecht = 0;
+      boxes.forEach((b, i) => {
+        const d = datum(i), t = res[i].find((x) => x.datum === d);
+        if (!t) { b.innerHTML = `<span class="muted">${WETTER.tagLabel(d)}: noch keine Prognose</span>`; return; }
+        if (t.note < 4) schlecht++;
+        b.innerHTML = `${WETTER.chip(t.note)} <span class="muted">${WETTER.tagLabel(d)} · ${WETTER.fmt(t.sonne)} h Sonne · ${WETTER.fmt(t.regen, 1)} mm</span>` +
+          (t.note < 4 ? ` <span class="warntext">Schlechtwetter – Ruhetag, Therme oder Stadt einplanen</span>` : "");
+      });
+      if (schlecht) $("#et-result").insertAdjacentHTML("beforeend", `<p class="muted">Tipp: Etappenlänge anpassen oder Abfahrt verschieben, damit Wander- und Velotage auf gute Tage fallen.</p>`);
+    } catch (e) {
+      boxes.forEach((b) => (b.innerHTML = `<span class="muted">Wetter nicht verfügbar</span>`));
+    }
+  }
   $("#et-result").onclick = (e) => {
     const li = e.target.closest("li[data-id]");
     if (li) openPlace(li.dataset.id);
+  };
+
+  // ---------------------------------------------------------------- Wetter: Karte und Regionen-Rangliste
+  const wxGroup = L.layerGroup().addTo(map);
+  let wxGrid = null, wxTag = 0, wxDaten = [];
+  function wxTage() {
+    const quelle = wxGrid ? wxGrid.zellen[0]?.tage : wxDaten;
+    const tage = (quelle || []).map((t) => t.datum);
+    if (!tage.length) { const d = new Date(); for (let i = 0; i < 8; i++) { const x = new Date(d); x.setDate(d.getDate() + i); tage.push(x.toISOString().slice(0, 10)); } }
+    $("#wx-days").innerHTML = tage.map((d, i) => `<button data-i="${i}" class="${i === wxTag ? "on" : ""}">${WETTER.tagLabel(d)}</button>`).join("");
+    return tage;
+  }
+  function wxZeichnen() {
+    wxGroup.clearLayers();
+    if (!wxGrid) return;
+    const tage = wxTage(), datum = tage[wxTag];
+    for (const z of wxGrid.zellen) {
+      const t = z.tage.find((x) => x.datum === datum);
+      if (!t) continue;
+      L.rectangle([[z.lat - z.dlat / 2, z.lng - z.dlng / 2], [z.lat + z.dlat / 2, z.lng + z.dlng / 2]], {
+        stroke: false, fillColor: WETTER.farbe(t.note), fillOpacity: 0.38, interactive: true,
+      }).bindTooltip(`${WETTER.tagLabel(datum)}: Note ${t.note.toFixed(1)} · ${WETTER.fmt(t.sonne)} h Sonne · ${WETTER.fmt(t.regen, 1)} mm`).addTo(wxGroup);
+    }
+    $("#wx-karte").textContent = "Wetterkarte ausblenden";
+  }
+  async function wxKarteLaden() {
+    const b = map.getBounds(), n = 7;
+    const dlat = (b.getNorth() - b.getSouth()) / n, dlng = (b.getEast() - b.getWest()) / n;
+    const zellen = [];
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) zellen.push({ lat: b.getSouth() + (i + 0.5) * dlat, lng: b.getWest() + (j + 0.5) * dlng, dlat, dlng });
+    $("#wx-karte").disabled = true; $("#wx-karte").textContent = "lädt …";
+    try {
+      const res = await WETTER.viele(zellen.map((z) => [z.lat, z.lng]));
+      zellen.forEach((z, i) => (z.tage = res[i]));
+      wxGrid = { zellen };
+      wxZeichnen();
+      close();
+    } catch (e) { toast("Wetterkarte nicht verfügbar: " + e.message); $("#wx-karte").textContent = "Wetterkarte für Kartenausschnitt"; }
+    $("#wx-karte").disabled = false;
+  }
+  // Referenzpunkte je Region: bis zu 3 verlässliche Plätze mit mindestens 15 km Abstand
+  function wxReferenzen() {
+    const out = [];
+    for (const z of active) for (const r of z.regions) {
+      const kand = places.filter((p) => p.zid === z.id && p.region === r && p.lat != null && !p.layer)
+        .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+      const gew = [];
+      for (const p of kand) {
+        if (gew.every((q) => Math.hypot((p.lat - q.lat) * 111, (p.lng - q.lng) * 111 * Math.cos(p.lat * Math.PI / 180)) > 15)) gew.push(p);
+        if (gew.length === 3) break;
+      }
+      if (gew.length) out.push({ key: `${z.id}|${r}`, name: r, ziel: z.name, punkte: gew });
+    }
+    return out;
+  }
+  async function wxRangliste() {
+    const refs = wxReferenzen();
+    if (!refs.length) { $("#wx-rank").innerHTML = `<p class="muted">Keine Regionen mit verorteten Plätzen in den gewählten Zielen.</p>`; return; }
+    $("#wx-rank").innerHTML = `<p class="muted">lädt Prognosen für ${refs.length} Regionen …</p>`;
+    try {
+      const alle = refs.flatMap((r) => r.punkte.map((p) => [p.lat, p.lng]));
+      const res = await WETTER.viele(alle);
+      let k = 0;
+      const tage = [...new Set(res.flat().map((t) => t.datum))].sort().slice(0, 7);
+      wxDaten = tage.map((d) => ({ datum: d }));
+      const zeilen = refs.map((r) => {
+        const pr = res.slice(k, k + r.punkte.length); k += r.punkte.length;
+        const proTag = tage.map((d) => {
+          const n = pr.map((x) => x.find((t) => t.datum === d)?.note).filter((x) => x != null);
+          return n.length ? n.reduce((a, b) => a + b, 0) / n.length : null;
+        });
+        const gut = proTag.filter((x) => x != null);
+        return { ...r, proTag, schnitt: gut.length ? gut.reduce((a, b) => a + b, 0) / gut.length : null };
+      }).sort((a, b) => (b.schnitt ?? 0) - (a.schnitt ?? 0));
+      $("#wx-rank").innerHTML = `<div class="wx-scroll"><table class="wx rank">
+          <tr><th>Region</th><th>Ø</th>${tage.map((d) => `<th>${WETTER.tagLabel(d)}</th>`).join("")}</tr>
+          ${zeilen.map((z) => `<tr data-region="${esc(z.key)}"><td><b>${esc(z.name)}</b>${active.length > 1 ? `<br><span class="muted">${esc(z.ziel)}</span>` : ""}</td>
+            <td>${WETTER.chip(z.schnitt)}</td>${z.proTag.map((n) => `<td><span class="wx-dot ${WETTER.klasse(n)}" title="${n == null ? "–" : n.toFixed(1)}"></span></td>`).join("")}</tr>`).join("")}
+        </table></div>
+        <p class="muted">Ø = mittlere Wetternote der nächsten 7 Tage (ECMWF, je bis zu 3 Plätze pro Region). Region antippen, um sie auf der Karte zu filtern.</p>`;
+    } catch (e) { $("#wx-rank").innerHTML = `<p class="muted">Rangliste nicht verfügbar: ${esc(e.message)}</p>`; }
+  }
+  $("#btn-wetter").onclick = () => { wxTage(); open("#sheet-wetter"); };
+  $("#wx-days").onclick = (e) => { const b = e.target.closest("button[data-i]"); if (!b) return; wxTag = +b.dataset.i; wxTage(); wxZeichnen(); };
+  $("#wx-karte").onclick = () => {
+    if (wxGrid) { wxGrid = null; wxGroup.clearLayers(); $("#wx-karte").textContent = "Wetterkarte für Kartenausschnitt"; return; }
+    wxKarteLaden();
+  };
+  $("#wx-rank-btn").onclick = wxRangliste;
+  $("#wx-rank").onclick = (e) => {
+    const tr = e.target.closest("tr[data-region]");
+    if (!tr) return;
+    filter.regions = [tr.dataset.region];
+    syncFilterUI(); render(); close(); fitView();
   };
 
   // ---------------------------------------------------------------- Detail
@@ -548,6 +667,7 @@
       ${s.recommendation ? `<div class="reco">${esc(s.recommendation)}</div>` : ""}
       ${routeInfo}
       ${myHtml(s)}
+      ${s.lat == null ? "" : `<div id="wx-detail" class="wx-box"></div>`}
       <div class="infra">${infra}</div>
       ${facts ? `<dl class="facts">${facts}</dl>` : ""}
       ${s.lat == null ? "" : `<div class="links">
@@ -567,6 +687,7 @@
       else navigator.clipboard?.writeText(url);
     };
     bindMine(s);
+    if (s.lat != null && window.WETTER) WETTER.detail($("#wx-detail"), s.lat, s.lng);
     const lz = $("#detail [data-load-ziel]");
     if (lz) lz.onclick = async () => {
       const id = lz.dataset.loadZiel;
