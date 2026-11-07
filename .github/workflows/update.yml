@@ -59,7 +59,7 @@ jobs:
         run: python scripts/update.py
       - name: Daten speichern
         run: |
-          git config user.name "camper-plaetze-bot"
+          git config user.name "camper-planer-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A data docs/data
           if [ -d berichte ]; then git add -A berichte; fi

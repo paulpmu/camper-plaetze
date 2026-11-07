@@ -20,7 +20,7 @@ DATA_DIR = ROOT / "data"
 WEB_DATA = ROOT / "docs" / "data"
 GEOCACHE_FILE = DATA_DIR / "geocache.json"
 REPO = os.getenv("GITHUB_REPOSITORY", "")
-UA = f"camper-plaetze/1.0 (https://github.com/{REPO or 'camper-plaetze'})"
+UA = f"camper-planer/1.0 (https://github.com/{REPO or 'camper-plaetze'})"
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,30}$")
 LEDGER_FILE = WEB_DATA / "kosten.json"
 

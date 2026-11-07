@@ -12,7 +12,7 @@ inputs:
   project:
     description: Name des Cloudflare-Pages-Projekts
     required: false
-    default: camper-plaetze
+    default: camper-planer
 runs:
   using: composite
   steps:

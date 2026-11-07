@@ -46,7 +46,7 @@ jobs:
           ZIEL: ${{ steps.claude.outputs.ziel }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          git config user.name "camper-plaetze-bot"
+          git config user.name "camper-planer-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add ziele docs/data/kosten.json
           git diff --staged --quiet && exit 0

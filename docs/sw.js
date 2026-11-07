@@ -1,5 +1,5 @@
 // Offline-Unterstützung: App-Hülle aus dem Cache, Platzdaten zuerst frisch aus dem Netz.
-const CACHE = "cp-v16";
+const CACHE = "cp-v17";
 const SHELL = [
   "./", "index.html", "style.css", "app.js", "wetter.js", "fotos.js", "github.js", "privat.js", "betrieb.js",
   "manifest.webmanifest", "icon-180.png",

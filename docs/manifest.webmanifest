@@ -1,7 +1,7 @@
 {
-  "name": "Camper-Plätze",
-  "short_name": "Camper-Plätze",
-  "description": "Übernachtungsplätze für Camper aus aktuellen Overlander-Videos",
+  "name": "Camper-Planer",
+  "short_name": "Camper-Planer",
+  "description": "Touren planen und Übernachtungsplätze finden für Camper und Overlander",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

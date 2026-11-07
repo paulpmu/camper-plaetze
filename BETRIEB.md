@@ -1,6 +1,6 @@
-# Betriebshandbuch Camper-Plätze
+# Betriebshandbuch Camper-Planer
 
-Stand: 7. November 2026 · Inhaber: Paul Müller · Repository: https://github.com/paulpmu/camper-plaetze
+Stand: 7. November 2026 · Inhaber: Paul Müller · Repository: https://github.com/paulpmu/camper-plaetze (der Repository-Name bleibt `camper-plaetze`, die App heisst Camper-Planer)
 
 Dieses Dokument beschreibt, was wo läuft, was es kostet und wie das Werkzeug gepflegt wird. Die technische Einrichtung steht im [README](README.md).
 
@@ -252,7 +252,7 @@ Die Reihenfolge ist wichtig: Das Repository erst privat stellen, wenn die neue A
 1. https://dash.cloudflare.com/sign-up öffnen und ein Gratiskonto anlegen.
 2. **Workers & Pages** öffnen. Rechts steht die **Account ID**. Kopieren.
 3. Oben rechts **My Profile → API Tokens → Create Token → Create Custom Token**.
-   - **Token name:** `camper-plaetze GitHub`
+   - **Token name:** `camper-planer GitHub`
    - **Permissions:** `Account` · `Cloudflare Pages` · `Edit`
    - **Account Resources:** Ihr Konto
    - **Continue to summary → Create Token**, den Schlüssel kopieren. Er wird nur einmal angezeigt.
@@ -262,14 +262,14 @@ Die Reihenfolge ist wichtig: Das Repository erst privat stellen, wenn die neue A
    `CLOUDFLARE_API_TOKEN` und `CLOUDFLARE_ACCOUNT_ID` mit den beiden Werten.
 2. Daneben den Reiter **Variables → New repository variable**: Name `HOSTING`, Wert `cloudflare`.
 3. **Actions → «Plätze aktualisieren & Webapp veröffentlichen» → Run workflow**, bei **Ziel** ein `-` eintragen. Damit wird nur veröffentlicht, nichts abgerufen.
-4. Nach etwa 2 Minuten läuft die App unter **https://camper-plaetze.pages.dev**. Ist der Name bei Cloudflare schon vergeben, steht die tatsächliche Adresse unter **Workers & Pages → camper-plaetze**.
+4. Nach etwa 2 Minuten läuft die App unter **https://camper-planer.pages.dev**. Ist der Name bei Cloudflare schon vergeben, steht die tatsächliche Adresse unter **Workers & Pages → camper-planer**.
 
 **3. Zugang schützen (Cloudflare Zero Trust)**
 1. https://one.dash.cloudflare.com öffnen. Beim ersten Mal einen **Team-Namen** wählen, etwa `paulpmu`, und den Plan **Free** wählen. Cloudflare verlangt dafür eventuell ein Zahlungsmittel, belastet beim Gratisplan aber nichts.
 2. **Access → Applications → Add an application → Self-hosted**.
-   - **Application name:** `Camper-Plätze`
+   - **Application name:** `Camper-Planer`
    - **Session Duration:** `1 month`, damit Sie sich nicht ständig neu anmelden müssen
-   - **Public hostname:** Domain `camper-plaetze.pages.dev`. Mit **Add public hostname** zusätzlich `*.camper-plaetze.pages.dev` eintragen, das deckt die Vorschau-Adressen ab.
+   - **Public hostname:** Domain `camper-planer.pages.dev`. Mit **Add public hostname** zusätzlich `*.camper-planer.pages.dev` eintragen, das deckt die Vorschau-Adressen ab.
 3. **Next → Add a policy**:
    - **Policy name:** `Freigegebene Personen`, **Action:** `Allow`
    - **Include → Selector: Emails** → Ihre Adresse und die der freigegebenen Personen
@@ -287,7 +287,7 @@ Die Reihenfolge ist wichtig: Das Repository erst privat stellen, wenn die neue A
 
 #### Personen freigeben oder entfernen
 
-**Zero Trust → Access → Applications → Camper-Plätze → Policies → Freigegebene Personen → Edit**, E-Mail-Adresse ergänzen oder löschen, **Save**. Die neue Person öffnet einfach die Adresse und meldet sich mit ihrer E-Mail-Adresse an.
+**Zero Trust → Access → Applications → Camper-Planer → Policies → Freigegebene Personen → Edit**, E-Mail-Adresse ergänzen oder löschen, **Save**. Die neue Person öffnet einfach die Adresse und meldet sich mit ihrer E-Mail-Adresse an.
 
 Eine entfernte Person kommt nach Ablauf ihrer Sitzung nicht mehr hinein, spätestens nach einem Monat. Sofort sperren: **Zero Trust → My Team → Users** → Person → **Revoke session**.
 
@@ -374,7 +374,7 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 |---|---|
 | vorübergehend pausieren | **Actions** → Workflow «Plätze aktualisieren» → **…** → **Disable workflow**. Die App bleibt online mit den letzten Daten |
 | Kosten stoppen | Webshare-Abo kündigen (**Subscription**), Anthropic-Guthaben nicht mehr aufladen |
-| ganz stilllegen | zusätzlich bei Cloudflare unter **Workers & Pages → camper-plaetze → Settings → Delete** die Webapp löschen und die API-Schlüssel bei Google, Anthropic und Cloudflare löschen |
+| ganz stilllegen | zusätzlich bei Cloudflare unter **Workers & Pages → camper-planer → Settings → Delete** die Webapp löschen und die API-Schlüssel bei Google, Anthropic und Cloudflare löschen |
 
 ---
 

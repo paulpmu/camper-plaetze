@@ -205,7 +205,7 @@
     ziel = active[0] || null;
     try { localStorage.setItem("ziele-aktiv", JSON.stringify(ids)); } catch { /* privater Modus */ }
     if (ziel) save("ziel", ziel.id);
-    $("#ziel-name").textContent = active.length > 1 ? `${active[0].name} + ${active.length - 1}` : (ziel ? ziel.name : "Camper-Plätze");
+    $("#ziel-name").textContent = active.length > 1 ? `${active[0].name} + ${active.length - 1}` : (ziel ? ziel.name : "Camper-Planer");
     $("#count").textContent = "lädt …";
     const sets = await Promise.all(active.map((z) => loadZiel(z.id)));
     routes = sets.flatMap((x) => x.routes);
