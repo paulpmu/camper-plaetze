@@ -667,7 +667,7 @@
       ${s.recommendation ? `<div class="reco">${esc(s.recommendation)}</div>` : ""}
       ${routeInfo}
       ${myHtml(s)}
-      ${s.lat == null ? "" : `<div id="wx-detail" class="wx-box"></div>`}
+      ${s.lat == null ? "" : `<div id="wx-detail" class="wx-box"></div><div id="ft-detail" class="ft-box"></div>`}
       <div class="infra">${infra}</div>
       ${facts ? `<dl class="facts">${facts}</dl>` : ""}
       ${s.lat == null ? "" : `<div class="links">
@@ -688,6 +688,7 @@
     };
     bindMine(s);
     if (s.lat != null && window.WETTER) WETTER.detail($("#wx-detail"), s.lat, s.lng);
+    if (s.lat != null && window.FOTOS) FOTOS.detail($("#ft-detail"), s.lat, s.lng);
     const lz = $("#detail [data-load-ziel]");
     if (lz) lz.onclick = async () => {
       const id = lz.dataset.loadZiel;

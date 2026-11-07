@@ -32,6 +32,8 @@ In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den
 | OSRM | Strassenverlauf der Routen | kein Konto, gratis | – |
 | OpenStreetMap-Kacheln | Kartenbild in der App | kein Konto, gratis | – |
 | Open-Meteo | Wetterprognosen und Ensembles, direkt aus der App abgerufen | kein Konto, gratis (nicht-kommerziell) | https://open-meteo.com |
+| Wikimedia Commons, Wikipedia, Panoramax | Fotos, Strassenbilder und bekannte Orte in der Nähe eines Platzes | kein Konto, gratis | – |
+| Mapillary (optional) | Vorschaubilder von Strassenbildern | gratis Client-Token, nur auf Ihrem Gerät | https://www.mapillary.com/dashboard/developers |
 
 ### Gespeicherte Schlüssel (GitHub Secrets)
 
@@ -192,6 +194,25 @@ Die App holt die Prognosen direkt beim Wetterdienst Open-Meteo, ohne Schlüssel 
 - **Zwischenspeicher:** Die App speichert Prognosen 3 Stunden zwischen. Offline gibt es kein Wetter.
 - **Grenzen:** Ab dem 4. Tag werden Prognosen deutlich unsicherer. Die Hochnebel-Schätzung ist eine Faustregel.
 
+### 2.12 Fotos & Umgebung
+
+Jeder Platz zeigt unter dem Wetter den Abschnitt **Fotos & Umgebung**, damit Sie ungefähr wissen, was Sie antreffen:
+
+- **Links:**
+  - **Google Street View:** öffnet die Strassenansicht von Google an dieser Stelle. Eine Einbettung in die App wäre bei Google kostenpflichtig.
+  - **Google Satellit:** Luftbild.
+  - **Mapillary** und **Panoramax:** offene Strassenbilder.
+- **Bilderleiste:** Strassenbilder aus Panoramax im Umkreis von rund 200 m und Fotos mit Standort von Wikimedia Commons im Umkreis von 1,5 km, mit Entfernung. Ein Bild antippen öffnet es gross, mit Urheber und Lizenz.
+- **Bekannte Orte in der Nähe:** bis zu 10 Wikipedia-Artikel im Umkreis von 5 km, wie bei OsmAnd.
+- **Mapillary-Vorschaubilder (optional):** Mapillary hat die beste Abdeckung mit Strassenbildern. Für Vorschaubilder in der App braucht es einen kostenlosen Client-Token:
+  1. Auf mapillary.com anmelden.
+  2. **Dashboard → Developers → Register application** wählen.
+  3. Den **Client Token** kopieren.
+  4. Im Platz auf **Mapillary-Vorschaubilder einschalten** tippen und den Token einfügen.
+
+  Der Token bleibt nur auf Ihrem Gerät.
+- **Kosten:** Alle Quellen sind gratis und brauchen kein Konto.
+
 **park4night:** park4night bietet keine offene Schnittstelle, deshalb gleicht die App nicht automatisch ab. Jeder Platz hat stattdessen den Knopf **park4night**. Er öffnet die park4night-Karte genau an dieser Stelle. Angemeldet mit Ihrem Konto sehen Sie dort die Plätze in der Umgebung, immer mit dem aktuellen Stand.
 
 ---
@@ -283,6 +304,7 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `scripts/quellen.py` | Quellen OpenStreetMap, Reiseberichte, offene Datensätze; Zusammenführen und Verlässlichkeit |
 | `scripts/common.py` | Geodaten, Standortprüfung, Routenberechnung |
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
+| `docs/fotos.js` | Fotos & Umgebung: Panoramax, Mapillary, Wikimedia Commons, Wikipedia, Street-View-Links |
 | `docs/wetter.js` | Wetter: Abruf bei Open-Meteo, Wetternote, Ensemble, Hochnebel |
 | `tests/wetter.test.js` | Tests der Wetterlogik (`node --test tests/wetter.test.js`) |
 | `docs/` | die Webapp; `docs/data/<ziel>/places.json` enthält die zusammengeführten Plätze, die übrigen Dateien die einzelnen Quellen |

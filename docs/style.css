@@ -350,3 +350,15 @@ table.wx.rank tr[data-region] { cursor: pointer; }
 .seg.wx-days { flex-wrap: wrap; }
 .wx-et { margin-top: 4px; font-size: 13px; }
 .seg.wx-days button { flex: 1 0 22%; font-size: 13px; padding: 7px 0; }
+
+/* Fotos & Umgebung */
+.ft-box { margin: 14px 0; }
+.ft-links { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.ft-strip { display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; min-height: 24px; }
+.ft-tile { flex: 0 0 auto; width: 150px; text-decoration: none; color: var(--muted); font-size: 12px; }
+.ft-tile img { width: 150px; height: 100px; object-fit: cover; border-radius: 10px; background: var(--line); display: block; }
+.ft-tile span { display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ft-wiki { margin: 8px 0; font-size: 14px; }
+.ft-wiki summary { cursor: pointer; font-weight: 600; }
+.ft-wiki li { margin: 4px 0; }
+.ft-quellen .linkbtn { font-size: 13px; }

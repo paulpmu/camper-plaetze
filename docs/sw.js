@@ -1,7 +1,7 @@
 // Offline-Unterstützung: App-Hülle aus dem Cache, Platzdaten zuerst frisch aus dem Netz.
-const CACHE = "cp-v12";
+const CACHE = "cp-v13";
 const SHELL = [
-  "./", "index.html", "style.css", "app.js", "wetter.js", "manifest.webmanifest", "icon-180.png",
+  "./", "index.html", "style.css", "app.js", "wetter.js", "fotos.js", "manifest.webmanifest", "icon-180.png",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
   "https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css",
@@ -22,6 +22,7 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.hostname.endsWith("tile.openstreetmap.org")) return;
   if (url.hostname.endsWith("open-meteo.com")) return; // Wetter immer frisch (Zwischenspeicher in wetter.js)
+  if (/(wikimedia|wikipedia)\.org$|panoramax|mapillary/.test(url.hostname)) return; // Fotos direkt vom Anbieter
   const networkFirst = url.pathname.includes("/data/") || url.origin === location.origin;
   if (networkFirst) {
     e.respondWith(fetch(e.request).then((r) => {

@@ -60,3 +60,14 @@ test("Tagesbeschriftung: heute, morgen, Wochentag", () => {
   assert.strictEqual(W.tagLabel("2026-11-08", heute), "Morgen");
   assert.strictEqual(W.tagLabel("2026-11-10", heute), "Di 10.11.");
 });
+
+test("Fotos: Links und Distanzrechnung", () => {
+  const c2 = { window: {}, sessionStorage: ctx.sessionStorage, localStorage: { getItem: () => null }, fetch: ctx.fetch };
+  vm.createContext(c2);
+  vm.runInContext(fs.readFileSync(__dirname + "/../docs/fotos.js", "utf8"), c2);
+  const F = c2.window.FOTOS;
+  const l = F.links(46.97905, 6.89517);
+  assert.ok(l[0][1].includes("map_action=pano&viewpoint=46.979050,6.895170"));
+  const d = F.distM(46.97905, 6.89517, 46.98805, 6.89517); // 0.009° Nord ≈ 1 km
+  assert.ok(Math.abs(d - 1000) < 5);
+});
