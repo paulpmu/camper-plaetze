@@ -330,8 +330,8 @@ Zwei Listen, zwei Zwecke: **Cloudflare Zero Trust** entscheidet, *wer die App ö
 #### Einrichtung, einmalig, etwa 15 Minuten
 
 **Schritt 1: Rechte des Cloudflare-Schlüssels erweitern**
-1. https://dash.cloudflare.com/profile/api-tokens öffnen.
-2. Beim Schlüssel `camper-planer GitHub` (bzw. `camper-plaetze GitHub`) rechts auf **…** → **Edit**.
+1. https://dash.cloudflare.com/profile/api-tokens öffnen. Steht dort unter «API Tokens» kein Schlüssel, wurde er als Account-Schlüssel angelegt: im blauen Kasten auf **Account API Tokens** tippen.
+2. Beim Schlüssel `camper-planer GitHub` (bzw. `camper-plaetze GitHub`) rechts auf **…** → **Edit**. Ist nirgends ein Schlüssel zu finden: einen neuen anlegen (**Create Token → Create Custom Token**) mit den vier Rechten unten inklusive «Cloudflare Pages · Edit» und ihn in GitHub beim Secret `CLOUDFLARE_API_TOKEN` eintragen (Stift-Symbol → **Update secret**).
 3. Unter **Permissions** mit **+ Add more** drei Zeilen ergänzen. Die bestehende Zeile «Cloudflare Pages · Edit» bleibt:
    - `Account` · `D1` · `Edit`
    - `Account` · `Workers R2 Storage` · `Edit`
