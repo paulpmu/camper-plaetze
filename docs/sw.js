@@ -1,12 +1,11 @@
 // Offline-Unterstützung: App-Hülle aus dem Cache, Platzdaten zuerst frisch aus dem Netz.
-const CACHE = "cp-v15";
+const CACHE = "cp-v16";
 const SHELL = [
-  "./", "index.html", "style.css", "app.js", "wetter.js", "fotos.js", "manifest.webmanifest", "icon-180.png",
-  "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
-  "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
-  "https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css",
-  "https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css",
-  "https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js",
+  "./", "index.html", "style.css", "app.js", "wetter.js", "fotos.js", "github.js", "privat.js", "betrieb.js",
+  "manifest.webmanifest", "icon-180.png",
+  "vendor/leaflet/leaflet.css", "vendor/leaflet/leaflet.js",
+  "vendor/markercluster/MarkerCluster.css", "vendor/markercluster/MarkerCluster.Default.css",
+  "vendor/markercluster/leaflet.markercluster.js",
 ];
 
 self.addEventListener("install", (e) => {
@@ -20,17 +19,14 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
-  if (e.request.method !== "GET" || url.hostname.endsWith("tile.openstreetmap.org")) return;
-  if (url.hostname.endsWith("open-meteo.com")) return; // Wetter immer frisch (Zwischenspeicher in wetter.js)
-  if (/(wikimedia|wikipedia)\.org$|panoramax|mapillary/.test(url.hostname)) return; // Fotos direkt vom Anbieter
-  const networkFirst = url.pathname.includes("/data/") || url.origin === location.origin;
-  if (networkFirst) {
-    e.respondWith(fetch(e.request).then((r) => {
+  // Nur eigene Dateien; Karte, Wetter, Fotos und GitHub gehen direkt zum Anbieter
+  if (e.request.method !== "GET" || url.origin !== location.origin) return;
+  e.respondWith(fetch(e.request).then((r) => {
+    // Nur echte Antworten zwischenspeichern, keine Umleitungen zur Anmeldung und keine Fehlerseiten
+    if (r.ok && r.type === "basic" && !r.redirected) {
       const copy = r.clone();
       caches.open(CACHE).then((c) => c.put(e.request, copy));
-      return r;
-    }).catch(() => caches.match(e.request, { ignoreSearch: true })));
-  } else {
-    e.respondWith(caches.match(e.request).then((hit) => hit || fetch(e.request)));
-  }
+    }
+    return r;
+  }).catch(() => caches.match(e.request, { ignoreSearch: true })));
 });

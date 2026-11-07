@@ -46,10 +46,20 @@ jobs:
           git pull --rebase origin main
           git push
           echo "geaendert=ja" >> "$GITHUB_OUTPUT"
+      # Hosting auf Cloudflare (Repository-Variable HOSTING = cloudflare): im selben Job veröffentlichen
+      - if: vars.HOSTING == 'cloudflare' && steps.speichern.outputs.geaendert == 'ja'
+        run: pip install -r requirements.txt
+      - name: Webapp veröffentlichen (Cloudflare)
+        if: vars.HOSTING == 'cloudflare' && steps.speichern.outputs.geaendert == 'ja'
+        uses: ./.github/actions/cloudflare
+        with:
+          api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+  # Bisheriges Hosting auf GitHub Pages, solange HOSTING nicht auf cloudflare steht
   deploy:
     needs: wetter
-    if: needs.wetter.outputs.geaendert == 'ja'
+    if: needs.wetter.outputs.geaendert == 'ja' && vars.HOSTING != 'cloudflare'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

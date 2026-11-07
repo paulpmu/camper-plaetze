@@ -1,0 +1,38 @@
+name: Webapp auf Cloudflare Pages veröffentlichen
+description: >-
+  Schreibt Zielübersicht und Handbuch und lädt docs/ zu Cloudflare Pages hoch. Läuft im selben Job wie der Abruf,
+  damit keine zusätzlichen Actions-Minuten anfallen. Voraussetzung: Python-Abhängigkeiten sind installiert.
+inputs:
+  api_token:
+    description: Cloudflare-API-Schlüssel (Secret CLOUDFLARE_API_TOKEN)
+    required: true
+  account_id:
+    description: Cloudflare-Konto-ID (Secret CLOUDFLARE_ACCOUNT_ID)
+    required: true
+  project:
+    description: Name des Cloudflare-Pages-Projekts
+    required: false
+    default: camper-plaetze
+runs:
+  using: composite
+  steps:
+    - name: Zielübersicht und Handbuch für die Webapp
+      shell: bash
+      run: |
+        python scripts/update.py --nur-index
+        cp BETRIEB.md docs/handbuch.md
+    - name: Hochladen
+      shell: bash
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ inputs.api_token }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ inputs.account_id }}
+        PROJEKT: ${{ inputs.project }}
+      run: |
+        W="npx --yes wrangler@4.151.3"
+        # Beim ersten Mal das Projekt anlegen; existiert es schon, meldet Cloudflare einen Fehler, der hier egal ist
+        $W pages project create "$PROJEKT" --production-branch=main >/dev/null 2>&1 || true
+        for i in 1 2 3; do
+          $W pages deploy docs --project-name="$PROJEKT" --branch=main --commit-dirty=true && exit 0
+          echo "Veröffentlichung fehlgeschlagen, neuer Versuch in $((i * 30)) s"; sleep $((i * 30))
+        done
+        exit 1
