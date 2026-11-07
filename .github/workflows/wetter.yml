@@ -55,6 +55,8 @@ jobs:
         with:
           api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          admin_email: ${{ vars.ADMIN_EMAIL }}
+          access_aud: ${{ vars.ACCESS_AUD }}
 
   # Bisheriges Hosting auf GitHub Pages, solange HOSTING nicht auf cloudflare steht
   deploy:

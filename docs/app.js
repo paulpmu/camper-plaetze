@@ -196,7 +196,7 @@
       const p = data.find((x) => x.id === k.slice(zid.length + 1));
       if (p && p.lat != null) { m.lat = p.lat; m.lng = p.lng; m.type = p.type; changed = true; }
     }
-    if (changed && GH.token()) { clearTimeout(backfillTimer); backfillTimer = setTimeout(() => PRIV.saveMerk("Merkliste: Koordinaten ergänzt").catch(() => {}), 3000); }
+    if (changed && PRIV.can()) { clearTimeout(backfillTimer); backfillTimer = setTimeout(() => PRIV.saveMerk().catch(() => {}), 3000); }
   }
 
   // Gewählte Ziele laden und anzeigen
@@ -639,7 +639,11 @@
   }
 
   function myHtml(s) {
-    if (!GH.token()) return `<p class="muted mine-hint">Favoriten, Notizen und Logbuch: GitHub-Schlüssel und privates Repository hinterlegen (Zielname antippen → ganz unten).</p>`;
+    if (!PRIV.can()) {
+      const why = PRIV.ich ? "Als Gast sehen Sie alle Plätze. Favoriten, Notizen, Logbuch und Fotos schaltet Ihnen der Admin frei."
+        : "Favoriten, Notizen, Logbuch und Fotos: angemeldet unter camper-planer.pages.dev" + (PRIV.status ? ` (${esc(PRIV.status)})` : "") + ".";
+      return `<p class="muted mine-hint">${why}</p>`;
+    }
     const m = merk(s);
     return `<div class="mine">
       <div class="row">
@@ -651,6 +655,9 @@
       <div class="row"><select data-my="rating" aria-label="Meine Bewertung">
         <option value="">Meine Bewertung …</option>${[5, 4, 3, 2, 1].map((n) => `<option value="${n}" ${m.rating === n ? "selected" : ""}>${"★".repeat(n)}</option>`).join("")}
       </select><button class="btn ghost" data-my="save-note">Notiz speichern</button></div>
+      ${PRIV.ich && PRIV.ich.fotos ? `<div class="my-fotos"><div class="my-fotos-head"><b>Meine Fotos</b>
+        <label class="btn ghost small">+ Fotos<input type="file" accept="image/*" multiple hidden data-my-file></label></div>
+        <div class="my-fotos-list" data-bezug="${esc(merkZiel(s) + "/" + s.id)}"><span class="muted">lädt …</span></div></div>` : ""}
       ${isOwn(s) ? `<div class="row"><button class="btn ghost" data-my="edit">Bearbeiten</button><button class="btn ghost danger" data-my="delete">Löschen</button></div>` : ""}
     </div>`;
   }
@@ -766,11 +773,12 @@
     if (!box) return;
     const store = async (changes, msg) => {
       try {
-        await PRIV.setMerk(merkZiel(s), s.id, s.name, { ...changes, lat: s.lat, lng: s.lng, type: s.type });
-        toast(msg); refreshMarker(s); openDetail(s); rebuildLayer();
+        const r = await PRIV.setMerk(merkZiel(s), s.id, s.name, { ...changes, lat: s.lat, lng: s.lng, type: s.type });
+        toast(r && r.offline ? msg + " (offline, wird später gesendet)" : msg); refreshMarker(s); openDetail(s); rebuildLayer();
       }
-      catch (err) { toast("Speichern fehlgeschlagen: " + err.message + " – privates Repository prüfen (Zielname antippen → ganz unten)."); }
+      catch (err) { toast("Speichern fehlgeschlagen: " + err.message); }
     };
+    meineFotos(s, box);
     box.onclick = async (e) => {
       const b = e.target.closest("button[data-my]");
       if (!b) return;
@@ -789,7 +797,7 @@
   // ---------------------------------------------------------------- Eigene Plätze erfassen
   let ownDraft = null;
   function openOwnForm(entry) {
-    if (!GH.token()) { toast("Für eigene Plätze zuerst GitHub-Schlüssel und privates Repository hinterlegen."); return; }
+    if (!PRIV.can()) { toast(PRIV.ich ? "Als Gast können Sie keine eigenen Plätze erfassen." : "Eigene Plätze: zuerst unter camper-planer.pages.dev anmelden."); return; }
     const c = map.getCenter();
     ownDraft = entry ? { ...entry } : {
       id: "e-" + Date.now().toString(36), ziel: ziel ? ziel.id : "", name: "", type: "stellplatz", rating: null, note: "", link: "",
@@ -830,6 +838,46 @@
     $("#own-save").disabled = false;
   };
   async function reloadOwn() { rebuildLayer(); }
+
+  // ---------------------------------------------------------------- Meine Fotos pro Platz
+  async function meineFotos(s, box) {
+    const list = box.querySelector(".my-fotos-list");
+    if (!list) return;
+    const bezug = list.dataset.bezug;
+    const zeichne = async () => {
+      let items;
+      try { items = await PRIV.fotos(bezug); }
+      catch (err) { list.innerHTML = `<span class="muted">Fotos nicht abrufbar (${esc(err.message)})</span>`; return; }
+      list.innerHTML = items.length ? items.map((f, i) => `<button class="my-foto" data-i="${i}" aria-label="Foto ${i + 1} ansehen">
+          <img loading="lazy" src="${PRIV.fotoUrl(f.id, true)}" alt=""></button>`).join("") : `<span class="muted">Noch keine Fotos.</span>`;
+      list.onclick = (e) => {
+        const b = e.target.closest(".my-foto");
+        if (!b) return;
+        const loeschen = async (f, schliessen) => {
+          if (!confirm("Dieses Foto löschen?")) return;
+          try { await PRIV.fotoLoeschen(f.id); schliessen(); toast("Foto gelöscht"); zeichne(); }
+          catch (err) { toast("Löschen fehlgeschlagen: " + err.message); }
+        };
+        FOTOS.zeigen(items.map((f) => ({
+          id: f.id, thumb: PRIV.fotoUrl(f.id, true), gross: PRIV.fotoUrl(f.id), titel: s.name, quelle: "Meine Fotos",
+          lizenz: f.aufgenommen ? new Date(f.aufgenommen).toLocaleDateString("de-CH") : "", dist: null,
+          aktion: { text: "Dieses Foto löschen", fn: loeschen },
+        })), +b.dataset.i);
+      };
+    };
+    box.querySelector("[data-my-file]").onchange = async (e) => {
+      const files = [...e.target.files];
+      e.target.value = "";
+      for (const [i, f] of files.entries()) {
+        toast(`Foto ${i + 1}/${files.length} wird hochgeladen …`);
+        try { await PRIV.fotoHochladen(bezug, f, { lat: s.lat, lng: s.lng }); }
+        catch (err) { toast("Hochladen fehlgeschlagen: " + err.message); return; }
+      }
+      toast(files.length === 1 ? "Foto gespeichert" : `${files.length} Fotos gespeichert`);
+      zeichne();
+    };
+    zeichne();
+  }
 
   // ---------------------------------------------------------------- Ziele, Quellen & Anfragen
   function sourceSummary(z) {
@@ -1044,29 +1092,73 @@
     if (b) { close(); selectZiel(b.dataset.openZiel); }
   };
 
-  // ---------------------------------------------------------------- GitHub-Schlüssel und privates Repository
+  // ---------------------------------------------------------------- Konto, Personen und GitHub-Schlüssel
+  const ROLLE = { admin: "Admin", mitreisend: "Mitreisend", gast: "Gast" };
+  function defaultPrivRepo() { const o = GH.repo().split("/")[0]; return o ? `${o}/camper-plaetze-privat` : ""; }
+  async function renderKonto() {
+    const ich = PRIV.ich;
+    const warte = PRIV.pending();
+    $("#konto-status").textContent = ich
+      ? `Angemeldet als ${ich.name || ich.email} (${ROLLE[ich.rolle] || ich.rolle}).${PRIV.status ? " " + PRIV.status + "." : ""}${warte ? ` ${warte} Änderung(en) warten auf Netz.` : ""}`
+      : `Nicht mit dem Server verbunden${PRIV.status ? ": " + PRIV.status : ""}.`;
+    $("#nur-admin").hidden = !(PRIV.admin || GH.token() || !ich);
+    $("#konto-import").hidden = !(PRIV.can() && GH.token());
+    $("#gh-private").value = $("#gh-private").value || defaultPrivRepo();
+    $("#konto-admin").hidden = !PRIV.admin;
+    if (!PRIV.admin) return;
+    try {
+      const liste = await PRIV.personen();
+      $("#personen-list").innerHTML = liste.map((p) => `<li><b>${esc(p.name || p.email)}</b> <span class="st">${esc(ROLLE[p.rolle] || p.rolle)}</span><br>
+        <span class="muted">${esc(p.email)} · ${p.zuletzt ? "zuletzt " + new Date(p.zuletzt).toLocaleDateString("de-CH") : "noch nie angemeldet"}</span>
+        ${p.email === ich.email ? "" : `<br><button class="linkbtn" data-p-edit="${esc(p.email)}">ändern</button><button class="linkbtn" data-p-del="${esc(p.email)}">entfernen</button>`}</li>`).join("");
+      $("#personen-list").onclick = async (e) => {
+        const ed = e.target.closest("[data-p-edit]"), del = e.target.closest("[data-p-del]");
+        const p = liste.find((x) => x.email === (ed || del || {}).dataset?.[ed ? "pEdit" : "pDel"]);
+        if (ed && p) { $("#p-email").value = p.email; $("#p-name").value = p.name; $("#p-rolle").value = p.rolle; $("#p-name").focus(); }
+        if (del && p && confirm(`${p.email} entfernen? Die Person kann die App weiterhin öffnen, solange sie in Cloudflare freigegeben ist, ist dann aber Gast.`)) {
+          try { await PRIV.personEntfernen(p.email); toast("Entfernt"); renderKonto(); } catch (err) { toast("Fehler: " + err.message); }
+        }
+      };
+    } catch (err) { $("#personen-list").innerHTML = `<li class="muted">Personen nicht abrufbar: ${esc(err.message)}</li>`; }
+  }
+  $("#p-add").onclick = async () => {
+    const email = $("#p-email").value.trim();
+    if (!email) { $("#p-email").focus(); return; }
+    try {
+      await PRIV.personSetzen({ email, name: $("#p-name").value.trim(), rolle: $("#p-rolle").value });
+      $("#p-email").value = $("#p-name").value = "";
+      toast("Gespeichert. Nicht vergessen: Adresse auch in Cloudflare Zero Trust freigeben.");
+      renderKonto();
+    } catch (err) { toast("Fehler: " + err.message); }
+  };
+  $("#btn-import").onclick = async () => {
+    const repo = $("#gh-private").value.trim();
+    if (!repo || !GH.token()) { toast("GitHub-Schlüssel und Repository angeben."); return; }
+    $("#btn-import").disabled = true;
+    try {
+      const n = await PRIV.ausGithubUebernehmen(repo);
+      toast(`Übernommen: ${n.merk} Merklisten-Einträge, ${n.eigene} eigene Plätze.`);
+      layers.eigene = true; rebuildLayer(); renderKonto();
+    } catch (err) { toast("Übernahme fehlgeschlagen: " + err.message); }
+    $("#btn-import").disabled = false;
+  };
+
   async function showTokenState(verify = false) {
+    renderKonto();
     const has = !!GH.token();
     $("#req-hint-direct").hidden = !has;
     $("#req-hint-link").hidden = has;
     $("#gh-token").value = "";
     $("#gh-token").placeholder = has ? "•••••••• (hinterlegt)" : "github_pat_…";
-    $("#gh-private").value = PRIV.repo();
-    $("#gh-private-new").href = `https://github.com/new?name=${encodeURIComponent(PRIV.repo().split("/")[1] || "camper-plaetze-privat")}&visibility=private`;
-    if (!has) { $("#gh-status").textContent = "Kein Schlüssel hinterlegt. Mit Schlüssel: Ziele starten, Quellen und Zeitpläne ändern, eigene Plätze, Favoriten und Logbuch."; return; }
+    if (!has) { $("#gh-status").textContent = "Kein Schlüssel hinterlegt. Mit Schlüssel: Ziele starten, Quellen und Zeitpläne ändern, Anfragen direkt senden."; return; }
     $("#gh-status").textContent = verify ? "Prüfe …" : "Schlüssel hinterlegt.";
     if (!verify) return;
-    let msg;
-    try { msg = `Verbunden als ${await GH.check()}.`; }
-    catch (err) { $("#gh-status").textContent = "Schlüssel ungültig: " + err.message; return; }
-    try { msg += ` Privates Repository ${await PRIV.check()} bereit.`; await PRIV.load(); reloadOwn(); }
-    catch (err) { msg += ` Privates Repository: ${err.message.startsWith("404") ? "nicht gefunden – bitte anlegen (Link unten) und dem Schlüssel freigeben" : err.message}.`; }
-    $("#gh-status").textContent = msg;
+    try { $("#gh-status").textContent = `Verbunden als ${await GH.check()}.`; }
+    catch (err) { $("#gh-status").textContent = "Schlüssel ungültig: " + err.message; }
   }
   $("#gh-save").onclick = async () => {
     const t = $("#gh-token").value.trim();
     if (t) GH.setToken(t);
-    PRIV.setRepo($("#gh-private").value.trim());
     await showTokenState(true);
     renderZielList();
   };

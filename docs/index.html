@@ -47,6 +47,28 @@
   <p class="muted">Häkchen: Ziel zusätzlich auf der Karte zeigen. Namen antippen: nur dieses Ziel zeigen.</p>
   <ul id="ziel-list" class="ziel-list"></ul>
 
+  <h2 class="mt">Konto</h2>
+  <p id="konto-status" class="muted">lädt …</p>
+  <div id="konto-admin" hidden>
+    <h4>Personen und Rollen</h4>
+    <p class="muted">Wer die App überhaupt öffnen darf, legen Sie in Cloudflare Zero Trust fest (Handbuch 2.13). Hier bestimmen Sie, was die Person darf: <b>Mitreisend</b> = Favoriten, Logbuch, eigene Plätze und Fotos; <b>Gast</b> = nur ansehen; <b>Admin</b> = zusätzlich Personen verwalten.</p>
+    <ul id="personen-list" class="req-list personen"></ul>
+    <label class="field">E-Mail-Adresse<input id="p-email" type="email" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="name@beispiel.ch"></label>
+    <label class="field">Name<input id="p-name" type="text" autocomplete="off" placeholder="Vorname"></label>
+    <div class="row">
+      <select id="p-rolle" aria-label="Rolle"><option value="mitreisend">Mitreisend</option><option value="gast">Gast</option><option value="admin">Admin</option></select>
+      <button id="p-add" class="btn">Speichern</button>
+    </div>
+  </div>
+  <div id="konto-import" hidden>
+    <h4>Bisherige Daten übernehmen</h4>
+    <p class="muted">Einmalig: übernimmt Favoriten, Logbuch und eigene Plätze aus dem privaten GitHub-Repository in die neue Datenbank. Braucht den GitHub-Schlüssel (unten). Mehrfaches Übernehmen schadet nicht.</p>
+    <label class="field">Privates Repository<input id="gh-private" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="paulpmu/camper-plaetze-privat"></label>
+    <button id="btn-import" class="btn ghost">Daten übernehmen</button>
+  </div>
+  <p class="muted"><a href="/cdn-cgi/access/logout">Abmelden</a></p>
+
+  <div id="nur-admin">
   <h2 class="mt">Ziel hinzufügen oder ändern</h2>
   <p class="muted">Beschreiben Sie frei, was Sie möchten. Claude erstellt daraus die Suche, die Regionen und die Routen. Danach startet der Abruf automatisch.</p>
   <textarea id="req-text" rows="5" placeholder="Beispiele:&#10;• Neues Ziel Norwegen mit Lofoten, Route Oslo – Trondheim – Bodø – Nordkap&#10;• Bei Marokko den Kanal @beispielkanal ergänzen&#10;• Spanien &amp; Portugal: Route Pyrenäen – Bilbao – Santander hinzufügen&#10;• Marokko jetzt aktualisieren"></textarea>
@@ -56,16 +78,15 @@
   <h4>Letzte Anfragen</h4>
   <ul id="req-list" class="req-list"><li class="muted">lädt …</li></ul>
 
-  <h4>GitHub-Schlüssel und privates Repository</h4>
+  <h4>GitHub-Schlüssel</h4>
   <p id="gh-status" class="muted">Kein Schlüssel hinterlegt. Mit Schlüssel können Sie Ziele direkt starten, Zeitpläne ändern und Anfragen ohne Umweg senden.</p>
   <input id="gh-token" type="password" placeholder="github_pat_…" autocomplete="off" autocapitalize="off" spellcheck="false">
-  <label class="field">Privates Repository für eigene Plätze, Favoriten und Logbuch
-    <input id="gh-private" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="paulpmu/camper-plaetze-privat"></label>
   <div class="row">
     <button id="gh-remove" class="btn ghost">Entfernen</button>
     <button id="gh-save" class="btn">Speichern &amp; prüfen</button>
   </div>
-  <p class="muted">Schlüssel erstellen: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained token</a>, Repositorys <b>camper-plaetze</b> und <b>camper-plaetze-privat</b>, Rechte: Actions, Contents und Issues jeweils «Read and write». Privates Repository anlegen: <a id="gh-private-new" href="https://github.com/new?name=camper-plaetze-privat&amp;visibility=private" target="_blank" rel="noopener">GitHub → neues Repository (Private)</a>. Der Schlüssel bleibt nur auf diesem Gerät gespeichert.</p>
+  <p class="muted">Schlüssel erstellen: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained token</a>, Repositorys <b>camper-plaetze</b> und <b>camper-plaetze-privat</b>, Rechte: Actions, Contents und Issues jeweils «Read and write». Der Schlüssel bleibt nur auf diesem Gerät gespeichert.</p>
+  </div>
 </section>
 
 <!-- Quellen eines Ziels -->

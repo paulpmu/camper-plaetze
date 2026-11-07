@@ -19,6 +19,23 @@ Jede Nacht um 04:17 (Winterzeit) bzw. 05:17 (Sommerzeit) startet **GitHub Action
 
 In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den Stand der Läufe, die aufgelaufenen Kosten und dieses Handbuch.
 
+### Übersicht: was läuft wo und wieso
+
+[![Übersicht: iPhone und iPad, Cloudflare, GitHub und die genutzten Dienste](docs/uebersicht.svg)](docs/uebersicht.svg)
+
+*Antippen vergrössert die Grafik.*
+
+| Nr. | Was passiert | Wo | Wieso so |
+|---|---|---|---|
+| **①** | Jede Nacht holen die Abläufe neue Videos, Reiseberichte, Stellplätze und Wetterwarnungen. Claude liest daraus die Plätze heraus | GitHub Actions | läuft ohne eigenen Server und gratis; die Schlüssel für YouTube, Claude und Webshare liegen sicher in GitHub Secrets, nie auf dem Handy |
+| **②** | Nach jedem Lauf werden die Daten gespeichert und die App neu veröffentlicht | GitHub → Cloudflare Pages | Git hält jeden Datenstand nachvollziehbar fest; Cloudflare liefert die App schnell aus |
+| **③** | Wer die App öffnet, meldet sich mit E-Mail-Adresse und Code an. Danach lädt die App ihre Dateien und Plätze | Cloudflare Access und Pages | nur freigegebene Personen kommen hinein, ohne eigenes Passwortsystem |
+| **④** | Favoriten, Notizen, Logbuch, eigene Plätze und Fotos werden gespeichert und auf allen Geräten abgeglichen | Cloudflare Functions, D1, R2 | getrennt pro Person, geprüft nach Rolle; dieselbe Anmeldung wie ③ |
+| **⑤** | Wetterprognose, Kartenbild, Fotos und Strassenbilder lädt die App direkt beim Anbieter | Open-Meteo, OpenStreetMap, Wikimedia, Panoramax, Mapillary | immer aktuell, gratis und ohne Schlüssel |
+| **⑥** | Ziele starten, Zeitpläne und Quellen ändern, Anfragen an Claude senden | App → GitHub | nur der Admin mit GitHub-Schlüssel; der Schlüssel bleibt auf dem Gerät |
+
+Offline funktioniert die App mit dem zuletzt geladenen Stand. Änderungen ohne Netz merkt sie sich in der Warteschlange und sendet sie bei ④, sobald wieder Empfang da ist.
+
 ### Plattformen und ihre Rolle
 
 | Plattform | Wofür | Konto / Zugang | Wo verwaltet |
@@ -27,7 +44,8 @@ In der Webapp unter **i → Läufe / Kosten / Handbuch** sehen Sie jederzeit den
 | **Cloudflare** | Webapp ausliefern (Pages) und Zugang nur für freigegebene Personen (Zero Trust Access) | paul_p_mueller@bluewin.ch | https://dash.cloudflare.com, https://one.dash.cloudflare.com |
 | **Google Cloud** | YouTube Data API: Videos suchen, Beschreibungen und Kommentare lesen | Ihr Google-Konto, Projekt `camper-plaetze` | https://console.cloud.google.com |
 | **Anthropic** | Claude liest Videos und Reiseberichte aus, sucht Reiseberichte im Web und bearbeitet Anfragen aus der App | paul_p_mueller@bluewin.ch | https://console.anthropic.com |
-| **GitHub, privat** | Ihre eigenen Plätze, Favoriten, Notizen und Ihr Logbuch | `paulpmu` | https://github.com/paulpmu/camper-plaetze-privat |
+| **Cloudflare D1 und R2** | Datenbank mit Personen, Rollen, Favoriten, Notizen, Logbuch und eigenen Plätzen; Fotospeicher | Ihr Cloudflare-Konto | https://dash.cloudflare.com → Storage & Databases |
+| GitHub, privat (alt) | frühere Ablage von eigenen Plätzen und Merkliste, nur noch für die einmalige Übernahme | `paulpmu` | https://github.com/paulpmu/camper-plaetze-privat |
 | **Webshare** | Rotating-Residential-Proxy, damit YouTube die Transkripte herausgibt | paul_p_mueller@bluewin.ch | https://dashboard.webshare.io |
 | OpenStreetMap Nominatim | wandelt Ortsnamen in Koordinaten um | kein Konto, gratis | – |
 | OSRM | Strassenverlauf der Routen | kein Konto, gratis | – |
@@ -106,7 +124,7 @@ Mit einem persönlichen GitHub-Schlüssel auf dem iPhone oder iPad steuern Sie a
 1. https://github.com/settings/personal-access-tokens/new öffnen.
 2. **Token name:** `camper-plaetze iPhone`. **Expiration:** zum Beispiel 1 Jahr.
 3. **Repository access:** **Only select repositories** → `camper-plaetze`.
-4. Zusätzlich `camper-plaetze-privat` auswählen, falls Sie eigene Plätze nutzen (siehe 2.8).
+4. Zusätzlich `camper-plaetze-privat` auswählen, solange Sie Ihre alten Daten noch übernehmen möchten (siehe 2.14).
 5. **Permissions → Repository permissions:** **Actions**, **Contents** und **Issues** je auf **Read and write**. **Metadata** setzt GitHub automatisch auf «Read».
 6. **Generate token**, dann den Schlüssel (`github_pat_…`) kopieren.
 7. In der App: Zielname antippen, ganz nach unten scrollen, Schlüssel einfügen, **Speichern & prüfen**. Es erscheint «Verbunden als paulpmu».
@@ -159,18 +177,16 @@ Jedes Ziel wählt seine Quellen selbst, alle Kombinationen sind möglich. In der
 
 **Link-Knöpfe:** park4night und camping.info erscheinen bei allen Zielen. camping.info wird über eine Google-Suche nach dem Ort auf camping.info geöffnet, weil es keine direkte Adresse für eine Kartenposition gibt. Weitere Knöpfe, etwa Wohnmobilland oder Campercontact, fügen Sie pro Ziel unter **Quellen** hinzu. Platzhalter in der Adresse: `{lat}`, `{lng}`, `{name}`, `{ort}`. Plattformen ohne offene Schnittstelle werden bewusst nur verlinkt, nicht ausgelesen.
 
-### 2.8 Eigene Plätze, Favoriten und Logbuch
+### 2.8 Eigene Plätze, Favoriten, Logbuch und Fotos
 
-Diese Daten liegen im **privaten Repository** `camper-plaetze-privat` und sind nur für Sie sichtbar. Die Dateien heissen `eigene.json` und `merkliste.json`. Die App liest und schreibt sie mit Ihrem GitHub-Schlüssel. iPhone und iPad zeigen deshalb denselben Stand. Offline zeigt die App den zuletzt geladenen Stand.
+Diese Daten liegen in der **Datenbank des Camper-Planers** bei Cloudflare, getrennt pro Person (siehe 2.14). Jede Person sieht nur ihre eigenen Einträge. iPhone und iPad zeigen denselben Stand. Offline zeigt die App den zuletzt geladenen Stand. Änderungen ohne Netz merkt sich die App und sendet sie beim nächsten Empfang. Unter **Zielname → Konto** steht, wie viele Änderungen noch warten.
 
 - **Eigener Platz:** der runde «+»-Knopf über dem Standort-Knopf. Position aus Ihrem Standort oder der Kartenmitte, dazu Name, Typ, Bewertung, Notiz und Link. Auf der Karte erscheint ein pinkfarbener ♦-Marker.
 - **Pro Platz:** **☆ Favorit**, **Besucht?** (trägt das heutige Datum ein), **Meine Notiz** und **Meine Bewertung**. Auf der Karte zeigen ein gelber Stern den Favoriten und ein grüner Haken den Besuch.
+- **Meine Fotos:** Im Platz unter **Meine Fotos → + Fotos** eines oder mehrere Bilder aus der Mediathek wählen oder direkt fotografieren. Die App verkleinert sie vor dem Hochladen auf höchstens 2048 Pixel, das spart Datenvolumen unterwegs. Antippen öffnet das Foto gross, dort lässt es sich auch löschen. Hochladen braucht Netz.
 - **Liste:** Unter den Reitern **Favoriten** und **Logbuch** stehen die besuchten Plätze, die neuesten zuerst, mit Notiz. **Filter → Nur meine Favoriten**.
 
-**Einrichtung** (einmalig):
-1. Privates Repository anlegen: https://github.com/new?name=camper-plaetze-privat&visibility=private, Sichtbarkeit **Private**, dann **Create repository**.
-2. Den GitHub-Schlüssel um dieses Repository erweitern: https://github.com/settings/personal-access-tokens → Ihr Schlüssel → **Repository access** → `camper-plaetze-privat` hinzufügen → **Update**. Die Rechte bleiben gleich.
-3. In der App: Zielname antippen → ganz unten **Speichern & prüfen**. Es erscheint «Privates Repository … bereit».
+Nutzen können das Personen mit der Rolle **Admin** oder **Mitreisend**. Gäste sehen nur die Plätze.
 
 ### 2.9 Mehrere Ziele, Regionen und «Meine Plätze»
 
@@ -242,7 +258,7 @@ Die Webapp ist nur für Personen zugänglich, die Sie freigeben. Das übernimmt 
 - Das Repository ist privat. Code, Daten und dieses Handbuch sind nicht mehr öffentlich.
 - Steuern (Abrufe, Ziele, Anfragen, eigene Plätze) kann weiterhin nur, wer einen GitHub-Schlüssel hinterlegt hat, also nur Sie.
 
-**Was freigegebene Personen sehen:** Karte, Plätze, Wetter, Fotos, Etappenplaner, ausserdem unter **i** die Läufe, die Kosten und dieses Handbuch. Favoriten, Logbuch und eigene Plätze sehen sie nicht, die liegen in Ihrem privaten Repository. Eigene Rollen und Daten pro Person folgen in einer späteren Ausbaustufe.
+**Was freigegebene Personen sehen:** Karte, Plätze, Wetter, Fotos, Etappenplaner, ausserdem unter **i** die Läufe, die Kosten und dieses Handbuch. Was sie zusätzlich dürfen, bestimmt ihre Rolle, siehe 2.14. Ihre Favoriten, Ihr Logbuch und Ihre Fotos sieht niemand ausser Ihnen.
 
 #### Umstellung, einmalig, etwa 30 Minuten
 
@@ -283,7 +299,7 @@ Die Reihenfolge ist wichtig: Das Repository erst privat stellen, wenn die neue A
 **5. iPhone und iPad umstellen**
 1. Das alte Symbol auf dem Home-Bildschirm löschen.
 2. Die neue Adresse in Safari öffnen, anmelden, dann **Teilen → Zum Home-Bildschirm**.
-3. Den **GitHub-Schlüssel** neu einfügen: Zielname antippen, ganz unten. Ebenso den Mapillary-Token, falls Sie ihn nutzen. Safari speichert solche Angaben pro Adresse. Favoriten, Logbuch und eigene Plätze sind sofort wieder da, sie liegen im privaten Repository.
+3. Den **GitHub-Schlüssel** neu einfügen: Zielname antippen, ganz unten. Ebenso den Mapillary-Token, falls Sie ihn nutzen. Safari speichert solche Angaben pro Adresse.
 
 #### Personen freigeben oder entfernen
 
@@ -294,6 +310,66 @@ Eine entfernte Person kommt nach Ablauf ihrer Sitzung nicht mehr hinein, spätes
 #### Actions-Minuten im privaten Repository
 
 Für private Repositories enthält das Gratiskonto von GitHub **2000 Minuten Actions pro Monat**. Der Verbrauch liegt im Normalbetrieb bei etwa 1400–1800 Minuten. Die Veröffentlichung auf Cloudflare läuft deshalb im selben Job wie der Abruf und kostet kaum zusätzliche Minuten. Den Stand sehen Sie unter https://github.com/settings/billing. Sind die Minuten aufgebraucht, laufen die Abläufe bis Monatsende nicht mehr. Es entstehen keine Kosten, solange Sie kein Ausgabenlimit über 0 setzen. Bei Bedarf: den Wetter-Ablauf in `.github/workflows/wetter.yml` von alle 3 auf alle 6 Stunden umstellen.
+
+### 2.14 Personen, Rollen und Datenbank
+
+Seit Phase 1 hat der Camper-Planer einen eigenen Server-Teil bei Cloudflare: Pages Functions (Code in `server/`), die Datenbank **D1** und den Fotospeicher **R2**, beide in Westeuropa. Die Anmeldung über Cloudflare Access gilt zugleich für die Daten. Es gibt kein zweites Passwort.
+
+**Rollen:**
+
+| Rolle | darf |
+|---|---|
+| **Admin** | alles, dazu Personen und Rollen verwalten. Die Adresse in der Variable `ADMIN_EMAIL` ist immer Admin |
+| **Mitreisend** | eigene Favoriten, Notizen, Logbuch, eigene Plätze und Fotos |
+| **Gast** | nur ansehen. Wer sich zum ersten Mal anmeldet und noch nicht eingetragen ist, ist Gast |
+
+Zwei Listen, zwei Zwecke: **Cloudflare Zero Trust** entscheidet, *wer die App öffnen darf* (2.13). **Zielname → Konto → Personen und Rollen** entscheidet, *was die Person darin darf*.
+
+**Selbst eingerichtet:** Datenbank, Fotospeicher und Anmeldeprüfung richtet der Ablauf bei jeder Veröffentlichung selbst ein, was fehlt, legt er an. Das Ergebnis steht in der Zusammenfassung jedes Laufs unter **Actions** im Abschnitt «Cloudflare»: Datenbank, Fotospeicher und Anmeldeprüfung sollen «bereit» zeigen.
+
+#### Einrichtung, einmalig, etwa 15 Minuten
+
+**Schritt 1: Rechte des Cloudflare-Schlüssels erweitern**
+1. https://dash.cloudflare.com/profile/api-tokens öffnen. Steht dort unter «API Tokens» kein Schlüssel, wurde er als Account-Schlüssel angelegt: im blauen Kasten auf **Account API Tokens** tippen.
+2. Beim Schlüssel `camper-planer GitHub` (bzw. `camper-plaetze GitHub`) rechts auf **…** → **Edit**. Ist nirgends ein Schlüssel zu finden: einen neuen anlegen (**Create Token → Create Custom Token**) mit den vier Rechten unten inklusive «Cloudflare Pages · Edit» und ihn in GitHub beim Secret `CLOUDFLARE_API_TOKEN` eintragen (Stift-Symbol → **Update secret**).
+3. Unter **Permissions** mit **+ Add more** drei Zeilen ergänzen. Die bestehende Zeile «Cloudflare Pages · Edit» bleibt:
+   - `Account` · `D1` · `Edit`
+   - `Account` · `Workers R2 Storage` · `Edit`
+   - `Account` · `Access: Apps and Policies` · `Read`
+4. **Continue to summary → Update Token**. Der Schlüssel selbst bleibt gleich, in GitHub müssen Sie nichts ändern.
+
+**Schritt 2: Fotospeicher R2 aktivieren**
+1. https://dash.cloudflare.com öffnen, links **Storage & Databases → R2 Object Storage**.
+2. Falls ein Knopf **Purchase R2 Plan** bzw. **Get started** erscheint: antippen und bestätigen. Der Gratisanteil umfasst 10 GB, das reicht für rund 20'000 Fotos. Erscheint eine Übersicht der Buckets, ist R2 schon aktiv.
+
+**Schritt 3: Admin-Adresse in GitHub eintragen**
+1. Im Repository **Settings → Secrets and variables → Actions → Reiter Variables → New repository variable**.
+2. Name `ADMIN_EMAIL`, Wert: die E-Mail-Adresse, mit der Sie sich bei Cloudflare Access anmelden. **Add variable**.
+
+**Schritt 4: Pull Request übernehmen**
+1. Den Pull Request «Phase 1» auf GitHub öffnen und **Merge pull request → Confirm merge** tippen.
+2. Die Veröffentlichung startet automatisch. Nach etwa 2 Minuten unter **Actions** den obersten Lauf öffnen. In der Zusammenfassung muss bei «Cloudflare» überall «bereit» stehen. Steht irgendwo «fehlt», nennt die gelbe Warnung darüber das fehlende Recht.
+
+**Schritt 5: In der App prüfen**
+1. Die App ganz schliessen und neu öffnen, damit sie die neue Version lädt.
+2. Zielname antippen → Abschnitt **Konto**. Dort soll stehen: «Angemeldet als … (Admin)».
+
+**Schritt 6: Bisherige Daten übernehmen**
+1. Voraussetzung: Der GitHub-Schlüssel ist in der App hinterlegt (Zielname → ganz unten).
+2. Zielname → **Konto → Bisherige Daten übernehmen → Daten übernehmen**. Die App meldet, wie viele Einträge übernommen wurden.
+3. Kurz prüfen: Liste → Reiter **Favoriten** und **Logbuch**, Karte → Ebene «Meine Plätze».
+4. Das Repository `camper-plaetze-privat` bleibt als Sicherung bestehen. Die App schreibt nicht mehr hinein.
+
+**Schritt 7: Mitreisende eintragen**
+1. Zielname → **Konto → Personen und Rollen**: E-Mail-Adresse, Name, Rolle **Mitreisend** → **Speichern**.
+2. Dieselbe Adresse in Cloudflare Zero Trust freigeben, siehe 2.13 «Personen freigeben oder entfernen».
+3. Die Person öffnet die Adresse, meldet sich mit ihrer E-Mail-Adresse an und legt die App auf den Home-Bildschirm.
+
+#### Sicherung und Grenzen
+
+- **Sicherung:** D1 hält automatisch einen Verlauf der letzten Tage (Time Travel). Eine Datenbank lässt sich damit auf einen früheren Zeitpunkt zurücksetzen: Cloudflare → D1 → camper-planer → **Time Travel**. Fotos werden nicht versioniert, gelöscht ist gelöscht.
+- **Gratis-Grenzen:** D1 5 GB, R2 10 GB Speicher. Beides ist für diese Nutzung reichlich.
+- **Sicherheit:** Jede Anfrage an den Server prüft die signierte Anmeldung von Cloudflare Access und die Rolle der Person. Schreiben ist nur aus der App selbst möglich. Jede Person sieht nur ihre eigenen Daten und Fotos.
 
 ---
 
@@ -309,7 +385,7 @@ Für private Repositories enthält das Gratiskonto von GitHub **2000 Minuten Act
 | Claude Haiku (Videoauswertung) | **ca. 1–4 USD pro Monat** | gemessen: 0.03 USD für 40 Videos ohne Transkript. Mit Transkript geschätzt 0.002–0.005 USD pro Video |
 | Reiseberichte (Websuche mit Claude Sonnet, Auswertung mit Haiku) | ca. 0.50–1 USD pro Monat und Ziel | nur bei aktiver Quelle; pro wöchentlicher Suche bis 8 Websuchen à 0.01 USD |
 | Claude Opus (Anfragen aus der App) | ca. 0.05–0.15 USD pro Anfrage | fällt nur bei Anfragen an |
-| Privates Repository | **0** | private Repositorys sind bei GitHub gratis |
+| Cloudflare D1 (Datenbank) und R2 (Fotos) | **0** | gratis bis 5 GB bzw. 10 GB |
 | **Total** | **ca. 6–11 USD pro Monat** | je nach Zahl der Ziele mit Reiseberichten |
 
 **Kostenbremsen:**
@@ -359,6 +435,9 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | App verlangt erneut die Anmeldung | Sitzung von Cloudflare Access abgelaufen (nach einem Monat) | E-Mail-Adresse eingeben, Code aus der E-Mail eintippen. Ohne Netz zeigt die App den zuletzt geladenen Stand |
 | Freigegebene Person erhält keinen Code | Adresse nicht in der Liste oder Code im Spam | Liste prüfen, siehe 2.13; Spam-Ordner prüfen |
 | Lauf rot beim Schritt «Webapp veröffentlichen (Cloudflare)» | Cloudflare-Schlüssel abgelaufen oder ohne Recht «Cloudflare Pages: Edit» | neuen Schlüssel erstellen und als `CLOUDFLARE_API_TOKEN` eintragen |
+| App meldet «Datenbank noch nicht eingerichtet», «Fotospeicher noch nicht eingerichtet» oder «Anmeldeprüfung noch nicht eingerichtet» | Recht beim Cloudflare-Schlüssel fehlt oder R2 nicht aktiviert | 2.14 Schritte 1 und 2, danach unter Actions «Plätze aktualisieren» mit Ziel `-` starten |
+| Konto zeigt «Gast» statt «Admin» | Variable `ADMIN_EMAIL` fehlt oder enthält eine andere Adresse als die Anmeldung | 2.14 Schritt 3, dann wie oben neu veröffentlichen |
+| Konto zeigt «Anmeldung abgelaufen» | Sitzung von Cloudflare Access abgelaufen | App schliessen und neu öffnen, neu anmelden |
 | Abläufe laufen nicht mehr, Hinweis auf «spending limit» | Actions-Minuten des Monats aufgebraucht | bis Monatsanfang warten oder Wetter-Ablauf seltener stellen, siehe 2.13 |
 
 ### 4.4 Technische Wartung, etwa zweimal pro Jahr
@@ -391,6 +470,10 @@ Die aufgelaufenen Kosten pro Plattform und Monat zeigt die Webapp unter **i → 
 | `.github/workflows/` | Zeitplan und Abläufe auf GitHub |
 | `.github/actions/cloudflare/` | Veröffentlichung auf Cloudflare Pages, von allen Abläufen genutzt |
 | `docs/_headers` | Sicherheits-Header für Cloudflare Pages |
+| `functions/`, `server/` | Server-Teil: Anmeldeprüfung (`server/auth.js`) und Schnittstelle für Daten, Personen und Fotos (`server/api.js`) |
+| `migrations/` | Aufbau der Datenbank (D1) |
+| `.github/actions/cloudflare/einrichten.sh` | richtet Datenbank, Fotospeicher und Anmeldeprüfung bei Cloudflare ein |
+| `tests/auth.test.mjs` | Tests der Anmeldeprüfung (`node --test tests/auth.test.mjs`) |
 | `docs/vendor/` | Kartenbibliotheken Leaflet und Markercluster sowie marked, lokal statt von fremden Servern |
 | `docs/fotos.js` | Fotos & Umgebung: Panoramax, Mapillary, Wikimedia Commons, Wikipedia, Street-View-Links |
 | `scripts/wetter_update.py` | bereitet Warnungen (MeteoAlarm) und MeteoSchweiz-Lokalprognose auf; übernommen aus dem Werkzeug «wetter-check» |

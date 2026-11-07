@@ -1,7 +1,9 @@
 name: Webapp auf Cloudflare Pages veröffentlichen
 description: >-
-  Schreibt Zielübersicht und Handbuch und lädt docs/ zu Cloudflare Pages hoch. Läuft im selben Job wie der Abruf,
+  Schreibt Zielübersicht und Handbuch, richtet Datenbank (D1), Fotospeicher (R2) und Anmeldeprüfung (Access) ein
+  und lädt die Webapp samt Server-Teil (functions/) zu Cloudflare Pages hoch. Läuft im selben Job wie der Abruf,
   damit keine zusätzlichen Actions-Minuten anfallen. Voraussetzung: Python-Abhängigkeiten sind installiert.
+  Alles ist wiederholbar: Was schon existiert, wird nur verwendet.
 inputs:
   api_token:
     description: Cloudflare-API-Schlüssel (Secret CLOUDFLARE_API_TOKEN)
@@ -9,6 +11,14 @@ inputs:
   account_id:
     description: Cloudflare-Konto-ID (Secret CLOUDFLARE_ACCOUNT_ID)
     required: true
+  admin_email:
+    description: E-Mail-Adresse(n) mit Admin-Rolle, durch Komma getrennt (Variable ADMIN_EMAIL)
+    required: false
+    default: ""
+  access_aud:
+    description: AUD-Tag der Access-Anwendung; leer = automatisch bei Cloudflare nachschlagen (Variable ACCESS_AUD)
+    required: false
+    default: ""
   project:
     description: Name des Cloudflare-Pages-Projekts
     required: false
@@ -21,6 +31,15 @@ runs:
       run: |
         python scripts/update.py --nur-index
         cp BETRIEB.md docs/handbuch.md
+    - name: Datenbank, Fotospeicher und Anmeldeprüfung einrichten
+      shell: bash
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ inputs.api_token }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ inputs.account_id }}
+        PROJEKT: ${{ inputs.project }}
+        ADMIN_EMAIL: ${{ inputs.admin_email }}
+        ACCESS_AUD: ${{ inputs.access_aud }}
+      run: bash .github/actions/cloudflare/einrichten.sh
     - name: Hochladen
       shell: bash
       env:
@@ -29,8 +48,9 @@ runs:
         PROJEKT: ${{ inputs.project }}
       run: |
         W="npx --yes wrangler@4.151.3"
-        # Beim ersten Mal das Projekt anlegen; existiert es schon, meldet Cloudflare einen Fehler, der hier egal ist
-        $W pages project create "$PROJEKT" --production-branch=main >/dev/null 2>&1 || true
+        if grep -q d1_databases wrangler.toml; then
+          $W d1 migrations apply camper-planer --remote || echo "::warning::Datenbank-Migration fehlgeschlagen"
+        fi
         for i in 1 2 3; do
           $W pages deploy docs --project-name="$PROJEKT" --branch=main --commit-dirty=true && exit 0
           echo "Veröffentlichung fehlgeschlagen, neuer Versuch in $((i * 30)) s"; sleep $((i * 30))

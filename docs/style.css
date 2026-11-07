@@ -295,7 +295,7 @@ button.brand #count { font-size: 12px; }
 .mention.web .webicon { width: 64px; height: 63px; flex: none; display: flex; align-items: center; justify-content: center; font-size: 28px; background: var(--bg); border-radius: 8px; }
 .mine { background: var(--bg); border-radius: 14px; padding: 10px 12px; margin: 10px 0; }
 .mine .row { margin-top: 8px; }
-.mine textarea, #own-note, #own-name, #own-link, #gh-private, #src-link-name, #src-link-url, .etappen input, .etappen select, #own-type, #own-rating, .mine select {
+.mine textarea, #own-note, #own-name, #own-link, #gh-private, #p-email, #p-name, #p-rolle, #src-link-name, #src-link-url, .etappen input, .etappen select, #own-type, #own-rating, .mine select {
   display: block; width: 100%; margin-top: 6px; padding: 10px 12px; font: inherit; font-size: 16px;
   color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 12px; -webkit-appearance: none; appearance: none;
 }
@@ -385,3 +385,19 @@ table.wx.rank tr[data-region] { cursor: pointer; }
 .wx-warn.rot { border-color: #c0392b; background: color-mix(in srgb, #c0392b 14%, var(--card)); }
 #wx-warn .wx-warn { cursor: pointer; }
 .wx-ok { color: #2e8b57; }
+
+/* Meine Fotos pro Platz */
+.my-fotos { margin-top: 12px; }
+.my-fotos-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.my-fotos-head label.btn { cursor: pointer; }
+.my-fotos-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; margin-top: 8px; }
+.my-foto { padding: 0; border: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 1; background: var(--line); }
+.my-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.my-fotos-list .muted { grid-column: 1 / -1; font-size: 13px; }
+
+/* Personen und Rollen */
+.personen .st { background: var(--accent-soft); color: var(--accent); }
+#p-rolle { flex: 1; min-width: 0; }
+
+/* Grafiken im Handbuch */
+.md img.md-bild { display: block; width: 100%; height: auto; border-radius: 12px; margin: 8px 0; }
