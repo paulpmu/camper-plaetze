@@ -4,3 +4,8 @@ __pycache__/
 venv/
 .env
 data/wetter-cache/
+
+wrangler.toml
+.dev.vars
+.wrangler/
+node_modules/

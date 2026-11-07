@@ -1,5 +1,5 @@
 // Offline-Unterstützung: App-Hülle aus dem Cache, Platzdaten zuerst frisch aus dem Netz.
-const CACHE = "cp-v17";
+const CACHE = "cp-v18";
 const SHELL = [
   "./", "index.html", "style.css", "app.js", "wetter.js", "fotos.js", "github.js", "privat.js", "betrieb.js",
   "manifest.webmanifest", "icon-180.png",
@@ -21,6 +21,7 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   // Nur eigene Dateien; Karte, Wetter, Fotos und GitHub gehen direkt zum Anbieter
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
+  if (url.pathname.includes("/api/") || url.pathname.startsWith("/cdn-cgi/")) return; // persönliche Daten und Anmeldung nie zwischenspeichern
   e.respondWith(fetch(e.request).then((r) => {
     // Nur echte Antworten zwischenspeichern, keine Umleitungen zur Anmeldung und keine Fehlerseiten
     if (r.ok && r.type === "basic" && !r.redirected) {

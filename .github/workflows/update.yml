@@ -22,7 +22,7 @@ on:
         required: false
   push:
     branches: [main]
-    paths: ["docs/**", "ziele/**"]
+    paths: ["docs/**", "ziele/**", "functions/**", "server/**", "migrations/**", ".github/actions/**"]
 
 permissions:
   contents: write
@@ -74,6 +74,8 @@ jobs:
         with:
           api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          admin_email: ${{ vars.ADMIN_EMAIL }}
+          access_aud: ${{ vars.ACCESS_AUD }}
 
   # Änderung an docs/ oder ziele/ auf main: nur veröffentlichen
   cloudflare:
@@ -93,6 +95,8 @@ jobs:
         with:
           api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          admin_email: ${{ vars.ADMIN_EMAIL }}
+          access_aud: ${{ vars.ACCESS_AUD }}
 
   # Bisheriges Hosting auf GitHub Pages, solange HOSTING nicht auf cloudflare steht
   deploy:

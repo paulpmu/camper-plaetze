@@ -124,8 +124,9 @@ window.FOTOS = (() => {
       const f = bilder[i];
       img.src = f.gross || f.thumb;
       img.onerror = () => { if (img.src !== f.thumb) img.src = f.thumb; };
-      cap.innerHTML = `<b>${esc(f.titel)}</b> · ${esc(f.quelle)}${f.lizenz ? " · " + esc(f.lizenz) : ""} · ${fmtDist(f.dist)} vom Platz · ${i + 1}/${bilder.length}<br>
-        <a href="${esc(f.link)}" target="_blank" rel="noopener">${esc(f.linkText || "Original öffnen")}</a>`;
+      cap.innerHTML = `<b>${esc(f.titel)}</b> · ${esc(f.quelle)}${f.lizenz ? " · " + esc(f.lizenz) : ""}${f.dist != null ? ` · ${fmtDist(f.dist)} vom Platz` : ""} · ${i + 1}/${bilder.length}<br>
+        ${f.aktion ? `<button class="linkbtn ft-aktion">${esc(f.aktion.text)}</button>` : `<a href="${esc(f.link)}" target="_blank" rel="noopener">${esc(f.linkText || "Original öffnen")}</a>`}`;
+      if (f.aktion) cap.querySelector(".ft-aktion").onclick = () => f.aktion.fn(f, () => { box.hidden = true; img.src = ""; });
       box.querySelector(".ft-prev").hidden = i === 0;
       box.querySelector(".ft-next").hidden = i === bilder.length - 1;
     };
